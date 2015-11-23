@@ -31,6 +31,27 @@ PID USER      PR  NI  VIRT  RES  SHR S %CPU MEM    TIME+  COMMAND
 14083 root      25   0  922m 914m 538m R   97 10.0  21:32.39 gateway                                 
 
 14088 root     25   0  922m 914m  538m R  97 10.0   11:23.12  gateway
+```  
+
+**使用gcore命令转存进程映像及内存上下文**  
 ```
+gcore 14094
+该命令生成core文件core.14094
+```
+
+**用gdb调试core文件，并线程切换到37号线程.gcore和实际的core dump时产生的core文件几乎一样，只是不能用gdb进行某些动态调试**  
+```
+(gdb) gdb gateway core.14094 
+(gdb) thread 37
+[Switching to thread 37 (Thread 0x4696ab90 (LWP 14086))]#0  0x40000410 in __kernel_vsyscall ()
+(gdb) where
+#0  0x40000410 in __kernel_vsyscall ()
+#1  0x40241f33 in poll () from /lib/i686/nosegneg/libc.so.6
+
+可以根据详细的函数栈进行gdb调试，打印一些变量值，并结合源代码分析为何会poll调用占用很高的CPU。
+```  
+
+#Sever performance commands  
+
 
 
