@@ -11,7 +11,12 @@ autoconf & automake : http://www.cnblogs.com/itech/archive/2010/11/28/1890220.ht
 
 #Git
 **git config --global core.editor vim**  
-**global修改的是~/.gitconfig，对当前用户有效**  
+global修改的是~/.gitconfig，对当前用户有效
+
+**push到github时，每次都要输入用户名和密码的问题**   
+step1 配置ssh key : https://help.github.com/articles/generating-ssh-keys/   
+step2 git remote set-url origin git@github.com:USERNAME/REPOSITORY2.git   
+> http://blog.csdn.net/yuquan0821/article/details/8210944
 
 #Thread
 **top -H -p pid命令查看进程内各个线程占用的CPU百分比**  
