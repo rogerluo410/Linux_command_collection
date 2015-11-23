@@ -11,7 +11,7 @@ Note all commands in Linux system
 
 #Thread
 **top -H -p pid命令查看进程内各个线程占用的CPU百分比**  
-``PID USER      PR  NI  VIRT  RES  SHR S %CPU MEM    TIME+  COMMAND                         
+```PID USER      PR  NI  VIRT  RES  SHR S %CPU MEM    TIME+  COMMAND                         
 
 14086 root      25   0  922m 914m 538m R  101 10.0  21:35.46 gateway                          
 
@@ -29,6 +29,6 @@ Note all commands in Linux system
 
 14083 root      25   0  922m 914m 538m R   97 10.0  21:32.39 gateway                                 
 
-14088  root       25   0   922m 914m  538m R    97 10.0   11:23.12  gateway``  
+14088 root     25   0  922m 914m  538m R  97 10.0   11:23.12  gateway```
 
 
