@@ -1,6 +1,10 @@
 # Linux_command_collection
 Note all commands in Linux system
 
+#URL  
+GDB document : http://www.sourceware.org/gdb/current/onlinedocs/gdb.html   
+autoconf & automake : http://www.cnblogs.com/itech/archive/2010/11/28/1890220.html   
+                      http://www.laruence.com/2009/11/18/1154.html --for GNU   
 
 #GNU nano 
 **^G表示Ctrl+G，就是按住Ctrl键不放然后按G**  
