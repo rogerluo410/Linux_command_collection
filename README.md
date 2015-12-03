@@ -61,6 +61,8 @@ gcore 14094
 ```  
 
 #Sever performance commands  
+Access to : psql -U username -d dbname -h 127.0.0.1
+List      : psql -l
 
 
 
