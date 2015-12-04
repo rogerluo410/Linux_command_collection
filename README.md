@@ -61,11 +61,24 @@ gcore 14094
 ```  
 
 #Sever performance commands  
+
+
+#Postgresql  
 Create db  : createdb dbname -O username -E UTF8 -e  
 Access to  : psql -U username -d dbname -h 127.0.0.1  
 List       : psql -l  
 Access one : \c dbname  
 Show tables: \d  
+
+
+
+#Nginx for Mac    
+Install   :  brew install nginx   
+             nginx -V    --查看版本，以及配置文件地址   
+配置文件地址: /usr/local/etc/nginx/nginx.conf    
+***重新加载配置|重启|停止|退出 nginx***   
+nginx -s reload|reopen|stop|quit   
+
 
 
 
