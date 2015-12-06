@@ -82,7 +82,13 @@ nginx -s reload|reopen|stop|quit
 
 
 #curl  
-Get request with json:  
+Get request with JSON data:  
 curl -G -v "http://192.168.1.101/ckk.cgi" --data-urlencode 'json={"asking1":{"001":"givnames1","_id":223}}'  
 
 curl -G -v  "http://localhost:3000/api/backend/taxonomies" --data-urlencode 'json={"query_opts":{"page":1,"per_page":5,"name":"a","colour":"red","depth":"deep","pattern":"cloud","use":"art","sort":"-name,colour"}}'
+
+
+curl -X GET -H "Content-Type: application/json" -d   '{"query_opts":{"page":1,"per_page":5,"name":"a","colour":"red","depth":"deep","pattern":"cloud","use":"art","sort":"-name,colour"}}' 'http://localhost:3000/api/backend/taxonomies'   
+
+POST request with JSON data:  
+curl -d '{"taxonomy":{"name": "abc","colour" : "RED","depth":"deep","pattern":"cloud","use":"art"}}' 'http://localhost:3000/api/backend/taxonomies' -H Content-Type:application/json -v   
