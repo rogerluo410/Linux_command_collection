@@ -92,3 +92,6 @@ curl http://localhost:3000/api/backend/taxonomies?params1=1&params2=2
 
 `POST request with JSON data:`       
 curl -d '{"taxonomy":{"name": "stone","colour" : "black","depth":"deep","pattern":"cloud","use":"building"}}' 'http://localhost:3000/api/backend/taxonomies' -H Content-Type:application/json -v    
+
+`PUT`   
+curl  -H 'Content-Type: application/json' -H 'Accept: application/json' -X PUT -d '{"name": "stone_upd","colour" : "blue","depth":"deep","pattern":"cloud","use":"art","position":0}'  'http://localhost:3000/api/backend/taxonomies/10'   
