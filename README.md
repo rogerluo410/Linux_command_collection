@@ -1,5 +1,5 @@
-# Linux_command_collection
-Note all commands in Linux system
+# command_collection
+Note all commands in Linux system and Mac.  
 
 #URL  
 GDB document : http://www.sourceware.org/gdb/current/onlinedocs/gdb.html   
@@ -8,6 +8,10 @@ autoconf & automake : http://www.cnblogs.com/itech/archive/2010/11/28/1890220.ht
 
 #GNU nano 
 **^G表示Ctrl+G，就是按住Ctrl键不放然后按G**  
+
+#VIM  
+光标到行首： shift+^    
+光标到行未： shift+$   or  shift+a（edit mode）    
 
 #Git
 **git config --global core.editor vim**  
