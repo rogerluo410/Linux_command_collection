@@ -86,5 +86,5 @@ nginx -s reload|reopen|stop|quit
 ***Get request with parameters IN URL:***   
 curl http://localhost:3000/api/backend/taxonomies?params1=1&params2=2   
 
-***POST request with JSON data:  ***    
+***POST request with JSON data:***       
 curl -d '{"taxonomy":{"name": "stone","colour" : "black","depth":"deep","pattern":"cloud","use":"building"}}' 'http://localhost:3000/api/backend/taxonomies' -H Content-Type:application/json -v    
