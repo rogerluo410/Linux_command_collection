@@ -75,15 +75,16 @@ Show tables: \d
 #Nginx for Mac    
 Install   :  brew install nginx   
              nginx -V    --查看版本，以及配置文件地址   
-配置文件地址: /usr/local/etc/nginx/nginx.conf    
+配置文件地址: /usr/local/etc/nginx/nginx.conf     
+
 ***重新加载配置|重启|停止|退出 nginx***   
 nginx -s reload|reopen|stop|quit   
 
 
 
 #curl  
-Get request with JSON data:  
-curl http://localhost:3000/api/backend/taxonomies?params1=1&params2=2
+***Get request with parameters IN URL:***   
+curl http://localhost:3000/api/backend/taxonomies?params1=1&params2=2   
 
-POST request with JSON data:  
-curl -d '{"taxonomy":{"name": "stone","colour" : "black","depth":"deep","pattern":"cloud","use":"building"}}' 'http://localhost:3000/api/backend/taxonomies' -H Content-Type:application/json -v
+***POST request with JSON data:  ***    
+curl -d '{"taxonomy":{"name": "stone","colour" : "black","depth":"deep","pattern":"cloud","use":"building"}}' 'http://localhost:3000/api/backend/taxonomies' -H Content-Type:application/json -v    
