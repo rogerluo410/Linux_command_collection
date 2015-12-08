@@ -3,8 +3,9 @@ Note all commands in Linux system and Mac.
 
 #URL  
 GDB document : http://www.sourceware.org/gdb/current/onlinedocs/gdb.html   
-autoconf & automake : http://www.cnblogs.com/itech/archive/2010/11/28/1890220.html   
-                      http://www.laruence.com/2009/11/18/1154.html --for GNU   
+autoconf & automake :   
+> http://www.cnblogs.com/itech/archive/2010/11/28/1890220.html    
+> http://www.laruence.com/2009/11/18/1154.html --for GNU    
 
 #GNU nano 
 **^G表示Ctrl+G，就是按住Ctrl键不放然后按G**  
@@ -18,16 +19,16 @@ autoconf & automake : http://www.cnblogs.com/itech/archive/2010/11/28/1890220.ht
 global修改的是~/.gitconfig，对当前用户有效
 
 **push到github时，每次都要输入用户名和密码的问题**   
-step1 配置ssh key : https://help.github.com/articles/generating-ssh-keys/   
-step2 git remote set-url origin git@github.com:USERNAME/REPOSITORY2.git   
+* step1 配置ssh key : https://help.github.com/articles/generating-ssh-keys/   
+* step2 git remote set-url origin git@github.com:USERNAME/REPOSITORY2.git   
 > http://blog.csdn.net/yuquan0821/article/details/8210944  
 
 **git 分支合并与冲突**  
-git branch branch_name           -- 创建分支  
-git checkout branch_name         -- 切换分支  
-git pull origin master:slave     -- 用远端origin主机的master分支更新本地slave分支  
-git diff                         -- 如果有文件冲突,diff出冲突处，手动修改/删除`>>>>head  code  <<<<< `中的代码    
-git commit -a -M "Update with master"  --本地slave分支提交到origin主机的slave分支即可      
+* git branch branch_name           -- 创建分支  
+* git checkout branch_name         -- 切换分支  
+* git pull origin master:slave     -- 用远端origin主机的master分支更新本地slave分支  
+* git diff                         -- 如果有文件冲突,diff出冲突处，手动修改/删除`>>>>head  code  <<<<< `中的代码    
+* git commit -a -M "Update with master"  --本地slave分支提交到origin主机的slave分支即可      
 
 #Thread
 **top -H -p pid命令查看进程内各个线程占用的CPU百分比**  
@@ -84,21 +85,23 @@ gcore 14094
 
 
 #Nginx for Mac    
-`Install`   :  brew install nginx   
-             nginx -V    --查看版本，以及配置文件地址   
+`Install`   :    
+* brew install nginx   
+* nginx -V    --查看版本，以及配置文件地址   
+
 `配置文件地址`: /usr/local/etc/nginx/nginx.conf     
 
 `重新加载配置|重启|停止|退出 nginx`  
-nginx -s reload|reopen|stop|quit   
+* nginx -s reload|reopen|stop|quit   
 
 
 
 #curl  
 `Get request with parameters IN URL:`  
-curl http://localhost:3000/api/backend/taxonomies?params1=1&params2=2   
+* curl http://localhost:3000/api/backend/taxonomies?params1=1&params2=2   
 
 `POST request with JSON data:`       
-curl -d '{"taxonomy":{"name": "stone","colour" : "black","depth":"deep","pattern":"cloud","use":"building"}}' 'http://localhost:3000/api/backend/taxonomies' -H Content-Type:application/json -v    
+* curl -d '{"taxonomy":{"name": "stone","colour" : "black","depth":"deep","pattern":"cloud","use":"building"}}' 'http://localhost:3000/api/backend/taxonomies' -H Content-Type:application/json -v    
 
 `PUT`   
-curl  -H 'Content-Type: application/json' -H 'Accept: application/json' -X PUT -d '{"name": "stone_upd","colour" : "blue","depth":"deep","pattern":"cloud","use":"art","position":0}'  'http://localhost:3000/api/backend/taxonomies/10'   
+* curl  -H 'Content-Type: application/json' -H 'Accept: application/json' -X PUT -d '{"name": "stone_upd","colour" : "blue","depth":"deep","pattern":"cloud","use":"art","position":0}'  'http://localhost:3000/api/backend/taxonomies/10'   
