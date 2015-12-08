@@ -1,5 +1,5 @@
-# Linux_command_collection
-Note all commands in Linux system
+# command_collection
+Note all commands in Linux system and Mac.  
 
 #URL  
 GDB document : http://www.sourceware.org/gdb/current/onlinedocs/gdb.html   
@@ -8,6 +8,10 @@ autoconf & automake : http://www.cnblogs.com/itech/archive/2010/11/28/1890220.ht
 
 #GNU nano 
 **^G表示Ctrl+G，就是按住Ctrl键不放然后按G**  
+
+#VIM  
+光标到行首： shift+^    
+光标到行未： shift+$   or  shift+a（edit mode）    
 
 #Git
 **git config --global core.editor vim**  
@@ -64,21 +68,30 @@ gcore 14094
 
 
 #Postgresql  
-Create db  : createdb dbname -O username -E UTF8 -e  
-Access to  : psql -U username -d dbname -h 127.0.0.1  
-List       : psql -l  
-Access one : \c dbname  
-Show tables: \d  
+`Create db`  : createdb dbname -O username -E UTF8 -e  
+`Access to`  : psql -U username -d dbname -h 127.0.0.1  
+`List `      : psql -l  
+`Access one` : \c dbname  
+`Show tables`: \d  
 
 
 
 #Nginx for Mac    
-Install   :  brew install nginx   
+`Install`   :  brew install nginx   
              nginx -V    --查看版本，以及配置文件地址   
-配置文件地址: /usr/local/etc/nginx/nginx.conf    
-***重新加载配置|重启|停止|退出 nginx***   
+`配置文件地址`: /usr/local/etc/nginx/nginx.conf     
+
+`重新加载配置|重启|停止|退出 nginx`  
 nginx -s reload|reopen|stop|quit   
 
 
 
+#curl  
+`Get request with parameters IN URL:`  
+curl http://localhost:3000/api/backend/taxonomies?params1=1&params2=2   
 
+`POST request with JSON data:`       
+curl -d '{"taxonomy":{"name": "stone","colour" : "black","depth":"deep","pattern":"cloud","use":"building"}}' 'http://localhost:3000/api/backend/taxonomies' -H Content-Type:application/json -v    
+
+`PUT`   
+curl  -H 'Content-Type: application/json' -H 'Accept: application/json' -X PUT -d '{"name": "stone_upd","colour" : "blue","depth":"deep","pattern":"cloud","use":"art","position":0}'  'http://localhost:3000/api/backend/taxonomies/10'   
