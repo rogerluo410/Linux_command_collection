@@ -5,7 +5,7 @@ Note all commands in Linux system and Mac.
 GDB document : http://www.sourceware.org/gdb/current/onlinedocs/gdb.html   
 autoconf & automake :   
 > http://www.cnblogs.com/itech/archive/2010/11/28/1890220.html    
-> http://www.laruence.com/2009/11/18/1154.html --for GNU    
+  http://www.laruence.com/2009/11/18/1154.html --for GNU    
 
 #GNU nano 
 **^G表示Ctrl+G，就是按住Ctrl键不放然后按G**  
@@ -16,12 +16,12 @@ autoconf & automake :
 
 #Git
 **git config --global core.editor vim**  
-global修改的是~/.gitconfig，对当前用户有效
+* global修改的是~/.gitconfig，对当前用户有效
 
 **push到github时，每次都要输入用户名和密码的问题**   
 * step1 配置ssh key : https://help.github.com/articles/generating-ssh-keys/   
-* step2 git remote set-url origin git@github.com:USERNAME/REPOSITORY2.git   
-> http://blog.csdn.net/yuquan0821/article/details/8210944  
+* step2 git remote set-url origin git@github.com:USERNAME/REPOSITORY2.git     
+    http://blog.csdn.net/yuquan0821/article/details/8210944  
 
 **git 分支合并与冲突**  
 * git branch branch_name           -- 创建分支  
