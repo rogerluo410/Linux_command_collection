@@ -20,7 +20,7 @@
 Description:  MongoDB是一个面向文档的数据库    
   > docs  :  https://docs.mongodb.org    
   > basic command :  http://www.cnblogs.com/TankMa/archive/2011/06/08/2074947.html  
-                     http://www.cnblogs.com/zengen/archive/2011/04/23/2025722.html   
+                  :  http://www.cnblogs.com/zengen/archive/2011/04/23/2025722.html   
   
 * Installing on OSX:    
    brew install mongodb  
@@ -31,9 +31,9 @@ Description:  MongoDB是一个面向文档的数据库
 `MongoDb的可视化管理工具:  Robomongo   `  
 
 ###Mongo command:   
-* show dbs    --show disk usage  
-* db.help()   --Show help for database methods  
-* show collections    --Print a list of all collections for current database  
-* show databases      --Print a list of all available databases    
+* db.help()          (Show help for database methods)   
+* show dbs           (show disk usage)  
+* show collections   (Print a list of all collections for current database)  
+* show databases     (Print a list of all available databases)      
 
    
