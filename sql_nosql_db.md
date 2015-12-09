@@ -49,7 +49,7 @@ Description:  MongoDB是一个面向文档的数据库
    }
 )
 ```
-* `use accountUser`  切换到accountUser用户下     
+* `use database_name`  创建database_name数据库        
 * 创建聚合   
   ```
     db.createCollection(“collName”, {size: 20, capped: 5, max: 100})           
