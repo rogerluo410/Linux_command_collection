@@ -50,10 +50,13 @@ Description:  MongoDB是一个面向文档的数据库
 )
 ```
 * `use accountUser`  切换到accountUser用户下     
-* 创建&获得聚合   
+* 创建聚合   
   ```
     db.createCollection(“collName”, {size: 20, capped: 5, max: 100})           
-    db.getCollection("account")          
+  ```
+* 获得聚合
+  ```
+    db.getCollection("account")  
   ```
 
 
