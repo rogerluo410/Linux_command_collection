@@ -7,13 +7,13 @@
   ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
   launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 ```
-* StartUp : pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start    
-* Close:  pg_ctl -D /usr/local/var/postgres stop -s -m fast   
+* StartUp      : pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start    
+* Close        :  pg_ctl -D /usr/local/var/postgres stop -s -m fast   
 * Create db    : createdb dbname -O username -E UTF8 -e  
 * Access to    : psql -U username -d dbname -h 127.0.0.1  
 * List         : psql -l  
 * Access one   : \c dbname  
-* Show tables : \d  
+* Show tables  : \d  
 
 
 #MongoDB   
@@ -32,9 +32,22 @@ Description:  MongoDB是一个面向文档的数据库
 `MongoDb的可视化管理工具:  Robomongo   `  
 
 ###Mongo command:   
-* db.help()          (Show help for database methods)   
-* show dbs           (show disk usage)  
-* show collections   (Print a list of all collections for current database)  
-* show databases     (Print a list of all available databases)      
+* db.help()          :  Show help for database methods  
+* show dbs           :  Show disk usage  
+* show users         :  Print a list of users for current database  
+* show roles         :  Print a list of all roles, both user-defined and built-in, for the current database   
+* show collections   :  Print a list of all collections for current database     
+* show databases     :  Print a list of all available databases      
+
+###Create users  
+```
+  db.createUser(
+   {
+     user: "accountUser",
+     pwd: "password",
+     roles: [ "readWrite", "dbAdmin" ]
+   }
+)
+```
 
    
