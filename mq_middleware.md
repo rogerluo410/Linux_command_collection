@@ -1,5 +1,5 @@
 ###RabbitMQ  
 > http://www.rabbitmq.com/install-homebrew.html  
 
-***Start server :***    
+**Start server :**    
 rabbitmq-server  
