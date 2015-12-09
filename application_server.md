@@ -1,4 +1,4 @@
-###Nginx for Mac    
+#Nginx for Mac    
 `Install`   :    
 * brew install nginx   
 * nginx -V    --查看版本，以及配置文件地址   
