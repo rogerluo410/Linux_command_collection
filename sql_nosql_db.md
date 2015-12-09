@@ -54,7 +54,7 @@ Description:  MongoDB是一个面向文档的数据库
   ```
     db.createCollection(“collName”, {size: 20, capped: 5, max: 100})           
   ```
-* 获得聚合
+* 获得聚合    
   ```
     db.getCollection("account")  
   ```
