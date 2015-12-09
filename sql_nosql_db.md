@@ -1,4 +1,4 @@
-###Postgresql  
+#Postgresql  
 * Installing On OSX :  brew install postgresql -v  
 * Initialize Postgresql server : initdb /usr/local/var/postgres -E utf8    --指定 "/usr/local/var/postgres" 为 PostgreSQL 的配置数据存放目录，并且设置数据库数据编码是 utf8，更多配置信息可以 "initdb --help" 查看   
 
@@ -16,7 +16,7 @@
 * Show tables : \d  
 
 
-###MongoDB   
+#MongoDB   
 Description:  MongoDB是一个面向文档的数据库    
   > docs  :  https://docs.mongodb.org    
   
@@ -25,7 +25,13 @@ Description:  MongoDB是一个面向文档的数据库
 * 启动MongoDB:  
    mongod --config /usr/local/etc/mongod.conf  
 * Access to MongoDB with Command:  
-   mongo  
+   mongo    
+`MongoDb的可视化管理工具:  Robomongo   `  
 
-MongoDb的可视化管理工具:  Robomongo   
+###Mongo command:   
+* show dbs    --show disk usage  
+* db.help()   --Show help for database methods  
+* show collections    --Print a list of all collections for current database  
+* show databases      --Print a list of all available databases    
+
    
