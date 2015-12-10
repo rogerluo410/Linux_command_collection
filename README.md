@@ -28,8 +28,11 @@ autoconf & automake :
 * git checkout branch_name         -- 切换分支  
 * git pull origin master:slave     -- 用远端origin主机的master分支更新本地slave分支  
 * git diff                         -- 如果有文件冲突,diff出冲突处，手动修改/删除`>>>>head  code  <<<<< `中的代码    
-* git commit -a -M "Update with master"  --本地slave分支提交到origin主机的slave分支即可      
+* git commit -a -M "Update with master"  --本地slave分支提交到origin主机的slave分支即可    
 
+**解决non-fast-forward**   
+`git pull origin master:local -f`    
+ 
 #Thread
 **top -H -p pid命令查看进程内各个线程占用的CPU百分比**  
 ```
