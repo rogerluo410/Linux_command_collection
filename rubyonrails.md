@@ -15,3 +15,7 @@
             * `rvm use 2.0.0`  
             * `rvm list`   
             * `rvm 2.0.0 --default`   
+            * 
+
+#Factory_girl  
+> https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md   
