@@ -7,6 +7,7 @@ Learning Redis:
 中文文档:  
 > http://doc.redisfans.com/  
 > http://www.redis.cn/  
+> http://redis.io/commands  --command reference   
 
 * Install on OSX : 
   `brew install redis`  
