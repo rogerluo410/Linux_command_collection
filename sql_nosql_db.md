@@ -17,7 +17,7 @@
 
 
 #MongoDB   
-Description:  MongoDB是一个面向文档的数据库    
+Description:  MongoDB是一个面向文档的数据库，采用乐观并发控制(乐观锁)      
   > docs  :  https://docs.mongodb.org    
   > basic command :    
   http://www.cnblogs.com/TankMa/archive/2011/06/08/2074947.html  
@@ -49,7 +49,7 @@ Description:  MongoDB是一个面向文档的数据库
    }
 )
 ```
-* `use database_name`  创建database_name数据库        
+* `use database_name`  创建database_name数据库 (先创建数据库，再创建用户)       
 * 创建聚合   
   ```
     db.createCollection(“collName”, {size: 20, capped: 5, max: 100})           
@@ -63,8 +63,50 @@ Description:  MongoDB是一个面向文档的数据库
 `db.stats()`  
 `db.blog.stats()`  查看聚合状态参数  
 
+* CRUD  
+  Insert : 
+```
+> post = {"title":"My Blog Post",  
+... "content":"Here's my blog post.",  
+... "date":new Date()}  
+{  
+        "title" : "My Blog Post",  
+        "content" : "Here's my blog post.",  
+        "date" : ISODate("2013-01-23T05:29:08.151Z")  
+}  
+> db.blog.insert(post)  
+```
 
+  Find :  
+```
+> db.blog.find()   --find all
+{ "_id" : ObjectId("50ff75376201fe04d53e42ed"), "title" : "My Blog Post", "content" : "Here's my blog post.", "date" : ISODate("2013-01-23T05:29:08.151Z") }  
 
+> db.blog.find({"title":"My Blog Post"})  --find all of title = ...
+{ "_id" : ObjectId("50ff75376201fe04d53e42ed"), "title" : "My Blog Post", "content" : "Here's my blog post.", "date" : ISODate("2013-01-23T05:29:08.151Z") }   
+
+> db.blog.findOne({"title":"My Blog Post", "content" : "Here's my blog post."})    --find one
+{  
+        "_id" : ObjectId("5107257f2f0dc8fbf16e8f28"),  
+        "title" : "My Blog Post",  
+        "content" : "Here's my blog post.",  
+        "date" : ISODate("2013-01-29T01:27:21.858Z")  
+}  
+```
+
+  Update:  
+```
+> post.comments=[]  
+[ ]  
+> db.blog.update({"title":"My Blog Post"},post)  
+```
+
+  Remove:
+```
+> db.blog.remove({"title" : "My Blog Post"})  --remove all of title ...  
+> db.blog.find({"title" : "My Blog Post"})  
+>   
+```
 
 
 
@@ -72,7 +114,7 @@ Description:  MongoDB是一个面向文档的数据库
 
 #数据库知识点  
 
-##乐观锁 和 悲观锁 
+**乐观锁 和 悲观锁**   
 > http://blog.codingnow.com/2014/12/skynet_spinlock.html   
 
 ```
