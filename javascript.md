@@ -94,7 +94,7 @@ console.log(b, c.foo); // "2" "bar"
 
 
 ###Javascript fundation
-JavaScript中有两种主要对象：  
+* JavaScript中有两种主要对象：  
  a.Native:  
      JavaScript中内置的标准对象(Date, Array)；   
  b.Host:  
@@ -106,7 +106,7 @@ number，string，boolean可以非常容易的由程序猿或者解释器转换�
 函数(Function)也是对象，也能有属性和方法。 
 
 
-*文档对象模型DOM里document的常用的查找访问节点的方法:    
+* 文档对象模型DOM里document的常用的查找访问节点的方法:    
 Document.getElementById    --根据元素id查找元素   
 Document.getElementByName  --根据元素name查找元素   
 Document.getElementTagName --根据指定的元素名查找元素  
