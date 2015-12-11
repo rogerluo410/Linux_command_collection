@@ -119,8 +119,8 @@ scp -r UserName1@RemoteIP1:RemoteFolder1 UserName2@RemoteIP2:RemoteFolder2
 
 注：执行以上命令后，系统会提示输入UserName的密码。     
 
-
-#Creating a user and adding it to the sudoers list    
+#Tips for configure Linux   
+###Creating a user and adding it to the sudoers list    
    Creating               : http://www.cyberciti.biz/faq/howto-add-new-linux-user-account/   
    Adding in sudoers list : http://www.pendrivelinux.com/how-to-add-a-user-to-the-sudoers-list/    
    
@@ -133,7 +133,7 @@ scp -r UserName1@RemoteIP1:RemoteFolder1 UserName2@RemoteIP2:RemoteFolder2
      and then edit with `"devops:x:1001:1001::/home/devops:/bin/bash" `  
      
      
-#.bashrc and .profile 
+###.bashrc and .profile 
 * 要搞清bashrc与profile的区别，首先要弄明白什么是交互式shell和非交互式shell，什么是login shell 和non-login shell。   
 
 * 交互式模式就是shell等待你的输入，并且执行你提交的命令。这种模式被称作交互式是因为shell与用户进行交互。这种模式也是大多数用户非常熟悉的：登录、执行一些命令、签退。当你签退后，shell也终止了。     shell也可以运行在另外一种模式：非交互式模式。在这种模式下，shell不与你进行交互，而是读取存放在文件中的命令,并且执行它们。当它读到文件的结尾，shell也就终止了。   
@@ -151,11 +151,11 @@ scp -r UserName1@RemoteIP1:RemoteFolder1 UserName2@RemoteIP2:RemoteFolder2
 3. 然后在根据用户帐号读取~/.bashrc  
 
 至于~/.profile与~/.bashrc的不同区别，都具有个性化定制功能    
-~/.profile可以设定本用户专有的路径，环境变量，等，它只能登入的时候执行一次
-~/.bashrc也是某用户专有设定文档，可以设定路径，命令别名，每次shell script的执行都会使用它一次
+~/.profile可以设定本用户专有的路径，环境变量，等，它只能登入的时候执行一次   
+~/.bashrc也是某用户专有设定文档，可以设定路径，命令别名，每次shell script的执行都会使用它一次  
 
-#Tips for configure Linux   
-* set colorful prompt   
+   
+###set colorful prompt   
 `export PS1='\[\e[1;32m\][\u@\h \W]\$\[\e[0m\] '    `  
 
 
