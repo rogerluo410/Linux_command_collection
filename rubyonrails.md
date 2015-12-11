@@ -19,3 +19,6 @@
 
 #Factory_girl  
 > https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md   
+
+#EventMachine-scalable-non-blocking IO
+> http://www.scribd.com/doc/28253878/EventMachine-scalable-non-blocking-i-o-in-ruby   
