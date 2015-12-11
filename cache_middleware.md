@@ -8,6 +8,7 @@ Learning Redis:
 > http://doc.redisfans.com/  
 > http://www.redis.cn/  
 > http://redis.io/commands  --command reference   
+> http://redis.io/documentation  --Programming with Redis   
 
 * Install on OSX : 
   `brew install redis`  
