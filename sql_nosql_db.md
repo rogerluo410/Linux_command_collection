@@ -17,14 +17,15 @@
    `psql -U username -d dbname -h 127.0.0.1`  
 * List         :    
    `psql -l`   
-* Access one   :
+* Access one   :   
    `\c dbname`   
-* Show tables  : 
+* Show tables  :    
    `\d`   
 
 
 #MongoDB   
-Description:  MongoDB是一个面向文档的数据库，采用乐观并发控制(乐观锁)      
+Description:  MongoDB是一个面向文档的数据库，采用乐观并发控制(乐观锁)    
+文件存储格式为BSON（一种JSON的扩展）  
   > docs  :  https://docs.mongodb.org    
   > basic command :    
   http://www.cnblogs.com/TankMa/archive/2011/06/08/2074947.html  
