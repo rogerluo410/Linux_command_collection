@@ -76,7 +76,7 @@ gcore 14094
 ```  
 
 #Sever performance commands  
-
+`nmap` localhost , to show which post is used.  
 
 
 
@@ -89,3 +89,45 @@ gcore 14094
 
 `PUT`   
 * curl  -H 'Content-Type: application/json' -H 'Accept: application/json' -X PUT -d '{"name": "stone_upd","colour" : "blue","depth":"deep","pattern":"cloud","use":"art","position":0}'  'http://localhost:3000/api/backend/taxonomies/10'   
+
+
+#scp  
+一.作用： 
+远程拷贝文件/目录 SCP 
+
+二.命令基本格式： 
+scp source dest  
+
+三.具体应用例子： 
+本地->远端（复制文件）：   
+scp LocalFile  UserName@RemoteIP:RemoteFile    
+
+本地->远端（复制目录）：   
+scp -r LocalFolder UserName@RemoteIP:RemoteFolder   
+
+远端->本地（复制文件）：  
+scp UserName@RemoteIP:RemoteFile LocalFile    
+
+远端->本地（复制目录）：  
+scp -r UserName@RemoteIP:RemoteFolder LocalFolder   
+
+远端->远端（复制文件，从1复制到2） ：     
+scp UserName1@RemoteIP1:RemoteFile1 UserName2@RemoteIP2:RemoteFile2   
+
+远端->远端（复制目录，从1复制到2）:    
+scp -r UserName1@RemoteIP1:RemoteFolder1 UserName2@RemoteIP2:RemoteFolder2   
+
+注：执行以上命令后，系统会提示输入UserName的密码。     
+
+
+#Creating a user and adding it to the sudoers list    
+   Creating               : http://www.cyberciti.biz/faq/howto-add-new-linux-user-account/   
+   Adding in sudoers list : http://www.pendrivelinux.com/how-to-add-a-user-to-the-sudoers-list/    
+   
+   a.Editing "NOPASSWD" for a user account :     
+     Enter "sudo vim /etc/sudoers"   
+     and then edit with "devops ALL=(ALL:ALL) NOPASSWD :ALL"   
+     
+   b.Adding bash for a user account so that it can be operated by bash when access to the os with SSH,otherwise,it can't use shell command with SSH   
+     Enter "sudo vim /etc/passwd"   
+     and then edit with "devops:x:1001:1001::/home/devops:/bin/bash"   
