@@ -131,3 +131,31 @@ scp -r UserName1@RemoteIP1:RemoteFolder1 UserName2@RemoteIP2:RemoteFolder2
    b.Adding bash for a user account so that it can be operated by bash when access to the os with SSH,otherwise,it can't use shell command with SSH   
      Enter "sudo vim /etc/passwd"   
      and then edit with `"devops:x:1001:1001::/home/devops:/bin/bash" `  
+     
+     
+#.bashrc and .profile 
+* 要搞清bashrc与profile的区别，首先要弄明白什么是交互式shell和非交互式shell，什么是login shell 和non-login shell。   
+
+* 交互式模式就是shell等待你的输入，并且执行你提交的命令。这种模式被称作交互式是因为shell与用户进行交互。这种模式也是大多数用户非常熟悉的：登录、执行一些命令、签退。当你签退后，shell也终止了。     shell也可以运行在另外一种模式：非交互式模式。在这种模式下，shell不与你进行交互，而是读取存放在文件中的命令,并且执行它们。当它读到文件的结尾，shell也就终止了。   
+
+* bashrc与profile都用于保存用户的环境信息，bashrc用于交互式non-loginshell，而profile用于交互式login shell。   
+
+/etc/profile，/etc/bashrc 是系统全局环境变量设定   
+~/.profile，~/.bashrc用户家目录下的私有环境变量设定  
+
+当登入系统时候获得一个shell进程时，其读取环境设定档有三步  
+1. 首先读入的是全局环境变量设定档/etc/profile，然后根据其内容读取额外的设定的文档，如
+/etc/profile.d和/etc/inputrc   
+2. 然后根据不同使用者帐号，去其家目录读取~/.bash_profile，如果这读取不了就读取~/.bash_login，这个也读取不了才会读取
+~/.profile，这三个文档设定基本上是一样的，读取有优先关系   
+3. 然后在根据用户帐号读取~/.bashrc  
+
+至于~/.profile与~/.bashrc的不同区别，都具有个性化定制功能    
+~/.profile可以设定本用户专有的路径，环境变量，等，它只能登入的时候执行一次
+~/.bashrc也是某用户专有设定文档，可以设定路径，命令别名，每次shell script的执行都会使用它一次
+
+#Tips for configure Linux   
+* set colorful prompt   
+`export PS1='\[\e[1;32m\][\u@\h \W]\$\[\e[0m\] '    `  
+
+
