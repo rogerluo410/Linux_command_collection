@@ -29,7 +29,8 @@ Description:  MongoDB是一个面向文档的数据库，采用乐观并发控�
   > docs  :  https://docs.mongodb.org    
   > basic command :    
   http://www.cnblogs.com/TankMa/archive/2011/06/08/2074947.html  
-  http://www.cnblogs.com/zengen/archive/2011/04/23/2025722.html   
+  http://www.cnblogs.com/zengen/archive/2011/04/23/2025722.html    
+  http://snowolf.iteye.com/blog/1974747   
   
 * Installing on OSX:    
    `brew install mongodb`  
