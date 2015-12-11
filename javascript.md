@@ -31,14 +31,15 @@ http://www.ituring.com.cn/article/8108               --JavaScript宝座：七大
 
 http://www.ituring.com.cn/article/38394              --JavaScript MVC框架PK：Angular、Backbone、CanJS与Ember  
 
+http://www.cnblogs.com/jinguangguo/p/3534422.html    --侃侃前端MVC设计模式
+
 对于比较流行的 Javascript MVC 框架应该如何选择？
-http://www.zhihu.com/question/20381805
+> http://www.zhihu.com/question/20381805
+
 "我觉得这个讨论还需要设定一个前提——项目类型是什么，是互联网应用还是企业（Web）应用？互联网应用也要分电子商务、社交网络、门户网站，
 不同项目应该有不同的最优选择（如果存在最优选择的话）。"
 
-侃侃前端MVC设计模式：
-http://www.cnblogs.com/jinguangguo/p/3534422.html
----------------------------------------------------------------
+
 ###1.Asynchronous/Synchronous Javascript
 a.Unless, and this is the answer to your second question, you specify that the Ajax call should be synchronous, which is an option. Doing so will force the user to wait until the call completes before they can do anything, so that's usually not the best choice. Using a callback is usually the best approach.
 
@@ -48,7 +49,7 @@ c.Gotcha, thanks! kingjiv said the exact phrase I was looking for - foobar will 
 
 > http://stackoverflow.com/questions/6748287/asynchronous-synchronous-javascript
 
----------------------------------------------------------------
+
 ###2.Javascript by reference vs. by value
 My understanding is that this is actually very simple:
 
@@ -98,26 +99,22 @@ JavaScript中有两种主要对象：
      JavaScript中内置的标准对象(Date, Array)；   
  b.Host:  
      JavaScript宿主环境对象(浏览器环境--window)。  
----------------     
      
        
 JavaScript中有5中基本类型：number，string，boolean，null，undefined；  
 number，string，boolean可以非常容易的由程序猿或者解释器转换成JavaScript对象；  
 函数(Function)也是对象，也能有属性和方法。 
----------------
 
 
 文档对象模型DOM里document的常用的查找访问节点的方法:  
 Document.getElementById    --根据元素id查找元素   
 Document.getElementByName  --根据元素name查找元素   
 Document.getElementTagName --根据指定的元素名查找元素  
------------------
 
 
-浏览器对象模型BOM里常用的至少4个对象，并列举window对象的常用方法:
+浏览器对象模型DOM里常用的至少4个对象，并列举window对象的常用方法:
 对象：Window  document  location  screen  history  navigator   
 方法：Alert()  confirm()  prompt()  open()  close()  
-----------------
 
 
 AJAX技术体系的组成部分有哪些？ 
