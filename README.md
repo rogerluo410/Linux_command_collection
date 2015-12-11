@@ -125,9 +125,9 @@ scp -r UserName1@RemoteIP1:RemoteFolder1 UserName2@RemoteIP2:RemoteFolder2
    Adding in sudoers list : http://www.pendrivelinux.com/how-to-add-a-user-to-the-sudoers-list/    
    
    a.Editing "NOPASSWD" for a user account :     
-     Enter "sudo vim /etc/sudoers"   
-     and then edit with "devops ALL=(ALL:ALL) NOPASSWD :ALL"   
+     Enter `"sudo vim /etc/sudoers"`     
+     and then edit with `"devops ALL=(ALL:ALL) NOPASSWD :ALL"`   
      
    b.Adding bash for a user account so that it can be operated by bash when access to the os with SSH,otherwise,it can't use shell command with SSH   
      Enter "sudo vim /etc/passwd"   
-     and then edit with "devops:x:1001:1001::/home/devops:/bin/bash"   
+     and then edit with `"devops:x:1001:1001::/home/devops:/bin/bash" `  
