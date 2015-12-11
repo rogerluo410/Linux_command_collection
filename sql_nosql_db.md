@@ -7,13 +7,20 @@
   ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
   launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 ```
-* StartUp      : `pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start`    
-* Close        : `pg_ctl -D /usr/local/var/postgres stop -s -m fast`   
-* Create db    : `createdb dbname -O username -E UTF8 -e`  
-* Access to    : `psql -U username -d dbname -h 127.0.0.1`  
-* List         : `psql -l`  
-* Access one   : `\c dbname`  
-* Show tables  : `\d`  
+* StartUp      :   
+   `pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start`    
+* Close        :    
+   `pg_ctl -D /usr/local/var/postgres stop -s -m fast`   
+* Create db    :   
+   `createdb dbname -O username -E UTF8 -e`  
+* Access to    :   
+   `psql -U username -d dbname -h 127.0.0.1`  
+* List         :    
+   `psql -l`   
+* Access one   :
+   `\c dbname`   
+* Show tables  : 
+   `\d`   
 
 
 #MongoDB   
