@@ -8,8 +8,6 @@ Learning Redis:
 > http://doc.redisfans.com/  
 > http://www.redis.cn/  
 
-Redis客户端管理工具： Redis Desktop Manager   
-
 * Install on OSX : 
   `brew install redis`  
 
@@ -19,6 +17,8 @@ Redis客户端管理工具： Redis Desktop Manager
   
 * 启动redis服务:  
   `redis-server /usr/local/etc/redis.conf`  
+  `redis-cli` 客户端命令    
+  Redis客户端管理工具： Redis Desktop Manager     
 
 * Instructions:  
 ```
