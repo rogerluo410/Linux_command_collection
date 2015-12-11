@@ -101,23 +101,23 @@ JavaScript中有两种主要对象：
      JavaScript宿主环境对象(浏览器环境--window)。  
      
        
-JavaScript中有5中基本类型：number，string，boolean，null，undefined；  
+* JavaScript中有5中基本类型：number，string，boolean，null，undefined；   
 number，string，boolean可以非常容易的由程序猿或者解释器转换成JavaScript对象；  
 函数(Function)也是对象，也能有属性和方法。 
 
 
-文档对象模型DOM里document的常用的查找访问节点的方法:  
+*文档对象模型DOM里document的常用的查找访问节点的方法:    
 Document.getElementById    --根据元素id查找元素   
 Document.getElementByName  --根据元素name查找元素   
 Document.getElementTagName --根据指定的元素名查找元素  
 
 
-浏览器对象模型DOM里常用的至少4个对象，并列举window对象的常用方法:
-对象：Window  document  location  screen  history  navigator   
+* 浏览器对象模型DOM里常用的至少4个对象，并列举window对象的常用方法:    
+对象：Window  document  location  screen  history  navigator     
 方法：Alert()  confirm()  prompt()  open()  close()  
 
 
-AJAX技术体系的组成部分有哪些？ 
-HTML，css，dom，xml，xmlHttpRequest，javascript
+* AJAX技术体系的组成部分有哪些？  
+HTML，css，dom，xml，xmlHttpRequest，javascript    
 通过HTTP Request， 一个web页面可以发送一个请求到web服务器并
-且接受web服务器返回的信息(不用重新加载页面)，展示给用户的还是通一个页面，用户感觉页面刷新，也看不到到Javascript后台进行的发送请求  和接受响应。
+且接受web服务器返回的信息(不用重新加载页面)，展示给用户的还是通一个页面，用户感觉页面刷新，也看不到到Javascript后台进行的发送请求和接受响应。   
