@@ -186,7 +186,9 @@ ZSCORE
 **事务与atomic operation原子操作**  
 MULTI 、 EXEC 、 DISCARD 和 WATCH 命令是 Redis 事务的基础。   
 * MULTI 命令用于开启一个事务，它总是返回 OK 。 Redis 不支持回滚（roll back）   
-* 当执行 DISCARD 命令时， 事务会被放弃， 事务队列会被清空， 并且客户端会从事务状态中退出     
+
+* 当执行 DISCARD 命令时， 事务会被放弃， 事务队列会被清空， 并且客户端会从事务状态中退出   
+
 * 使用 check-and-set 操作实现乐观锁, WATCH 命令可以为 Redis 事务提供 check-and-set （CAS）行为。  
   ```
   WATCH mykey
