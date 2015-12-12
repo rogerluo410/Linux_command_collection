@@ -444,3 +444,7 @@ FTPIT
 * 文件置换符 *     
 在shell中使用文件置换符，例如file="ydds_*.txt"     
  ydds_*.txt: 文件置换为第一个匹配的字符串 ydds_201107.txt则file取引用($file)为ydds_201107.txt.       
+
+
+#SYSTEM PERFORMANCE COMMAND   
+
