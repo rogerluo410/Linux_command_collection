@@ -63,7 +63,7 @@
   `/^[A-Za-z]*[^,][A-Za-z]*$/`   
 
 
-EMAIL: ` /^[A-Za-z0-9]\{3,15\}\@`
+EMAIL: ` /^[A-Za-z0-9]\{3,15\}\@`   
 PHONE:  
 UERNAME:   
 USERPASSWD:    
@@ -285,9 +285,9 @@ basename  路径-->basename /home/eclipse/script
 11.tty 报告所连接的设备或终端    
 
 12.uname 显示当前操作系统名及其他相关信息   
-- a：显示所有信息。   
-- s：系统名。   
-- v：只显示操作系统版本或其发布日期。   
+-a：显示所有信息。   
+-s：系统名。   
+-v：只显示操作系统版本或其发布日期。   
 
 13.系统信息及运行状态监控    
   Linux 的文件系统中有一个特殊目录/proc 该目录下列出的文件并非保
@@ -302,7 +302,7 @@ basename  路径-->basename /home/eclipse/script
 在运行的进程而目录名即为相应的进程ID。   
 
 14.iostat  -d   
- 显示的 IO 统计信息中各部分说明如下   
+显示的 IO 统计信息中各部分说明如下:   
 tps 设备每秒收到的 IO 传送请求数   
 Blk_read/s 设备每秒读入的块数量   
 Blk_wrtn/s 设备每秒写入的块数量   
@@ -326,12 +326,12 @@ mount 命令有很多参数其中大多数都不会在日常工作中用到mount
 其中最常用的选项是:    
    `-a 把/etc/fstab 文件中列出的文件系统都挂装上`         
    
-挂装软驱和光驱的命令比较简单,直接输入以下命令即可：      
+挂装软驱和光驱的命令比较简单,直接输入以下命令即可:      
 ```
    mount /mnt/cdrom   
    mount /mnt/floppy  
 ```   
-umount命令用于卸载一个文件系统命令的格式如下：       
+umount命令用于卸载一个文件系统命令的格式如下:       
    `umount [ -f ] directory`   
 其中directory是准备卸载的目录名        
 
@@ -443,4 +443,4 @@ FTPIT
 
 * 文件置换符 *     
 在shell中使用文件置换符，例如file="ydds_*.txt"     
-ydds_*.txt  ： 文件置换为第一个匹配的字符串 ydds_201107.txt则file取引用($file)为ydds_201107.txt.       
+ ydds_*.txt: 文件置换为第一个匹配的字符串 ydds_201107.txt则file取引用($file)为ydds_201107.txt.       
