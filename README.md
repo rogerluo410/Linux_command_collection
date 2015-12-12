@@ -75,11 +75,6 @@ gcore 14094
 可以根据详细的函数栈进行gdb调试，打印一些变量值，并结合源代码分析为何会poll调用占用很高的CPU。
 ```  
 
-#Sever performance commands  
-`nmap` localhost , to show which post is used.  
-
-
-
 #curl  
 `Get request with parameters IN URL:`  
 * curl http://localhost:3000/api/backend/taxonomies?params1=1&params2=2   
