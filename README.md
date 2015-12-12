@@ -188,5 +188,7 @@ magenta=$'\[\e[1;35m\]'
  normal=$'\[\e[m\]'
  
 PS1="$white[$magenta\u$white@$green\h$white:$cyan\w$yellow\$git_branch$white]\$ $normal"
-以上的代码可以放在 ~/.profile 或者 ~/.bash_profile 等文件中即可，我的系统是 Snow Leopard，PS1 定义在 /etc/bashrc 中，所以我直接修改的这个文件。
+
+以上的代码可以放在 ~/.profile 或者 ~/.bash_profile 等文件中即可，我的系统是 Snow Leopard，
+PS1 定义在/etc/bashrc 中，所以直接修改这个文件。
 ```
