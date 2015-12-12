@@ -22,3 +22,6 @@
 
 #EventMachine-scalable-non-blocking IO
 > http://www.scribd.com/doc/28253878/EventMachine-scalable-non-blocking-i-o-in-ruby   
+
+#Mina  
+> http://yafeilee.me/blogs/5550f3006c693403675a0000   
