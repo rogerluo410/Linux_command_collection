@@ -1,7 +1,7 @@
 #RabbitMQ 
 MQ（Message Queue）即消息队列，一般用于应用系统解耦、消息异步分发，能够提高系统吞吐量。   
 > http://www.rabbitmq.com/install-homebrew.html  
-  http://www.rabbitmq.com/getstarted.html  --Get started
+  http://www.rabbitmq.com/getstarted.html  --Get started   
   http://blog.chinaunix.net/topic/surpershi/  --应用场景  
 
 * Start server :    
