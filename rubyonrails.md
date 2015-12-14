@@ -91,6 +91,25 @@
         
         #排除大小写敏感   
         validates :name, uniqueness: {case_sensitive: false}   
+        
+        10. validates_with, validates_each  
+        
+        **Common validation Options for validations:
+        eg.
+         validates :size, inclusion: { in: %w(small medium), message: "..."}, allow_nil: true 
+         
+         allow_nil
+         allow_blank
+         message
+         on   ==>  validates :age, numericality: true, on: :update  #仅在update时验证  
+         strict validations  ==> validates :name, presence: {strict: true}
+                             ==> Person.new.valid?  #=> ActiveModel::StrictValidationFailed: Name can't br blank   
+                            
+         条件验证  if:  unless: 
+         ==> validates :card_number, presence: true, if: :paid_with_card?   
+             def paid_with_card?
+                 payment_type == "card"  
+             end
 ```
      
      
