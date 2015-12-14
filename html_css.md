@@ -89,7 +89,8 @@ clear: both; left; right;
           relative; 相对定位（相对自身初始位置的偏移），会产生偏移属性和z-index z轴 
   #div{position: relative; top:50px; left:30px;} #相对定位，并设置从初始位置开始偏移。          
           
-          absolute; 绝对定位(相对父节点的偏移，如果没有父节点，则以<html>作为父节点) 完全脱离标准文档流，会产生偏移属性和z-index z轴 
+          absolute; 绝对定位(相对父节点的偏移并且父节点也需要定位，如果没有父节点定位，则以<html>作为父节点) ，完全脱离标准文档流，会产生偏移属性和z-index z轴 。
+                    当一个元素设置绝对定位后，没有设置宽度，元素的宽度根据内容进行调节，例如设置width: 500px;。  
           
           fixed;    绝对定位 固定定位   
 ```
