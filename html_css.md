@@ -85,10 +85,12 @@ clear: both; left; right;
 * 绝对布局， 是用position属性定位  
 ```
  position: static; 静态定位
+ 
           relative; 相对定位（相对自身初始位置的偏移），会产生偏移属性和z-index z轴 
   #div{position: relative; top:50px; left:30px;} #相对定位，并设置从初始位置开始偏移。          
           
-          absolute; 绝对定位(相对父节点的偏移) 完全脱离标准文档流，会产生偏移属性和z-index z轴    
+          absolute; 绝对定位(相对父节点的偏移，如果没有父节点，则以<html>作为父节点) 完全脱离标准文档流，会产生偏移属性和z-index z轴 
+          
           fixed;    绝对定位 固定定位   
 ```
   
