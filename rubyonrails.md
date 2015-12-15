@@ -37,7 +37,7 @@
 
 ###In Model class, We can add: 
    * validates : Validations are used to ensure that only valid data is saved into your database.  
-     只有在`create,create!,save,save!,update,update!`做持久化时才会触发，`save(validate: false)` 能跳过验证.  
+     只有在`create,create!,save,save!,update,update!`做持久化时才会触发，当对象存在，可以用valid?方法验证对象，   `save(validate: false)` 能跳过验证.  
      如果验证失败，错误信息会存放在对象的errors[]集合中`taxonomy.errors.full_messages.join(",") `
 ```
        1. presence   
@@ -113,5 +113,62 @@
 ```
      
      
-   * callbacks
+   * callbacks: With callbacks it is possible to write code that will run whenever an `Active Record object` is created, saved, updated, deleted, validated, or loaded from the database.  
+```
+#Implement the callbacks as ordinary methods and use a marco-style class method to register them as callbacks. 
+#Meanwhile, we can register callbacks with a block. 
+
+    1.before_validation :ensure_login_has_a_value
+      protected  #回调函数最好定义为protected or private, 以免破坏类的封装性.   
+         def ensure_login_has_a_value
+             ...
+         end
+         
+      before_validation do
+          ...
+      end
+      
+      after_validation :set_location, on: [:create, :update]
+      before_save
+      around_save
+      after_save
+      before_create
+      around_create
+      after_create
+      before_update
+      around_update
+      after_update
+      before_destroy
+      around_destroy
+      after_destroy
+      after_commit/after_rollback
+      after_initialize    #=> new 之后会触发
+      after_find          #=> all, first, find, find_by, find_by_*, find_by_*!, find_by_sql, last之后会触发  
+      after_touch  
+      
+      #Skipping Callbacks
+      decrement
+      decrement_counter
+      delete
+      delete_all
+      increment
+      increment_counter
+      toggle
+      touch
+      update_column
+      update_columns
+      update_all
+      update_counters
+      
+      #Halting
+      As you start registering new callbacks for your models, they will be queued for execution. 
+      This queue will include all your model's validations, the regsitered callbacks, and the database operation to be executed.
+      整个回调链包含在一个事务中。如果任何一个 before_* 回调方法返回 false 或抛出异常，整个回调链都会终止执行，撤销事务；而 after_* 回调只有抛出异常才能达到相同的效果。   
+
+      #Conditional Callbacks
+      before_save :normalize_card_number, if: :paid_with_card?  
+      
+      #Callback Classes
+      Sometimes the callback methods that you'll write will be useful enough to be reused by other models.
+```
    * 
