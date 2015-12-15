@@ -32,6 +32,12 @@ autoconf & automake :
 
 **解决non-fast-forward**   
 `git pull origin master:local -f`    
+
+GIT PROCESS:  
+gc master  
+git pull origin master   
+gc rogerluo410-dev  
+git merge master   
  
 #Thread
 **top -H -p pid命令查看进程内各个线程占用的CPU百分比**  
