@@ -26,6 +26,9 @@
 #Mina  
 > http://yafeilee.me/blogs/5550f3006c693403675a0000   
 
+#state_machine   
+> https://github.com/pluginaweek/state_machine
+
 
 
 #Rails 
