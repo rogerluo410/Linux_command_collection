@@ -17,6 +17,12 @@
    $# :参数的总个数    
    $* :所有参数组成的字符串    
 
+* 整型比较, 字符串比较, 数组使用技巧     
+> http://linglong2110.iteye.com/blog/1058021  --整型比较, 字符串比较   
+> http://www.cnblogs.com/chengmo/archive/2010/09/30/1839632.html  --数组使用技巧  
+
+
+
 
 #正则表达式   
 
