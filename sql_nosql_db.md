@@ -34,7 +34,11 @@ Description:  MongoDB是一个面向文档的数据库，采用乐观并发控�
   
 mongoDB 使用场景  
 > http://www.oschina.net/translate/why-you-should-never-use-mongodb?print   
-> http://blog.itpub.net/21601207/viewspace-745088/   --mongodb 使用场景和不使用场景    
+> http://blog.itpub.net/21601207/viewspace-745088/   --mongodb 使用场景和不使用场景   
+
+mongoDB 不支持事务的答疑   
+> http://blog.csdn.net/leon_7mx/article/details/43767823    --Stack Overflow上一些关于MongoDB事务的问答   
+> http://www.csdn.net/article/2014-08-07/2821104-Implement-Robust-and-Scalable-Transactions-with-MongoDB   
   
 * Installing on OSX:    
    `brew install mongodb`  
