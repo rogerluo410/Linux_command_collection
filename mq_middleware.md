@@ -3,7 +3,9 @@ MQ（Message Queue）即消息队列，一般用于应用系统解耦、消息�
 > http://www.rabbitmq.com/install-homebrew.html  
   http://www.rabbitmq.com/getstarted.html  --Get started   
   http://blog.chinaunix.net/topic/surpershi/  --应用场景    
-  http://my.oschina.net/ydsakyclguozi/blog/417087?p=1  --与redis的对比   
+  http://my.oschina.net/ydsakyclguozi/blog/417087?p=1  --与redis的对比     
+  https://github.com/ruby-amqp/bunny   --Ruby client for RabbitMQ
+  http://rubybunny.info/articles/getting_started.html  --ruby 中使用RabbitMQ   
 
 * Start server :    
 `rabbitmq-server`   -detatched选项参数表示以守护进程方式启动服务。   
