@@ -186,12 +186,12 @@ ZSCORE
 ```
 
 **Redis manage**   
-· select命令切换数据库 
-`select 0` --切换到0号数据库   
+· select命令切换数据库    
+`select 0` --切换到0号数据库     
 
-· auth 赋权命令
+· auth 赋权命令    
 
-· 持久化 RDB and  AOF 方式  
+· 持久化 RDB and  AOF 方式    
 
 
 **事务与atomic operation原子操作**  
