@@ -243,17 +243,17 @@ We wanted the value to be 12, but instead it is 11! This is because incrementing
 
 * Redis 也提供了一些复杂结构，如链表，集合，有序集合，哈希表等    
 
-1.链表list     
-· 创建list 
-`rpush new_list "a"` --右插入元素a，也可以说是末插入  
-`lpush new_list "b"` --左插入元素b，也可以说是头插入  
-· 遍历list  
-`lrange new_list 0 -1`  --取subset   
-· list长度 
-`llen new_list`  
-·删除元素 
-`rpop new_list`  --尾删除一个元素, 并返回被删除元素     
-`lpop new_list` --头删除一个元素, 并返回被删除元素   
+1.链表list      
+· 创建list     
+`rpush new_list "a"` --右插入元素a，也可以说是末插入   
+`lpush new_list "b"` --左插入元素b，也可以说是头插入   
+· 遍历list    
+`lrange new_list 0 -1`  --取subset     
+· list长度    
+`llen new_list`    
+·删除元素    
+`rpop new_list`  --尾删除一个元素, 并返回被删除元素         
+`lpop new_list` --头删除一个元素, 并返回被删除元素      
 
 2.集合set 
 · 创建集合set  
