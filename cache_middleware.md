@@ -202,4 +202,162 @@ MULTI 、 EXEC 、 DISCARD 和 WATCH 命令是 Redis 事务的基础。
   SET mykey $val
   EXEC
   ```
-  使用上面的代码， 如果在 WATCH 执行之后， EXEC 执行之前， 有其他客户端修改了 mykey 的值， 那么当前客户端的事务就会失败。 程序需要做的， 就是不断重试这个操作， 直到没有发生碰撞为止。
+  使用上面的代码， 如果在 WATCH 执行之后， EXEC 执行之前， 有其他客户端修改了 mykey 的值， 那么当前客户端的事务就会失败。 程序需要做的， 就是不断重试这个操作， 直到没有发生碰撞为止。  
+  
+  
+  
+**Basic Commands**  
+* 设置键值对  
+` set v1:backend:name "fido" `  --v1:backend 为域名   
+* 获得键值对的值  
+` get v1:backend:name`   
+* SET-if-not-exists  that sets a key only if it does not already exist   
+` setnx v1 15`  --成功返回1，失败返回0  
+* 自增命令INCR, INCR to `atomically` increment a number stored at a given key  
+` INCR v1`  => 16  
+` INCRBY v1 10`  => 25
+```
+There is something special about INCR. Why do we provide such an operation if we can do it ourself with a bit of code? After all it is as simple as:
+
+x = GET count
+x = x + 1
+SET count x
+The problem is that doing the increment in this way will only work as long as there is a single client using the key. See what happens if two clients are accessing this key at the same time:
+
+Client A reads count as 10.
+Client B reads count as 10.
+Client A increments 10 and sets count to 11.
+Client B increments 10 and sets count to 11.
+
+We wanted the value to be 12, but instead it is 11! This is because incrementing the value in this way is not an atomic operation. Calling the INCR command in Redis will prevent this from happening, because it is an atomic operation. Redis provides many of these atomic operations on different types of data.
+```  
+
+* 设置key的生存期, expire , ttl 
+```
+ set num 10
+ expire num 100  --100 单位为秒， 意为100秒后过期   
+ ttl num   --返回剩余秒数， 如果过期返回-2 ， 如果返回-1 表示永不过期  
+ 
+ Note that if you SET a key once again, its TTL will be reset and invalid.  
+```
+
+* Redis 也提供了一些复杂结构，如链表，集合，有序集合，哈希表等  
+1.链表list
+· 创建list 
+`rpush new_list "a"` --右插入元素a，也可以说是末插入  
+`lpush new_list "b"` --左插入元素b，也可以说是头插入  
+· 遍历list  
+`lrange new_list 0 -1`  --取subset   
+· list长度 
+`llen new_list`  
+·删除元素 
+`rpop new_list`  --尾删除一个元素, 并返回被删除元素     
+`lpop new_list` --头删除一个元素, 并返回被删除元素   
+
+2.集合set 
+· 创建集合set  
+`sadd new_set "first"`  --创建一个set， 并加入第一个元素  
+· 删除集合中的元素  
+`srem new_set "first"`  --删除值为first的元素   
+· 查看一个元素是否在集合中
+`sismember new_set "first"`  --存在返回1， 不在返回0   
+· 遍历集合  
+`smembers new_set`  --遍历集合中的所有元素  
+· 合并两个集合 
+`sunion set1 set2`  --返回一个新集合包含set1,set2的元素， 但是set1, set2并未改变   
+
+3.有序集合 sorted set  
+· 创建有序集合 zset  
+`zadd sset 100 "first"` --有序集合中， 每一个元素都有一个权值， 会根据这个score排序   
+```
+127.0.0.1:6379> zadd sset_1 100 "one"
+(integer) 1
+127.0.0.1:6379> zadd sset_1 200 "two"
+(integer) 1
+127.0.0.1:6379> zadd sset_1 300 "three"
+(integer) 1
+127.0.0.1:6379> zadd sset_1 50 "zero"
+(integer) 1
+127.0.0.1:6379> zrange sset_1 0 -1
+1) "zero"
+2) "one"
+3) "two"
+4) "three"
+
+127.0.0.1:6379> zadd sset_1 -14 "minus"
+(integer) 1
+127.0.0.1:6379> zrange sset_1 0 -1
+1) "minus"
+2) "zero"
+3) "one"
+4) "two"
+5) "three"
+
+新增相同的权值   
+127.0.0.1:6379> zadd sset_1 -14 "minus1"
+(integer) 1
+127.0.0.1:6379> zrange sset_1 0 -1
+1) "minus"
+2) "minus1"
+3) "zero"
+4) "one"
+5) "two"
+6) "three"
+```
+· 遍历集合 或 取子集  
+`zrange sset_1 0 -1`   
+
+* 哈希表 hash
+· 建立hash表  
+```
+hset user:1 name "roger"
+hset user:1 age 18     
+
+一次初始化写法:  
+hmset user:1  name "roger"  age 18  
+
+user:1 这种写法可以表示为数组形式的hash表 => [user1, user2, user3, user4,..., userN] 
+```
+· 遍历hash表 
+`hgetall user:1` 获取所有的key-value  user实际只是域名， 所以无法`hgetall user`.  
+```
+127.0.0.1:6379> hgetall user:1
+1) "name"
+2) "roger"
+3) "age"
+4) "18"
+```
+`hget user:1 name` 获取某个键key的值   
+```
+127.0.0.1:6379> hget user:1 name
+"roger"
+```
+
+· hash 字符型value的自增， 原子操作 
+`hset user:1 age 18 `  
+`hincrby user:1 age  10` => 28   
+
+· 删除某个键key 
+```
+HSET user:1000 visits 10
+HINCRBY user:1000 visits 1 => 11
+HINCRBY user:1000 visits 10 => 21
+HDEL user:1000 visits
+HINCRBY user:1000 visits 1 => 1
+```
+
+· 遍历所有的keys  
+```
+127.0.0.1:6379> hkeys user:1
+1) "name"
+2) "age"
+```
+
+
+
+
+ 
+
+
+
+
