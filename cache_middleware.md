@@ -183,7 +183,16 @@ ZREM
 ZREMRANGEBYSCORE
 ZREVRANGE
 ZSCORE
-```  
+```
+
+**Redis manage**   
+· select命令切换数据库 
+`select 0` --切换到0号数据库   
+
+· auth 赋权命令
+
+· 持久化 RDB and  AOF 方式  
+
 
 **事务与atomic operation原子操作**  
 MULTI 、 EXEC 、 DISCARD 和 WATCH 命令是 Redis 事务的基础。   
@@ -355,10 +364,72 @@ HINCRBY user:1000 visits 1 => 1
 ```
 
 
+* 一些关于key的命令  
+· dump key 序列化一个key的值
+```
+127.0.0.1:6379> dump app:num
+"\x00\xc0\x1e\x06\x00\x7f^I\xe6D \xc7e"
 
+127.0.0.1:6379> dump app:num1
+(nil)    =>key不存在返回nil  
+```
+· restore 反序列化一个key的值
+RESTORE key ttl serialized-value  --key: 指定一个key, ttl: 设置生存时间 0表示不设置过期时间   
+```
+127.0.0.1:6379> dump app:num
+"\x00\xc0\x1e\x06\x00\x7f^I\xe6D \xc7e"
+127.0.0.1:6379> get app:num
+"30"
+127.0.0.1:6379> restore app:num1 0 "\x00\xc0\x1e\x06\x00\x7f^I\xe6D \xc7e"
+OK
+127.0.0.1:6379> get app:num1
+"30"
+127.0.0.1:6379> ttl app:num1
+(integer) -1
+```
 
- 
+· 模式匹配查找key  
+keys pattern   
+```
+KEYS * 匹配数据库中所有 key 。
+KEYS h?llo 匹配 hello ， hallo 和 hxllo 等。
+KEYS h*llo 匹配 hllo 和 heeeeello 等。
+KEYS h[ae]llo 匹配 hello 和 hallo ，但不匹配 hillo 。
+特殊符号用 \ 隔开
+```
 
+· type 返回key指向的值的类型  
+```
+127.0.0.1:6379> type app:num1
+string
+127.0.0.1:6379> type alist
+list 
 
+返回值：
+none (key不存在)
+string (字符串)
+list (列表)
+set (集合)
+zset (有序集)
+hash (哈希表)
+```
+
+· scan 扫描当前数据库中所有的键key   
+```
+127.0.0.1:6379> scan 0
+1) "6"
+2)  1) "alist"
+    2) "user:2"
+    3) "user"
+    4) "app:num1"
+    5) "sec_set"
+    6) "app:num"
+    7) "aset"
+    8) "user:3"
+    9) "v1:api:backend:name"
+   10) "app:str"
+```
+
+**发布与订阅**   
 
 
