@@ -241,8 +241,9 @@ We wanted the value to be 12, but instead it is 11! This is because incrementing
  Note that if you SET a key once again, its TTL will be reset and invalid.  
 ```
 
-* Redis 也提供了一些复杂结构，如链表，集合，有序集合，哈希表等  
-1.链表list
+* Redis 也提供了一些复杂结构，如链表，集合，有序集合，哈希表等    
+
+1.链表list     
 · 创建list 
 `rpush new_list "a"` --右插入元素a，也可以说是末插入  
 `lpush new_list "b"` --左插入元素b，也可以说是头插入  
