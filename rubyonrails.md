@@ -28,6 +28,10 @@
 #Factory_girl  
 > https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md   
 
+#Guard     
+使用 Guard 你可以自动化的运行那些和你正在修改的测试，Model，Controller 或者文件有关的测试。    
+> https://github.com/guard/guard     
+
 #EventMachine-scalable-non-blocking IO
 > http://www.scribd.com/doc/28253878/EventMachine-scalable-non-blocking-i-o-in-ruby   
 
