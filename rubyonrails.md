@@ -29,11 +29,17 @@
 #state_machine   
 > https://github.com/pluginaweek/state_machine
 
-#spork 加上这个gem后，simplecov统计代码覆盖率时才能将API接口的代码统计进去。   
+#spork    
+加上这个gem后，simplecov统计代码覆盖率时才能将API接口的代码统计进去。       
 > https://github.com/sporkrb/spork   
 
-#devise  Flexible authentication solution  
+#devise    
+Flexible authentication solution       
 > https://github.com/plataformatec/devise    
+
+#cancan    
+CanCan is an authorization library for Ruby on Rails which restricts what resources a given user is allowed to access.    
+> https://github.com/ryanb/cancan  
 
 #Rails 
 > http://guides.rubyonrails.org/active_record_validations.html  --active model validations   
