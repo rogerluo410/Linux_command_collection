@@ -17,6 +17,14 @@
             * `rvm 2.0.0 --default`   
             * 
 
+
+#Ruby 语法   
+> http://www.runoob.com/ruby/ruby-hash.html  
+
+#Rspec   
+> http://my.oschina.net/huangwenwei/blog/418999   --RSpec入门指南   
+> http://www.jianshu.com/p/1db9ee327357  --RSpec入门指南    
+
 #Factory_girl  
 > https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md   
 
