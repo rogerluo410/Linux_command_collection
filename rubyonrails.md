@@ -39,7 +39,11 @@ Flexible authentication solution
 
 #cancan    
 CanCan is an authorization library for Ruby on Rails which restricts what resources a given user is allowed to access.    
-> https://github.com/ryanb/cancan  
+> https://github.com/ryanb/cancan    
+
+#mime-types    
+The mime-types library provides a library and registry for information about MIME content type definitions.    
+> https://github.com/mime-types/ruby-mime-types
 
 #Rails 
 > http://guides.rubyonrails.org/active_record_validations.html  --active model validations   
