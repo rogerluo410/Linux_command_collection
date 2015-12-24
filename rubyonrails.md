@@ -49,6 +49,10 @@
 Flexible authentication solution       
 > https://github.com/plataformatec/devise    
 
+#sidekiq
+后台任务池   
+> https://github.com/mperham/sidekiq   
+
 #cancan    
 CanCan is an authorization library for Ruby on Rails which restricts what resources a given user is allowed to access.    
 > https://github.com/ryanb/cancan    
