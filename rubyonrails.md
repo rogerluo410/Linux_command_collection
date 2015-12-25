@@ -19,7 +19,11 @@
 
 
 #Ruby 语法   
-> http://www.runoob.com/ruby/ruby-hash.html  
+> http://www.runoob.com/ruby/ruby-hash.html    
+
+#API Description Generator  
+> http://apidocjs.com   
+> https://github.com/apidoc/apidoc   
 
 #Rspec   
 > http://my.oschina.net/huangwenwei/blog/418999   --RSpec入门指南   
