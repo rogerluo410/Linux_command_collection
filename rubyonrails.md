@@ -25,6 +25,68 @@
 > http://my.oschina.net/huangwenwei/blog/418999   --RSpec入门指南   
 > http://www.jianshu.com/p/1db9ee327357  --RSpec入门指南    
 
+```  
+它在BDD流程的开发中被用来写高可读性的测试，引导并验证你开发的应用程序。
+#常用模式：  
+before(:all) { #全局变量赋值，只执行一遍，每个测试方法都可以用，变量最好设置为实例变量 @param  } 
+before(:each) { #全局变量赋值，每个测试方法运行前都会执行一遍，变量最好设置为实例变量 @param  } 
+describe '描述这个方法的测试目的' do
+ let(:arg1) { #做测试使用变量的赋值 }
+ let(:arg2) { #做测试使用变量的赋值 }
+ context '描述测试时的上下文环境，它能让测试更清晰，有条理' do
+   #别用should，用expect 
+   #别用fixtures， 用Factory
+   
+   expect(actual).to be(expected)    # passes if actual.equal?(expected)
+   expect(actual).to equal(expected) # passes if actual.equal?(expected)
+   #=> https://github.com/rspec/rspec-expectations  how to use expect  
+ end
+end
+
+Instance: 
+   describe "PUT /api/v1/team/:team_id/cases/:id/sort" do
+    let(:cs) { FactoryGirl.create(:case) }
+    let(:case_file_list) { FactoryGirl.create_list(:case_file, 3, case: cs) }
+    let(:ids) do
+    {
+      file_ids: case_file_list.map(&:id).reverse!.join(',')  #逆序排序
+    }
+    end
+    it "returns HTTP status 204, if sort successfully." do
+      put "/api/v1/team/#{cs.organization_id}/cases/#{cs.id}/sort", ids
+
+      expect(last_response.status).to eq(200)
+      expect(JSON.parse(last_response.body)).to have_key("file_keys")
+    end
+    it "returns HTTP status 403, if organization_id is error." do
+      put "/api/v1/team/#{cs.organization_id + 1}/cases/#{cs.id}/sort", ids
+
+      expect(last_response.status).to eq(403)
+      expect(JSON.parse(last_response.body)).to have_key("code")
+    end
+   end
+
+Factory_girl: 
+FactoryGirl.define do
+  factory :case do
+    sequence(:name) { |n| "case#{n}" }  
+    state             "editing"
+    finished_on_year  2015
+    finished_on_month 12
+    organization_id   63 
+  end
+end
+
+FactoryGirl.define do
+  factory :case_file do
+    sequence(:key) { |n| "abc#{n}" } 
+    association :case, factory: :case #指定这个关联的真名, strategy: :build #只创建不save这个关联对象
+  end
+end
+
+##以上是controller的测试模式， model的模式可以使用subject方法。
+```
+
 #capybara   
 Acceptance test framework for web applications   
 > https://github.com/jnicklas/capybara    
