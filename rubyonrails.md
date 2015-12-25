@@ -25,6 +25,10 @@
 > http://my.oschina.net/huangwenwei/blog/418999   --RSpec入门指南   
 > http://www.jianshu.com/p/1db9ee327357  --RSpec入门指南    
 
+#capybara   
+Acceptance test framework for web applications   
+> https://github.com/jnicklas/capybara    
+
 #Factory_girl  
 > https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md   
 
