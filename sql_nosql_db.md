@@ -170,7 +170,7 @@ mongoDB 不支持事务的答疑
 
 
 #Mysql   
-* Install on OSX
+* Install on OSX    
 `brew install mysql`     
 `unset TMPDIR` to avoid `ERROR 2002 (HY000): Can not connect to local MySQL server through socket '/tmp/mysql.sock' (2)`  
 
