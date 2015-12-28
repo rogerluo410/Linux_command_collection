@@ -171,17 +171,18 @@ mongoDB 不支持事务的答疑
 
 #Mysql   
 * Install on OSX
-`brew install mysql`  `unset TMPDIR` to avoid `ERROR 2002 (HY000): Can not connect to local MySQL server through socket '/tmp/mysql.sock' (2)`
+`brew install mysql`     
+`unset TMPDIR` to avoid `ERROR 2002 (HY000): Can not connect to local MySQL server through socket '/tmp/mysql.sock' (2)`  
 
 * 起服务  
 `mysql.server start`    
 
 * 登陆  
 `mysql -uroot -p`    
-`mysql -D 所选择的数据库名 -h 主机名 -u 用户名 -p`
-执行 use samp_db 来选择刚刚创建的数据库, 选择成功后会提示: Database changed   
+`mysql -D 所选择的数据库名 -h 主机名 -u 用户名 -p`   
+执行 use samp_db 来选择刚刚创建的数据库, 选择成功后会提示: Database changed     
 
-* Mysql中数据库类型  
+* Mysql中数据库类型   
 ```
 数字类型
 整数: tinyint、smallint、mediumint、int、bigint
@@ -197,7 +198,7 @@ mongoDB 不支持事务的答疑
 ```
 
 * create database samp_db character set gbk;   
-为了便于在命令提示符下显示中文, 在创建时通过 character set gbk 将数据库字符编码指定为 gbk。   
+为了便于在命令提示符下显示中文, 在创建时通过 character set gbk 将数据库字符编码指定为 gbk。    
 
 * 创建表  
 Mysql 中的约束条件：   
