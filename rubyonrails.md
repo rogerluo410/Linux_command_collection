@@ -129,14 +129,7 @@ CanCan is an authorization library for Ruby on Rails which restricts what resour
 
 #mime-types    
 The mime-types library provides a library and registry for information about MIME content type definitions.    
-> https://github.com/mime-types/ruby-mime-types
-
-#Rails 
-> http://guides.rubyonrails.org/active_record_validations.html  --active model validations   
-> http://guides.rubyonrails.org/active_record_querying.html     --active record querying  
-> http://guides.rubyonrails.org/active_record_callbacks.html    --active record callbacks   
-> http://edgeguides.rubyonrails.org/active_record_migrations.html  --active record migrations  
-> http://guides.rubyonrails.org/association_basics.html  --active record association  
+> https://github.com/mime-types/ruby-mime-types   
 
 #Rails with mongoDB  
 ```
@@ -147,6 +140,13 @@ then you can follow the configuration steps from Mongoid:
 
 http://mongoid.org/en/mongoid/docs/installation.html
 ```
+
+#Rails 
+> http://guides.rubyonrails.org/active_record_validations.html  --active model validations   
+> http://guides.rubyonrails.org/active_record_querying.html     --active record querying  
+> http://guides.rubyonrails.org/active_record_callbacks.html    --active record callbacks   
+> http://edgeguides.rubyonrails.org/active_record_migrations.html  --active record migrations  
+> http://guides.rubyonrails.org/association_basics.html  --active record association  
 
 ###In Model class, We can add: 
    * validates : Validations are used to ensure that only valid data is saved into your database.  
