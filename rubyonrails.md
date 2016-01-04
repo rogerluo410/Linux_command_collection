@@ -138,6 +138,16 @@ The mime-types library provides a library and registry for information about MIM
 > http://edgeguides.rubyonrails.org/active_record_migrations.html  --active record migrations  
 > http://guides.rubyonrails.org/association_basics.html  --active record association  
 
+#Rails with mongoDB  
+```
+As far as I am concerned you will have to create a new Rails project excluding active record:
+
+rails new my_app --skip-active-record
+then you can follow the configuration steps from Mongoid:
+
+http://mongoid.org/en/mongoid/docs/installation.html
+```
+
 ###In Model class, We can add: 
    * validates : Validations are used to ensure that only valid data is saved into your database.  
      只有在`create,create!,save,save!,update,update!`做持久化时才会触发，当对象存在，可以用valid?方法验证对象，   `save(validate: false)` 能跳过验证.  
