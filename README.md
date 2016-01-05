@@ -37,9 +37,20 @@ GIT PROCESS:
 gc master  
 git pull origin master   
 gc rogerluo410-dev  
-git merge master   
+git merge master  
 
-Git stach  隐藏   
+fork 了开源项目后，如何持续跟进项目的开发:   
+```
+$ git clone https://github.com/youname/ruby-china.git
+$ git remote add ruby-china https://github.com/ruby-china/ruby-china.git
+$ git remote
+origin # 你的
+ruby-china # 官方的
+$ git fetch ruby-china
+$ git checkout master
+$ git rebase ruby-china/master -i
+```
+Git stach  --隐藏     
  
 #Thread
 **top -H -p pid命令查看进程内各个线程占用的CPU百分比**  
