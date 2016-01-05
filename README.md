@@ -33,11 +33,13 @@ autoconf & automake :
 **解决non-fast-forward**   
 `git pull origin master:local -f`    
 
-GIT PROCESS:  
+GIT PROCESS on Working:  
+```
 gc master  
 git pull origin master   
 gc rogerluo410-dev  
 git merge master  
+```  
 
 fork 了开源项目后，如何持续跟进项目的开发:   
 ```
