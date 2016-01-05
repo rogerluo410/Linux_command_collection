@@ -38,7 +38,7 @@ GIT PROCESS on Working:
 gc master  
 git pull origin master   
 gc rogerluo410-dev  
-git merge master  
+git merge master  -- 合并master到当前分支
 ```  
 
 fork 了开源项目后，如何持续跟进项目的开发:   
@@ -51,8 +51,24 @@ ruby-china # 官方的
 $ git fetch ruby-china
 $ git checkout master
 $ git rebase ruby-china/master -i
+
+git rebase有点类似git merge，但是两者又有不同，打个比方，你有两个抽屉A和B，里面都装了衣服，现在想把B中的衣服放到A中，git merge是那种横冲直撞型的，拿起B就倒入A里面，如果满了（冲突）再一并整理；而git rebase就很持家了，它会一件一件的从B往A中加，会根据一开始放入的时间顺序的来加，如果满了你可以处理这一件，你可以继续加，或者跳过这一件，又 或者不加了，把A还原。所以merge适合那种比较琐碎的，简单的合并，系统级的合并还是用rebase吧。
+
+# 合并b
+git rebase b
+
+# 处理完冲突继续合并
+git rebase –continue
+
+# 跳过
+git rebase –skip
+
+# 取消合并
+git rebase –abort
+
+Git stach  --隐藏  
 ```
-Git stach  --隐藏     
+   
  
 #Thread
 **top -H -p pid命令查看进程内各个线程占用的CPU百分比**  
