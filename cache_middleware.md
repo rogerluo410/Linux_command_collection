@@ -10,6 +10,9 @@ Learning Redis:
 > http://redis.io/commands  --command reference   
 > http://redis.io/documentation  --Programming with Redis   
 
+使用场景:  
+> http://get.ftqq.com/523.get  --Redis 数据结构使用场景    
+
 * Install on OSX : 
   `brew install redis`  
 
