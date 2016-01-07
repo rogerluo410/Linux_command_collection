@@ -131,6 +131,10 @@ CanCan is an authorization library for Ruby on Rails which restricts what resour
 The mime-types library provides a library and registry for information about MIME content type definitions.    
 > https://github.com/mime-types/ruby-mime-types   
 
+#redis-objects   
+Map Redis types directly to Ruby objects  
+> https://github.com/nateware/redis-objects   
+
 #Rails with mongoDB  
 ```
 As far as I am concerned you will have to create a new Rails project excluding active record:
