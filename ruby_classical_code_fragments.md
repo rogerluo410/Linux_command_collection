@@ -9,7 +9,7 @@ end
 
 endpoint 的典型用法
 ```
-attributes_collection = if keys.include?('id') || keys.include?(:id)
+attributes_collection = if keys.include?('id') || keys.include?(:id) #开放客户传入hash，需要判断key是字符串还是标签
   [attributes_collection]
 else
   attributes_collection.values
