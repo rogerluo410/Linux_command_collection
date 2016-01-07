@@ -30,7 +30,7 @@ autoconf & automake :
 * git diff                         -- 如果有文件冲突,diff出冲突处，手动修改/删除`>>>>head  code  <<<<< `中的代码    
 * git commit -a -M "Update with master"  --本地slave分支提交到origin主机的slave分支即可    
 
-**GIT PROCESS on Working:**   
+**git process on Working:**   
 ```
 gc master  
 git pull origin master   
