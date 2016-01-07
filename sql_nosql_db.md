@@ -245,8 +245,11 @@ MySQL 处理树状回复的设计会很复杂, 而且需要写很多代码, 而 
 心动不如行动Converting MySQL to PostgreSQL
 ```
 
+#Oracle   
 
-#数据库知识点  
+
+
+#数据库知识概念     
 
 **乐观锁 和 悲观锁**   
 > http://blog.codingnow.com/2014/12/skynet_spinlock.html   
