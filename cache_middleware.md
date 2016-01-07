@@ -225,6 +225,8 @@ MULTI 、 EXEC 、 DISCARD 和 WATCH 命令是 Redis 事务的基础。
 ` get v1:backend:name`   
 * SET-if-not-exists  that sets a key only if it does not already exist   
 ` setnx v1 15`  --成功返回1，失败返回0  
+* 删除key   
+` del key_name`   
 * 自增命令INCR, INCR to `atomically` increment a number stored at a given key  
 ` INCR v1`  => 16  
 ` INCRBY v1 10`  => 25
