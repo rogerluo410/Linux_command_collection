@@ -135,6 +135,10 @@ The mime-types library provides a library and registry for information about MIM
 Map Redis types directly to Ruby objects  
 > https://github.com/nateware/redis-objects   
 
+#mock_redis   
+Mock Redis gem for Ruby   
+> https://github.com/brigade/mock_redis   
+
 #Rails with mongoDB  
 ```
 As far as I am concerned you will have to create a new Rails project excluding active record:
