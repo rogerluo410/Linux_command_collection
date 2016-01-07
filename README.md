@@ -117,10 +117,10 @@ gcore 14094
 * curl http://localhost:3000/api/backend/taxonomies?params1=1&params2=2   
 
 `POST request with JSON data:`       
-* curl -d '{"taxonomy":{"name": "stone","colour" : "black","depth":"deep","pattern":"cloud","use":"building"}}' 'http://localhost:3000/api/backend/taxonomies' -H Content-Type:application/json -v    
+*  curl -X POST localhost:3000/api/v1/team/63/products -F 'token=123' -F 'type=stone_material' -F 'surface_id=3' -F 'file_ids[]=1' -F 'file_ids[]=2' -F 'prices[0][type]=1' -F 'prices[0][level]=3' -F 'prices[1][type]=2' -F 'prices[1][deliver_address]=sadafsfs' -F 'prices[1][level]=5' -F 'taxonomy_id=10' -F 'archive_ids[]=3' -F 'archive_ids[]=1' -F 'prices[0][length]=15' -F 'prices[0][amount]=5' -F 'prices[0][money]=5.55' -F 'prices[1][amount]=7' -F 'prices[1][money]=15.64'  -F 'name=lu105'    
 
 `PUT`   
-* curl  -H 'Content-Type: application/json' -H 'Accept: application/json' -X PUT -d '{"name": "stone_upd","colour" : "blue","depth":"deep","pattern":"cloud","use":"art","position":0}'  'http://localhost:3000/api/backend/taxonomies/10'   
+* curl -X PUT localhost:3000/api/v1/team/63/products/111 -d 'token=123' -d 'file_ids[]=8' -d 'file_ids[]=6' -d 'taxonomy_id=15' -d 'surface_id=7' -d 'archive_ids[]=12' -d 'prices[0][price_id]=230' -d 'prices[0][money]=1255.55' -d 'prices[0][amount]=100' -d 'prices[0][length]=101' -d 'prices[0][type]=2' -d 'prices[0][height]=134' -d 'prices[1][height]=50' -d 'prices[1][money]=500' -d 'prices[1][amount]=200'    
 
 
 #scp  
