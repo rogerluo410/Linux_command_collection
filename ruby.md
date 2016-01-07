@@ -1,5 +1,10 @@
+
+#Ruby
+
+文档:   
 > http://www.kuqin.com/rubycndocument/man/built-in-class/class_object_module.html#method_defined.3f   --document
-> https://ruby-hacking-guide.github.io/  --Ruby Hacking Guide
+> https://ruby-hacking-guide.github.io/  --Ruby Hacking Guide   
+> http://www.runoob.com/ruby/ruby-array.html   
 
 ###Ruby 基础相关
 1. each 和 map 的区别 : map 会返回新的对象  
@@ -31,16 +36,6 @@
 4. alias_method_chain 的用法及源码解读   
 
 > http://naixspirit.github.io/2013/08/13/a-ruby-face-questions/
-
-###REST / JSON / XML-RPC / SOAP
-REST mandates the general semantics and concepts. The transport and encodings are up to you. They were originally formulated on XML, but JSON is totally applicable.
-
-XML-RPC / SOAP are different mechanisms, but mostly the same ideas: how to map OO APIs on top of XML and HTTP. IMHO, they're disgusting from a design view. I was so relieved when found about REST. In your case, i'm sure that the lots of layers would mean a lot more CPU demand.
-
-I'd say go REST, using JSON for encoding; but if your requirements are really that simple as just uploading, then you can use simply HTTP (which might be RESTful in design even without adding any specific library)
-
-> http://stackoverflow.com/questions/1371312/rest-json-xml-rpc-soap
-
 
 ###ruby的hash variable
 
