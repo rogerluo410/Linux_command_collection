@@ -320,7 +320,7 @@ We wanted the value to be 12, but instead it is 11! This is because incrementing
 · 遍历集合 或 取子集  
 `zrange sset_1 0 -1`   
 
-* 哈希表 hash
+4.哈希表 hash
 · 建立hash表  
 ```
 hset user:1 name "roger"
