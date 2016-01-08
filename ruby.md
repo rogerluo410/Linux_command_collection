@@ -2,9 +2,10 @@
 #Ruby
 
 文档:   
-> http://www.kuqin.com/rubycndocument/man/built-in-class/class_object_module.html#method_defined.3f   --document
 > https://ruby-hacking-guide.github.io/  --Ruby Hacking Guide   
-> http://www.runoob.com/ruby/ruby-array.html   
+> http://www.runoob.com/ruby/ruby-array.html    
+> http://apidock.com/ruby/    --ruby, rails, rspec 文档   
+> https://en.wikibooks.org/wiki/Ruby_Programming   --ruby wiki   
 
 ###Ruby 基础相关
 1. each 和 map 的区别 : map 会返回新的对象  
