@@ -379,7 +379,12 @@ Eg：
 /etc/sysconfig/network-scripts/ifcfg-ethN
 ```   
 
-**19.lsof -i:25830 查看所指定端口运行的程序，还有当前连接。**          
+**19.lsof -i:25830 查看所指定端口运行的程序，还有当前连接。**        
+`netstat -lnp | grep 9212`  --查看某个端口被哪个进程占用   
+```
+tcp        0      0 0.0.0.0:6379            0.0.0.0:*               LISTEN      1507/redis-server *
+tcp6       0      0 :::6379                 :::*                    LISTEN      1507/redis-server *
+```
 
 **20.pkill -KILL -U `awk -F":" '$1 == "wujie" {print $3;}' /etc/passwd`**        
     查找某用户（wujie），结束它的相关进程    
