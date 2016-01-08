@@ -135,6 +135,10 @@ The mime-types library provides a library and registry for information about MIM
 Map Redis types directly to Ruby objects  
 > https://github.com/nateware/redis-objects   
 
+#redis-rb   
+A Ruby client library for Redis    
+> https://github.com/redis/redis-rb   
+
 #mock_redis   
 Mock Redis gem for Ruby   
 > https://github.com/brigade/mock_redis   
