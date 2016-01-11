@@ -344,6 +344,8 @@ to_s
 to_i
 to_f
 to_a
+to_h
+to_sym
 to_time
 to_date
 ```
@@ -375,12 +377,12 @@ puts info
 - **case语句**
 ```
   case sentence
-    when value1 then
-          code block
-    when value2 then
-          code block
-    else
-          code block
+  when value1 
+    code block
+  when value2
+    code block
+  else
+    code block
   end  
 ```
 
@@ -447,7 +449,179 @@ a = Array.new
 ```
 
 - **array转hash**   
+```
+#数组转哈希的方式
+arr = [ 0, "123", 1, "456"]
 
+#h = arr.to_h #=>array_to_hash.rb:4:in `to_h': wrong element type Fixnum at 0 (expected array) (TypeError)
+              #key为整型时 报错！
+arr1 = [ "0", "123", "1", "456"] #=>array_to_hash.rb:8:in `to_h': wrong element type String at 0 (expected array) (TypeError)
+
+#h = arr1.to_h 
+
+arr2 = [ [0,"123"], [1,"456"]]
+
+h = arr2.to_h #=>{0=>"123", 1=>"456"}  需要用二维数组来转换hash
+p h
+
+#or
+a = [0, "item 2", 1, "item 4"]
+h2 = Hash[*a] # => { 0 => "item 2", 1 => "item 4" }   to_h 和 Hash[*a] 两种转换的不同
+p h2
+
+2.1.4 :051 > a1 = [[:a,1],[:b,2]]
+ => [[:a, 1], [:b, 2]] 
+2.1.4 :052 > p a1.to_h
+{:a=>1, :b=>2}
+ => {:a=>1, :b=>2} 
+2.1.4 :053 > p a1.to_hash  #=> Array 没有 to_hash方法！  
+NoMethodError: undefined method `to_hash' for [[:a, 1], [:b, 2]]:Array  
+
+#hash to array
+h3 = { 0 => "234", 1 => "567"}
+
+p h3.to_a #=>[[0, "234"], [1, "567"]]
+p h3.keys #=>[0, 1] 返回key的数组
+p h3.values #=>["234","567"] 返回值的数组
+```
+
+* 遍历数组时带下标  
+```
+[:a, :b, :c].map.with_index(2).to_a
+#=> [[:a, 2], [:b, 3], [:c, 4]]
+
+2.1.4 :068 > p [:a, :b, :c].map.with_index(2).to_a
+[[:a, 2], [:b, 3], [:c, 4]]
+ => [[:a, 2], [:b, 3], [:c, 4]] 
+2.1.4 :069 > p [:a, :b, :c].map.with_index(2)
+#<Enumerator: #<Enumerator: [:a, :b, :c]:map>:with_index(2)>
+ => #<Enumerator: #<Enumerator: [:a, :b, :c]:map>:with_index(2)> 
+
+[1,2,3].each_with_index { |e, index| block}
+
+[1,2,3].map!.with_index { |x,i| x * i } #=> [0,2,6]
+
+array.each_index { |index| block }
+与 Array#each 相同，但是传递元素的 index，而不是传递元素本身。
+```
+
+* 数组删除元素  
+```
+array.compact
+返回 self 的副本(新的数组)，移除了所有的 nil 元素。
+2.1.4 :058 > a2 = [1,2,3,4,5,6]
+ => [1, 2, 3, 4, 5, 6] 
+2.1.4 :059 > p a2.concat [7,nil,9,nil]
+[1, 2, 3, 4, 5, 6, 7, nil, 9, nil]
+ => [1, 2, 3, 4, 5, 6, 7, nil, 9, nil] 
+2.1.4 :060 > p a2
+[1, 2, 3, 4, 5, 6, 7, nil, 9, nil]
+ => [1, 2, 3, 4, 5, 6, 7, nil, 9, nil] 
+2.1.4 :061 > p a2.compact
+[1, 2, 3, 4, 5, 6, 7, 9]
+ => [1, 2, 3, 4, 5, 6, 7, 9] 
+2.1.4 :062 > p a2
+[1, 2, 3, 4, 5, 6, 7, nil, 9, nil]
+ => [1, 2, 3, 4, 5, 6, 7, nil, 9, nil] 
+ 
+array.compact!
+从数组中移除所有的 nil 元素。如果没有变化则返回 nil。
+2.1.4 :063 > a3 = [1,3,5]
+ => [1, 3, 5] 
+2.1.4 :064 > p a3.compact! #=>数组中没有nil， 则调用返回nil，   
+nil
+ => nil 
+2.1.4 :065 > p a3
+[1, 3, 5]
+ => [1, 3, 5] 
+2.1.4 :066 > p a3.concat([nil,nil,nil]).compact!
+[1, 3, 5]
+ => [1, 3, 5] 
+2.1.4 :067 > p a3
+[1, 3, 5]
+ => [1, 3, 5] 
+ 
+array.delete_if { |item| block }
+当 block 为 true 时，删除 self 的每个元素。
+
+array.delete(obj) 返回被删除的元素  
+2.1.4 :073 > p a3.delete(3)
+3
+ => 3 
+2.1.4 :074 > p a3
+[1, 5]
+ => [1, 5] 
+
+array.delete(obj) { block }
+从 self 中删除等于 obj 的项。如果未找到相等项，则返回 nil。如果未找到相等项且给出了可选的代码 block，则返回 block 的结果。
+
+array.uniq
+返回一个新的数组，移除了 array 中的重复值。
+
+array.uniq!
+从 self 中移除重复元素。如果没有变化（也就是说，未找到重复），则返回 nil。
+
+array.reject { |item| block }
+返回一个新的数组，包含当 block 不为 true 时的数组项。
+2.1.4 :079 >   p a3
+[1, 5]
+ => [1, 5] 
+2.1.4 :080 > p a3.reject {|e| e > 1}
+[1]
+ => [1] 
+2.1.4 :081 > p a3
+[1, 5]
+ => [1, 5] 
+ 
+array.reject! { |item| block }
+当 block 为真时，从 array 删除元素，如果没有变化则返回 nil。相当于 Array#delete_if。
+
+array.shift
+返回 self 的第一个元素，并移除该元素（把所有的其他元素下移一位）。如果数组为空，则返回 nil。
+```
+
+* 数组插入元素  
+```
+array.unshift(obj, ...)
+头插入元素   
+2.1.4 :082 > p a3.unshift(5)
+[5, 1, 5]
+ => [5, 1, 5] 
+2.1.4 :083 > p a3.unshift(7)
+[7, 5, 1, 5]
+ => [7, 5, 1, 5]
+```
+
+* 其他方法  
+```
+array.include?(obj)
+如果 self 中包含 obj，则返回 true，否则返回 false。
+
+array.flatten
+返回一个新的数组，新数组是一个一维的扁平化的数组（递归）。
+
+array.flatten!
+把 array 进行扁平化。如果没有变化则返回 nil， 返回nil需要特别注意。（数组不包含子数组。）
+
+计数器方法 flat_map   
+2.1.4 :084 > a4=[[1,3],[2,4],[5,6]]
+ => [[1, 3], [2, 4], [5, 6]] 
+2.1.4 :085 > p a4.flat_map { | e | e }
+[1, 3, 2, 4, 5, 6]
+ => [1, 3, 2, 4, 5, 6] 
+2.1.4 :086 > p a4
+[[1, 3], [2, 4], [5, 6]]
+ => [[1, 3], [2, 4], [5, 6]] 
+ 
+2.1.4 :089 > p a4.flatten
+[1, 3, 2, 4, 5, 6]
+ => [1, 3, 2, 4, 5, 6]
+ 
+array.join(sep=$,)
+返回一个字符串，通过把数组的每个元素转换为字符串，并使用 sep 分隔进行创建的
+
+array.to_s  ==  array.join
+```
 
 ###String
 - ** 使用单引号的字符串会原样输出，使用双引号的字符串可以使用表达式**
@@ -593,6 +767,40 @@ When merge two strings in Ruby, have two situations below:
  strip      去掉首位空格
  capitalize 首字母大小
  reverse    字符串反转
+ str.chomp  返回一个新的字符串  
+从字符串末尾移除记录分隔符（$/），通常是 \n。如果没有记录分隔符，则不进行任何操作。
+ str.chomp!
+与 chomp 相同，但是 str 会发生变化并返回。
+ 
+ str.replace(other_str)
+ 把 str 中的内容替换为 other_str 中的相对应的值。
+ 
+ str.split(pattern=$;, [limit])
+ 
+ str.sub(pattern, replacement) [or]
+ str.sub(pattern) { |match| block }
+ 返回 str 的副本，pattern 的第一次出现会被替换为 replacement 或 block 的值。pattern 通常是一个正则表达式    Regexp；如果是一个字符串 String，则没有正则表达式元字符被解释。
+ 
+ str.sub!(pattern, replacement) [or]
+ str.sub!(pattern) { |match| block }
+ 执行 String#sub 替换，并返回 str，如果没有替换执行，则返回 nil。
+ 
+ sub 和gsub的不同 
+ The g stands for global, as in replace globally (all):
+>> "hello".sub('l', '*')
+=> "he*lo"
+>> "hello".gsub('l', '*')
+=> "he**o"  
+
+ str =~ obj
+根据正则表达式模式 obj 匹配 str。返回匹配开始的位置，否则返回 false。
+2.1.4 :098 > s1 ="abcdefg"
+ => "abcdefg" 
+2.1.4 :099 > s1=~/d/
+ => 3 
+2.1.4 :100 > s1=~/def/
+ => 3 
+
 ```
 
 ### 时间和日期
@@ -608,7 +816,7 @@ When merge two strings in Ruby, have two situations below:
 ### 正则表达式  
 用于匹配字符串的模式，it's an instance of `Regexp` class.
 ```
-  /[0-9a-zA-Z]/.match(str) #如果返回nil, 则没有返回成功
+  /[0-9a-zA-Z]/.match(str) #如果返回nil, 则没有匹配成功
 ```
 
 ### Class in Ruby  
@@ -1971,6 +2179,8 @@ Ruby 还提供了`Module#alias_method()`方法,它的功能与alias关键字相�
   eval("array << element") #=> [10,20,30]
 ```
 由于使用字符串代码函数`eval()` 可能导致注入式攻击，最好的方式是不是用`eval`, 改为`send()`.  
+
+#Object类 
 
 
 
