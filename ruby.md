@@ -163,7 +163,7 @@ hash.to_s
  => {:a=>1, :b=>2, :c=>3} 
  
 hash.select { |key, value| block }
-返回一个新的hash，由 block返回true的hash中的键值对组成。   
+返回一个新的hash，由block返回true的hash中的键值对组成。   
 2.1.4 :016 > p h1
 {:a=>1, :b=>2, :c=>3}
  => {:a=>1, :b=>2, :c=>3} 
@@ -194,6 +194,61 @@ hash.replace(other_hash)
 
 * 删除key-value  
 ```
+hash.delete(key) --返回被删除key的value, 如果未找到key, 则返回nil  
+hash.delete(key) { |key| block }
+通过 key 从 hash 中删除键值对， 返回删除key的值。如果使用了块且未找到匹配的键值对，则返回块的结果。把它与 delete_if 进行比较。
+2.1.4 :037 > p h2.delete(:i){|key| h2[:i]="new"}
+"new"
+ => "new" 
+2.1.4 :038 > p h2
+{:f=>5, :i=>"new"}
+ => {:f=>5, :i=>"new"} 
+ 
+hash.delete_if { |key,value| block }
+为 block 为 true 的每个块，从 hash中删除键值对， 返回被删除元素后的hash对象本身。
+2.1.4 :039 > p h2.delete_if { |key, value| value.class == String}
+{:f=>5}
+ => {:f=>5} 
+2.1.4 :040 > p h2
+{:f=>5}
+ => {:f=>5} 
+
+hash.reject { |key, value| block }
+block 为true的每个键值对创建一个新的hash， 与delete，delete_if hash本身元素被删除不同, hash本身并未改变。  
+2.1.4 :045 > p h1.reject { |key, value| value > 4}
+{:e=>4}
+ => {:e=>4} 
+2.1.4 :046 > p h1
+{:e=>4, :f=>5}
+ => {:e=>4, :f=>5} 
+
+hash.reject! { |key, value| block }
+与 reject 相同，但实际上 hash 发生了变化。
+
+hash.shift
+从hash中移除头元素键值对，并把该键值对作为二元素数组返回。  
+```
+
+* 函数调用中， 可变hash参数的使用   
+```
+h = {"0"=>{"type"=>"1", "level"=>"2"}, "1"=>{"type"=>"2", "level"=>"5"}}
+
+def func **args
+  print args	
+end
+
+
+#func h  #=> wrong number of arguments (1 for 0) 显然 **args 参数接受 h这样写法的实参。  
+
+
+h1 = {"type"=>"2", "level"=>"5"}
+
+#func h1 #=> hash_as_args.rb:6:in `func': wrong number of arguments (1 for 0)  h1 is same as h
+#
+
+h2 = {:type=>"2", :level=>"5"}
+
+func h2 #=> successful!, 说明 **args 只接受key为symbol的hash结构
 ```
 
 - **Traversing the hash**
@@ -390,6 +445,9 @@ a = Array.new
 ```
   colors.concat(students)
 ```
+
+- **array转hash**   
+
 
 ###String
 - ** 使用单引号的字符串会原样输出，使用双引号的字符串可以使用表达式**
