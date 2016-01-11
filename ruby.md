@@ -39,6 +39,16 @@
 > http://naixspirit.github.io/2013/08/13/a-ruby-face-questions/
 
 ###ruby的hash variable
+OverView:      
+1. key是变量, 则hash形式为 key: value, 用标签访问hash[:key]  
+```
+2.1.4 :009 >   h1 = {a:1, b:2, c:3}
+ => {:a=>1, :b=>2, :c=>3} 
+ {a:1, b:2, c:3} 实际上就是{:a=>1, :b=>2, :c=>3}， 只不过是字面量的一种写法.    
+```
+2. key是标签, 则hash形式为 :key => value, 用标签访问hash[:key], 用string失效hash["key"]   
+3. key是字符串, 则hash形式为 "key" => value, 用string访问hash["key"], 用标签失效hash[:key]    
+4. key是整数, 则hash形式为 0 => value, 用整数访问hash[0]     
 
 It's similar with single map in C++, separated by '=>' between key and value, the structured data like this :  
 ```
@@ -52,7 +62,7 @@ Each hash object is an instance of Hash class, so we can create hash object thro
 ```
   student = Hash.new
 ```
-Commonly using functions :   
+* Commonly using functions :   
 ```
   size()   return how many records.
   length() return the number of elements in one record.
@@ -62,18 +72,52 @@ Commonly using functions :
   keys() return an array which is made up of all keys in hash object.
   values() 
 ```
-Add new item to hash object :   
+
+* Add new item to hash object :   
 ```
  hash[:newKey] = "newValue"
+ hash.store(key, value)
 ```
 
-If you want to add new items from another hash - use merge method:
+* fetch函数的使用   
+```
+#如何使用hash的fetch方法
+#hash.fetch(key [, default] ) [or]
+#hash.fetch(key) { | key | block }
+#通过给定的key从hash返回值。如果未找到key，且未提供其他参数，则抛出 IndexError 异常；
+#如果给出了 default，则返回 default；
+#如果指定了可选的 block，则返回 block 的结果。
+
+h = { "a"=> 1, "b"=> 2 }
+
+p h.fetch("a", 3) #=>1 取到了返回key ”a“ 的value
+
+p h.fetch("a") do |key|
+  h[key] = 3    #=>  "a"=>3
+end
+
+p h.fetch("c",3) #=>3  说明fetch只返回替代值3，并且不会入hash中
+
+retval = h.fetch("c") do | key | #=>fetch 带一个块
+  h[key] = 3
+end
+
+p "retval: #{retval}" #=>3 说明块的 endpoint为返回值， 并非返回整个hash对象
+
+p h #=> { "a"=> 1, "b"=> 2, "c"=>3 }
+
+```
+
+* key的名字是否匹配某一模式  
+`h.keys.any? { |key| key.to_s.match(/tax/)}`   --是否有key匹配tax的模式   
+
+* If you want to add new items from another hash - use merge method:
 ```
 hash = {:item1 => 1}
 another_hash = {:item2 => 2, :item3 => 3}
 hash.merge(another_hash) # {:item1=>1, :item2=>2, :item3=>3}
 ```
-In your specific case it could be:
+* In your specific case it could be:
 ```
 hash = {:item1 => 1}
 hash.merge({:item2 => 2}) # {:item1=>1, :item2=>2}
@@ -94,6 +138,64 @@ hash.merge!({:item2 => 2})
 now hash == {:item1=>1, :item2=>2}
 ```
 
+* Hash to Array(或者返回array/hash)   
+```
+hash.to_a
+从 hash 中创建一个二维数组。每个键值对转换为一个数组，所有这些数组都存储在一个数组中。 
+
+hash.sort
+把 hash 转换为一个包含键值对数组的二维数组，然后进行排序。  
+2.1.4 :001 > h = { a: 1, b: 0}
+ => {:a=>1, :b=>0} 
+2.1.4 :002 > p h.sort
+[[:a, 1], [:b, 0]]
+ => [[:a, 1], [:b, 0]] 
+ 
+hash.to_s
+把 hash 转换为一个数组，然后把该数组转换为一个字符串，返回这个字符串，但原来的hash并未修改。   
+2.1.4 :009 > h1 = {a:1, b:2, c:3}
+ => {:a=>1, :b=>2, :c=>3} 
+2.1.4 :010 > p h1.to_s
+"{:a=>1, :b=>2, :c=>3}"
+ => "{:a=>1, :b=>2, :c=>3}" 
+2.1.4 :011 > p h1
+{:a=>1, :b=>2, :c=>3}
+ => {:a=>1, :b=>2, :c=>3} 
+ 
+hash.select { |key, value| block }
+返回一个新的hash，由 block返回true的hash中的键值对组成。   
+2.1.4 :016 > p h1
+{:a=>1, :b=>2, :c=>3}
+ => {:a=>1, :b=>2, :c=>3} 
+2.1.4 :017 > p h1.select {|k, v| v >= 2 }
+{:b=>2, :c=>3}
+ => {:b=>2, :c=>3} 
+2.1.4 :018 > p h1
+{:a=>1, :b=>2, :c=>3}
+ => {:a=>1, :b=>2, :c=>3} 
+ 
+hash.replace(other_hash)
+把 hash 的内容替换为 other_hash 的内容, 并返回替换后的结果。    
+2.1.4 :023 > p h1
+{:a=>1, :b=>2, :c=>3}
+ => {:a=>1, :b=>2, :c=>3} 
+2.1.4 :024 > h2 = {e:4, f:5}
+ => {:e=>4, :f=>5} 
+2.1.4 :025 > p h1.replace(h2)
+{:e=>4, :f=>5}
+ => {:e=>4, :f=>5} 
+2.1.4 :026 > p h1
+{:e=>4, :f=>5}
+ => {:e=>4, :f=>5} 
+2.1.4 :027 > p h2
+{:e=>4, :f=>5}
+ => {:e=>4, :f=>5} 
+```
+
+* 删除key-value  
+```
+```
+
 - **Traversing the hash**
 ```
   each: Iterating over all elements in hash including key and value, if using one parameter in loop only, traversing all keys and all values in order.
@@ -109,11 +211,12 @@ now hash == {:item1=>1, :item2=>2}
      do something
   end
 ```
-If you define hash like this with symbol :  
+
+* If you define hash like this with symbol :  
 ```
-  h = { :name=> "roger", :conf => "Windy" }
+  h = { :name=> "roger", :conf => "luo" }
   p h[:name] #=> roger #just can visit by symbol , not with string "name" which will return nil
-  p h[:conf] #=> Windy 
+  p h[:conf] #=> luo 
   p h["name"] #=> nil
   p h[:conf]  #=> nil  :name and "name" are different keys.
 ```
