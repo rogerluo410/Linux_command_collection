@@ -792,7 +792,7 @@ When merge two strings in Ruby, have two situations below:
 >> "hello".gsub('l', '*')
 => "he**o"  
 
-sub 与 sub! 不带感叹号和 带感叹号的返回不同处
+sub 与 sub! 不带感叹号和 带感叹号的返回不同处(这类方法的感叹号作用是暴力返回，直接返回nil)
 2.1.4 :149 > s1 = "12345"
  => "12345" 
 2.1.4 :150 > p s1.gsub(/[A-Z]{1}[a-z]*/) { |ss| ss.downcase + "_" }
@@ -801,6 +801,9 @@ sub 与 sub! 不带感叹号和 带感叹号的返回不同处
 2.1.4 :151 > p s1.gsub!(/[A-Z]{1}[a-z]*/) { |ss| ss.downcase + "_" }
 nil
  => nil 
+2.1.4 :163 > p s1
+"12345"
+ => "12345" 
 
 
 gsub把每个匹配的子字串传入块中，一起返回。
