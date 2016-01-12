@@ -783,7 +783,7 @@ When merge two strings in Ruby, have two situations below:
  
  str.sub!(pattern, replacement) [or]
  str.sub!(pattern) { |match| block }
- 执行 String#sub 替换，并返回 str，如果没有替换执行，则返回 nil。
+ 执行 String#sub 替换，并返回 str，如果没有替换执行，则返回 nil（这里需要注意nil）。
  
  sub 和gsub的不同 
  The g stands for global, as in replace globally (all):
@@ -791,6 +791,16 @@ When merge two strings in Ruby, have two situations below:
 => "he*lo"
 >> "hello".gsub('l', '*')
 => "he**o"  
+
+gsub把每个匹配的字串传入块中，一起返回。
+2.1.4 :144 > s="StoneMaterial"
+ => "StoneMaterial" 
+2.1.4 :145 > p s.gsub(/[A-Z]{1}[a-z]*/) { |ss| ss.downcase + "_" }[0..-2]
+"stone_material"
+ => "stone_material" 
+2.1.4 :146 > p s
+"StoneMaterial"
+ => "StoneMaterial" 
 
  str =~ obj
 根据正则表达式模式 obj 匹配 str。返回匹配开始的位置，否则返回 false。
