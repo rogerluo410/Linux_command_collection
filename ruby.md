@@ -384,6 +384,50 @@ puts info
   else
     code block
   end  
+  
+  
+  Matching ranges in case statements:
+  case 5
+  when (1..10)
+    puts "case statements match inclusion in a range"
+  end
+  
+  Matching regular expressions with case statements:
+  case "FOOBAR"
+  when /BAR$/
+   puts "they can match regular expressions!"
+  end
+  
+  Matching procs and lambdas:
+  case 40
+  when -> (n) { n.to_s == "40" }
+   puts "lambdas!"
+  end
+  
+  Writing your own matcher classes:  
+  class Success
+   def self.===(item)
+    item.status >= 200 && item.status < 300
+   end
+  end
+
+class Empty
+  def self.===(item)
+    item.response_size == 0
+  end
+end
+
+case http_response
+when Empty
+  puts "response was empty"
+when Success
+  puts "response was a success"
+end
+
+# Here, the Class.===(item) method is called, which returns true if item is an instance of the class 
+
+String === "hello" # true
+String === 1 # false
 ```
 
 - **loop**   
