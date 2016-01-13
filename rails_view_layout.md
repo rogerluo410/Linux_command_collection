@@ -35,30 +35,30 @@ def update
 end  
 ```
 
-7、使用不同controller下的某个action的模板来渲染   
-`render 'products/show'` 
-`render :template => 'products/show'` #旧的方式   
+7、使用不同controller下的某个action的模板来渲染     
+`render 'products/show'`    
+`render :template => 'products/show'` #旧的方式     
 
 8、渲染任意的文件 
-默认情况下，渲染任意文件不会使用当前layout， 
-如果想使用当前layout，加上:layout => true 
+默认情况下，渲染任意文件不会使用当前layout，   
+如果想使用当前layout，加上:layout => true   
 `render "/u/apps/warehouse_app/current/app/views/products/show"`   
 `render :file => "/u/apps/warehouse_app/current/app/views/products/show"`   #旧的方式 
 
-9、在controller内inline渲染（字符串模板） 
+9、在controller内inline渲染（字符串模板）    
 `render :inline => "<% products.each do |p| %><p><%= p.name %></p><% end %>"`    
-默认情况下，inline渲染使用ERB，但你可强制使用Builder 
+默认情况下，inline渲染使用ERB，但你可强制使用Builder    
 `render :inline => "xml.p {'Horrid coding practice!'}", :tpye => :builder`    
 
-10、渲染文本 
+10、渲染文本   
 默认情况下，渲染文本不会使用当前layout，如有需要，加上 :layout => true。   
 `render :text => "OK" `
 
-11、渲染JSON 
+11、渲染JSON    
 不需要@product.to_json，render会自动调用该方法 
 `render :json => @product` 
 
-12、渲染XML 
+12、渲染XML   
 `render :xml => @product` 
 
 13、渲染选项 Options 
@@ -66,25 +66,23 @@ end
 :content_type   
 `render :file => filename, :content_type => 'application/rss'`   
 
-:layout 
-`render :layout => 'special_layout' `   
+:layout    
+`render :layout => 'special_layout' `      
 `render :layout => false`    
 
-:status 
-`render :status => 500`   
+:status    
+`render :status => 500`       
 `render :status => :forbidden #被禁止的`    
 
-可以在actionpack/lib/action_controller/status_codes.rb文件里找到symbol和 
-status的对映关系   
+可以在actionpack/lib/action_controller/status_codes.rb文件里找到symbol和status的对映关系   
 
 :location    
 `render :xml => photo, :location => photo_url(photo) `  
 
 14、寻找layout 
 Rails首先会在app/views/layouts目录下查找与controller同名的layout文件， 
-如果没有找到，则会使用app/views/layouts/application.html.erb 
-或app/views/layouts/application.builder。 
-除以上文件都外，Rails还提供多种方式来选择layout 
+如果没有找到，则会使用app/views/layouts/application.html.erb或app/views/layouts/application.builder。   
+除以上文件都外，Rails还提供多种方式来选择layout。 
 
 **为controller指定layout，替换默认的layout**   
 ```
@@ -125,9 +123,8 @@ layout proc { |controller| controller.request.xhr? ? 'popup' : 'application' }
 end 
 ```
 
-**带条件的layout设置** 
-除index和rss这两个action之外，其余action都使用名为product的layout 
-rss这个layout只有rss这个action使用 
+**带条件的layout设置**     
+除index和rss这两个action之外，其余action都使用名为product的layout，rss这个layout只有rss这个action使用 
 ```
 class ProductsController < ApplicationController 
   layout "product", :except => [:index, :rss] 
@@ -136,7 +133,7 @@ class ProductsController < ApplicationController
 end 
 ```
 
-**layout继承** 
+**layout继承**    
 ApplicationController的layout设置 <-- Controller的layout设置 <-- render方法的layout选项 
 本地的设置会覆盖父级的设置，如果本级无设置，则继承父级的设置 
 
@@ -151,8 +148,8 @@ def show
 end 
 ```
 
-16、使用跳转redirect_to 
-redirect_to给浏览器的响应是：告诉浏览器发起一个新的请求 
+16、使用跳转redirect_to    
+redirect_to给浏览器的响应是：告诉浏览器发起一个新的请求    
 
 ```
 redirect_to photos_path 
@@ -161,13 +158,13 @@ redirect_to photos_path, :status => 301 #301临时跳转
 redirect_to photos_path, :status => 302 #302永久跳转 
 ```
 
-17、redirect_to和render的区别 
-render渲染用户指定的模板作为响应 
-redirect_to会结束当前响应，并告诉浏览器请求一个新的url 
+17、redirect_to和render的区别    
+render渲染用户指定的模板作为响应    
+redirect_to会结束当前响应，并告诉浏览器请求一个新的url    
 
-18、响应时只返回HTTP header 
-`head :bad_request `   
-`head :created, :location => photo_path(@photo)`    
+18、响应时只返回HTTP header   
+`head :bad_request `       
+`head :created, :location => photo_path(@photo)`       
 
 
 ##二、结构化布局 
@@ -217,7 +214,7 @@ Img标记
 渲染app/views/shared/_menu.html.erb   
 `<%= render :partial => "shared/menu" %>`   
 
-4、为partial指定layout 
+4、为partial指定layout    
 `<%= render :partial => "link_area", :layout => "graybar" %> `   
 
 5、渲染partial时传递局部变量 
