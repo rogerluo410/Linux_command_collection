@@ -246,8 +246,283 @@ MySQL 处理树状回复的设计会很复杂, 而且需要写很多代码, 而 
 ```
 
 #Oracle   
+* sql语句优化和索引的使用  
+```
+1.最常见的索引扫描类型为 唯一扫描 和 范围扫描。主键索引或 定义了unique的列的索引会定义为唯一索引。一般的索引则会定义为范围性索引。
+
+2.索引的用途：当从表中访问数据时，Oracle提供了两个选择：从表中读取每一行(即全表扫描)，或者通过ROWID一次读取一行。当访问大型表的少量行时，可能想使用索引。
+
+3.索引通常能提高查询语句的效率，但是对insert，update，delete等dml语句，则会影响其执行效率。
+
+4.组合索引：create index emp_id1 on emp(empno, ename, deptno);
+这就是一个组合索引。虽然，9i引入了跳跃式扫描索引访问方法，增加了优化器在使用组合索引时的选择。但是，也要谨慎地选择索引列的顺序，一般来说，第一列是最有可能在where子句中使用的列，也是索引中最句选择性的列。
+select job, empno  from emp  where ename = 'RICH';
+因为Ename不是索引的第一列，优化器可能会选择不使用该索引。优化器可能选择执行索引快速扫描访问、索引快速全局扫描或全表扫描。
+
+最好总是使用索引的第一个列： 
+如果索引是建立在多个列上, 只有在它的第一个列(leading column)被where子句引用时,优化器才会选择使用该索引. 这也是一条简单而重要的规则，当仅引用索引的第二个列时,优化器使用了全表扫描而忽略了索引 。
+
+5.限制索引的使用
+Sql语句的一些缺陷会是索引无法使用。
+(1)使用不等于运算符（<>,!=）
+索引只能查找表中已有的数据，所以where子句使用不等式运算符时无法使用索引。
+
+(2)使用 IS NULL 或 IS NOT NULL时
+因为NULL值并没有被定义。数据库中没有值等于NULL值；甚至NULL也不等于NULL。
+
+(3)使用函数，在索引列上使用函数改变了索引列的值，也会导致该索引列的索引无法使用。
+如果不使用基于函数的索引，那么在SQL语句的WHERE子句中对存在索引的列使用函数时，会使优化器忽略掉这些索引。一些常见的函数，如TRUNC、SUBSTR、TO_DATE、TO_CHAR和INSTR等，都能改变列的值。因此，无法使用已被函数引用的索引和列。下面的语句会执行一次全表扫描，即使hire_date列上存在索引(只要它不是基于函数的索引)。
+select empno, ename, deptno from emp where trunc(hiredate) = '01-MAY-01';
+把上面的语句改成如下所示的语句，这样就可以通过索引进行查找。
+select empno, ename, deptno from emp  where hiredate > '01-MAY-01'and  hiredate < (TO_DATE('01-MAY-01') + 0.99999);
+**通过改变所比较的列上的值，而不用改变列本身，就可以启用索引用。这样可避免全表扫描。
+
+（4）比较不匹配的数据类型
+如果Account_Number列使用VARCHAR2数据类型，下面的语句将执行全表扫描，即便是索引account_number列：
+select bank_name, address, city, state, zip  from  banks   where   account_number = 990354;
+Oracle可以自动把WHERE子句变成
+to_number(account_number)=990354
+通过使用函数(例如TO_DATE或TO_CHAR)修改所比较的列值而不是列本身，就可以使用索引，在对列本身使用函数时就会限制使用这些索引。
 
 
+6.位图索引
+试用于基数较少的列，如两个可能值：男或女(基数仅为2)。
+create bitmap index dept_idx2_bm on dept (deptno);
+
+如果索引中被删除的行数达到了20％~25％，就必须重建索引，这样可以减少二元高度和在一次I/O过程中读取的空闲空间量。
+
+如何正确使用索引：
+
+1.索引正确的表和列
+。经常检索排序大表中40%或非排序表7%的行，建议建索引；
+。为了改善多表关联，索引列用于联结；
+。列中的值相对比较唯一；
+。取值范围（大：B*树索引，小：位图索引）；
+。Date 型列一般适合基于函数的索引；
+。列中有许多空值，不适合建立索引
+
+2.为性能而安排索引列
+。经常一起使用多个字段检索记录，组合索引比单索引更有效；
+。把最常用的列放在最前面，例：dx_groupid_serv_id(groupid,serv_id)，在where 条件
+中使用groupid 或groupid,serv_id，查询将使用索引，若仅用到serv_id 字段，则索引无效；
+。合并/拆分不必要的索引。
+
+3.限制每个表索引的数量
+。一个表可以有几百个索引（你会这样做吗？），但是对于频繁插入和更新表，索引越
+多系统CPU，I/O 负担就越重；
+。建议每张表不超过5 个索引。
+
+4.删除不再需要的索引
+。索引无效，集中表现在该使用基于函数的索引或位图索引，而使用了B*树索引；
+。应用中的查询不使用索引；
+。重建索引之前必须先删除索引，若用alter index … rebuild 重建索引，则不必删除索引。
+
+5.索引数据块空间使用
+。创建索引时指定表空间，特别是在建立主键时，应明确指定表空间；
+。合理设定pctfress，注意：不能给索引指定pctused；
+。估计索引的大小和合理地设置存储参数，默认为表空间大小，或initial与next设置成
+一样大。
+
+6.考虑并行创建索引
+。对大表可以采用并行创建索引，在并行创建索引时，存储参数被每个查询服务器进程
+分别使用，例如：initial为1M，并行度为8，则创建索引期间至少要消耗8M空间；
+
+7.考虑用nologging 创建索引
+。对大表创建索引可以使用nologging来减少重做日志；
+。节省重做日志文件的空间；
+。缩短创建索引的时间；
+。改善了并行创建大索引时的性能。
+
+8.怎样建立最佳索引
+明确地创建索引
+create index index_name on table_name(field_name)
+tablespace tablespace_name
+pctfree 5
+initrans 2
+maxtrans 255
+storage
+(
+minextents 1
+maxextents 16382
+pctincrease 0
+);
+
+9.创建基于函数的索引
+。常用与UPPER、LOWER、TO_CHAR(date)等函数分类上，例：
+create index idx_func on emp (UPPER(ename)) tablespace tablespace_name;
+
+10.创建位图索引
+。对基数较小，且基数相对稳定的列建立索引时，首先应该考虑位图索引，例：
+create bitmap index idx_bitm on class (classno) tablespace tablespace_name;
+
+11.明确地创建唯一索引
+。可以用create unique index 语句来创建唯一索引，例：
+create unique index dept_unique_idx on dept(dept_no) tablespace idx_1;
+
+12.创建与约束相关的索引
+。可以用using index字句，为与unique和primary key约束相关的索引，例如：
+alter table table_name
+add constraint PK_primary_keyname primary key (field_name)
+using index tablespace tablespace_name；
+
+13.重建现存的索引
+重建现存的索引的当前时刻不会影响查询；
+重建索引可以删除额外的数据块；
+提高索引查询效率；
+alter index idx_name rebuild nologging;
+对于分区索引：
+alter index idx_name rebuild partition partiton_name nologging;
+
+14.要删除索引的原因
+。不再需要的索引；
+。索引没有针对其相关的表所发布的查询提供所期望的性能改善；
+。应用没有用该索引来查询数据；
+。该索引无效，必须在重建之前删除该索引；
+。该索引已经变的太碎了，必须在重建之前删除该索引；
+。语句：drop index idx_name;drop index idx_name drop partition partition_name;
+
+15.建立索引的代价
+基础表维护时，系统要同时维护索引，不合理的索引将严重影响系统资源，主要表现在
+CPU和I/O上；
+插入、更新、删除数据产生大量db file sequential read锁等待；
+
+16.索引访问
+。最常用的方法，包括索引唯一扫描和索引范围扫描，OLTP；
+快速完全索引扫描
+。访问索引中所有数据块，结果相当于全表扫描，可以用索引扫描代替全表扫描，例如：
+Select serv_id,count(* ) from tg_cdr01 group by serv_id;
+评估全表扫描的合法性
+
+17.如何实现并行扫描
+。永久并行化（不推荐）
+alter table customer parallel degree 8;
+。单个查询并行化
+select /*+ full(emp) parallel(emp,8)*/ * from emp;
+```
+
+* Sql优化   
+```
+1.减少访问数据库的次数： 
+ORACLE在内部执行了许多工作: 解析SQL语句, 估算索引的利用率, 绑定变量 , 读数据块等。
+
+2.整合简单,无关联的数据库访问： 
+如果你有几个简单的数据库查询语句,你可以把它们整合到一个查询中(即使它们之间没有关系) 
+
+3.删除重复记录： 
+最高效的删除重复记录方法 ( 因为使用了ROWID)例子： 
+DELETE FROM EMP E WHERE E.ROWID > (SELECT MIN(X.ROWID) 
+FROM EMP X WHERE X.EMP_NO = E.EMP_NO); 
+
+4.用TRUNCATE替代DELETE： 
+当删除表中的记录时,在通常情况下, 回滚段(rollback segments ) 用来存放可以被恢复的信息. 如果你没有COMMIT事务,ORACLE会将数据恢复到删除之前的状态(准确地说是恢复到执行删除命令之前的状况) 而当运用TRUNCATE时, 回滚段不再存放任何可被恢复的信息.当命令运行后,数据不能被恢复.因此很少的资源被调用,执行时间也会很短. (译者按: TRUNCATE只在删除全表适用,TRUNCATE是DDL不是DML) 
+
+5.尽量多使用COMMIT： 
+只要有可能,在程序中尽量多使用COMMIT, 这样程序的性能得到提高,需求也会因为COMMIT所释放的资源而减少: 
+COMMIT所释放的资源: 
+a. 回滚段上用于恢复数据的信息. 
+b. 被程序语句获得的锁 
+c. redo log buffer 中的空间 
+d. ORACLE为管理上述3种资源中的内部花费 
+
+6.用EXISTS替代IN、用NOT EXISTS替代NOT IN： 
+在许多基于基础表的查询中,为了满足一个条件,往往需要对另一个表进行联接.在这种情况下, 使用EXISTS(或NOT EXISTS)通常将提高查询的效率. 在子查询中,NOT IN子句将执行一个内部的排序和合并. 无论在哪种情况下,NOT IN都是最低效的 (因为它对子查询中的表执行了一个全表遍历). 为了避免使用NOT IN ,我们可以把它改写成外连接(Outer Joins)或NOT EXISTS. 
+例子： 
+（高效）SELECT * FROM EMP (基础表) WHERE EMPNO > 0 AND EXISTS (SELECT ‘X' FROM DEPT WHERE DEPT.DEPTNO = EMP.DEPTNO AND LOC = ‘MELB') 
+(低效)SELECT * FROM EMP (基础表) WHERE EMPNO > 0 AND DEPTNO IN(SELECT DEPTNO FROM DEPT WHERE LOC = ‘MELB') 
+
+7.用EXISTS替换DISTINCT： 
+当提交一个包含一对多表信息(比如部门表和雇员表)的查询时,避免在SELECT子句中使用DISTINCT. 一般可以考虑用EXIST替换, EXISTS 使查询更为迅速,因为RDBMS核心模块将在子查询的条件一旦满足后,立刻返回结果. 例子： 
+(低效): 
+SELECT DISTINCT DEPT_NO,DEPT_NAME FROM DEPT D , EMP E 
+WHERE D.DEPT_NO = E.DEPT_NO 
+(高效): 
+SELECT DEPT_NO,DEPT_NAME FROM DEPT D WHERE EXISTS ( SELECT ‘X' 
+FROM EMP E WHERE E.DEPT_NO = D.DEPT_NO); 
+
+8.用>=替代> 
+高效: 
+SELECT * FROM EMP WHERE DEPTNO >=4 
+低效: 
+SELECT * FROM EMP WHERE DEPTNO >3 
+两者的区别在于, 前者DBMS将直接跳到第一个DEPT等于4的记录而后者将首先定位到DEPTNO=3的记录并且向前扫描到第一个DEPT大于3的记录. 
+
+9.需要当心的WHERE子句: 
+某些SELECT 语句中的WHERE子句不使用索引. 这里有一些例子. 
+在下面的例子里, 
+(1)‘!=' 将不使用索引. 记住, 索引只能告诉你什么存在于表中, 而不能告诉你什么不存在于表中. 
+(2)‘||'是字符连接函数. 就象其他函数那样, 停用了索引. 
+(3)‘+'是数学函数. 就象其他数学函数那样, 停用了索引. 
+(4)相同的索引列不能互相比较,这将会启用全表扫描. 
+
+10.避免改变索引列的类型.: 
+当比较不同数据类型的数据时, ORACLE自动对列进行简单的类型转换. 
+假设 EMPNO是一个数值类型的索引列. 
+SELECT … FROM EMP WHERE EMPNO = ‘123' 
+实际上,经过ORACLE类型转换, 语句转化为: 
+SELECT … FROM EMP WHERE EMPNO = TO_NUMBER(‘123') 
+幸运的是,类型转换没有发生在索引列上,索引的用途没有被改变. 
+现在,假设EMP_TYPE是一个字符类型的索引列. 
+SELECT … FROM EMP WHERE EMP_TYPE = 123 
+这个语句被ORACLE转换为: 
+SELECT … FROM EMP WHERE  TO_NUMBER(EMP_TYPE)=123 
+因为内部发生的类型转换, 这个索引将不会被用到! 为了避免ORACLE对你的SQL进行隐式的类型转换, 最好把类型转换用显式表现出来. 注意当字符和数值比较时, ORACLE会优先转换字符类型 到 数值类型。 和c语言的类型转换一样
+
+11.优化GROUP BY: 
+提高GROUP BY 语句的效率, 可以通过将不需要的记录在GROUP BY 之前过滤掉.下面两个查询返回相同结果但第二个明显就快了许多. 
+低效: 
+SELECT JOB , AVG(SAL) 
+FROM EMP 
+GROUP by JOB 
+HAVING JOB = ‘PRESIDENT' 
+OR JOB = ‘MANAGER' 
+高效: 
+SELECT JOB , AVG(SAL) 
+FROM EMP 
+WHERE JOB = ‘PRESIDENT' 
+OR JOB = ‘MANAGER' 
+GROUP by JOB 
+```
+
+* 优化SQL语句排序
+```
+排序的操作：
+。order by 子句
+。group by 子句
+。select distinct子句
+。创建索引时
+。union或minus
+。排序合并连接
+如何避免排序
+。添加索引
+。在索引中使用distinct子句
+。避免排序合并连接
+```
+
+* 使用提示进行调整
+```
+使用提示的原则
+。语法：/*+ hint */
+。使用表别名:select /*+ index(e dept_idx)*/ * from emp e
+。检验提示
+常用的提示
+。rule
+。all_rows
+。first_rows
+。use_nl
+。use_hash( a b)
+。use_merge
+。index
+。index_asc
+。no_index
+。index_desc（常用于使用max内置函数）
+。index_combine(强制使用位图索引)
+。index_ffs（索引快速完全扫描）
+。use_concat(将查询中所有or条件使用union all)
+。parallel
+。noparallel
+。full
+。ordered（基于成本）
+```
 
 #数据库知识概念     
 
@@ -266,8 +541,100 @@ MySQL 处理树状回复的设计会很复杂, 而且需要写很多代码, 而 
 两种锁各有优缺点，不可认为一种好于另一种，像乐观锁适用于写比较少的情况下，即冲突真的很少发生的时候，这样可以省去了锁的开销，加大了系统的整个吞吐量。但如果经常产生冲突，上层应用会不断的进行retry，这样反倒是降低了性能，所以这种情况下用悲观锁就比较合适。
 ```  
 
+**关系型数据库的表链接**  
+```
+表之间的连接分为三种：
+1. 内连接(自然连接)
+2. 外连接
+（1）左外连接 (左边的表不加限制)
+	（2）右外连接(右边的表不加限制)
+	（3）全外连接(左右两表都不加限制)
+3. 自连接（同一张表内的连接）
 
+SQL的标准语法：
+	select table1.column,table2.column
+		from table1 [inner | left | right | full ] join table2 on table1.column1 = table2.column2;
+
+inner join 表示内连接；
+left join表示左外连接；
+right join表示右外连接；
+full join表示完全外连接；
+	on子句 用于指定连接条件。
+
+注意：
+如果使用from子句指定内、外连接，则必须要使用on子句指定连接条件；
+	如果使用（+）操作符指定外连接，则必须使用where子句指定连接条件。
+```
+
+**SQL谓词**   
+```
+1、谓词 谓词允许您构造条件，以便只处理满足这些条件的那些行。
+
+2、使用 IN 谓词
+使用 IN 谓词将一个值与其他几个值进行比较。例如：
+SELECT NAME FROM STAFF WHERE DEPT IN (20, 15)
+此示例相当于：
+SELECT NAME FROM STAFF WHERE DEPT = 20 OR DEPT = 15
+
+当子查询返回一组值时，可使用 IN 和 NOT IN 运算符。例如，下列查询列出负责项目 MA2100 和 OP2012 的雇员的姓：
+SELECT LASTNAME FROM EMPLOYEE WHERE EMPNO IN (SELECT RESPEMP FROM PROJECT WHERE PROJNO='MA2100' OR PROJNO='OP2012')
+
+计算一次子查询，并将结果列表直接代入外层查询。例如，上面的子查询选择雇员编号 10 和 330，对外层查询进行计算，就好象 WHERE 子句如下：
+WHERE EMPNO IN (10, 330)
+子查询返回的值列表可包含零个、一个或多个值。
+
+3、使用 BETWEEN 谓词
+使用 BETWEEN 谓词将一个值与某个范围内的值进行比较。范围两边的值是包括在内的，并考虑 BETWEEN 谓词中用于比较的两个表达式。
+下一示例寻找收入在 $10,000 和 $20,000 之间的雇员的姓名：
+
+SELECT LASTNAME FROM EMPLOYEE WHERE SALARY BETWEEN 10000 AND 20000
+这相当于：
+SELECT LASTNAME FROM EMPLOYEE WHERE SALARY >= 10000 AND SALARY <= 20000
+
+下一个示例寻找收入少于 $10,000 或超过 $20,000 的雇员的姓名：
+SELECT LASTNAME FROM EMPLOYEE WHERE SALARY NOT BETWEEN 10000 AND 20000
+
+4、使用 LIKE 谓词
+使用 LIKE 谓词搜索具有某些模式的字符串。通过百分号和下划线指定模式。
+下划线字符(_)表示任何单个字符，百分号(%)表示零或多个字符的字符串。
+任何其他表示本身的字符。
+
+下列示例选择以字母\'S\'开头长度为 7 个字母的雇员名：
+SELECT NAME FROM STAFF WHERE NAME LIKE \'S_ _ _ _ _ _\'
+
+下一个示例选择不以字母\'S\'开头的雇员名：
+SELECT NAME FROM STAFF WHERE NAME NOT LIKE \'S%\'
+
+5、使用 EXISTS 谓词
+可使用子查询来测试满足某个条件的行的存在性。在此情况下，谓词 EXISTS 或 NOT EXISTS 将子查询链接到外层查询。
+当用 EXISTS 谓词将子查询链接到外层查询时，该子查询不返回值。相反，如果子查询的回答集包含一个或更多个行，则 EXISTS 谓词为真；如果回答集不包含任何行，则 EXISTS 谓词为假。
+通常将 EXISTS 谓词与相关子查询一起使用。下面示例列出当前在项目(PROJECT) 表中没有项的部门：
+
+SELECT DEPTNO, DEPTNAME FROM DEPARTMENT X WHERE NOT EXISTS (SELECT *FROM PROJECT WHERE DEPTNO = X.DEPTNO) ORDER BY DEPTNO
+
+可通过在外层查询的 WHERE 子句中使用 AND 和 OR 将 EXISTS 和 NOT EXISTS 谓词与其他谓词连接起来。
+
+6、定量谓词
+定量谓词将一个值和值的集合进行比较。如果全查询返回多个值，则必须通过附加后缀 ALL、ANY 或 SOME 来修改谓词中的比较运算符。这些后缀确定如何在外层谓词中处理返回的这组值。使用>比较运算符作为示例（下面的注释也适用于其他运算符）：
+
+表达式 > ALL （全查询）
+如果该表达式大于由全查询返回的每个单值，则该谓词为真。如果全查询未返回值，则该谓词为真。如果指定的关系至少对一个值为假，则结果为假。注意：<>ALL 定量谓词相当于 NOT IN 谓词。
+下列示例使用子查询和> ALL 比较来寻找收入超过所有经理的所有雇员的姓名和职业：
+SELECT LASTNAME, JOB FROM EMPLOYEE WHERE SALARY > ALL (SELECT SALARY FROM EMPLOYEE WHERE JOB=\'MANAGER\')
+
+表达式 > ANY （全查询）
+如果表达式至少大于由全查询返回的值之一，则该谓词为真。如果全查询未返回值，则该谓词为假。注意：=ANY 定量运算符相当于 IN 谓词。
+
+表达式 > SOME（全查询）
+SOME 与 ANY 同义。
+```
   
+**范式**  
+第一范式（1NF）：数据库表中的字段都是单一属性的，不可再分。    
+第二范式（2NF）：数据库表中不存在非关键字段对任一候选关键字段的部分函数依赖。  
+第三范式（3NF）：在第二范式的基础上，数据表中如果不存在非关键字段对任一候选关键字段的传递函数依赖则符合第三范式。所谓传递函数依赖，指的是如果存在"A → B → C"的决定关系，则C传递函数依赖于A。    
+鲍依斯-科得范式（BCNF）：在第三范式的基础上，数据库表中如果不存在任何字段对任一候选关键字段的传递函数依赖则符合第三范式。    
+
 
 
    
