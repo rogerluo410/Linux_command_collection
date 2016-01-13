@@ -2205,9 +2205,119 @@ Ruby 还提供了`Module#alias_method()`方法,它的功能与alias关键字相�
 由于使用字符串代码函数`eval()` 可能导致注入式攻击，最好的方式是不是用`eval`, 改为`send()`.  
 
 #Object类 
+常用方法 ： 
+```
+<=>
+==
+===
+=~  匹配
+!~  不匹配
+class
+clone
+dup
+eql?
+equal?
+extend  扩展一个模块  
+freeze
+frozen?
+inspect
+instance_eval
+instance_exec
+instance_of?  谁的实例
+instance_variables
+is_a? 
+kind_of?
+methods 遍历所有的方法   
+public_send
+respond_to?
+send
+singleton_class
+singleton_methods
+tap
+```
 
+extend方法的使用:    
+```
+module Mod
+  def hello
+    "Hello from Mod.\n"
+  end
+end
 
+class Klass
+  def hello
+    "Hello from Klass.\n"
+  end
+end
 
+k = Klass.new
+k.hello         #=> "Hello from Klass.\n"
+k.extend(Mod)   #=> #<Klass:0x401b3bc8>
+k.hello         #=> "Hello from Mod.\n"
+```
+
+Because classes are objects. So for example:    
+```
+module Ispeak
+  def says
+    "greetings aliens!"
+  end
+end
+
+module Ieat
+  def eats
+    "spinach"
+  end
+end
+
+module Inhabitant
+  def says
+    "I'm strong to the finish"
+  end
+end
+
+class Human
+  extend Ispeak # add class methods from Ispeak
+  include Inhabitant # add instance methods from Inhabitant
+end
+
+Human.extend Ieat # add class methods from Ieat
+
+puts Human.says # -> greetings aliens!
+puts Human.eats # -> spinach
+
+popeye = Human.new
+
+puts popeye.says # -> I'm strong to the finish
+```
+
+singleton_methods方法的使用 :   
+```
+Returns an array of the names of singleton methods for obj. If the optional all parameter is true, the list will include methods in modules included in obj. Only public and protected singleton methods are returned.
+
+module Other
+  def three() end
+end
+
+class Single
+  def Single.four() end
+end
+
+a = Single.new
+
+def a.one()
+end
+
+class << a
+  include Other
+  def two()
+  end
+end
+
+Single.singleton_methods    #=> [:four]
+a.singleton_methods(false)  #=> [:two, :one]
+a.singleton_methods         #=> [:two, :one, :three]
+```
 
   
 
