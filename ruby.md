@@ -2319,10 +2319,28 @@ a.singleton_methods(false)  #=> [:two, :one]
 a.singleton_methods         #=> [:two, :one, :three]
 ```
 
-  
+#Module类 
+Module的常用方法    
+```
+attr_accessor
+alias_method
+ancestors
+class_eval
+class_exec
+class_variables
+define_method
+module_eval
+module_exec
+instance_methods
+method_defined?
+```
 
-
-
+Class.superclass的使用 :   
+```
+class Foo; end
+class Bar < Foo; end
+Bar.superclass           #=> Foo
+```
    
    
   
