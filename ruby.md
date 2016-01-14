@@ -789,6 +789,44 @@ When merge two strings in Ruby, have two situations below:
  str[-3]  # Reverse index 3, from minus 1 starting count  #=>o 
 ```
 
+- **ruby中的空值**  
+nil？ empty?  present?  blank?   
+nil? 空值nil的判断  
+empty？ 集合是否没有元素的判断   
+present？ 变量是否赋值,即不为nil  
+blank？ rails 一切为空的判断   
+```
+2.1.4 :030 > str = nil
+ => nil 
+2.1.4 :031 > p str.present?
+false
+ => false 
+2.1.4 :032 > p "".nil?
+false
+ => false 
+2.1.4 :033 > p [].nil?
+false
+ => false 
+2.1.4 :034 > p nil.nil?
+true
+ => true 
+2.1.4 :035 > p "".empty?
+true
+ => true 
+2.1.4 :036 > p 1.empty?
+NoMethodError: undefined method `empty?' for 1:Fixnum
+2.1.4 :037 > p {}.empty?
+NoMethodError: undefined method `empty?' for nil:NilClass
+
+空hash需要注意的地方 : 空hash是nil， 而不是empty，并且hash也不能使用empty方法。
+2.1.4 :047 > p {}.nil?
+ => true 
+2.1.4 :048 > p {}.blank?
+ => true 
+2.1.4 :049 > p {}.present?
+ => false 
+```
+
 - **比较字符串的内容**  
  Explain each of the following operators and how and when they should be used: ==, ===, eql?, equal?.
  ```
@@ -797,6 +835,21 @@ When merge two strings in Ruby, have two situations below:
    
    === – Specifically used to test equality within the when clause of a case statement (also often overridden to provide meaningful class-specific semantics in case statements).
    expanding: 当普通对象处于运算符左边时，该运算符与 == 功能相同，但左边对象是一个range对象，且右边对象包含在该range内时，返回true，否则返回false. (1..12)===6 #=>true
+   === 更像是匹配的含义， 即右边匹配左边
+2.1.4 :023 > p 1 === 5.0
+false
+ => false 
+2.1.4 :024 > p 1 === 1.0
+true
+ => true 
+
+2.1.4 :028 > p String==="132"
+true
+ => true 
+2.1.4 :029 > p String===1
+false
+ => false 
+
 
    eql? – Checks if the value and type of two operands are the same (as opposed to the == operator which compares values but ignores types). For example, 1 == 1.0 evaluates to true, whereas 1.eql?(1.0) evaluates to false.
    expanding: eql? 不仅比较值，还要比较类型
