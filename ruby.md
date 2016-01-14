@@ -43,7 +43,7 @@
 #and, or, not, &&, ||, !  
 #The same and difference of these operators
 #如果是true/false判断，最好用 and/or 并加入（）中。
-#如果是操作数判断，最好用 &&/||， 它会返回最左非空的值。
+#如果是操作数判断，最好用 &&/||， 它的判断标准是空与非空，在为真时，它会返回最左非空的值。
 
 p "and, or :  "
 p 1 and 2 #=> 1
