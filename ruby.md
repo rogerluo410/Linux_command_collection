@@ -716,6 +716,14 @@ array.to_s  ==  array.join
   "string can use sentence like this : #{variable}"
 ```
 
+- **如何将一个字符串转换为一个类**  
+```
+2.1.4 :027 > "Archive".classify
+ => "Archive" 
+2.1.4 :028 > "Archive".constantize
+ => Archive(id: integer, name: string, state: string, organization_id: integer, group_id: integer, group_type: string, created_at: datetime, updated_at: datetime) 
+```
+
 - **复制字符串**  
 dup() and clone() of String class can copy string, dup() only copys string to a new object, however, clone() will be inherited some special functions,such as singleton.
 
