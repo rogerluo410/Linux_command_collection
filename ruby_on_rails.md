@@ -15,7 +15,9 @@
             * `rvm use 2.0.0`  
             * `rvm list`   
             * `rvm 2.0.0 --default`   
-            * 
+            
+   Linux : RVM is not a function, selecting rubies with 'rvm use …' will not work   
+   解决办法 : Type `bash --login` from your terminal. And then give rvm use 2.0.0    
 
 
 #Ruby 语法   
