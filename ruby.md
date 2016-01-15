@@ -2482,8 +2482,36 @@ class Bar < Foo; end
 Bar.superclass           #=> Foo
 ```
    
-   
-  
+#Array#bsearch   
+
+我不清楚你的情况，但我经常在数组里去查找数据。ruby的`enumerable模块`提供了很多简单好用的方法 select, reject, find 。不过当数据源很庞大的时候，我开始对这些查找的性能表示忧桑。   
+
+如果你正在使用ActiveRecord和非NO SQL的数据库，查询的算法复杂度是经过优化了的。但是有时候你需要从数据库里把所有的数据拉出来进行处理，比方说如果你加密了数据库，那就不能好好的写sql做查询了。    
+
+这时候我会冥思苦想以找到一个最小的算法复杂度来筛选数据。如果你不了解算法复杂度，也就是这个O，请阅读 Big-O Notation Explained By A Self-Taught Programmer 或［Big-O Complexity Cheat Sheet]( http://bigocheatsheet.com/)。
+
+一般来说，算法复杂度越低，程序运行的速度就越快。 O(1), O(log n), O(n), O(n log(n)), O(n^2), O(2^n), O(n!) ，在这个例子里，越往右算法复杂度是越高的。所以我们要让我们的算法接近左边的复杂度。    
+
+当我们搜索数组的时候，一般第一个想到的方法便是 Enumerable#find ,也就是select方法。不过这个方法会搜索整个数组直到找到预期的结果。如果要找的元素在数组的开始部分，那么搜索的效率倒不会太低，但如果是在数据的末尾，那么搜索时间将是很可观的。find方法的算法复杂度是O(n)。      
+
+更好的办法是使用(Array#bsearch)[ http://www.ruby-doc.org/core-2.1.5/Array.html#method-i-bsearch ]方法。该方法的算法复杂度是O(log n)。你可以查看 Building A Binary Search 这篇文章来该算法的原理。   
+
+下面的代码显示了搜索50000000个数字时不同算法之间的性能差异。    
+```
+require 'benchmark'
+
+data = (0..50_000_000)
+
+Benchmark.bm do |x|
+  x.report(:find) { data.find {|number| number > 40_000_000 } }
+  x.report(:bsearch) { data.bsearch {|number| number > 40_000_000 } }
+end
+
+         user       system     total       real
+find     3.020000   0.010000   3.030000   (3.028417)
+bsearch  0.000000   0.000000   0.000000   (0.000006)
+```
+如你所见， bsearch 要快的多。不过要注意的是bsearch要求搜索的数组是排序过的。尽管这个限制bsearch的使用场景，bsearch在显示生活中确实是有用武之地的。比如通过 created_at 字段来查找从数据库中取出的数据。       
 
 
   
