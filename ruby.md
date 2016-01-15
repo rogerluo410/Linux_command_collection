@@ -2553,7 +2553,9 @@ bsearch  0.000000   0.000000   0.000000   (0.000006)
 ```
 如你所见， bsearch 要快的多。不过要注意的是bsearch要求搜索的数组是排序过的。尽管这个限制bsearch的使用场景，bsearch在显示生活中确实是有用武之地的。比如通过 created_at 字段来查找从数据库中取出的数据。       
 
+#Kernel 
 
+#Enumerable
   
 
   
