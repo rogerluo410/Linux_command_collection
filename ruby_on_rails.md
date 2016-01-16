@@ -1,7 +1,7 @@
 #RVM  
 * Installing in OSX with homebrew :  
-   1. Install Homebrew
-      `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" `    
+   1. Install Homebrew   
+      `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" `      
       `brew doctor` check tool installed successfully.    
    2. Install and configure RVM : 
          ```
@@ -128,6 +128,7 @@ Flexible authentication solution
 #cancan    
 CanCan is an authorization library for Ruby on Rails which restricts what resources a given user is allowed to access.    
 > https://github.com/ryanb/cancan    
+> https://github.com/CanCanCommunity/cancancan
 
 #mime-types    
 The mime-types library provides a library and registry for information about MIME content type definitions.    
@@ -145,6 +146,13 @@ A Ruby client library for Redis
 Mock Redis gem for Ruby   
 > https://github.com/brigade/mock_redis   
 
+#responders   
+> https://github.com/plataformatec/responders   
+
+#acts_as_tree   
+ActsAsTree -- Extends ActiveRecord to add simple support for organizing items into parent–children relationships.  
+> https://github.com/amerine/acts_as_tree   
+
 #Rails with mongoDB  
 ```
 As far as I am concerned you will have to create a new Rails project excluding active record:
@@ -161,6 +169,17 @@ http://mongoid.org/en/mongoid/docs/installation.html
 > http://guides.rubyonrails.org/active_record_callbacks.html    --active record callbacks   
 > http://edgeguides.rubyonrails.org/active_record_migrations.html  --active record migrations  
 > http://guides.rubyonrails.org/association_basics.html  --active record association  
+
+###String 
+> http://guides.ruby-china.org/active_support_core_extensions.html   
+
+```
+as_json
+classify
+constantize
+humanize
+tableize
+```
 
 ###In Model class, We can add: 
    * validates : Validations are used to ensure that only valid data is saved into your database.  
