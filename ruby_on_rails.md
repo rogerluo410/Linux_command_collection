@@ -163,6 +163,10 @@ then you can follow the configuration steps from Mongoid:
 http://mongoid.org/en/mongoid/docs/installation.html
 ```
 
+#settingslogic  
+A simple and straightforward settings solution that uses an ERB enabled YAML file and a singleton design pattern.  
+> https://github.com/binarylogic/settingslogic    
+
 #Rails 
 > http://guides.rubyonrails.org/active_record_validations.html  --active model validations   
 > http://guides.rubyonrails.org/active_record_querying.html     --active record querying  
