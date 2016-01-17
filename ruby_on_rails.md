@@ -342,3 +342,8 @@ tableize
       Sometimes the callback methods that you'll write will be useful enough to be reused by other models.
 ```
    * 
+
+
+**rails中缓存的使用**  
+> http://hawkins.io/2011/05/advanced_caching_in_rails/     
+> http://hawkins.io/2012/07/advanced_caching_revised/   
