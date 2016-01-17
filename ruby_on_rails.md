@@ -167,12 +167,24 @@ http://mongoid.org/en/mongoid/docs/installation.html
 A simple and straightforward settings solution that uses an ERB enabled YAML file and a singleton design pattern.  
 > https://github.com/binarylogic/settingslogic    
 
+#webmock
+Library for stubbing and setting expectations on HTTP requests in Ruby.   
+简单说就是你可以用stub去伪造(fake)一个方法,阻断对原来方法的调用   
+stub是伪造方法， mock是伪造对象    
+> https://github.com/bblimke/webmock  
+
+#vcr  
+VCR is also an amazing Ruby gem that records your test suite's HTTP interactions and replays them during future test runs.
+> https://github.com/vcr/vcr  
+> http://www.thegreatcodeadventure.com/stubbing-with-vcr/   --use webmock + vcr  
+
 #Rails 
 > http://guides.rubyonrails.org/active_record_validations.html  --active model validations   
 > http://guides.rubyonrails.org/active_record_querying.html     --active record querying  
 > http://guides.rubyonrails.org/active_record_callbacks.html    --active record callbacks   
 > http://edgeguides.rubyonrails.org/active_record_migrations.html  --active record migrations  
 > http://guides.rubyonrails.org/association_basics.html  --active record association  
+> https://www.rubyplus.com/articles  --rails cast  
 
 ###String 
 > http://guides.ruby-china.org/active_support_core_extensions.html   
