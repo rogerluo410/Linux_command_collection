@@ -175,6 +175,7 @@ stub是伪造方法， mock是伪造对象
 
 #vcr  
 VCR is also an amazing Ruby gem that records your test suite's HTTP interactions and replays them during future test runs.
+它可以降低测试时web分布式组件之间的偶尔度，加速测试速度。  
 > https://github.com/vcr/vcr  
 > http://www.thegreatcodeadventure.com/stubbing-with-vcr/   --use webmock + vcr  
 
