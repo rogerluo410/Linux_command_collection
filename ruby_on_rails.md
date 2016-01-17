@@ -98,19 +98,25 @@ Acceptance test framework for web applications
 > https://github.com/jnicklas/capybara    
 
 #Factory_girl  
+A library for setting up Ruby objects as test data.  
 > https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md   
 
 #Guard     
 使用 Guard 你可以自动化的运行那些和你正在修改的测试，Model，Controller 或者文件有关的测试。    
 > https://github.com/guard/guard     
 
-#EventMachine-scalable-non-blocking IO
+#EventMachine-scalable-non-blocking IO  
+EventMachine is an event-driven I/O and lightweight concurrency library for Ruby.   
+> https://github.com/eventmachine/eventmachine   
 > http://www.scribd.com/doc/28253878/EventMachine-scalable-non-blocking-i-o-in-ruby   
 
 #Mina  
-> http://yafeilee.me/blogs/5550f3006c693403675a0000   
+Really fast deployer and server automation tool.  自动化部署rails环境    
+> https://github.com/mina-deploy/mina   
+> http://yafeilee.me/blogs/5550f3006c693403675a0000   --使用案例  
 
 #state_machine   
+Adds support for creating state machines for attributes on any Ruby class   
 > https://github.com/pluginaweek/state_machine
 
 #spork    
@@ -147,6 +153,7 @@ Mock Redis gem for Ruby
 > https://github.com/brigade/mock_redis   
 
 #responders   
+A set of responders modules to dry up your Rails   
 > https://github.com/plataformatec/responders   
 
 #acts_as_tree   
