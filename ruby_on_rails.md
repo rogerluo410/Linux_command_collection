@@ -186,6 +186,7 @@ VCR is also an amazing Ruby gem that records your test suite's HTTP interactions
 > https://github.com/vcr/vcr  
 > http://www.thegreatcodeadventure.com/stubbing-with-vcr/   --use webmock + vcr  
 > http://qiita.com/xiangzhuyuan/items/9f3301cd30e09369e7d1  --创建假的服务api路由一定要写对， 否则模拟失败。  
+> https://ruby-china.org/topics/26588  --使用 Webmock 和 VCR 搭建测试，对调用第三方 API 库的支持(本地fake第三方api, 不需要使用vcr的replay功能)   
 
 #Cache
 ##record-cache   
