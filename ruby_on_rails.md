@@ -101,6 +101,24 @@ Acceptance test framework for web applications
 A library for setting up Ruby objects as test data.  
 > https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md   
 
+```
+当factory_girl中需要映射 one-many 关联时，可以使用如下写法。  
+FactoryGirl.define do
+  factory :product do
+    sequence(:name) { | n | "abc#{n}" }
+    state "editing"
+    association :goods, factory: :stone_material
+    #association :files, factory: :product_file  #这种方式只能表达1对1关联。 会报错：undefined method `each' for #<ProductFile:0x007f9080441048>
+    organization_id 63
+
+    after(:create) do |instance|
+      instance.files = FactoryGirl.create_list(:product_file, 5)         
+    end
+  end
+end
+
+```
+
 #Guard     
 使用 Guard 你可以自动化的运行那些和你正在修改的测试，Model，Controller 或者文件有关的测试。    
 > https://github.com/guard/guard     
