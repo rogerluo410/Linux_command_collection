@@ -28,8 +28,11 @@
 > https://github.com/apidoc/apidoc   
 
 #Rspec   
+RSpec is a great tool in the behavior-driven development (BDD) process of writing human readable specifications that direct and validate the development of your application.   
+> https://github.com/rspec/rspec-rails  --rspec in rails   
 > http://my.oschina.net/huangwenwei/blog/418999   --RSpec入门指南   
 > http://www.jianshu.com/p/1db9ee327357  --RSpec入门指南    
+> http://betterspecs.org/  --rspec 规范  
 
 ```  
 它在BDD流程的开发中被用来写高可读性的测试，引导并验证你开发的应用程序。
