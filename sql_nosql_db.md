@@ -57,6 +57,10 @@ host all all ::1/128 trust
 定位到#listen_addresses=’localhost’。PostgreSQL安装完成后，默认是只接受来在本机localhost的连接请 求。
 
 将行开头都#去掉，将行内容修改为listen_addresses=’*'来允许数据库服务器监听来自任何主机的连接请求
+
+3.重启postgresql服务  
+sudo service postgresql restart  
+sudo /etc/init.d/postgresql restart   
 ```
 
 
@@ -584,23 +588,23 @@ GROUP by JOB
 1. 内连接(自然连接)
 2. 外连接
 （1）左外连接 (左边的表不加限制)
-	（2）右外连接(右边的表不加限制)
-	（3）全外连接(左右两表都不加限制)
+（2）右外连接(右边的表不加限制)
+（3）全外连接(左右两表都不加限制)
 3. 自连接（同一张表内的连接）
 
 SQL的标准语法：
 	select table1.column,table2.column
-		from table1 [inner | left | right | full ] join table2 on table1.column1 = table2.column2;
+	from table1 [inner | left | right | full ] join table2 on table1.column1 = table2.column2;
 
 inner join 表示内连接；
 left join表示左外连接；
 right join表示右外连接；
 full join表示完全外连接；
-	on子句 用于指定连接条件。
+on子句 用于指定连接条件。
 
 注意：
 如果使用from子句指定内、外连接，则必须要使用on子句指定连接条件；
-	如果使用（+）操作符指定外连接，则必须使用where子句指定连接条件。
+如果使用（+）操作符指定外连接，则必须使用where子句指定连接条件。
 ```
 
 **SQL谓词**   
