@@ -227,3 +227,7 @@ PS1="$white[$magenta\u$white@$green\h$white:$cyan\w$yellow\$git_branch$white]\$ 
 以上的代码可以放在 ~/.profile 或者 ~/.bash_profile 等文件中即可，我的系统是 Snow Leopard，
 PS1 定义在/etc/bashrc 中，所以直接修改这个文件。
 ```
+
+#Mac  
+* 8个不可不知的Mac OS X专用命令行工具:  mdfind ...   
+> http://segmentfault.com/a/1190000000509514   
