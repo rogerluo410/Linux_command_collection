@@ -226,6 +226,7 @@ Simple Cacheable is a simple cache implementation based on activerecord
 > http://edgeguides.rubyonrails.org/active_record_migrations.html  --active record migrations  
 > http://guides.rubyonrails.org/association_basics.html  --active record association  
 > https://www.rubyplus.com/articles  --rails cast  
+> https://www.ruby-toolbox.com/#Web_Apps_Services_Interaction  --rails gems分类
 
 ###String 
 > http://guides.ruby-china.org/active_support_core_extensions.html   
