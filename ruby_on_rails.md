@@ -43,12 +43,14 @@ describe '描述这个方法的测试目的' do
  let(:arg1) { #做测试使用变量的赋值 }
  let(:arg2) { #做测试使用变量的赋值 }
  context '描述测试时的上下文环境，它能让测试更清晰，有条理' do
-   #别用should，用expect  (should, expect语句都只能在 it '测试功能描述' do ... end 语句块中使用 )
-   #别用fixtures， 用Factory
-   
-   expect(actual).to be(expected)    # passes if actual.equal?(expected)
-   expect(actual).to equal(expected) # passes if actual.equal?(expected)
-   #=> https://github.com/rspec/rspec-expectations  how to use expect  
+   it "描述测试的功能" do
+      #别用should，用expect  (should, expect语句都只能在 it '测试功能描述' do ... end 语句块中使用 )
+      #别用fixtures， 用Factory
+      #describe '...' do ... end 中定义的变量, 只能在 it '....' do .. end  的块中使用
+      expect(actual).to be(expected)    # passes if actual.equal?(expected)
+      expect(actual).to equal(expected) # passes if actual.equal?(expected)
+      #=> https://github.com/rspec/rspec-expectations  how to use expect  
+   end    
  end
 end
 
