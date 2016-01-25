@@ -77,7 +77,7 @@ Instance:
     end
    end
 
-Factory_girl: 
+在Factory_girl中: 
 FactoryGirl.define do
   factory :case do
     sequence(:name) { |n| "case#{n}" }  
@@ -93,6 +93,56 @@ FactoryGirl.define do
     sequence(:key) { |n| "abc#{n}" } 
     association :case, factory: :case #指定这个关联的真名, strategy: :build #只创建不save这个关联对象
   end
+end
+
+##三种model的关联方式
+one: 加association, 当FactoryGirl.create(:price_property_option)时, 自动创建关联price_property。 优点是方便， 缺点是只能表示one-to-one关联。  (必须在真实的model中有关联, 否侧会报错)
+FactoryGirl.define do
+  factory :price_property_option do
+    sequence(:name)       { |n| "price_property_option_name#{n}" }
+    state "published"
+    association :price_property
+  end
+end
+
+two: 在factory girl 的model定义中 定义回调， 下例中自动创建了关联的files集合。 该方式的优点是可以创建集合关联。
+FactoryGirl.define do
+  factory :product do
+    sequence(:name) { | n | "abc#{n}" }
+    state "editing"
+    association :goods, factory: :stone_material
+    organization_id 63
+
+    after(:create) do |instance|
+      instance.files = FactoryGirl.create_list(:product_file, 5)         
+    end
+  end
+end
+
+three: 在测试模块中直接赋值, 而在factory girl 的model定义中不需要定义association关联。
+describe "PUT /api/v1/team/:team_id/archives/:id" do
+ let(:archive) { FactoryGirl.create(:archive) }
+ let(:archive_files) { FactoryGirl.create_list(:archive_file, 5, archive: archive) }
+ let(:params) do
+ {
+   token: @valid_token,
+   team_id: @org.id,
+   id: archive.id, 
+   name: "archive_name_updated",
+   file_ids: archive_files.map(&:file_id).reverse!  #逆序
+ }
+ end
+ it "编辑指定组织的指定公司档信息。" do
+   put "/api/v1/team/#{params[:team_id]}/archives/#{params[:id]}", params
+
+   expect(last_response.status).to eq(204)
+ end
+
+ it "用非法的team_id编辑指定组织的指定公司档信息。" do
+   put "/api/v1/team/#{params[:team_id]+1}/archives/#{params[:id]}", params
+
+   expect(last_response.status).to eq(403)
+ end
 end
 
 ##以上是controller的测试模式， model的模式可以使用subject方法。
