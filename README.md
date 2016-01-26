@@ -75,6 +75,8 @@ http://blog.csdn.net/hudashi/article/details/7664464
 
 # git rm 把一个文件删除，并把它从git的仓库管理系统中移除
 git rm 1.txt  
+
+git rm -r --cached .    ---移除git add的文件。
 ```
 
 **怎么忽略不想上传的文件**   
