@@ -64,7 +64,43 @@ git rebase –skip
 # 取消合并
 git rebase –abort
 
-git stach  --隐藏某个commit    
+# git stach的作用: 
+git stash: 备份当前的工作区的内容，从最近的一次提交中读取相关内容，让工作区保证和上次提交的内容一致。同时，将当前的工作区内容保存到Git栈中。
+git stash pop: 从Git栈中读取最近一次保存的内容，恢复工作区的相关内容。由于可能存在多个Stash的内容，所以用栈来管理，pop会从最近的一个stash中读取内容并恢复。
+git stash list: 显示Git栈内的所有备份，可以利用这个列表来决定从那个地方恢复。
+git stash clear: 清空Git栈。此时使用gitg等图形化工具会发现，原来stash的哪些节点都消失了。
+
+# git reset --hard <commit_id>  --删除某次提交
+http://blog.csdn.net/hudashi/article/details/7664464
+
+# git rm 把一个文件删除，并把它从git的仓库管理系统中移除
+git rm 1.txt  
+```
+
+**怎么忽略不想上传的文件**   
+```
+git中提供两种过滤机制，一种是全局过滤机制，即对所有的git都适用；另一种是针对某个项目使用的过滤规则。个人倾向于第二种。
+
+以我的一个项目为例，该项目用.net开发，.config文件、包括生成的bin/Debug, bin/Release文件等，我希望不加入git管理。
+
+在代码目录下建立.gitignore文件：vim .gitignore ,内容如下：
+
+[plain] view plaincopy
+
+#过滤数据库文件、sln解决方案文件、配置文件  
+*.mdb  
+*.ldb  
+*.sln  
+*.config  
+  
+  
+#过滤文件夹Debug,Release,obj  
+Debug/  
+Release/  
+obj/  
+然后调用git add. ，执行 git commit即可。
+
+问题：.gitignore只适用于尚未添加到git库的文件。如果已经添加了，则需用git rm移除后再重新commit。
 ```
 
 #curl  
