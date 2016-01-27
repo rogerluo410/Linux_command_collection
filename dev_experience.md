@@ -30,7 +30,8 @@ http://linux.cn/article-2722-1.html  -- 加盐密码哈希：如何正确使用
 > http://www.zhihu.com/question/22651987
 
 - md5会有重复的可能吗？  
-  **A:** 一般认为任何一个字符串都有一个对应的md5加密串
+  **A:**   
+一般认为任何一个字符串都有一个对应的md5加密串
 的确这样. md5算法对输入串的形式没有要求.
 如果将26个英文字母组合成32位字符串
 显然不是只有32位串才能被md5加密. 所以这么比较无意义.
@@ -39,7 +40,8 @@ http://linux.cn/article-2722-1.html  -- 加盐密码哈希：如何正确使用
 > http://www.zhihu.com/question/23189202
 
 - 为什么现在网上有很多软件可以破解MD5，但MD5还是很流行？  
-  **A:** 1、算法的公开并不意味着不安全；RSA 的算法也是公开的，AES 也是公开的。现代密码学的安全性从不是靠算法的保密来保证的。
+  **A:**    
+         1、算法的公开并不意味着不安全；RSA 的算法也是公开的，AES 也是公开的。现代密码学的安全性从不是靠算法的保密来保证的。
 
          2、目前没有软件能有效地破解 MD5。大多数时候只是把常见字符串的 MD5 存了起来为彩虹表，然后直接反查。
 
@@ -65,7 +67,9 @@ http://linux.cn/article-2722-1.html  -- 加盐密码哈希：如何正确使用
 
 **Some specifical questions:**
 - SHA1 vs md5 vs SHA256: which to use for a PHP login?  
-  **A:** Neither. You should use bcrypt. The hashes you mention are all optimized to be quick and easy on hardware, and so cracking them share the same qualities. If you have no other choice, at least be sure to use a long salt and re-hash multiple times.
+  **A:**   
+
+Neither. You should use bcrypt. The hashes you mention are all optimized to be quick and easy on hardware, and so cracking them share the same qualities. If you have no other choice, at least be sure to use a long salt and re-hash multiple times.
       	 	
 a. can you elaborate? what is bcrypt? i don't see any good online examples of it... –  NMoney Feb 10 '10 at 7:50
 	 	
