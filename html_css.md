@@ -41,6 +41,11 @@ p.center
 
 > Instruction :  http://www.w3schools.com/css/default.asp   
 
+###CSS 预处理器技术   
+CSS 预处理器是一种语言用来为 CSS 增加一些编程的的特性，无需考虑浏览器的兼容性问题，例如你可以在 CSS 中使用变量、简单的程序逻辑、函数等等在编程语言中的一些基本技巧，可以让你的 CSS 更见简洁，适应性更强，代码更直观等诸多好处。    
+
+> http://www.oschina.net/question/12_44255
+
 
 #HTML  
 ###布局 
