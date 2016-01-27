@@ -48,7 +48,7 @@ end
 9、在controller内inline渲染（字符串模板）    
 `render :inline => "<% products.each do |p| %><p><%= p.name %></p><% end %>"`    
 默认情况下，inline渲染使用ERB，但你可强制使用Builder    
-`render :inline => "xml.p {'Horrid coding practice!'}", :tpye => :builder`    
+`render :inline => "xml.p {'Horrid coding practice!'}", :type => :builder`    
 
 10、渲染文本   
 默认情况下，渲染文本不会使用当前layout，如有需要，加上 :layout => true。   
@@ -138,7 +138,6 @@ ApplicationController的layout设置 <-- Controller的layout设置 <-- render方
 本地的设置会覆盖父级的设置，如果本级无设置，则继承父级的设置 
 
 15、避免重复渲染   
-```
 def show 
   @book = Book.find(params[:id]) 
   if @book.special? 
@@ -146,7 +145,7 @@ def show
   end 
   render :action => "regular_show" 
 end 
-```
+
 
 16、使用跳转redirect_to    
 redirect_to给浏览器的响应是：告诉浏览器发起一个新的请求    
@@ -161,6 +160,36 @@ redirect_to photos_path, :status => 302 #302永久跳转
 17、redirect_to和render的区别    
 render渲染用户指定的模板作为响应    
 redirect_to会结束当前响应，并告诉浏览器请求一个新的url    
+
+有些经验不足的开发者会认为 redirect_to 方法是一种 goto 命令，把代码从一处转到别处。这么理解是不对的。执行到 redirect_to 方法时，代码会停止运行，等待浏览器发起新请求。你需要告诉浏览器下一个请求是什么，并返回 302 状态码。 
+
+```
+def index
+  @books = Book.all
+end
+ 
+def show
+  @book = Book.find_by(id: params[:id])
+  if @book.nil?
+    render action: "index"
+  end
+end
+```
+在这段代码中，如果 @book 变量的值为 nil 很可能会出问题。记住，render :action 不会执行目标动作中的任何代码(仅仅会渲染目标动作中对应的模板)，因此不会创建 index 视图所需的 @books 变量。修正方法之一是不渲染，使用重定向：
+
+```
+def index
+  @books = Book.all
+end
+ 
+def show
+  @book = Book.find_by(id: params[:id])
+  if @book.nil?
+    redirect_to action: :index
+  end
+end
+```
+
 
 18、响应时只返回HTTP header   
 `head :bad_request `       
