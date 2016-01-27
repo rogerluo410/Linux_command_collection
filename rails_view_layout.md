@@ -137,14 +137,14 @@ end
 ApplicationController的layout设置 <-- Controller的layout设置 <-- render方法的layout选项 
 本地的设置会覆盖父级的设置，如果本级无设置，则继承父级的设置 
 
-15、避免重复渲染   
-def show 
-  @book = Book.find(params[:id]) 
-  if @book.special? 
-    render :action => "special_show" and return 
-  end 
-  render :action => "regular_show" 
-end 
+15、避免重复渲染     
+def show    
+  @book = Book.find(params[:id])    
+  if @book.special?    
+    render :action => "special_show" and return    
+  end   
+  render :action => "regular_show"    
+end      
 
 
 16、使用跳转redirect_to    
