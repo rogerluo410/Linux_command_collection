@@ -76,7 +76,7 @@ p nil || nil #=> nil
 p "boolean and boolean :  "
 p 1==1 and 2==2 #=>true 
 p 1==2 and 2==2 #=>false
-p 1==1 and 1==2 #=>true  这里为true... 
+p 1==1 and 1==2 #=>false 
 p 1==1 && 1==2 #=>false  如果两个boolean逻辑判断，没有()优先级操作符，最好用&&、|| 操作符
 p (1==1 and 1==2) #=>false
 
