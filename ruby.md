@@ -40,46 +40,44 @@
 > http://naixspirit.github.io/2013/08/13/a-ruby-face-questions/
 
 ###ruby的逻辑运算符  
-```
+```ruby  
 #and, or, not, &&, ||, !  
 #The same and difference of these operators
 #如果是true/false判断，最好用 and/or 并加入（）中。
 #如果是操作数判断，最好用 &&/||， 它的判断标准是空与非空，在为真时，它会返回最左非空的值。
 
 p "and, or :  "
-p 1 and 2 #=> 1
-p (1 and 2) #=> 2
-p 1 or 2 #=>1 
-p (1 or 2) #=>1
-p 1 and nil #=>1
-p nil and 1 #=>nil
-p (nil and 1) #=>nil
+1 and 2 #=> 2
+(1 and 2) #=> 2
+1 or 2 #=>1 
+(1 or 2) #=>1
+1 and nil #=> nil
+nil and 1 #=>nil
+(nil and 1) #=>nil
 
 p "&&, || : "
-p 1 && 2 #=> 2
-p (1 && 2) #=> 2
-p 1 || 2 #=> 1 #短路原则
-p (1 || 2) #=> 1
-p 1 && nil #=> nil 
-p nil && 1 #=> nil
+1 && 2 #=> 2
+(1 && 2) #=> 2
+1 || 2 #=> 1 #短路原则
+(1 || 2) #=> 1
+1 && nil #=> nil 
+nil && 1 #=> nil
 
-p "nil  or 、|| non-nil : "
-p nil or 1 #=> nil
-p (nil or 1 ) #=> 1
-p 1 or nil #=> 1
-p nil || 1 #=> 1
-p 1 || nil #=> 1
-p 0 || 1 #=> 0  只会判断非空，不会判断0值！
-p 0 || nil #=> 0
-p nil || nil #=> nil
+p "nil  [or 、||]  non-nil : "  
+nil or 1 #=> nil
+(nil or 1 ) #=> 1
+1 or nil #=> 1
+nil || 1 #=> 1
+1 || nil #=> 1
+0 || 1 #=> 0  只会判断非空，不会判断0值！
+0 || nil #=> 0
+nil || nil #=> nil
 
 p "boolean and boolean :  "
-p 1==1 and 2==2 #=>true 
-p 1==2 and 2==2 #=>false
-p 1==1 and 1==2 #=>false 
-p 1==1 && 1==2 #=>false  如果两个boolean逻辑判断，没有()优先级操作符，最好用&&、|| 操作符
-p (1==1 and 1==2) #=>false
-
+1==1 and 2==2 #=>true 
+1==2 and 2==2 #=>false
+1==1 and 1==2 #=>false 
+1==1 && 1==2 #=>false  
 ```
 
 ###ruby的hash variable
@@ -847,36 +845,33 @@ nil? 空值nil的判断
 empty？ 集合是否没有元素的判断   
 present？ 变量是否赋值,即不为nil  
 blank？ rails 一切为空的判断   
-```
+```ruby   
 2.1.4 :030 > str = nil
  => nil 
-2.1.4 :031 > p str.present?
-false
+2.1.4 :031 > str.present?
  => false 
-2.1.4 :032 > p "".nil?
-false
+2.1.4 :032 > "".nil?
  => false 
-2.1.4 :033 > p [].nil?
-false
+2.1.4 :033 > [].nil?
  => false 
-2.1.4 :034 > p nil.nil?
-true
+2.1.4 :034 > nil.nil?
  => true 
-2.1.4 :035 > p "".empty?
-true
+2.1.4 :035 > "".empty?
  => true 
-2.1.4 :036 > p 1.empty?
+2.1.4 :036 > 1.empty?
 NoMethodError: undefined method `empty?' for 1:Fixnum
-2.1.4 :037 > p {}.empty?
-NoMethodError: undefined method `empty?' for nil:NilClass
+2.1.4 :037 > {}.empty?
+ => true
 
-空hash需要注意的地方 : 空hash是nil， 而不是empty，并且hash也不能使用empty方法。
-2.1.4 :047 > p {}.nil?
- => true 
-2.1.4 :048 > p {}.blank?
- => true 
-2.1.4 :049 > p {}.present?
+空hash需要注意的地方 : 空hash不是nil， 是empty，并且hash也不能使用empty方法。
+2.1.4 :047 > {}.nil?
  => false 
+2.1.4 :048 > {}.blank?
+ => true 
+2.1.4 :049 > {}.present?
+ => false 
+ 
+ blank? 和 present? 是rails中的函数， 变量中“有值”和“没值”得判断。
 ```
 
 - **比较字符串的内容**  
