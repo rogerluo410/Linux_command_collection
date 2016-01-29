@@ -233,7 +233,7 @@ A set of responders modules to dry up your Rails
 ActsAsTree -- Extends ActiveRecord to add simple support for organizing items into parent–children relationships.  
 > https://github.com/amerine/acts_as_tree   
 
-#Rails with mongoDB  
+#Rails with mongoDB Access gem **mongoid**  
 ```
 As far as I am concerned you will have to create a new Rails project excluding active record:
 
@@ -242,6 +242,25 @@ then you can follow the configuration steps from Mongoid:
 
 http://mongoid.org/en/mongoid/docs/installation.html
 ```
+
+#carrierwave 
+文件上传器
+Classier solution for file uploads for Rails, Sinatra and other Ruby web frameworks   
+> https://github.com/carrierwaveuploader/carrierwave   
+
+##rails + mongoid + carrierwave 实现图片上传的案例   
+使用的gems:   
+> https://github.com/carrierwaveuploader/carrierwave   --获得上传的文件对象
+> https://github.com/carrierwaveuploader/carrierwave-mongoid   --将文件对象存入mongodb的gridfs中
+> https://github.com/ahoward/mongoid-grid_fs    --通过查询参数获得mongodb的gridfs中的文件对象   
+> https://github.com/meskyanichi/mongoid-paperclip  --灵活处理上传的文件  
+
+相关文档:   
+> https://docs.mongodb.org/manual/core/gridfs/   --gridfs介绍  
+
+上传案例: 
+> https://coderwall.com/p/lqtsya/rails-3-mongoid-gridfs-carrierwave-image-upload  
+> https://hafizbadrie.wordpress.com/2011/04/14/image-upload-with-carrierwave-and-mongoid-gridfs-mongodb-in-rails-3/  
 
 #settingslogic  
 A simple and straightforward settings solution that uses an ERB enabled YAML file and a singleton design pattern.  
