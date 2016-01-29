@@ -234,8 +234,8 @@ ActsAsTree -- Extends ActiveRecord to add simple support for organizing items in
 > https://github.com/amerine/acts_as_tree   
 
 #will_paginate 分页  
-> https://github.com/mislav/will_paginate   
-> https://github.com/amatsuda/kaminari
+> https://github.com/mislav/will_paginate     
+> https://github.com/amatsuda/kaminari   
 > https://github.com/lucasas/will_paginate_mongoid   --mongoid的model的分页  
 
 #Rails with mongoDB
