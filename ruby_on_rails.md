@@ -34,7 +34,7 @@ RSpec is a great tool in the behavior-driven development (BDD) process of writin
 > http://www.jianshu.com/p/1db9ee327357  --RSpec入门指南    
 > http://betterspecs.org/  --rspec 规范  
 
-```  
+```ruby    
 它在BDD流程的开发中被用来写高可读性的测试，引导并验证你开发的应用程序。
 #常用模式：  
 before(:all) { #全局变量赋值，只执行一遍，每个测试方法都可以用，变量最好设置为实例变量 @param  } 
@@ -156,7 +156,7 @@ Acceptance test framework for web applications
 A library for setting up Ruby objects as test data.  
 > https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md   
 
-```
+```ruby
 当factory_girl中需要映射 one-many 关联时，可以使用如下写法。  
 FactoryGirl.define do
   factory :product do
@@ -233,7 +233,8 @@ A set of responders modules to dry up your Rails
 ActsAsTree -- Extends ActiveRecord to add simple support for organizing items into parent–children relationships.  
 > https://github.com/amerine/acts_as_tree   
 
-#Rails with mongoDB Access gem **mongoid**  
+#Rails with mongoDB
+Access gem **mongoid**   
 ```
 As far as I am concerned you will have to create a new Rails project excluding active record:
 
@@ -248,7 +249,7 @@ http://mongoid.org/en/mongoid/docs/installation.html
 Classier solution for file uploads for Rails, Sinatra and other Ruby web frameworks   
 > https://github.com/carrierwaveuploader/carrierwave   
 
-##rails + mongoid + carrierwave 实现图片上传的案例   
+###rails + mongoid + carrierwave 实现图片上传的案例   
 使用的gems:   
 > https://github.com/carrierwaveuploader/carrierwave   --获得上传的文件对象
 > https://github.com/carrierwaveuploader/carrierwave-mongoid   --将文件对象存入mongodb的gridfs中
@@ -281,11 +282,11 @@ VCR is also an amazing Ruby gem that records your test suite's HTTP interactions
 > https://ruby-china.org/topics/26588  --使用 Webmock 和 VCR 搭建测试，对调用第三方 API 库的支持(本地fake第三方api, 不需要使用vcr的replay功能)   
 
 #Cache
-##record-cache   
+###record-cache   
 Cache Active Model Records in Rails 3   
 > https://github.com/orslumen/record-cache   
 
-##simple_cacheable   
+###simple_cacheable   
 Simple Cacheable is a simple cache implementation based on activerecord  
 > https://github.com/flyerhzm/simple_cacheable
 ----------------------------------
