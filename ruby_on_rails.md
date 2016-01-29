@@ -181,6 +181,11 @@ end
 使用 Guard 你可以自动化的运行那些和你正在修改的测试，Model，Controller 或者文件有关的测试。    
 > https://github.com/guard/guard     
 
+#rack-mini-profiler  
+Middleware that displays speed badge for every html page. Designed to work both in production and in development.  
+页面应用响应时间  
+> https://github.com/MiniProfiler/rack-mini-profiler  
+
 #EventMachine-scalable-non-blocking IO  
 EventMachine is an event-driven I/O and lightweight concurrency library for Ruby.   
 > https://github.com/eventmachine/eventmachine   
