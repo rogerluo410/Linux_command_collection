@@ -33,7 +33,9 @@ RSpec is a great tool in the behavior-driven development (BDD) process of writin
 > http://my.oschina.net/huangwenwei/blog/418999   --RSpec入门指南   
 > http://www.jianshu.com/p/1db9ee327357  --RSpec入门指南    
 > http://betterspecs.org/  --rspec 规范  
-> http://chloerei.com/2015/10/26/testing-guide/  --测试指南
+> http://chloerei.com/2015/10/26/testing-guide/  --测试指南 
+
+目的:  确保你升级各种第三方库或框架的时候，能有保障。    
 
 ```ruby    
 它在BDD流程的开发中被用来写高可读性的测试，引导并验证你开发的应用程序。
