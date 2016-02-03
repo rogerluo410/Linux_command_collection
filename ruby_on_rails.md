@@ -207,6 +207,7 @@ Adds support for creating state machines for attributes on any Ruby class
 #devise    
 Flexible authentication solution       
 > https://github.com/plataformatec/devise    
+
 **Use Devise + cancancan**  
 > http://stackoverflow.com/questions/34962815/devise-and-cancancan-how-to-make-it-work   
 
