@@ -229,6 +229,7 @@ devise_for :users, :controllers => { :sessions => "users/sessions", :registratio
 
 **Ruby on Rails中实现Omniauth第三方登录最终解决方案（豆瓣、QQ、微博第三方登录）**    
 > http://www.douban.com/note/411359006/  
+> https://github.com/fertapric/rails3-mongoid-devise-omniauth  
 
 #sidekiq
 后台任务池   
