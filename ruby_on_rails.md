@@ -227,6 +227,9 @@ end
 devise_for :users, :controllers => { :sessions => "users/sessions", :registrations => "users/registrations" }
 ```
 
+**Ruby on Rails中实现Omniauth第三方登录最终解决方案（豆瓣、QQ、微博第三方登录）**    
+> http://www.douban.com/note/411359006/  
+
 #sidekiq
 后台任务池   
 > https://github.com/mperham/sidekiq   
