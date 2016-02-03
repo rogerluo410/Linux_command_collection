@@ -207,6 +207,24 @@ Adds support for creating state machines for attributes on any Ruby class
 #devise    
 Flexible authentication solution       
 > https://github.com/plataformatec/devise    
+**Use Devise + cancancan**  
+> http://stackoverflow.com/questions/34962815/devise-and-cancancan-how-to-make-it-work   
+
+**rails generate devise:views 默认是erb, 怎么转换成slim**  
+> https://github.com/plataformatec/devise/wiki/How-To%3a-Create-Haml-and-Slim-Views  
+
+**ActionController::InvalidAuthenticityToken in RegistrationsController#create 遇到这类错误的解决方法**  
+> http://stackoverflow.com/questions/20875591/actioncontrollerinvalidauthenticitytoken-in-registrationscontrollercreate 
+
+```ruby
+#自定义继承devise的controller, 并在app/controllers/users/registrations_controller.rb 中过滤掉token验证
+class RegistrationsController < Devise::RegistrationsController
+  skip_before_filter :verify_authenticity_token, :only => :create
+end
+
+#在路由中重载controller路径
+devise_for :users, :controllers => { :sessions => "users/sessions", :registrations => "users/registrations" }
+```
 
 #sidekiq
 后台任务池   
