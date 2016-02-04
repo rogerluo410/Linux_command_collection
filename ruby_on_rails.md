@@ -336,7 +336,7 @@ Simple Cacheable is a simple cache implementation based on activerecord
 > https://www.rubyplus.com/articles  --rails cast  
 > https://www.ruby-toolbox.com/#Web_Apps_Services_Interaction  --rails gems分类
 
-###String 
+###String In Active Support 
 > http://guides.ruby-china.org/active_support_core_extensions.html   
 
 ```
@@ -347,7 +347,7 @@ humanize
 tableize
 ```
 
-###In Model class, We can add: 
+###In Model: 
    * validates : Validations are used to ensure that only valid data is saved into your database.  
      只有在`create,create!,save,save!,update,update!`做持久化时才会触发，当对象存在，可以用valid?方法验证对象，   `save(validate: false)` 能跳过验证.  
      如果验证失败，错误信息会存放在对象的errors[]集合中`taxonomy.errors.full_messages.join(",") `
@@ -485,6 +485,18 @@ tableize
 ```
    * 
 
+###In view: 
+文本中的\r\n 转换为html中的标签<br/>换行符: 
+> http://api.rubyonrails.org/classes/ActionView/Helpers/TextHelper.html
+> http://stackoverflow.com/questions/3137393/rails-add-a-line-break-into-a-text-area
+
+```
+Line breaks in textareas are produced as `\n'. However, the problem is that if you simply dump it into your view, it will just be line breaks in your HTML source.
+
+You can try using the Rails simple_format helper to take care of some of this for you: http://api.rubyonrails.org/classes/ActionView/Helpers/TextHelper.html#M002285
+
+It will auto-convert line breaks to HTML tags. You can use it with something like <%= simple_format(my_text_field) %>.
+```
 
 **rails中缓存的使用**  
 > http://hawkins.io/2011/05/advanced_caching_in_rails/     
