@@ -642,6 +642,47 @@ on子句 用于指定连接条件。
 注意：
 如果使用from子句指定内、外连接，则必须要使用on子句指定连接条件；
 如果使用（+）操作符指定外连接，则必须使用where子句指定连接条件。
+
+例子：   
+
+-------------------------------------------------
+  a表     id   name     b表     id   job   parent_id   
+           1   张3              1     23     1   
+           2   李四             2     34     2   
+           3   王武             3     34     4       
+  a.id同parent_id   存在关系   
+
+--------------------------------------------------    
+ 1） 内连接   
+  select   a.*,b.*   from   a   inner   join   b     on   a.id=b.parent_id       
+  结果是     
+  1   张3                   1     23     1   
+  2   李四                  2     34     2   
+    
+  2）左连接   
+  select   a.*,b.*   from   a   left   join   b     on   a.id=b.parent_id       
+  结果是     
+  1   张3                   1     23     1   
+  2   李四                  2     34     2   
+  3   王武                  null   
+
+ 
+
+ 3） 右连接   
+  select   a.*,b.*   from   a   right   join   b     on   a.id=b.parent_id       
+  结果是     
+  1   张3                   1     23     1   
+  2   李四                  2     34     2   
+  null                       3     34     4   
+    
+ 4） 完全连接   
+  select   a.*,b.*   from   a   full   join   b     on   a.id=b.parent_id   
+
+  结果是     
+  1   张3                  1     23     1   
+  2   李四                 2     34     2   
+  null               　　  3     34     4   
+  3   王武                 null
 ```
 
 **SQL谓词**   
