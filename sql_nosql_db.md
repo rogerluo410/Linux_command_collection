@@ -694,7 +694,7 @@ on子句 用于指定连接条件。
   结果是     
   1   张3                   1     23     1   
   2   李四                  2     34     2   
-  null                       3     34     4   
+  null                      3     34     4   
     
  4） 完全连接   
   select   a.*,b.*   from   a   full   join   b     on   a.id=b.parent_id   
@@ -703,7 +703,33 @@ on子句 用于指定连接条件。
   1   张3                  1     23     1   
   2   李四                 2     34     2   
   null               　　  3     34     4   
-  3   王武                 null
+  3   王武                 null    
+  
+  限制关联范围的sql：  
+  SELECT "photos".*, "galleries".* 
+  FROM "photos" 
+  LEFT outer JOIN galleries on galleries.id = photos.album_id 
+  and (galleries.owner_type ='Organization'  and galleries.clazz = 'product')  --右边的表galleries只会导出加了限定的集合
+  WHERE "photos"."bucket" = 'yunlu-pub'
+  
+  SELECT "photos".*, "galleries".* 
+  FROM "photos" 
+  LEFT outer JOIN galleries on galleries.id = photos.album_id   --右边的表galleries会导出全部的集合
+  WHERE "photos"."bucket" = 'yunlu-pub'
+  AND (galleries.owner_type ='Organization'  and galleries.clazz = 'product')      
+  --但是在整个查询上，右边的表集合加了限定，所以和内连接是一个效果。  
+  
+  --存在多个内连接的情况  
+  SELECT stone_materials.taxonomy_id as taxonomy_id, count(1) as total_sum 
+  FROM "products" 
+  INNER join stone_materials on products.goods_id = stone_materials.id 
+  INNER join taxonomies on taxonomies.id = stone_materials.id 
+  WHERE "products"."state" = 'published' 
+  AND "products"."goods_type" = 'StoneMaterial' 
+  AND (taxonomies.colour = 'black') 
+  GROUP BY stone_materials.taxonomy_id 
+  ORDER BY total_sum 
+  LIMIT 10 OFFSET 0
 ```
 
 **SQL谓词**   
