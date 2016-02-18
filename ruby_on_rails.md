@@ -27,6 +27,24 @@
 > http://apidocjs.com   
 > https://github.com/apidoc/apidoc   
 
+#代码风格检测  
+> https://github.com/bbatsov/rubocop  
+
+**ruby维护ruby代码？如何保证提交代码的质量？自动化测试程度如何？**  
+```
+1.https://github.com/bbatsov/rubocop - 代码风格检测
+2.https://github.com/presidentbeef/brakeman - 安全检测
+3.CI 测试
+4.所有改动，走Pull Request的方式，先Review再合并到Master
+
+补充几个在线工具：
+
+https://travis-ci.org/ 在线 CI
+https://houndci.com/ 自动检测代码风格，基于 Github
+https://linthub.io/ 另一个代码风格检测工具
+https://github.com/whitesmith/rubycritic 代码质量监测和报告工具
+```
+
 #Rspec   
 RSpec is a great tool in the behavior-driven development (BDD) process of writing human readable specifications that direct and validate the development of your application.   
 > https://github.com/rspec/rspec-rails  --rspec in rails   
