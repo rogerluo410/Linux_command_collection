@@ -177,6 +177,42 @@ end
 
 ```
 
+**遇到多态关联的处理方法**  
+不使用factory_girl 的association, 改为在测试脚本中手动关联！
+---> FactoryGirl.attributes_for(:archive).merge   
+```ruby
+ describe "PUT /api/v1/team/:team_id/archives/:id" do
+    let(:archive) { FactoryGirl.create(:archive) }
+    let(:archive_files) { FactoryGirl.create_list(:archive_file, 5, archive: archive) }
+    let(:case_instance) { FactoryGirl.create(:case) }
+    let(:sale_certificate) { FactoryGirl.create(:sale_certificate) }
+    let(:certificate) { FactoryGirl.create(:certificate) }
+    let(:params) do
+    {
+      token: @valid_token,
+      team_id: archive.organization_id,
+      id: archive.id, 
+      name: "archive_name_updated",
+      file_ids: archive_files.map(&:file_id).reverse!,  #逆序
+      taxonomy_ids: [1,2,3,4]
+    }
+    end
+    it "123。" do
+      put "/api/v1/team/#{params[:team_id]}/archives/#{params[:id]}", params
+
+      expect(last_response.status).to eq(204)
+      #expect(archive.archive_files(true)[4].position).to eq 1
+    end
+
+    it "456。" do
+      FactoryGirl.attributes_for(:archive).merge(:group_id => sale_certificate.id, :group_type => "SaleCertificate")
+      put "/api/v1/team/#{params[:team_id]}/archives/#{params[:id]}", params
+
+      expect(last_response.status).to eq(204)
+      #expect(archive.archive_files(true)[4].position).to eq 1
+    end
+```
+
 #Guard     
 使用 Guard 你可以自动化的运行那些和你正在修改的测试，Model，Controller 或者文件有关的测试。    
 > https://github.com/guard/guard     
