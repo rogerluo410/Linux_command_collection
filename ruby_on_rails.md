@@ -168,7 +168,8 @@ end
 ##以上是controller的测试模式， model的模式可以使用subject方法。
 ```
 
-- 使用rspec的一些recipes:  
+- 使用rspec的一些recipes:   
+
  1。善用 subject   
 如果你有好几个测试都是用了同一个 subject，使用 subject{} 来避免重复。  
 
