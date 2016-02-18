@@ -415,7 +415,10 @@ Simple Cacheable is a simple cache implementation based on activerecord
 
 ----------------------------------
 
-#Rails 
+#Rails   
+> http://api.rubyonrails.org  --查询rails API
+> http://www.rubydoc.info  --查询GEMS文档
+
 > http://guides.rubyonrails.org/active_record_validations.html  --active model validations   
 > http://guides.rubyonrails.org/active_record_querying.html     --active record querying  
 > http://guides.rubyonrails.org/active_record_callbacks.html    --active record callbacks   
