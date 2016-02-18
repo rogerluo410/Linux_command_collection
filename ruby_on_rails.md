@@ -306,7 +306,7 @@ ActsAsTree -- Extends ActiveRecord to add simple support for organizing items in
 > https://github.com/lucasas/will_paginate_mongoid   --mongoid的model的分页  
 
 #Rails with mongoDB
-Access gem **mongoid**   
+Using gem **mongoid**   
 ```
 As far as I am concerned you will have to create a new Rails project excluding active record:
 
