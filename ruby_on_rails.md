@@ -361,6 +361,7 @@ Cache Active Model Records in Rails 3
 ###simple_cacheable   
 Simple Cacheable is a simple cache implementation based on activerecord  
 > https://github.com/flyerhzm/simple_cacheable
+
 ----------------------------------
 
 #Rails 
