@@ -169,10 +169,10 @@ end
 ```
 
 - 使用rspec的一些recipes:  
-* 1. 善用 subject   
+ 1。善用 subject   
 如果你有好几个测试都是用了同一个 subject，使用 subject{} 来避免重复。  
 
-* 2. 当你需要给一个变量赋值时，使用 let 而不是 before 来创建这个实例变量。let 采用了 lazy load 的机制，只有在第一次用到的时候才会加载，然后就被缓存，直到测试结束。  
+ 2。 当你需要给一个变量赋值时，使用 let 而不是 before 来创建这个实例变量。let 采用了 lazy load 的机制，只有在第一次用到的时候才会加载，然后就被缓存，直到测试结束。  
 ```ruby
 # 这一段:
 let(:foo) { Foo.new }
@@ -183,7 +183,7 @@ def foo
 end
 ```
 
-* 3. 当你在描述你的测试的时候，不要使用 should，使用第三人称现在时。更进一步，你可以使用新的 expectation 语法。  
+ 3。当你在描述你的测试的时候，不要使用 should，使用第三人称现在时。更进一步，你可以使用新的 expectation 语法。  
 用rspec-expectations的语法做断言！    
 ```ruby
 # gem: https://github.com/rspec/rspec-expectations 
@@ -192,12 +192,12 @@ it 'does not change timings' do
 end
 ```
 
-* 4. 每次你修改了你的项目就要重新跑所有的测试用力真的是一种负担。这会消耗很多时间并且打断了你的工作。 使用 Guard 你可以自动化的运行那些和你正在修改的测试，Model，Controller 或者文件有关的测试。  
+ 4。 每次你修改了你的项目就要重新跑所有的测试用力真的是一种负担。这会消耗很多时间并且打断了你的工作。 使用 Guard 你可以自动化的运行那些和你正在修改的测试，Model，Controller 或者文件有关的测试。  
 
-* 5. 伪装HTTP请求  
+ 5。 伪装HTTP请求  
 有时候你需要用到一些外部的服务。在你不能真的使用这些外部服务的时候你应该用类似 webmock 这样的工具来进行伪装。  
 
-* 6. 使用Fuubar   
+ 6。使用Fuubar   
 > https://github.com/thekompanee/fuubar  
 
 
