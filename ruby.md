@@ -38,7 +38,10 @@
 3. ActiveSupport::Concern 模块的用法及源码解读  
 4. alias_method_chain 的用法及源码解读   
 
-> http://naixspirit.github.io/2013/08/13/a-ruby-face-questions/
+> http://naixspirit.github.io/2013/08/13/a-ruby-face-questions/   
+
+###Ruby 里的 %Q, %q, %W, %w, %x, %r, %s, %i 
+> https://ruby-china.org/topics/18512   
 
 ###ruby的逻辑运算符  
 ```ruby  
