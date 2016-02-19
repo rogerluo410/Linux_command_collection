@@ -230,7 +230,7 @@ end
 
 **遇到多态关联的处理方法**  
 不使用factory_girl 的association, 改为在测试脚本中手动关联！
----> FactoryGirl.attributes_for(:archive).merge   
+---> archive.update_attributes  
 ```ruby
  describe "PUT /api/v1/team/:team_id/archives/:id" do
     let(:archive) { FactoryGirl.create(:archive) }
@@ -256,7 +256,7 @@ end
     end
 
     it "456。" do
-      FactoryGirl.attributes_for(:archive).merge(:group_id => sale_certificate.id, :group_type => "SaleCertificate")
+      archive.update_attributes(:group_id => sale_certificate.id, :group_type => "SaleCertificate")
       put "/api/v1/team/#{params[:team_id]}/archives/#{params[:id]}", params
 
       expect(last_response.status).to eq(204)
