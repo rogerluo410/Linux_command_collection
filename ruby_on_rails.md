@@ -27,6 +27,10 @@
 > http://apidocjs.com   
 > https://github.com/apidoc/apidoc   
 
+#rack-attack  
+Rack::Attack is a rack middleware to protect your web app from bad clients.  防止恶意访问。  
+> https://github.com/kickstarter/rack-attack   
+
 #代码风格检测  
 > https://github.com/bbatsov/rubocop  
 
