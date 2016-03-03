@@ -70,6 +70,11 @@ git stash pop: 从Git栈中读取最近一次保存的内容，恢复工作区�
 git stash list: 显示Git栈内的所有备份，可以利用这个列表来决定从那个地方恢复。
 git stash clear: 清空Git栈。此时使用gitg等图形化工具会发现，原来stash的哪些节点都消失了。
 
+[roger@rogers-MacBook-Air:~/Repos/giant → roger-dev → ruby-2.1.4]$ git stash list
+stash@{0}: WIP on roger-dev: 8701131 :dog: 优化代码逻辑。
+stash@{1}: WIP on roger-dev: 733cf60 :cat: 修复逻辑错误。
+[roger@rogers-MacBook-Air:~/Repos/giant → roger-dev → ruby-2.1.4]$ git stash pop stash@{1}  --恢复 stash@{1}
+
 # git reset --hard <commit_id>  --删除某次提交
 http://blog.csdn.net/hudashi/article/details/7664464
 
