@@ -15,6 +15,8 @@ autoconf & automake :
 光标到行未： shift+$   or  shift+a（edit mode）    
 
 #Git
+> http://git-scm.com/book/zh/v2 --git 教程   
+ 
 **git config --global core.editor vim**  
 * global修改的是~/.gitconfig，对当前用户有效
 
