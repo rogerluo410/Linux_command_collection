@@ -267,6 +267,50 @@ end
       expect(last_response.status).to eq(204)
       #expect(archive.archive_files(true)[4].position).to eq 1
     end
+    
+    
+    #不知是factory_girl的bug 或者 ...
+    #在用第一种方式做表关联时无效！ 在API的逻辑中查询不到数据。
+    #必须 (method 1 + method 3) or (method 0 + method 2)
+    describe "GET /api/v1/clients" do
+    # method 0
+    let(:stranger) { FactoryGirl.create(:stranger) }
+    let(:cluster) { FactoryGirl.create(:cluster) }
+    let(:client) { FactoryGirl.create(:client) }
+    # method 1
+    let(:stranger) { FactoryGirl.create(:stranger, user: user_for_stranger, owner: user) }
+    let(:cluster) { FactoryGirl.create(:cluster, user: user) }
+    let(:client) { FactoryGirl.create(:client, cluster: cluster, stranger: stranger) }
+    let(:params) do       
+    {
+      token: user.authentication_token,
+      cluster_id: cluster.id.to_s
+    }
+    end
+    it "全量查询指定组织的客户列表" do
+      # method 2
+      stranger.update_attributes(user_id: user_for_stranger.id, owner_id: user.id)
+      cluster.update_attributes(user_id: user.id)
+      client.update_attributes(cluster_id: cluster.id, stranger_id: stranger.id)
+      
+      # method 3
+      stranger.reload
+      cluster.reload
+      client.reload
+      get "/api/v1/clients", params
+
+      data = JSON.parse(response.body)
+
+      p data
+      p user
+      p stranger
+      p stranger.user
+      p cluster
+      p client
+      p params
+      expect(response.status).to eq(200)
+      expect(data).to have_key("clients")
+    end
 ```
 
 #Guard     
