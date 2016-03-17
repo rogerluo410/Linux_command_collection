@@ -63,6 +63,12 @@ sudo service postgresql restart
 sudo /etc/init.d/postgresql restart   
 ```
 
+###使用手册  
+**LIMIT 和 OFFSET**  
+```sql
+ 在使用LIMIT 和 OFFSET时，结果集必须有主键 或 排序，并且排序需要强排序（唯一性字段上有排序）以便返回一个可预料的顺序，否则返回结果得不到预期值。
+ >  http://www.php100.com/manual/PostgreSQL8/queries-limit.html
+```
 
 #MongoDB   
 Description:  MongoDB是一个面向文档的数据库，采用乐观并发控制(乐观锁)    
