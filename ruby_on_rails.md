@@ -189,6 +189,15 @@ end
 
  1。善用 subject   
 如果你有好几个测试都是用了同一个 subject，使用 subject{} 来避免重复。  
+```ruby
+describe CreditCard do
+  subject do
+    CreditCard.new name: 'Ann', card_number: 1234
+  end
+  
+  it { should be_valid}
+end
+```
 
  2。 当你需要给一个变量赋值时，使用 let 而不是 before 来创建这个实例变量。let 采用了 lazy load 的机制，只有在第一次用到的时候才会加载，然后就被缓存，直到测试结束。  
 ```ruby
@@ -199,6 +208,10 @@ let(:foo) { Foo.new }
 def foo
   @foo ||= Foo.new
 end
+
+let  and  let!  let第一次调用时赋值， let! 暴力方式赋值，初始化就赋值。
+You can read more about this here, but basically. (:let) is lazily evaluated and will never be instantiated if you don't call it, while (:let!) is forcefully evaluated before each method call.
+
 ```
 
  3。当你在描述你的测试的时候，不要使用 should，使用第三人称现在时。更进一步，你可以使用新的 expectation 语法。  
