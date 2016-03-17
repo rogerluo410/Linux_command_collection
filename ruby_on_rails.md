@@ -21,7 +21,13 @@
 
 
 #Ruby 语法   
-> http://www.runoob.com/ruby/ruby-hash.html    
+> http://www.runoob.com/ruby/ruby-hash.html   
+> http://guides.ruby-china.org/  --rails guides  
+
+#REST 
+REST，或者称为表征状态转移，它是一个分布式通信体系架构，正在迅速发展成云平台的一个通用概念。它非常简单，然而却足以表达大量的云资源和全部的配置、管理。在Ruby中从头开始学习如何实现和使用一个简单的REST代理。
+REST是一种web基础通信架构风格，它允许客户端通过一个唯一的值访问服务端。尤其是，REST在给定的服务器里资源作为统一资源标识（URIs），因此在HTTP里简化了REST架构的实现。让我们开始介绍下REST和HTTP背后的一些思想，然后探索下数据表示方法，使用Ruby实现一个简单的REST客户端。   
+> http://www.oschina.net/translate/os-understand-rest-ruby  --REST 介绍
 
 #API Description Generator  
 > http://apidocjs.com   
@@ -33,6 +39,12 @@ Rack::Attack is a rack middleware to protect your web app from bad clients.  防
 
 #代码风格检测  
 > https://github.com/bbatsov/rubocop  
+
+#database_cleaner  
+Rake task to truncate all tables in Rails   
+> http://stackoverflow.com/questions/7755389/rake-task-to-truncate-all-tables-in-rails-3  
+> https://github.com/DatabaseCleaner/database_cleaner   
+
 
 **ruby维护ruby代码？如何保证提交代码的质量？自动化测试程度如何？**  
 ```
@@ -269,7 +281,7 @@ end
     end
     
     
-    #不知是factory_girl的bug 或者 ...
+    #不知是factory_girl的bug 或者 ... （非bug, 原因见method3）
     #在用第一种方式做表关联时无效！ 在API的逻辑中查询不到数据。
     #必须 (method 1 + method 3) or (method 0 + method 2)
     describe "GET /api/v1/clients" do
@@ -293,7 +305,8 @@ end
       cluster.update_attributes(user_id: user.id)
       client.update_attributes(cluster_id: cluster.id, stranger_id: stranger.id)
       
-      # method 3
+      # method 3 
+      使用reload是因为在FactoryGirl.define中定义映射model的对象时，使用了关联association 关联其他对象, 导致在rspec中手动关联的数据没有刷入数据库中，手动关联无效，所以必须reload一下。
       stranger.reload
       cluster.reload
       client.reload
@@ -311,6 +324,57 @@ end
       expect(response.status).to eq(200)
       expect(data).to have_key("clients")
     end
+    
+    #业务模型多场景的定义方法 
+    #在定义factorygirl映射某个模型时，可以定义多个factorygirl对象来表示对象在不同场景下的状态。
+    FactoryGirl.define do
+     factory :stranger do
+       user_id nil
+       sequence(:name)        { |n| "name#{n}" }
+       sequence(:pinyin_name) { |n| "name#{n}" }
+       sequence(:email)       { |n| "email#{n}@stranger.com" }
+       level 0
+       group "normal"
+       association :owner, factory: :user
+   
+       trait :unsign do
+         user_id nil
+       end
+   
+       factory :stranger_signed do
+         association :user
+       end
+   
+       factory :stranger_with_clusters do
+   
+         transient do
+           clusters_count 5
+         end
+   
+         after(:create) do |stranger, evaluator|
+           stranger.clusters = create_list(:cluster, evaluator.clusters_count)
+         end
+   
+       end
+   
+       factory :stranger_with_contacts do
+   
+         transient do
+           contacts_count 1
+           contact_params nil
+         end
+   
+         after(:create) do |stranger, evaluator|
+           if evaluator.contact_params.nil?
+             stranger.contacts = create_list(:contact_mobile, evaluator.contacts_count)
+           else
+             stranger.contacts = create_list(:contact, evaluator.contacts_count, content: evaluator.contact_params[:content], clazz: evaluator.contact_params[:clazz])
+           end
+         end
+        end
+       end
+      end
+    
 ```
 
 #Guard     
@@ -461,6 +525,18 @@ Cache Active Model Records in Rails 3
 ###simple_cacheable   
 Simple Cacheable is a simple cache implementation based on activerecord  
 > https://github.com/flyerhzm/simple_cacheable
+
+###identity_cache
+IdentityCache is a blob level caching solution to plug into ActiveRecord. Don't #find, #fetch!  
+> https://github.com/Shopify/identity_cache  
+
+###second_level_cache  
+SecondLevelCache is a write-through and read-through caching library inspired by Cache Money and cache_fu, support ActiveRecord 4.
+
+Read-Through: Queries by ID, like current_user.articles.find(params[:id]), will first look in cache store and then look in the database for the results of that query. If there is a cache miss, it will populate the cache.
+
+Write-Through: As objects are created, updated, and deleted, all of the caches are automatically kept up-to-date and coherent.
+> https://github.com/hooopo/second_level_cache
 
 ----------------------------------
 
@@ -641,3 +717,9 @@ It will auto-convert line breaks to HTML tags. You can use it with something lik
 **rails中缓存的使用**  
 > http://hawkins.io/2011/05/advanced_caching_in_rails/     
 > http://hawkins.io/2012/07/advanced_caching_revised/   
+> https://ruby-china.org/topics/19389  --总结 Web 应用中常用的各种 Cache   
+
+**关联查询以及预加载**  
+> https://ruby-china.org/topics/22192   --ActiveRecord 的三种数据预加载形式 - includes, preload, eager_load  
+
+
