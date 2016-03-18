@@ -3,22 +3,6 @@
 - 大公司里怎样开发和部署前端代码？  
 > http://www.runoob.com/w3cnote/how-to-develop-and-deploy-front-end-code.html
 
-
-**1.Draw a line on panel :**
-
-  > Write something like this : 
-  
-  ```
-   border-left: 1px solid black;
-  ```
-  
-**2.padding:5px 15px 5px 15px; How to recognize it?**
-  ```
-  border 视为盒子的外壳，padding则视为盒子中的缓冲填充物，比如泡沫，那么剩下的就是盒子真正可以放东西的空间，比如里面的鞋子.
-  margin 你可以理解为这个盒子和其他盒子之间的间隔，距离  
-  
-  padding:5px 15px 5px 15px; --->  上 右 下 左  (顺时针方向)
-  ```
   
 #CSS
 ```
@@ -49,9 +33,23 @@ p.center
 
 ###CSS 预处理器技术   
 CSS 预处理器是一种语言用来为 CSS 增加一些编程的的特性，无需考虑浏览器的兼容性问题，例如你可以在 CSS 中使用变量、简单的程序逻辑、函数等等在编程语言中的一些基本技巧，可以让你的 CSS 更见简洁，适应性更强，代码更直观等诸多好处。    
-
 > http://www.oschina.net/question/12_44255
 
+**1.Draw a line on panel :**
+
+  > Write something like this : 
+  
+  ```
+   border-left: 1px solid black;
+  ```
+  
+**2.padding:5px 15px 5px 15px; How to recognize it?**
+  ```
+  border 视为盒子的外壳，padding则视为盒子中的缓冲填充物，比如泡沫，那么剩下的就是盒子真正可以放东西的空间，比如里面的鞋子.
+  margin 你可以理解为这个盒子和其他盒子之间的间隔，距离  
+  
+  padding:5px 15px 5px 15px; --->  上 右 下 左  (顺时针方向)
+  ```
 
 #HTML  
 ###布局 
