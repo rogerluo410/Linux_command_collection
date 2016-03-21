@@ -108,44 +108,44 @@ clear: both; left; right;
   
 ###HTML DOM对象  
 1. 在 HTML DOM (Document Object Model) 中, 每一个元素都是节点:  
-- 所有的HTML元素都是元素节点。  
-- 所有 HTML 属性都是属性节点。  
+ - 所有的HTML元素都是元素节点。  
+ - 所有 HTML 属性都是属性节点。  
 
 2. Document对象  
-- 当浏览器载入 HTML 文档, 它就会成为 document 对象。
-- document 对象是HTML文档的根节点与所有其他节点（元素节点，文本节点，属性节点, 注释节点）。
-- Document 对象使我们可以从`脚本(Javascript)`中对 HTML 页面中的所有元素进行访问。
+ - 当浏览器载入 HTML 文档, 它就会成为 document 对象。
+ - document 对象是HTML文档的根节点与所有其他节点（元素节点，文本节点，属性节点, 注释节点）。
+ - Document 对象使我们可以从`脚本(Javascript)`中对 HTML 页面中的所有元素进行访问。
 > 提示：Document 对象是 Window 对象的一部分，可通过 window.document 属性对其进行访问。  
 
 3. Document对象属性和方法   
-- document.addEventListener()	向文档添加句柄  
-- document.body	返回文档的body元素  
-- document.cookie	设置或返回与当前文档有关的所有 cookie。  
-- document.createElement()	创建元素节点。  
-- document.createTextNode()	创建文本节点。  
-- document.createAttribute()	创建一个属性节点  
-- document.documentElement	返回文档的根节点   
-- document.getElementById()	返回对拥有指定 id 的第一个对象的引用。  
-- document.getElementsByName()	返回带有指定名称的对象集合。  
-- document.getElementsByTagName()	返回带有指定标签名的对象集合。  
-- document.removeEventListener()	移除文档中的事件句柄(由 addEventListener() 方法添加)  
+ - document.addEventListener()	向文档添加句柄  
+ - document.body	返回文档的body元素  
+ - document.cookie	设置或返回与当前文档有关的所有 cookie。  
+ - document.createElement()	创建元素节点。  
+ - document.createTextNode()	创建文本节点。  
+ - document.createAttribute()	创建一个属性节点  
+ - document.documentElement	返回文档的根节点   
+ - document.getElementById()	返回对拥有指定 id 的第一个对象的引用。  
+ - document.getElementsByName()	返回带有指定名称的对象集合。  
+ - document.getElementsByTagName()	返回带有指定标签名的对象集合。  
+ - document.removeEventListener()	移除文档中的事件句柄(由 addEventListener() 方法添加)  
 
 4. HTML DOM 元素对象  
 在 HTML DOM 中, 元素对象代表着一个 HTML 元素。  
 元素对象的子节点可以是, 可以是元素节点，文本节点，注释节点。  
 
 元素对象的属性和方法:  
-- element.accessKey	设置或返回accesskey一个元素   
-- element.addEventListener()	向指定元素添加事件句柄  
-- element.appendChild()	为元素添加一个新的子元素  
-- element.attributes	返回一个元素的属性数组  
-- element.childNodes	返回元素的一个子节点的数组  
-- element.getAttribute()	返回指定元素的属性值  
-- element.id	设置或者返回元素的 id。  
-- element.innerHTML	设置或者返回元素的内容。  
-- element.removeAttribute()	从元素中删除指定的属性  
-- element.removeChild()	删除一个子元素  
-- element.style	设置或返回元素的样式属性  
+ - element.accessKey	设置或返回accesskey一个元素   
+ - element.addEventListener()	向指定元素添加事件句柄  
+ - element.appendChild()	为元素添加一个新的子元素  
+ - element.attributes	返回一个元素的属性数组  
+ - element.childNodes	返回元素的一个子节点的数组  
+ - element.getAttribute()	返回指定元素的属性值  
+ - element.id	设置或者返回元素的 id。  
+ - element.innerHTML	设置或者返回元素的内容。  
+ - element.removeAttribute()	从元素中删除指定的属性  
+ - element.removeChild()	删除一个子元素  
+ - element.style	设置或返回元素的样式属性  
 
 
 5. Attr 对象  
