@@ -115,7 +115,7 @@ clear: both; left; right;
  - 当浏览器载入 HTML 文档, 它就会成为 document 对象。
  - document 对象是HTML文档的根节点与所有其他节点（元素节点，文本节点，属性节点, 注释节点）。
  - Document 对象使我们可以从`脚本(Javascript)`中对 HTML 页面中的所有元素进行访问。
-> 提示：Document 对象是 Window 对象的一部分，可通过 window.document 属性对其进行访问。  
+ > 提示：Document 对象是 Window 对象的一部分，可通过 window.document 属性对其进行访问。  
 
 3. Document对象属性和方法   
  - document.addEventListener()	向文档添加句柄  
@@ -131,29 +131,29 @@ clear: both; left; right;
  - document.removeEventListener()	移除文档中的事件句柄(由 addEventListener() 方法添加)  
 
 4. HTML DOM 元素对象  
-在 HTML DOM 中, 元素对象代表着一个 HTML 元素。  
-元素对象的子节点可以是, 可以是元素节点，文本节点，注释节点。  
+  在 HTML DOM 中, 元素对象代表着一个 HTML 元素。  
+  元素对象的子节点可以是, 可以是元素节点，文本节点，注释节点。  
 
-元素对象的属性和方法:  
- - element.accessKey	设置或返回accesskey一个元素   
- - element.addEventListener()	向指定元素添加事件句柄  
- - element.appendChild()	为元素添加一个新的子元素  
- - element.attributes	返回一个元素的属性数组  
- - element.childNodes	返回元素的一个子节点的数组  
- - element.getAttribute()	返回指定元素的属性值  
- - element.id	设置或者返回元素的 id。  
- - element.innerHTML	设置或者返回元素的内容。  
- - element.removeAttribute()	从元素中删除指定的属性  
- - element.removeChild()	删除一个子元素  
- - element.style	设置或返回元素的样式属性  
+ 元素对象的属性和方法:  
+   - element.accessKey	设置或返回accesskey一个元素   
+   - element.addEventListener()	向指定元素添加事件句柄  
+   - element.appendChild()	为元素添加一个新的子元素  
+   - element.attributes	返回一个元素的属性数组  
+   - element.childNodes	返回元素的一个子节点的数组  
+   - element.getAttribute()	返回指定元素的属性值  
+   - element.id	设置或者返回元素的 id。  
+   - element.innerHTML	设置或者返回元素的内容。  
+   - element.removeAttribute()	从元素中删除指定的属性  
+   - element.removeChild()	删除一个子元素  
+   - element.style	设置或返回元素的样式属性  
 
 
 5. Attr 对象  
-在 HTML DOM 中, Attr 对象 代表一个 HTML 属性。 HTML属性总是属于HTML元素。   
+  在 HTML DOM 中, Attr 对象 代表一个 HTML 属性。 HTML属性总是属于HTML元素。   
 
-- attr.isId	  Returns true if the attribute is of type Id, otherwise it returns false   
-- attr.name	  返回属性名称   
-- attr.value	设置或者返回属性值   
+  - attr.isId	  Returns true if the attribute is of type Id, otherwise it returns false   
+  - attr.name	  返回属性名称   
+  - attr.value	设置或者返回属性值   
 
 
 
