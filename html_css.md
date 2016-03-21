@@ -134,7 +134,7 @@ clear: both; left; right;
   在 HTML DOM 中, 元素对象代表着一个 HTML 元素。  
   元素对象的子节点可以是, 可以是元素节点，文本节点，注释节点。  
 
- 元素对象的属性和方法:  
+  元素对象的属性和方法:  
    - element.accessKey	设置或返回accesskey一个元素   
    - element.addEventListener()	向指定元素添加事件句柄  
    - element.appendChild()	为元素添加一个新的子元素  
