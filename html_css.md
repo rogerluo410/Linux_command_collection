@@ -155,6 +155,44 @@ clear: both; left; right;
   - attr.name	  返回属性名称   
   - attr.value	设置或者返回属性值   
 
+6. HTML DOM 事件   
+  HTML DOM 事件允许Javascript在HTML文档元素中注册不同事件处理程序。  
+  事件通常与函数结合使用，函数不会在事件发生前被执行！
+
+  - 鼠标事件  
+  (1) onclick	当用户点击某个对象时调用的事件句柄。  
+  (2) ondblclick	当用户双击某个对象时调用的事件句柄。  
+  (3) onmouseenter	当鼠标指针移动到元素上时触发。  
+  (4) onmouseleave	当鼠标指针移出元素时触发。  
+  (5) onmouseover	鼠标移到某元素之上。  
+  (6) onmouseout	鼠标从某元素移开。  
+  
+  - 框架/对象（Frame/Object）事件  
+  (1) onabort	图像的加载被中断。 ( <object>)  
+  (2) onload	一张页面或一幅图像完成加载。  
+  (3) onscroll	当文档被滚动时发生的事件。  
+  (4) onresize	窗口或框架被重新调整大小。  
+
+  - 表单事件  
+  (1) onblur	元素失去焦点时触发。  
+  (2) onchange	该事件在表单元素的内容改变时触发( <input>, <keygen>, <select>, 和 <textarea>)。     
+  (3) onfocus	元素获取焦点时触发。  
+  (4) onselect	用户选取文本时触发 ( <input> 和 <textarea>)。  
+  
+  更多事件:  
+  > http://www.runoob.com/jsref/dom-obj-event.html   
+
+###浏览器对象  
+浏览器对象有5个:  
+
+- Window 对象  
+  Window 对象表示浏览器中打开的窗口。   
+  如果文档包含框架（<frame> 或 <iframe> 标签), 浏览器会为HTML文档创建一个 window 对象, 并为每个框架创建一个额外的 window 对象。   
+  其他4个对象,在window 对象中都有包含的子对象。     
+   - Navigator(Navigator对象包含有关浏览器的信息),    
+   - Screen对象(Screen 对象包含有关客户端显示屏幕的信息),   
+   - History对象(History 对象包含用户（在浏览器窗口中）访问过的 URL. History 对象是 window 对象的一部分,可通过 window.history 属性对其进行访问),   
+   - Location对象,(Location 对象包含有关当前 URL 的信息。Location 对象是 window 对象的一部分，可通过 window.Location 属性对其进行访问) 
 
 
 
