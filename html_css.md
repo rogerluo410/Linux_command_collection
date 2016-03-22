@@ -168,7 +168,7 @@ clear: both; left; right;
   (6) onmouseout	鼠标从某元素移开。  
   
   - 框架/对象（Frame/Object）事件  
-  (1) onabort	图像的加载被中断。 ( <object>)  
+  (1) onabort	图像的加载被中断。 (object)  
   (2) onload	一张页面或一幅图像完成加载。  
   (3) onscroll	当文档被滚动时发生的事件。  
   (4) onresize	窗口或框架被重新调整大小。  
