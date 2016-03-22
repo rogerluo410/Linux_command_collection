@@ -93,7 +93,7 @@ console.log(b, c.foo); // "2" "bar"
 > http://stackoverflow.com/questions/6605640/javascript-by-reference-vs-by-value
 
 
-###Javascript fundation
+###Javascript
 * JavaScript中有两种主要对象：  
  a.Native:  
      JavaScript中内置的标准对象(Date, Array)；   
@@ -121,3 +121,7 @@ Document.getElementTagName --根据指定的元素名查找元素
 HTML，css，dom，xml，xmlHttpRequest，javascript    
 通过HTTP Request， 一个web页面可以发送一个请求到web服务器并
 且接受web服务器返回的信息(不用重新加载页面)，展示给用户的还是通一个页面，用户感觉页面刷新，也看不到到Javascript后台进行的发送请求和接受响应。   
+
+###Javascript语法   
+
+> http://www.runoob.com/js/js-tutorial.html    --js教程  
