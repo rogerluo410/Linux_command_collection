@@ -191,6 +191,7 @@ clear: both; left; right;
 ``` 
   Window 对象表示浏览器中打开的窗口。   
   如果文档包含框架（<frame> 或 <iframe> 标签), 浏览器会为HTML文档创建一个 window 对象, 并为每个框架创建一个额外的 window 对象。   
+  
   其他4个对象,在window 对象中都有包含的子对象。     
    - Navigator(Navigator对象包含有关浏览器的信息),    
    
