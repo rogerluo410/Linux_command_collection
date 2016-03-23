@@ -125,3 +125,17 @@ HTML，css，dom，xml，xmlHttpRequest，javascript
 ###Javascript语法   
 
 > http://www.runoob.com/js/js-tutorial.html    --js教程  
+
+- Array对象    
+```
+var cars = ["Saab", "Volvo", "BMW"];  
+```  
+
+- String 对象  
+```
+var txt = new String("string");
+或者更简单方式：
+var txt = "string";
+```
+
+
