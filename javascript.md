@@ -138,4 +138,35 @@ var txt = new String("string");
 var txt = "string";
 ```
 
+- JavaScript 全局变量  
+```
+变量在函数外定义，即为全局变量。
+全局变量有 全局作用域: 网页中所有脚本和函数均可使用。 
 
+var carName = " Volvo";
+
+// 此处可调用 carName 变量
+
+function myFunction() {
+
+    // 函数内可调用 carName 变量 
+
+}
+
+
+JavaScript变量生命周期:  
+
+* JavaScript 变量生命周期在它声明时初始化。
+* 局部变量在函数执行完毕后销毁。
+* 全局变量在页面关闭后销毁。
+
+HTML中的全局变量:  
+在 HTML 中, 全局变量是 window 对象: 所有数据变量都属于 window 对象。  
+
+//此处可使用 window.carName
+
+function myFunction() {
+    carName = "Volvo";
+}
+
+```
