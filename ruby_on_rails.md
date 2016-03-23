@@ -731,6 +731,17 @@ It will auto-convert line breaks to HTML tags. You can use it with something lik
 > http://hawkins.io/2011/05/advanced_caching_in_rails/     
 > http://hawkins.io/2012/07/advanced_caching_revised/   
 > https://ruby-china.org/topics/19389  --总结 Web 应用中常用的各种 Cache   
+> http://guides.ruby-china.org/caching_with_rails.html  --Rails 缓存简介  
+
+cache是提高应用性能重要的一个环节, 动态内容的cache有如下几种。
+文章以Nginx，Rails，Mysql，Redis作为例子，换成其他web服务器，语言，数据库，缓存服务都是类似的。  
+
+- 客户端缓存   
+- Nginx缓存     
+- 整页缓存  
+- 片段缓存  
+- 数据查询缓存 （底层缓存）  
+- 跨请求周期的缓存  （底层缓存）   
 
 **关联查询以及预加载**  
 > https://ruby-china.org/topics/22192   --ActiveRecord 的三种数据预加载形式 - includes, preload, eager_load  
