@@ -1,5 +1,6 @@
 # Command 
 Note all commands in Linux and Mac.  
+> http://www.duyan.com.cn/edu-85.html  
 
 #URL  
 GDB document : http://www.sourceware.org/gdb/current/onlinedocs/gdb.html   
