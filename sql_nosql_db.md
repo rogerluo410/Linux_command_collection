@@ -70,6 +70,36 @@ sudo /etc/init.d/postgresql restart
  >  http://www.php100.com/manual/PostgreSQL8/queries-limit.html
 ```
 
+**如何在查询选项中制作一个伪列**  
+```sql
+SELECT
+    COUNT (*) AS cnt,
+    CASE
+      WHEN product_property_id IN (
+	SELECT
+	  product_property_values.product_property_id
+	FROM
+	  product_property_values
+	INNER JOIN products ON product_property_values.product_id = products.id
+	AND (
+	  organization_id = #{params[:team_id]}
+	  AND STATE = 'published'
+	)
+	) 
+      THEN
+	1
+      ELSE
+	0
+      END AS INCLUDE_FLAG,
+      product_property_id
+FROM
+   product_property_values
+GROUP BY
+   product_property_id
+ORDER BY
+   INCLUDE_FLAG, cnt DESC
+```
+
 #MongoDB   
 Description:  MongoDB是一个面向文档的数据库，采用乐观并发控制(乐观锁)    
 文件存储格式为BSON（一种JSON的扩展）  
