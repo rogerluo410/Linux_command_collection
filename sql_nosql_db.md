@@ -1,4 +1,7 @@
 #Postgresql  
+
+> http://www.postgres.cn/docs/9.3/index.html  --中文文档  
+
 * Installing On OSX :  `brew install postgresql -v`  
 * Initialize Postgresql server : `initdb /usr/local/var/postgres -E utf8`    --指定 "/usr/local/var/postgres" 为 PostgreSQL 的配置数据存放目录，并且设置数据库数据编码是 utf8，更多配置信息可以 "initdb --help" 查看   
 
