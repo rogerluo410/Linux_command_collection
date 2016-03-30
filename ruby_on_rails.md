@@ -404,6 +404,11 @@ EventMachine is an event-driven I/O and lightweight concurrency library for Ruby
 > https://github.com/eventmachine/eventmachine   
 > http://www.scribd.com/doc/28253878/EventMachine-scalable-non-blocking-i-o-in-ruby   
 
+并发框架:  
+> https://github.com/ruby-concurrency/concurrent-ruby  
+> https://github.com/puma/puma  
+> https://github.com/celluloid/celluloid  
+
 #Mina  
 Really fast deployer and server automation tool.  自动化部署rails环境    
 > https://github.com/mina-deploy/mina   
