@@ -675,6 +675,7 @@ tableize
       end
       
       after_validation :set_location, on: [:create, :update]
+-------------------------------------------------------------------------      
       before_save
       around_save
       after_save
