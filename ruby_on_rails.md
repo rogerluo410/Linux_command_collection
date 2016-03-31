@@ -749,6 +749,41 @@ cache是提高应用性能重要的一个环节, 动态内容的cache有如下�
 - 跨请求周期的缓存  （底层缓存）   
 
 **关联查询以及预加载**  
-> https://ruby-china.org/topics/22192   --ActiveRecord 的三种数据预加载形式 - includes, preload, eager_load  
+> https://ruby-china.org/topics/22192   --ActiveRecord 的三种数据预加载形式 - includes, preload, eager_load   
 
+预加载的使用场景是， 主对象集合查询出来的数据，需要去访问关联的对象数据， 这时可以使用预加载。 以提高对象访问速度。  
 
+includes:  
+```
+ProductPropertyGroup.includes(:product_properties).where(id: 1)
+  ProductPropertyGroup Load (2.4ms)  SELECT "product_property_groups".* FROM "product_property_groups" WHERE "product_property_groups"."id" = $1  [["id", 1]]
+  ProductProperty Load (1.2ms)  SELECT "product_properties".* FROM "product_properties" WHERE "product_properties"."product_property_group_id" IN (1)
+ => #<ActiveRecord::Relation [#<ProductPropertyGroup id: 1, name: "g1", position: 1, state: "published", aliaz: "g1", service_id: 4, created_at: "2016-03-21 00:00:00", updated_at: "2016-03-21 00:00:00">]> 
+ 
+ ProductPropertyGroup.includes(:product_properties)
+  ProductPropertyGroup Load (3.3ms)  SELECT "product_property_groups".* FROM "product_property_groups"
+  ProductProperty Load (1.0ms)  SELECT "product_properties".* FROM "product_properties" WHERE "product_properties"."product_property_group_id" IN (1, 2)
+ => #<ActiveRecord::Relation [#<ProductPropertyGroup id: 1, name: "g1", position: 1, state: "published", aliaz: "g1", service_id: 4, created_at: "2016-03-21 00:00:00", updated_at: "2016-03-21 00:00:00">, #<ProductPropertyGroup id: 2, name: "g2", position: 2, state: "published", aliaz: "g2", service_id: 4, created_at: "2016-03-21 00:00:00", updated_at: "2016-03-21 00:00:00">]> 
+ 
+ 如果没加查询条件， 关联查询则会全量兜取出来，并存放入主对象的ActiveRecord::Associations::CollectionProxy中，
+ 所以， 要注意主对象集合加限制条件， 不然关联对象集合会全量导入内存中， 反而影响效率。 
+```
+
+preload:  
+与 includes差不多， 但是， 如果查询条件中是关联对象的字段，则会报错，
+而在使用 includes时， 则会转换成eager_load. 即变成left join的关联查询方式。 
+```
+ProductPropertyGroup.eager_load(:product_properties).where(id: 1)
+  SQL (0.6ms)  SELECT "product_property_groups"."id" AS t0_r0, "product_property_groups"."name" AS t0_r1, "product_property_groups"."position" AS t0_r2, "product_property_groups"."state" AS t0_r3, "product_property_groups"."aliaz" AS t0_r4, "product_property_groups"."service_id" AS t0_r5, "product_property_groups"."created_at" AS t0_r6, "product_property_groups"."updated_at" AS t0_r7, "product_properties"."id" AS t1_r0, "product_properties"."name" AS t1_r1, "product_properties"."position" AS t1_r2, "product_properties"."state" AS t1_r3, "product_properties"."aliaz" AS t1_r4, "product_properties"."product_property_group_id" AS t1_r5, "product_properties"."created_at" AS t1_r6, "product_properties"."updated_at" AS t1_r7 FROM "product_property_groups" LEFT OUTER JOIN "product_properties" ON "product_properties"."product_property_group_id" = "product_property_groups"."id" WHERE "product_property_groups"."id" = $1  [["id", 1]]
+ => #<ActiveRecord::Relation [#<ProductPropertyGroup id: 1, name: "g1", position: 1, state: "published", aliaz: "g1", service_id: 4, created_at: "2016-03-21 00:00:00", updated_at: "2016-03-21 00:00:00">]> 
+ 
+ 
+ ProductPropertyGroup.includes(:product_properties).where("product_properties.name = ?", "n1").references(:product_properties)  -- 关联的表需要加 references(:product_properties)  
+  SQL (6.9ms)  SELECT "product_property_groups"."id" AS t0_r0, "product_property_groups"."name" AS t0_r1, "product_property_groups"."position" AS t0_r2, "product_property_groups"."state" AS t0_r3, "product_property_groups"."aliaz" AS t0_r4, "product_property_groups"."service_id" AS t0_r5, "product_property_groups"."created_at" AS t0_r6, "product_property_groups"."updated_at" AS t0_r7, "product_properties"."id" AS t1_r0, "product_properties"."name" AS t1_r1, "product_properties"."position" AS t1_r2, "product_properties"."state" AS t1_r3, "product_properties"."aliaz" AS t1_r4, "product_properties"."product_property_group_id" AS t1_r5, "product_properties"."created_at" AS t1_r6, "product_properties"."updated_at" AS t1_r7 FROM "product_property_groups" LEFT OUTER JOIN "product_properties" ON "product_properties"."product_property_group_id" = "product_property_groups"."id" WHERE (product_properties.name = 'n1')
+ => #<ActiveRecord::Relation [#<ProductPropertyGroup id: 1, name: "g1", position: 1, state: "published", aliaz: "g1", service_id: 4, created_at: "2016-03-21 00:00:00", updated_at: "2016-03-21 00:00:00">]>  
+ 
+ ProductPropertyGroup.preload(:product_properties).where("product_properties.name = ?", "n1").references(:product_properties)
+  ProductPropertyGroup Load (2.6ms)  SELECT "product_property_groups".* FROM "product_property_groups" WHERE (product_properties.name = 'n1')
+ActiveRecord::StatementInvalid: PG::UndefinedTable: ERROR:  missing FROM-clause entry for table "product_properties"
+LINE 1: ...y_groups".* FROM "product_property_groups" WHERE (product_pr...
+```
