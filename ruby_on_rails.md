@@ -793,3 +793,12 @@ ProductPropertyGroup.eager_load(:product_properties).where(id: 1)
 ActiveRecord::StatementInvalid: PG::UndefinedTable: ERROR:  missing FROM-clause entry for table "product_properties"
 LINE 1: ...y_groups".* FROM "product_property_groups" WHERE (product_pr...
 ```
+
+
+###recipes  
+
+- rspec中导入种子数据。  
+ 在spec_helper.rb中加入  
+`load Rails.root + "db/seeds.rb" `  
+
+> http://stackoverflow.com/questions/8386604/auto-load-the-seed-data-from-db-seeds-rb-with-rake  
