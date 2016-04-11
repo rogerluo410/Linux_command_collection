@@ -387,7 +387,26 @@ end
         end
        end
       end
-    
+```
+
+- rspec-expectation 的一些用法  
+> https://github.com/rspec/rspec-expectations  
+
+```
+expect(actual).to eq(expected)  # passes if actual == expected
+expect(actual).to eql(expected) # passes if actual.eql?(expected)
+expect(actual).not_to eql(not_expected) # passes if not(actual.eql?(expected))
+
+expect(actual).to be(expected)    # passes if actual.equal?(expected)
+expect(actual).to equal(expected) # passes if actual.equal?(expected)  
+
+
+expect(actual).to be_truthy   # passes if actual is truthy (not nil or false)
+expect(actual).to be true     # passes if actual == true
+expect(actual).to be_falsy    # passes if actual is falsy (nil or false)
+expect(actual).to be false    # passes if actual == false
+expect(actual).to be_nil      # passes if actual is nil
+expect(actual).to_not be_nil  # passes if actual is not nil
 ```
 
 #Guard     
