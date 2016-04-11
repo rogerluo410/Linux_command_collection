@@ -599,6 +599,10 @@ humanize
 tableize
 ```
 
+- 说说 ruby 里的 hash 和 ActiveSupport 里的 HashWithIndifferentAccess 的区别?    
+`Implements a hash where keys :foo and "foo" are considered to be the same.`
+:foo 和 "foo" 为相同的key，在HashWithIndifferentAccess中。  
+
 ###In Model: 
    * validates : Validations are used to ensure that only valid data is saved into your database.  
      只有在`create,create!,save,save!,update,update!`做持久化时才会触发，当对象存在，可以用valid?方法验证对象，   `save(validate: false)` 能跳过验证.  
