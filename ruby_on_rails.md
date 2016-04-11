@@ -578,9 +578,8 @@ Write-Through: As objects are created, updated, and deleted, all of the caches a
 ----------------------------------
 
 #Rails   
-> http://api.rubyonrails.org  --查询rails API
-> http://www.rubydoc.info  --查询GEMS文档
-
+> http://api.rubyonrails.org  --查询rails API   
+> http://www.rubydoc.info  --查询GEMS文档  
 > http://guides.rubyonrails.org/active_record_validations.html  --active model validations   
 > http://guides.rubyonrails.org/active_record_querying.html     --active record querying  
 > http://guides.rubyonrails.org/active_record_callbacks.html    --active record callbacks   
@@ -797,7 +796,57 @@ end
 send("product_property_values_attributes=", update_list.compact)
 ```
 
-###In view: 
+###In Controller  
+**router - 路由**  
+```
+resources :posts do
+  member do
+    get 'comments'
+  end
+  collection do
+    post 'bulk_upload'
+  end
+end
+```  
+有几个路由地址：  
+/posts/:post_id/comments/:comment_id  
+/posts/bulk_upload  
+
+添加集合路由的方式如下(后缀路由)：  
+```
+resources :photos do
+  collection do
+    get 'search'
+  end
+end  
+
+这段路由能识别 /photos/search 是个 GET 请求，映射到 PhotosController 的 search 动作上。同时还会生成 search_photos_url 和 search_photos_path 两个帮助方法。  
+```  
+
+前缀路由:  
+```
+scope 'admin', as: 'admin' do
+  resources :photos, :accounts
+end
+ 
+resources :photos, :accounts  
+
+scope ':username' do
+  resources :articles
+end
+这段路由能识别 /bob/articles/1 这种请求，在控制器、帮助方法和视图中可使用 params[:username] 获取 username 的值。  
+```  
+
+限制生成的路由:  
+默认情况下，Rails 会为每个 REST 路由生成七个默认动作（index，show，new，create，edit，update 和 destroy）对应的路由。你可以使用 :only 和 :except 选项调整这种行为。:only 选项告知 Rails，只生成指定的路由：  
+```
+resources :photos, only: [:index, :show]  
+```
+
+- CSRF 是什么, Rails 里针对它做了些什么?   
+
+
+###In View: 
 文本中的\r\n 转换为html中的标签<br/>换行符: 
 > http://api.rubyonrails.org/classes/ActionView/Helpers/TextHelper.html
 > http://stackoverflow.com/questions/3137393/rails-add-a-line-break-into-a-text-area
