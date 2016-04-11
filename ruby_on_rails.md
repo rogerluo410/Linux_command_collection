@@ -737,7 +737,65 @@ tableize
       #Callback Classes
       Sometimes the callback methods that you'll write will be useful enough to be reused by other models.
 ```
-   * 
+   * 对象关联- association  
+使用new方法创建的对象：   
+```
+ product = Product.new( name: "da", organization_id: 63 )
+ => #<Product id: nil, name: "da", state: "editing", organization_id: 63, goods_id: nil, goods_type: nil, created_at: nil, updated_at: nil, description: nil> 
+2.1.4 :006 > product.product_property_values.build(custom_value: "123", product_property_id: 4)
+ => #<ProductPropertyValue id: nil, custom_value: "123", product_id: nil, product_property_id: 4, created_at: nil, updated_at: nil> 
+2.1.4 :007 > product.save
+   (0.3ms)  BEGIN
+  SQL (3.1ms)  INSERT INTO "products" ("name", "organization_id", "state", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "da"], ["organization_id", 63], ["state", "editing"], ["created_at", "2016-04-06 08:41:27.055093"], ["updated_at", "2016-04-06 08:41:27.055093"]]
+  SQL (2.6ms)  INSERT INTO "product_property_values" ("custom_value", "product_property_id", "product_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["custom_value", "123"], ["product_property_id", 4], ["product_id", 21], ["created_at", "2016-04-06 08:41:27.069264"], ["updated_at", "2016-04-06 08:41:27.069264"]]
+   (3.4ms)  COMMIT
+
+说明在没有id时，也可以进行关联。  
+```
+
+`accepts_nested_attributes_for` with multiple nesting：  
+> http://api.rubyonrails.org/classes/ActiveRecord/NestedAttributes/ClassMethods.html#method-i-accepts_nested_attributes_for  
+> http://stackoverflow.com/questions/30443812/accepts-nested-attributes-for-with-multiple-nesting-and-polymorphic-association  
+
+```
+  class Product < ActiveRecord::Base
+  include ApiRequest
+  validates :organization_id, presence: true
+  validates :name, presence: true
+
+  belongs_to :goods, polymorphic: true, dependent: :destroy
+
+  has_many :prices, dependent: :destroy, inverse_of: :product
+  has_many :archive_associations, dependent: :destroy
+  has_many :files, dependent: :destroy, class_name: "ProductFile"
+  has_many :archives, through: :archive_associations
+  has_many :product_property_values, dependent: :destroy
+
+  accepts_nested_attributes_for :goods
+  accepts_nested_attributes_for :prices, allow_destroy: true
+  accepts_nested_attributes_for :archive_associations, allow_destroy: true
+  accepts_nested_attributes_for :files, allow_destroy: true
+  accepts_nested_attributes_for :product_property_values, allow_destroy: true
+  ...
+  
+  usage: 
+  
+  send("files_attributes=", self.files.map { |f| { :id => f.id, :position => index_dict[f.file_id.to_s] }
+  
+  send("product_property_values_attributes=", self.product_property_values.where.not(product_property_id: properties.keys).map { | property_value | {:id => property_value.id, "_destroy" => true} } ) 
+   
+ #修改
+update_list = properties.keys.map do | property_id |
+  if self.product_property_values.exists?(product_property_id: property_id) and self.product_property_values.find_by!(product_property_id: property_id).custom_value != properties[property_id]
+    { 
+      :id => self.product_property_values.find_by!(product_property_id: property_id).id,
+      :custom_value => properties[property_id]
+    }
+  end
+end
+
+send("product_property_values_attributes=", update_list.compact)
+```
 
 ###In view: 
 文本中的\r\n 转换为html中的标签<br/>换行符: 
@@ -762,16 +820,66 @@ cache是提高应用性能重要的一个环节, 动态内容的cache有如下�
 文章以Nginx，Rails，Mysql，Redis作为例子，换成其他web服务器，语言，数据库，缓存服务都是类似的。  
 
 - 客户端缓存   
+
 - Nginx缓存     
+
 - 整页缓存（页面缓存）  
  页面缓存机制允许网页服务器（Apache 或 Nginx 等）直接处理请求，不经 Rails 处理。这么做显然速度超快，但并不适用于所有情况（例如需要身份认证的页面）。服务器直接从文件系统上伺服文件，所以缓存过期是一个很棘手的问题。
 
 - 片段缓存   
+片段缓存把视图逻辑的一部分打包放在 cache 块中，后续请求都会从缓存中返回这部分内容。  
+```
+<% cache do %>
+  All available products:
+  <% Product.all.each do |p| %>
+    <%= link_to p.name, product_url(p) %>
+  <% end %>
+<% end %>
+
+上述代码中的 cache 块会绑定到调用它的动作上，输出到动作缓存的所在位置。因此，如果要在动作中使用多个片段缓存，就要使用 action_suffix 为 cache 块指定前缀：  
+
+<% cache(action: 'recent', action_suffix: 'all_products') do %>
+  All available products:  
+  
+expire_fragment 方法可以把缓存设为过期，例如：  
+expire_fragment(controller: 'products', action: 'recent', action_suffix: 'all_products')  
+
+如果不想把缓存绑定到调用它的动作上，调用 cahce 方法时可以使用全局片段名：  
+<% cache('all_available_products') do %>
+  All available products:
+<% end %>   
+
+在 ProductsController 的所有动作中都可以使用片段名调用这个片段缓存，而且过期的设置方式不变：  
+expire_fragment('all_available_products')  
+```
 
 - 底层缓存   
- 
+> http://stackoverflow.com/questions/8915814/cache-strategy-for-rails-where-new-objects-appearing-invalidates-the-cache  
+> http://stackoverflow.com/questions/12718759/ruby-on-rails-caching-variables  
+实现底层缓存最有效地方式是使用 Rails.cache.fetch 方法。这个方法既可以从缓存中读取数据，也可以把数据写入缓存。  
+传入单个参数时，读取指定键对应的值。传入代码块时，会把代码块的计算结果存入缓存的指定键中，然后返回计算结果。     
+```
+class Product < ActiveRecord::Base
+  def competing_price
+    Rails.cache.fetch("#{cache_key}/competing_price", expires_in: 12.hours) do
+      Competitor::API.find_price(id)
+    end
+  end
+end
+
+注意，在这个例子中使用了 cache_key 方法，所以得到的缓存键名是这种形式：products/233-20140225082222765838000/competing_price。cache_key 方法根据模型的 id 和 updated_at 属性生成键名。这是最常见的做法，因为商品更新后，缓存就失效了。一般情况下，使用底层缓存保存实例的相关信息时，都要生成缓存键。
+```
+
 - 数据查询缓存 （底层缓存）  
+查询缓存是 Rails 的一个特性，把每次查询的结果缓存起来，如果在同一次请求中遇到相同的查询，直接从缓存中读取结果，不用再次查询数据库。  
+
 - 跨请求周期的缓存  （底层缓存）   
+
+**缓存的存储方式**  
+是存在内存中， 还是磁盘上， 还是缓存中间件上。 这些是可以选择的。  
+Rails 为动作缓存和片段缓存提供了不同的存储方式。  页面缓存全部存储在硬盘中。  
+
+
 
 **关联查询以及预加载**  
 > https://ruby-china.org/topics/22192   --ActiveRecord 的三种数据预加载形式 - includes, preload, eager_load   
@@ -810,7 +918,8 @@ ProductPropertyGroup.eager_load(:product_properties).where(id: 1)
  ProductPropertyGroup.preload(:product_properties).where("product_properties.name = ?", "n1").references(:product_properties)
   ProductPropertyGroup Load (2.6ms)  SELECT "product_property_groups".* FROM "product_property_groups" WHERE (product_properties.name = 'n1')
 ActiveRecord::StatementInvalid: PG::UndefinedTable: ERROR:  missing FROM-clause entry for table "product_properties"
-LINE 1: ...y_groups".* FROM "product_property_groups" WHERE (product_pr...
+LINE 1: ...y_groups".* FROM "product_property_groups" WHERE (product_pr...  
+   -- preload是2个sql 不能用关联表的字段做查询条件！  
 ```
 
 
