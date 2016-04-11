@@ -796,6 +796,15 @@ end
 send("product_property_values_attributes=", update_list.compact)
 ```
 
+###In CRUD  
+> http://guides.ruby-china.org/active_record_basics.html  
+
+- create 返回对象 或 nil  
+- create 返回对象 或 抛出异常  
+- save 返回 true 或 false    
+- save! 返回 true 或 抛出异常    
+- update 返回true 或 false    
+
 ###In Controller  
 **router - 路由**  
 ```
@@ -808,11 +817,19 @@ resources :posts do
   end
 end
 ```  
-有几个路由地址：  
-/posts/:post_id/comments/:comment_id  
-/posts/bulk_upload  
+有几个路由地址：9条  
+comments_post GET      /posts/:id/comments(.:format)           posts#comments
+bulk_upload_posts POST     /posts/bulk_upload(.:format)        posts#bulk_upload
+posts GET    /posts(.:format)                        posts#index
+    POST     /posts(.:format)                        posts#create
+    GET      /posts/new(.:format)                    posts#new
+    GET      /posts/:id/edit(.:format)               posts#edit
+    GET      /posts/:id(.:format)                    posts#show
+    PATCH    /posts/:id(.:format)                    posts#update
+    PUT      /posts/:id(.:format)                    posts#update
+    DELETE   /posts/:id(.:format)                    posts#destroy 
 
-添加集合路由的方式如下(后缀路由)：  
+- 添加集合路由的方式如下(后缀路由)：  
 ```
 resources :photos do
   collection do
@@ -823,7 +840,7 @@ end
 这段路由能识别 /photos/search 是个 GET 请求，映射到 PhotosController 的 search 动作上。同时还会生成 search_photos_url 和 search_photos_path 两个帮助方法。  
 ```  
 
-前缀路由:  
+- 前缀路由:  
 ```
 scope 'admin', as: 'admin' do
   resources :photos, :accounts
@@ -837,7 +854,7 @@ end
 这段路由能识别 /bob/articles/1 这种请求，在控制器、帮助方法和视图中可使用 params[:username] 获取 username 的值。  
 ```  
 
-限制生成的路由:  
+- 限制生成的路由:  
 默认情况下，Rails 会为每个 REST 路由生成七个默认动作（index，show，new，create，edit，update 和 destroy）对应的路由。你可以使用 :only 和 :except 选项调整这种行为。:only 选项告知 Rails，只生成指定的路由：  
 ```
 resources :photos, only: [:index, :show]  
