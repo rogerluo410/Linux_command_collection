@@ -101,6 +101,58 @@ GROUP BY
    product_property_id
 ORDER BY
    INCLUDE_FLAG, cnt DESC
+``` 
+
+**select top three in each group 分组后取每组的前TOP个（使用ROW_NUMBER()函数**  
+> http://stackoverflow.com/questions/27415706/postgresql-select-top-three-in-each-group  
+> http://sqlfiddle.com/#!15/e1f71/39   --实例  
+
+```
+SELECT product_properties.*, extend_row_ids.rowid FROM "product_properties" LEFT OUTER JOIN (
+            SELECT
+              COUNT (*) AS cnt,
+              CASE
+              WHEN product_property_id IN (
+                SELECT
+                  product_property_values.product_property_id
+                FROM
+                  product_property_values
+                INNER JOIN products ON product_property_values.product_id = products.id
+                AND (
+                  organization_id = 63
+                  AND STATE = 'published'
+                )
+              ) 
+              THEN
+                1
+              ELSE
+                0
+              END AS INCLUDE_FLAG,
+              product_property_id
+            FROM
+              product_property_values
+            GROUP BY
+              product_property_id
+            ORDER BY
+              INCLUDE_FLAG, cnt DESC
+            ) team_product_properties ON team_product_properties.product_property_id = product_properties.id 
+            INNER JOIN (
+            SELECT
+              id, ROW_NUMBER() OVER (
+                PARTITION BY product_property_group_id
+              ) AS ROWID
+            FROM
+              product_properties
+            ) extend_row_ids ON product_properties.ID = extend_row_ids.ID WHERE "product_properties"."state" = $1 AND "product_properties"."product_property_group_id" IN (1, 2) AND (ROWID <= '3') AND "product_properties"."product_property_group_id" = $2  
+            
+            
+SELECT company, val FROM 
+(
+    SELECT *, ROW_NUMBER() OVER (PARTITION BY 
+             company order by val DESC) AS Row_ID FROM com
+) AS A
+WHERE Row_ID < 4 ORDER BY company  --注意要使用子集的方式才能访问伪列 row_id  
+
 ```
 
 #MongoDB   
