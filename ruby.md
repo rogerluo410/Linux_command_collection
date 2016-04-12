@@ -68,11 +68,12 @@ p "&&, || : "
 nil && 1 #=> nil
 
 p "nil  [or 、||]  non-nil : "  
-nil or 1 #=> nil
+nil or 1 #=> 1
 (nil or 1 ) #=> 1
 1 or nil #=> 1
 nil || 1 #=> 1
 1 || nil #=> 1
+0 or 1 #=> 0  只会判断非空，不会判断0值！ 返回非空的第一个！  
 0 || 1 #=> 0  只会判断非空，不会判断0值！
 0 || nil #=> 0
 nil || nil #=> nil
