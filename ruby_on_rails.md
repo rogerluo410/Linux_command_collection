@@ -760,7 +760,7 @@ tableize
 > http://api.rubyonrails.org/classes/ActiveRecord/NestedAttributes/ClassMethods.html#method-i-accepts_nested_attributes_for  
 > http://stackoverflow.com/questions/30443812/accepts-nested-attributes-for-with-multiple-nesting-and-polymorphic-association  
 
-```
+```ruby
   class Product < ActiveRecord::Base
   include ApiRequest
   validates :organization_id, presence: true
@@ -781,11 +781,11 @@ tableize
   accepts_nested_attributes_for :product_property_values, allow_destroy: true
   ...
   
-  usage: 主要用于has_many关联， 在一个事务中修改关联的属性。
+  usage: 主要用于has_many/has_one关联， 在一个事务中修改关联的属性。
   
   In class Product, has methods goods_attributes=, prices_attributes=, archive_associations_attributes=, files_attributes=, product_property_values_attributes=  
   
-  Product的实例也有 attributes方法, product.attributes=  { ... }
+  Product的实例也有 attributes方法, product.attributes=  { ... } : 
    product = Product.find(params[:id])
    if params[:name].present?
      file = product.files.find_by(file_id: params[:file_id])
