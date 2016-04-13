@@ -814,7 +814,7 @@ Nested attributes allow you to save attributes on associated records `through th
 
 ```
 
-`collection_singular_ids` 的细节   
+**`collection_singular_ids` 的细节**     
 ```
 #<ActiveRecord::Associations::CollectionProxy [#<JobseekerZone id: 203, jobseeker_id: 78, zone_id: 10016, created_at: "2016-04-13 03:27:38", updated_at: "2016-04-13 03:27:38">, #<JobseekerZone id: 204, jobseeker_id: 78, zone_id: 10017, created_at: "2016-04-13 03:27:38", updated_at: "2016-04-13 03:27:38">, #<JobseekerZone id: 205, jobseeker_id: 78, zone_id: 10018, created_at: "2016-04-13 03:27:38", updated_at: "2016-04-13 03:27:38">, #<JobseekerZone id: 206, jobseeker_id: 78, zone_id: 198, created_at: "2016-04-13 03:27:38", updated_at: "2016-04-13 03:27:38">, #<JobseekerZone id: 207, jobseeker_id: 78, zone_id: 199, created_at: "2016-04-13 03:27:38", updated_at: "2016-04-13 03:27:38">, #<JobseekerZone id: 208, jobseeker_id: 78, zone_id: 200, created_at: "2016-04-13 03:27:38", updated_at: "2016-04-13 03:27:38">]>
 
@@ -824,7 +824,7 @@ collection_singular_ids=ids
 collection_singular_ids= 方法让数组中只包含指定的主键，根据需要增删ID。  
 ```
 
-`belongs_to` 关联添加的方法   
+**`belongs_to` 关联添加的方法**    
 声明  belongs_to 关联后，所在的类自动获得了五个和关联相关的方法：   
 ```
 association(force_reload = false)
@@ -850,7 +850,7 @@ create_customer!
 
 ```
 
- `has_many `关联添加的方法    
+**`has_many `关联添加的方法**       
 ```
 声明 has_many 关联后，声明所在的类自动获得了 16 个关联相关的方法：
 
@@ -870,6 +870,22 @@ collection.exists?(...)
 collection.build(attributes = {}, ...)
 collection.create(attributes = {})
 collection.create!(attributes = {})
+```
+
+**关联时出现重复记录的情况, 查询条件中有 IN谓词的要注意!**   
+```ruby
+jobseekers.joins(:zones).where("jobseeker_zones.zone_id in (?)", params[:zone_ids] ).distinct
+
+Jobseeker.joins(:zones).where("jobseeker_zones.zone_id in (?)", [1,2] )
+  Jobseeker Load (4.2ms)  SELECT "jobseekers".* FROM "jobseekers" INNER JOIN "jobseeker_zones" ON "jobseeker_zones"."jobseeker_id" = "jobseekers"."id" WHERE (jobseeker_zones.zone_id in (1,2))
+ => #<ActiveRecord::Relation [
+ #<Jobseeker id: 1, rate: 10, state: "published", role_id: 26, vocation_id: 1, user_id: 4, created_at: nil, updated_at: nil>, 
+ #<Jobseeker id: 1, rate: 10, state: "published", role_id: 26, vocation_id: 1, user_id: 4, created_at: nil, updated_at: nil>]>   #两条一样的记录
+
+2.1.4 :056 >   Jobseeker.joins(:zones).where("jobseeker_zones.zone_id in (?)", [1,2] ).distinct
+  Jobseeker Load (5.9ms)  SELECT DISTINCT "jobseekers".* FROM "jobseekers" INNER JOIN "jobseeker_zones" ON "jobseeker_zones"."jobseeker_id" = "jobseekers"."id" WHERE (jobseeker_zones.zone_id in (1,2))
+ => #<ActiveRecord::Relation [#<Jobseeker id: 1, rate: 10, state: "published", role_id: 26, vocation_id: 1, user_id: 4, created_at: nil, updated_at: nil>]> 
+
 ```
  
 
