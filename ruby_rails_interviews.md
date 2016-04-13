@@ -74,3 +74,5 @@ class CommentsController < ApplicationController
   end
 end
 ``` 
+
+- 为什么第三方的gem， installed后， 就可以直接在rails中使用了？  
