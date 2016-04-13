@@ -760,6 +760,8 @@ tableize
 > http://api.rubyonrails.org/classes/ActiveRecord/NestedAttributes/ClassMethods.html#method-i-accepts_nested_attributes_for  
 > http://stackoverflow.com/questions/30443812/accepts-nested-attributes-for-with-multiple-nesting-and-polymorphic-association  
 
+Nested attributes allow you to save attributes on associated records `through the parent`（类定义中有has_one/has_many的是父对象）. By default nested attribute updating is `turned off`(除非直接用子对象去访问修改！) and you can enable it using the #accepts_nested_attributes_for class method. When you enable nested attributes an attribute writer is defined on the model.  
+
 ```ruby
   class Product < ActiveRecord::Base
   include ApiRequest
@@ -783,7 +785,8 @@ tableize
   
   usage: 主要用于has_many/has_one关联， 在一个事务中修改关联的属性。
   
-  In class Product, has methods goods_attributes=, prices_attributes=, archive_associations_attributes=, files_attributes=, product_property_values_attributes=  
+  In class Product, has methods goods_attributes= [ { id: 1 ,attr1: value, attr2: value }, { id: 2 ,attr1: value, attr2: value } ], prices_attributes=, archive_associations_attributes=, files_attributes=, product_property_values_attributes=  
+  if has_one, the method is like this: price_attributes= { },  file_attributes= { attr1: value, attr2: value }   
   
   Product的实例也有 attributes方法, product.attributes=  { ... } : 
    product = Product.find(params[:id])
