@@ -781,24 +781,95 @@ tableize
   accepts_nested_attributes_for :product_property_values, allow_destroy: true
   ...
   
-  usage: 
+  usage: 主要用于has_many关联， 在一个事务中修改关联的属性。
   
-  send("files_attributes=", self.files.map { |f| { :id => f.id, :position => index_dict[f.file_id.to_s] }
+  In class Product, has methods goods_attributes=, prices_attributes=, archive_associations_attributes=, files_attributes=, product_property_values_attributes=  
   
-  send("product_property_values_attributes=", self.product_property_values.where.not(product_property_id: properties.keys).map { | property_value | {:id => property_value.id, "_destroy" => true} } ) 
+  Product的实例也有 attributes方法, product.attributes=  { ... }
+   product = Product.find(params[:id])
+   if params[:name].present?
+     file = product.files.find_by(file_id: params[:file_id])
+     name_attribute = { files_attributes: [ {id: file.id, name: params[:name]} ] }
+     product.attributes = name_attribute
+   end
    
- #修改
-update_list = properties.keys.map do | property_id |
-  if self.product_property_values.exists?(product_property_id: property_id) and self.product_property_values.find_by!(product_property_id: property_id).custom_value != properties[property_id]
-    { 
-      :id => self.product_property_values.find_by!(product_property_id: property_id).id,
-      :custom_value => properties[property_id]
-    }
-  end
+   关联对象attributes方法的用法(在product对象的实例方法中)： 
+   send("files_attributes=", self.files.map { |f| { :id => f.id, :position => index_dict[f.file_id.to_s] }
+  
+   send("product_property_values_attributes=", self.product_property_values.where.not(product_property_id: properties.keys).map { | property_value | {:id => property_value.id, "_destroy" => true} } ) 
+   
+   #修改
+   update_list = properties.keys.map do | property_id |
+     if self.product_property_values.exists?(product_property_id: property_id) and self.product_property_values.find_by!(product_property_id: property_id).custom_value != properties[property_id]
+       { 
+         :id => self.product_property_values.find_by!(product_property_id: property_id).id,
+         :custom_value => properties[property_id]
+       }
+     end
+   end
+   send("product_property_values_attributes=", update_list.compact)  
+
+```
+
+`collection_singular_ids` 的细节   
+```
+#<ActiveRecord::Associations::CollectionProxy [#<JobseekerZone id: 203, jobseeker_id: 78, zone_id: 10016, created_at: "2016-04-13 03:27:38", updated_at: "2016-04-13 03:27:38">, #<JobseekerZone id: 204, jobseeker_id: 78, zone_id: 10017, created_at: "2016-04-13 03:27:38", updated_at: "2016-04-13 03:27:38">, #<JobseekerZone id: 205, jobseeker_id: 78, zone_id: 10018, created_at: "2016-04-13 03:27:38", updated_at: "2016-04-13 03:27:38">, #<JobseekerZone id: 206, jobseeker_id: 78, zone_id: 198, created_at: "2016-04-13 03:27:38", updated_at: "2016-04-13 03:27:38">, #<JobseekerZone id: 207, jobseeker_id: 78, zone_id: 199, created_at: "2016-04-13 03:27:38", updated_at: "2016-04-13 03:27:38">, #<JobseekerZone id: 208, jobseeker_id: 78, zone_id: 200, created_at: "2016-04-13 03:27:38", updated_at: "2016-04-13 03:27:38">]>
+
+zone_ids == [203, 204, 205, 206, 207, 208] 
+
+collection_singular_ids=ids
+collection_singular_ids= 方法让数组中只包含指定的主键，根据需要增删ID。  
+```
+
+`belongs_to` 关联添加的方法   
+声明  belongs_to 关联后，所在的类自动获得了五个和关联相关的方法：   
+```
+association(force_reload = false)
+association=(associate)
+build_association(attributes = {})
+create_association(attributes = {})
+create_association!(attributes = {})
+```  
+这五个方法中的 association 要替换成传入 belongs_to 方法的第一个参数。例如，如下的声明：   
+```ruby
+class Order < ActiveRecord::Base
+  belongs_to :customer
 end
 
-send("product_property_values_attributes=", update_list.compact)
+每个 Order 模型实例都获得了这些方法：  
+customer
+customer=
+build_customer
+create_customer
+create_customer!
+
+在 has_one 和 belongs_to 关联中，必须使用 build_* 方法构建关联对象。association.build 方法是在 has_many 和 has_and_belongs_to_many 关联中使用的!
+
 ```
+
+ `has_many `关联添加的方法    
+```
+声明 has_many 关联后，声明所在的类自动获得了 16 个关联相关的方法：
+
+collection(force_reload = false)
+collection<<(object, ...)
+collection.delete(object, ...)
+collection.destroy(object, ...)
+collection=objects
+collection_singular_ids
+collection_singular_ids=ids
+collection.clear
+collection.empty?
+collection.size
+collection.find(...)
+collection.where(...)
+collection.exists?(...)
+collection.build(attributes = {}, ...)
+collection.create(attributes = {})
+collection.create!(attributes = {})
+```
+ 
+
 
 ###In CRUD  
 > http://guides.ruby-china.org/active_record_basics.html  
