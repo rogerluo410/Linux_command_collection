@@ -138,6 +138,53 @@ var txt = new String("string");
 var txt = "string";
 ```
 
+- JavaScript对象  
+```
+var obj = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"}  
+属性：  
+car.name = Fiat
+car.model = 500
+car.weight = 850kg
+car.color = white	
+
+方法 
+car.start()
+car.drive()
+car.brake() 
+car.stop()
+
+你可以使用以下语法创建对象方法：
+methodName : function() { code lines }  --值为一个匿名函数  
+var obj = {firstName:"John", methodName : function() { code lines } }
+
+你可以使用以下语法访问对象方法：
+objectName.methodName()
+```  
+
+- 函数（Function） 
+```
+function MyFunc(a, b) { return a * b }
+
+函数回调： 
+
+function myFunction(a,b)
+{
+  return a*b;
+}
+	
+function new_one(c, d )
+{
+  return c(1,2) + d
+}
+
+document.getElementById("demo").innerHTML=new_one(myFunction,3);  
+
+ if (typeof callback === "function") {
+    // Call it, since we have confirmed it is callable
+        callback(options);
+    } 
+```
+
 - JavaScript 全局变量  
 ```
 变量在函数外定义，即为全局变量。
