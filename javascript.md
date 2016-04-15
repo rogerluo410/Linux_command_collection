@@ -162,7 +162,7 @@ objectName.methodName()
 ```  
 
 - 函数（Function） 
-```
+```javascript
 function MyFunc(a, b) { return a * b }
 
 函数回调： 
@@ -183,6 +183,63 @@ document.getElementById("demo").innerHTML=new_one(myFunction,3);
     // Call it, since we have confirmed it is callable
         callback(options);
     } 
+
+
+JavaScript 闭包  
+
+var add = (function () {
+    var counter = 0;
+    return function () {return counter += 1;}
+})();
+
+add();
+add();
+add();
+
+// 计数器为 3
+
+add变量可以作为一个函数使用。非常棒的部分是它可以访问函数上一层作用域的计数器。
+这个叫作 JavaScript 闭包。它使得函数拥有私有变量变成可能。
+计数器受匿名函数的作用域保护，只能通过 add 方法修改。
+```
+
+-  HTML DOM EventListener  
+```javascript
+document.getElementById("myBtn").addEventListener("click", displayDate);  
+
+element.addEventListener(event, function, useCapture);
+第一个参数是事件的类型 (如 "click" 或 "mousedown").
+第二个参数是事件触发后调用的函数。
+第三个参数是个布尔值用于描述事件是冒泡还是捕获。该参数是可选的。
+
+向原元素添加事件句柄： 
+element.addEventListener("click", function(){ alert("Hello World!"); });  
+
+向 Window 对象添加事件句柄： 
+window.addEventListener("resize", function(){
+    document.getElementById("demo").innerHTML = sometext;
+});
+----------------------------------------------
+var p1 = 5; //p1,p2 为两个全局作用域的变量. 
+var p2 = 7;
+
+document.getElementById("myBtn").addEventListener("click", function() {
+    myFunction(p1, p2); //此处可以使用p1,p2
+});
+
+function myFunction(a, b) {
+    var result = a * b;
+    document.getElementById("demo").innerHTML = result;
+}
+-------------------------------------------
+匿名函数 和 函数 可以这么理解： 
+function func1(a,b) { return a*b; }
+
+to equal  :
+
+var func1 = function(a,b){ return a*b; }
+
+function(a,b){ return a*b; } 这个本身就是一匿名函数.  
 ```
 
 - JavaScript 全局变量  
