@@ -184,7 +184,7 @@ clear: both; left; right;
   更多事件:  
   > http://www.runoob.com/jsref/dom-obj-event.html   
 
-###浏览器对象  
+###浏览器对象  (浏览器BOM)
 浏览器对象有5个:  
 
 - Window 对象  
