@@ -29,6 +29,7 @@ autoconf & automake :
 **git 分支合并与冲突**  
 * git branch branch_name           -- 创建分支  
 * git checkout branch_name         -- 切换分支  
+* git push --set-upstream origin branch_name  --提交到远程本分支上（在远端服务器上创建该分支）   
 * git pull origin master:slave     -- 用远端origin主机的master分支更新本地slave分支  
 * git diff                         -- 如果有文件冲突,diff出冲突处，手动修改/删除`>>>>head  code  <<<<< `中的代码    
 * git commit -a -M "Update with master"  --本地slave分支提交到origin主机的slave分支即可    
