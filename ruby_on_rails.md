@@ -912,16 +912,16 @@ resources :posts do
 end
 ```  
 有几个路由地址：9条  
-comments_post GET      /posts/:id/comments(.:format)           posts#comments
-bulk_upload_posts POST     /posts/bulk_upload(.:format)        posts#bulk_upload
-posts GET    /posts(.:format)                        posts#index
-    POST     /posts(.:format)                        posts#create
-    GET      /posts/new(.:format)                    posts#new
-    GET      /posts/:id/edit(.:format)               posts#edit
-    GET      /posts/:id(.:format)                    posts#show
-    PATCH    /posts/:id(.:format)                    posts#update
-    PUT      /posts/:id(.:format)                    posts#update
-    DELETE   /posts/:id(.:format)                    posts#destroy 
+comments_post GET      /posts/:id/comments(.:format)           posts#comments   
+bulk_upload_posts POST     /posts/bulk_upload(.:format)        posts#bulk_upload   
+posts GET    /posts(.:format)                        posts#index  
+    POST     /posts(.:format)                        posts#create  
+    GET      /posts/new(.:format)                    posts#new  
+    GET      /posts/:id/edit(.:format)               posts#edit  
+    GET      /posts/:id(.:format)                    posts#show  
+    PATCH    /posts/:id(.:format)                    posts#update  
+    PUT      /posts/:id(.:format)                    posts#update  
+    DELETE   /posts/:id(.:format)                    posts#destroy    
 
 - 添加集合路由的方式如下(后缀路由)：  
 ```
