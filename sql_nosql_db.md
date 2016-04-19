@@ -155,6 +155,41 @@ WHERE Row_ID < 4 ORDER BY company  --注意要使用子集的方式才能访问�
 
 ```
 
+**exists 的用法**  
+```sql
+SELECT
+	*
+FROM
+	strangers
+WHERE
+	"owner_id" = 198
+AND NOT EXISTS (
+	SELECT
+		'X'
+	FROM
+		(
+			SELECT
+				*
+			FROM
+				clients cc,
+				strangers bb
+			WHERE
+				cc.stranger_id = bb.id
+			AND cc.cluster_id = 1081
+		) aa
+	WHERE
+		aa.user_id = strangers. user_id
+)
+
+In ORM: 
+strangers.where("not exists (select 'X' from (select * from clients cs, strangers st where cs.stranger_id = st.id AND cs.cluster_id = ?) cc where cc.user_id = strangers.user_id)", params[:cluster_id])
+
+在子查询中匹配范围时，用exists, not exists 比 in, not in 好的原因是：  
+
+在许多基于基础表的查询中,为了满足一个条件,往往需要对另一个表进行联接.在这种情况下, 使用EXISTS(或NOT EXISTS)通常将提高查询的效率. 在子查询中,NOT IN子句将执行一个内部的排序和合并. 无论在哪种情况下,NOT IN都是最低效的 (因为它对子查询中的表执行了一个全表遍历). 为了避免使用NOT IN ,我们可以把它改写成外连接(Outer Joins)或NOT EXISTS（子查询中，需要和主表关联！）. 
+
+```  
+
 #MongoDB   
 Description:  MongoDB是一个面向文档的数据库，采用乐观并发控制(乐观锁)    
 文件存储格式为BSON（一种JSON的扩展）  
