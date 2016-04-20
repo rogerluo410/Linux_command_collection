@@ -718,6 +718,35 @@ array.join(sep=$,)
 array.to_s  ==  array.join
 ```
 
+* 用each作迭代器时的注意事项  
+```ruby
+1. 在each迭代器的块中，不能使用return 等跳转语句  
+2. each迭代器返回整个原集合  
+
+s = [1,2,3].each { | e | return e if e > 1}
+LocalJumpError: unexpected return
+	from (irb):56:in `block in irb_binding'
+	from (irb):56:in `each'
+	from (irb):56
+	from /Users/roger/.rvm/gems/ruby-2.1.4/gems/railties-4.2.6/lib/rails/commands/console.rb:110:in `start'
+	from /Users/roger/.rvm/gems/ruby-2.1.4/gems/railties-4.2.6/lib/rails/commands/console.rb:9:in `start'
+	from /Users/roger/.rvm/gems/ruby-2.1.4/gems/railties-4.2.6/lib/rails/commands/commands_tasks.rb:68:in `console'
+	from /Users/roger/.rvm/gems/ruby-2.1.4/gems/railties-4.2.6/lib/rails/commands/commands_tasks.rb:39:in `run_command!'
+	from /Users/roger/.rvm/gems/ruby-2.1.4/gems/railties-4.2.6/lib/rails/commands.rb:17:in `<top (required)>'
+	from bin/rails:4:in `require'
+	from bin/rails:4:in `<main>'
+2.1.4 :057 > 
+2.1.4 :058 >   
+2.1.4 :059 >   s = [1,2,3].each { | e | e if e > 1}
+ => [1, 2, 3] 
+2.1.4 :060 > 
+2.1.4 :061 >   s = [1,2,3].each { | e | e + 1}
+ => [1, 2, 3] 
+2.1.4 :062 > 
+
+```  
+
+
 ###String
 - ** 使用单引号的字符串会原样输出，使用双引号的字符串可以使用表达式**
 ``` 
