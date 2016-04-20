@@ -586,7 +586,8 @@ Write-Through: As objects are created, updated, and deleted, all of the caches a
 > http://edgeguides.rubyonrails.org/active_record_migrations.html  --active record migrations  
 > http://guides.rubyonrails.org/association_basics.html  --active record association  
 > https://www.rubyplus.com/articles  --rails cast  
-> https://www.ruby-toolbox.com/#Web_Apps_Services_Interaction  --rails gems分类
+> https://www.ruby-toolbox.com/#Web_Apps_Services_Interaction  --rails gems分类  
+> http://blog.58share.com/?p=232   --rails的框架结构与常用配置  
 
 ###String In Active Support:   
 > http://guides.ruby-china.org/active_support_core_extensions.html   
