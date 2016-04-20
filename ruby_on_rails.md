@@ -886,6 +886,16 @@ Jobseeker.joins(:zones).where("jobseeker_zones.zone_id in (?)", [1,2] )
 2.1.4 :056 >   Jobseeker.joins(:zones).where("jobseeker_zones.zone_id in (?)", [1,2] ).distinct
   Jobseeker Load (5.9ms)  SELECT DISTINCT "jobseekers".* FROM "jobseekers" INNER JOIN "jobseeker_zones" ON "jobseeker_zones"."jobseeker_id" = "jobseekers"."id" WHERE (jobseeker_zones.zone_id in (1,2))
  => #<ActiveRecord::Relation [#<Jobseeker id: 1, rate: 10, state: "published", role_id: 26, vocation_id: 1, user_id: 4, created_at: nil, updated_at: nil>]> 
+ 
+ 
+执行复杂计算时还可使用各种查询方法：
+
+Client.includes("orders").where(first_name: 'Ryan', orders: { status: 'received' }).count
+上述代码执行的 SQL 语句如下：
+
+SELECT count(DISTINCT clients.id) AS count_all FROM clients
+  LEFT OUTER JOIN orders ON orders.client_id = client.id WHERE
+  (clients.first_name = 'Ryan' AND orders.status = 'received')
 
 ```
  
