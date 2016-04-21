@@ -2,6 +2,7 @@
 #Ruby
 
 文档:   
+> http://ruby-doc.org  --Ruby 源码文档  
 > https://ruby-hacking-guide.github.io/  --Ruby Hacking Guide   
 > http://www.runoob.com/ruby/ruby-array.html    --Ruby 速查手册
 > http://apidock.com/ruby/    --ruby, rails, rspec 文档   
