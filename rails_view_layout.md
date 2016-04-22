@@ -1,3 +1,8 @@
+# Article
+
+> http://www.cnblogs.com/Fooo/p/4281200.html  -- Rails 布局和视图渲染  
+
+
 ##一、如何渲染 
 1、如有以下控制器 
 ```
