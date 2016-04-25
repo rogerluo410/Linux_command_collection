@@ -195,6 +195,19 @@ def show
 end
 ```
 
+response_to 的理解和用法  
+> http://www.cnblogs.com/fly871117/archive/2010/08/09/1795803.html  
+
+我们知道，在HTTP协议中，客户端会在他们的HTTP首部包含一些元信息（meta-information)，这些元信息按照“字段：值”的方式来组织，HTTP协议预定义了很多标准字段，其中的一个字段就是“Accept-type“,它代表发送请求的客户端能够支持或者说理解的资源表示类型，如果没有为这个键指定值，服务端会认为客户端能够理解标准的HTML文档，当然，客户端可以为这个字段指定任意的符合MIME规范的类型值，假设客户端设置这个字段为”Accept-Type: text/xml“，则服务端必须返回资源的XML表示。      
+ 
+所以respond_to事实上就是根据HTTP首部的Accept-Type字段来决定向客户端返回那种类型的资源表示   
+```
+response_to | format |
+  format.html
+  format.xml { render :xml => @event.to_xml }
+  format.any { render :text => "WTF" }
+end
+```
 
 18、响应时只返回HTTP header   
 `head :bad_request `       
