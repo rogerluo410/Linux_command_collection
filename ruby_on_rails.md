@@ -986,6 +986,7 @@ It will auto-convert line breaks to HTML tags. You can use it with something lik
 > http://hawkins.io/2012/07/advanced_caching_revised/   
 > https://ruby-china.org/topics/19389  --总结 Web 应用中常用的各种 Cache   
 > http://guides.ruby-china.org/caching_with_rails.html  --Rails 缓存简介  
+> http://robbinfan.com/blog/38/orm-cache-sumup  --Web应用的缓存设计模式
 
 cache是提高应用性能重要的一个环节, 动态内容的cache有如下几种。
 文章以Nginx，Rails，Mysql，Redis作为例子，换成其他web服务器，语言，数据库，缓存服务都是类似的。  
