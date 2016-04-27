@@ -3,19 +3,26 @@
 **谈一谈网络编程学习经验**  
 > http://blog.csdn.net/solstice/article/details/6527585   
 
-**TCP的keep-alive选项 
+**TCP的keep-alive选项** 
 > http://www.cnblogs.com/wainiwann/p/4024583.html   --tcp的keep-alive
 > http://blog.csdn.net/lys86_1205/article/details/21234867  --http keep_alive 和 tcp keep_alive  
 
 ```
 tcp自己的keepalive有这样的一个bug：
 
-正常情况下，连接的另一端主动调用colse关闭连接，tcp会通知，我们知道了该连接已经关闭。但是如果tcp连接的另一端突然掉线，或者重启断电，这个时候我们并不知道网络已经关闭。而此时，如果有发送数据失败，tcp会自动进行重传。重传包的优先级高于keepalive，那就意味着，我们的keepalive总是不能发送出去。 而此时，我们也并不知道该连接已经出错而中断。在较长时间的重传失败之后，我们才会知道。
+正常情况下，连接的另一端主动调用colse关闭连接，tcp会通知，我们知道了该连接已经关闭。
+但是如果tcp连接的另一端突然掉线，或者重启断电，这个时候我们并不知道网络已经关闭。
+而此时，如果有发送数据失败，tcp会自动进行重传。重传包的优先级高于keepalive，
+那就意味着，我们的keepalive总是不能发送出去。
+而此时，我们也并不知道该连接已经出错而中断。在较长时间的重传失败之后，我们才会知道。
 
-为了避免这种情况发生，我们要在tcp上层，自行控制(在应用层实现一个心跳包)。对于此消息，记录发送时间和收到回应的时间。如果长时间没有回应，就可能是网络中断。如果长时间没有发送，就是说，长时间没有进行通信，可以自行发一个包，用于keepalive，以保持该连接的存在。
+为了避免这种情况发生，我们要在tcp上层，自行控制(在应用层实现一个心跳包)。
+对于此消息，记录发送时间和收到回应的时间。如果长时间没有回应，就可能是网络中断。
+如果长时间没有发送，就是说，长时间没有进行通信，可以自行发一个包，用于keepalive，以保持该连接的存在。
 
-http keep-alive与tcp keep-alive，不是同一回事，意图不一样。http keep-alive是为了让tcp活得更久一点，以便在同一个连接上传送
-多个http，提高socket的效率。而tcp keep-alive是TCP的一种检测TCP连接状况的保鲜机制。
+http keep-alive与tcp keep-alive，不是同一回事，意图不一样。
+http keep-alive是为了让tcp活得更久一点，以便在同一个连接上传送多个http，提高socket的效率。
+而tcp keep-alive是TCP的一种检测TCP连接状况的保鲜机制。
 ```
 
 #网络结构  
