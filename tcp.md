@@ -20,6 +20,7 @@ tcp自己的keepalive有这样的一个bug：
 对于此消息，记录发送时间和收到回应的时间。如果长时间没有回应，就可能是网络中断。
 如果长时间没有发送，就是说，长时间没有进行通信，可以自行发一个包，用于keepalive，以保持该连接的存在。
 
+-------http keep-alive与tcp keep-alive----------------
 http keep-alive与tcp keep-alive，不是同一回事，意图不一样。
 http keep-alive是为了让tcp活得更久一点，以便在同一个连接上传送多个http，提高socket的效率。
 而tcp keep-alive是TCP的一种检测TCP连接状况的保鲜机制。
