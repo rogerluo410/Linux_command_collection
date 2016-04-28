@@ -2669,7 +2669,10 @@ sha256.hexdigest
 ```
  
  rails中的加密签名 ： 
- > http://stackoverflow.com/questions/5492377/encrypt-decrypt-using-rails/5492450  
+ > http://stackoverflow.com/questions/5492377/encrypt-decrypt-using-rails/5492450    
+ 
+ 主要用于 cookie 中存储的数据会使用密令签名，以防篡改。cookie 会被加密，任何有权访问的人都无法读取其内容。   
+ （如果修改了 cookie，Rails 会拒绝使用。）  
  
  ```
  2.1.4 :001 > crypt = ActiveSupport::MessageEncryptor.new(Rails.configuration.secret_key_base)
