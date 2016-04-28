@@ -2629,6 +2629,7 @@ method_missing
 使用该模块，生成随机数。  
 > https://ruby-china.org/topics/4795    
 
+```
 SecureRandom.hex
 => "93dcf2eb24591d8846f6a9ec804eceff" 
 SecureRandom.random_number
@@ -2637,7 +2638,7 @@ SecureRandom.urlsafe_base64
 => "xCHCIA7qpCYJwBBFiddUTg"
 SecureRandom.uuid
 => "a79b9a7a-2f1f-4dc1-a0f1-8136b9f919ac"
-
+```
 
 # Digest 模块
 使用该模块， 可以用于MD5，SHA1, SHA2的加密。  
