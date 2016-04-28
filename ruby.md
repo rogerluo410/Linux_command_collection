@@ -2625,9 +2625,47 @@ method_missing
 模块应该可以扩展， 模块也应该是封闭的， 即某个模块被别的模块使用时，无论给模块内部怎么改变，对外接口也应当是不变的。  
 
 
-  
+# SecureRandom  模块
+使用该模块，生成随机数。  
+> https://ruby-china.org/topics/4795    
 
-  
+SecureRandom.hex
+=> "93dcf2eb24591d8846f6a9ec804eceff" 
+SecureRandom.random_number
+=> 0.2754022060318716 
+SecureRandom.urlsafe_base64
+=> "xCHCIA7qpCYJwBBFiddUTg"
+SecureRandom.uuid
+=> "a79b9a7a-2f1f-4dc1-a0f1-8136b9f919ac"
+
+
+# Digest 模块
+使用该模块， 可以用于MD5，SHA1, SHA2的加密。  
+
+```
+require 'digest'
+
+# Compute a complete digest
+Digest::SHA256.digest 'message'       #=> "\xABS\n\x13\xE4Y..."
+
+sha256 = Digest::SHA256.new
+sha256.digest 'message'               #=> "\xABS\n\x13\xE4Y..."
+
+# Other encoding formats
+Digest::SHA256.hexdigest 'message'    #=> "ab530a13e459..."
+Digest::SHA256.base64digest 'message' #=> "q1MKE+RZFJgr..."
+
+# Compute digest by chunks
+md5 = Digest::MD5.new
+md5.update 'message1'
+md5 << 'message2'                     # << is an alias for update
+
+md5.hexdigest                         #=> "94af09c09bb9..."
+
+# Compute digest for a file
+sha256 = Digest::SHA256.file 'testfile'
+sha256.hexdigest
+```
  
  
 
