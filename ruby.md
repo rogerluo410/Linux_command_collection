@@ -2668,6 +2668,25 @@ sha256 = Digest::SHA256.file 'testfile'
 sha256.hexdigest
 ```
  
+ rails中的加密签名 ： 
+ > http://stackoverflow.com/questions/5492377/encrypt-decrypt-using-rails/5492450  
+ 
+ ```
+ 2.1.4 :001 > crypt = ActiveSupport::MessageEncryptor.new(Rails.configuration.secret_key_base)
+ => #<ActiveSupport::MessageEncryptor:0x007fdee085a950 @secret="7eb53e016c68a3f299a508b6f086c9cd0bc7ab46aad3b78a5c7f92d03e49d623c7083b1ea713ea58177e6dbe6b5517c5a6084a585f57de959adfef8cda948268", @sign_secret=nil, @cipher="aes-256-cbc", @verifier=#<ActiveSupport::MessageVerifier:0x007fdee085a6f8 @secret="7eb53e016c68a3f299a508b6f086c9cd0bc7ab46aad3b78a5c7f92d03e49d623c7083b1ea713ea58177e6dbe6b5517c5a6084a585f57de959adfef8cda948268", @digest="SHA1", @serializer=ActiveSupport::MessageEncryptor::NullSerializer>, @serializer=Marshal> 
+ 
+2.1.4 :002 > encrypted_data = crypt.encrypt_and_sign('my confidental data')
+ => "UEtBYmlrMkozQUJ2VDdrSTNZRUlHOWlSOGpwYmxjaXdia0JuMnpoZ3dUQT0tLXMyckVvNDJ2OTBleTlrUElYcUVSbXc9PQ==--1ff91fb380243338fa564274ef39c530e44f4a7f" 
+ 
+2.1.4 :003 > decrypted_back = crypt.decrypt_and_verify(encrypted_data)
+ => "my confidental data" 
+ 
+2.1.4 :004 > encrypted_data = crypt.encrypt_and_sign({user_id:1})
+ => "RzZSTGNHQllKdWllbW9XN2t2ZDhhQT09LS1STHRDVGRTanpSRHhPMkJjZDkvZFJBPT0=--1e05180e600395ed394a89ef1f91a66498763065" 
+ 
+2.1.4 :005 > decrypted_back = crypt.decrypt_and_verify(encrypted_data)
+ => {:user_id=>1} 
+ ```
  
 
 
