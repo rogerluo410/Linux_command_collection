@@ -904,11 +904,14 @@ SELECT count(DISTINCT clients.id) AS count_all FROM clients
 ###In CRUD  
 > http://guides.ruby-china.org/active_record_basics.html  
 
-- create 返回对象 或 nil  
-- create 返回对象 或 抛出异常  
-- save 返回 true 或 false    
-- save! 返回 true 或 抛出异常    
-- update 返回true 或 false    
+- create   返回对象 或 nil  
+- create   返回对象 或 抛出异常  
+- save     返回 true 或 false    
+- save!    返回 true 或 抛出异常    
+- update   返回true 或 false    
+- update_attributes 返回true 或 false  
+- destroy  返回对象 或 nil    
+- destroy! 返回对象 或 抛出异常   
 
 ###In Controller  
 **router - 路由**  
@@ -923,6 +926,7 @@ resources :posts do
 end
 ```  
 有几个路由地址：9条  
+```
 comments_post GET      /posts/:id/comments(.:format)           posts#comments   
 bulk_upload_posts POST     /posts/bulk_upload(.:format)        posts#bulk_upload   
 posts GET    /posts(.:format)                        posts#index  
@@ -933,6 +937,7 @@ posts GET    /posts(.:format)                        posts#index
     PATCH    /posts/:id(.:format)                    posts#update  
     PUT      /posts/:id(.:format)                    posts#update  
     DELETE   /posts/:id(.:format)                    posts#destroy    
+```    
 
 - 添加集合路由的方式如下(后缀路由)：  
 ```
@@ -966,6 +971,33 @@ resources :photos, only: [:index, :show]
 ```
 
 - CSRF 是什么, Rails 里针对它做了些什么?   
+所有使用表单帮助方法生成的表单，都有会添加这个令牌。如果想自己编写表单，或者基于其他原因添加令牌，可以使用
+form_authenticity_token 方法。
+
+```
+跨站请求伪造（CSRF）是一种攻击方式，A 网站的用户伪装成 B 网站的用户发送请求，在 B 站中添加、修改或删除数据，而 B 站的用户绝然不知。
+
+防止这种攻击的第一步是，确保所有析构动作（create，update 和 destroy）只能通过 GET 之外的请求方法访问。如果遵从 REST 架构，已经完成了这一步。不过，恶意网站还是可以很轻易地发起非 GET 请求，这时就要用到其他防止跨站攻击的方法了。
+
+我们添加一个只有自己的服务器才知道的难以猜测的令牌。如果请求中没有该令牌，就会禁止访问。
+```
+
+- ActionDispatch类 处理所有请求中的元素。    
+
+```
+ActionDispatch::Session::CookieStore：所有数据都存储在客户端
+ActionDispatch::Session::CacheStore：数据存储在 Rails 缓存里
+ActionDispatch::Session::ActiveRecordStore：使用 Active Record 把数据存储在数据库中（需要使用 activerecord-session_store gem）
+ActionDispatch::Session::MemCacheStore：数据存储在 Memcached 集群中（这是以前的实现方式，现在请改用 CacheStore）
+```
+
+- 过滤器（filter）是一些方法，在控制器动作运行之前、之后，或者前后运行。   
+
+- request 和 response 对象    
+
+- 数据流和文件下载   
+
+- 异常处理 与 rescue_from  
 
 
 ###In View: 
