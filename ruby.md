@@ -790,6 +790,31 @@ o.dup.bar = 10   # succeeds
 o.clone.bar = 10 # raises RuntimeError
 ```
 
+也就是说， dup是浅拷贝， clone 是深拷贝。 
+```
+h = { id: 1, name: "abc"}
+
+h1 = h.dup
+h2 = h.clone
+p h1
+p h2
+
+p h1.equal?(h)  #=> false
+p h2.equal?(h)  #=> false   说明dup, clone都会创建新对象  
+
+# pass reference VS. pass value
+self.send :define_method, :func do | **a |
+  p  a.equal?(h)  #当形式参数为 **a,  则会创建一个新的对象， 这时是值传递。
+  p  a.class #=> Hash
+  p  h.class #=> Hash
+  
+  #如果，形式参数为 a, 不是显示声明为 Hash参数 **a时, 这时是传递引用。
+  p  a.equal?(h) #=> true  if like  "self.send :define_method, :func do | a | "
+end
+
+func(h)
+```
+
 About `frozen` : 
 You freeze objects, not variables, i.e. you can't update a frozen object but you can assign a new object to the same variable. Consider this:
 ```
@@ -882,7 +907,7 @@ When merge two strings in Ruby, have two situations below:
 nil？ empty?  present?  blank?   
 nil? 空值nil的判断  
 empty？ 集合是否没有元素的判断   
-present？ 变量是否赋值,即不为nil  
+present？ 变量是否赋值,即不为nil 空对象, "" 空字符串, [] 空数组, {} 空哈希   
 blank？ rails 一切为空的判断   
 ```ruby   
 2.1.4 :030 > str = nil
