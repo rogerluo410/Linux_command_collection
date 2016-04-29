@@ -808,11 +808,20 @@ self.send :define_method, :func do | **a |
   p  a.class #=> Hash
   p  h.class #=> Hash
   
-  #如果，形式参数为 a, 不是显示声明为 Hash参数 **a时, 这时是传递引用。
+  #如果，形式参数为 a, 不是显式声明为 Hash参数 **a时, 这时是传递引用。
   p  a.equal?(h) #=> true  if like  "self.send :define_method, :func do | a | "
 end
 
 func(h)
+
+形式参数的三种类型： *a 显式表示为 数组参数， **a  显式表示为 哈希参数， &a 显式表示为块参数。 
+
+self.send :define_method, :func do | &b |
+  #yield if block_given? #=> 不存在入参&b时，print nothing 甚至会报出 no block given (yield) (LocalJumpError) 错误 ！说明在反射机制导致作用域的问题。
+  b.call  #=> "a block" 
+end
+
+func { p "a block" }
 ```
 
 About `frozen` : 
