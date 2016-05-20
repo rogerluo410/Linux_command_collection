@@ -15,6 +15,7 @@ au BufWrite /private/etc/pw.* set nowritebackup nobackup
 set nocompatible " 必须
 filetype off     " 必须
 
+" 使用Vundle管理配置Vim基本插件(https://github.com/VundleVim/Vundle.vim)  
 " 将Vundle加入运行时路径中(Runtime path)
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
