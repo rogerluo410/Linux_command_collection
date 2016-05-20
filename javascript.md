@@ -1,4 +1,5 @@
 **JS中获取HTML标签对象**  
+$("#id")是jquery写法，和GetElementById一样   
 * 在JS中使用 $('#images-mask')， 取得标签id    = images-mask 的对象  
 * 在JS中使用 $('.images-mask')， 取得标签class = images-mask 的对象  
 
