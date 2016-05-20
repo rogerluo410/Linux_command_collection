@@ -18,14 +18,14 @@ autoconf & automake :
 #Git
 > http://git-scm.com/book/zh/v2 --git 教程   
  
-**git config --global core.editor vim**    
 ```
-编辑用户名和邮箱  
+编辑用户名和邮箱, 编辑工具  
 $ git config --global user.name "wirelessqa"  
 $ git config --global user.email wirelessqa.me@gmail.com  
+$ git config --global core.editor vim 
 ```
-
 * global修改的是~/.gitconfig，对当前用户有效
+
 
 **push到github时，每次都要输入用户名和密码的问题**   
 * step1 配置ssh key : https://help.github.com/articles/generating-ssh-keys/   
