@@ -1,4 +1,4 @@
-#Show classical source code fragments 
+# Classical source code fragments 
 
 类型检查， is_a的用法 
 ```
@@ -15,3 +15,19 @@ else
   attributes_collection.values
 end
 ```
+
+
+
+# Coding world  
+
+**面向对象**  
+
+***编程和面向对象的关系***  
+
+**数据抽象和继承**  
+
+**多重继承的缺点**  
+
+***Duck Typing**  
+
+***元编程***  
