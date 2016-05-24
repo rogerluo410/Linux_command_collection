@@ -3,6 +3,28 @@
 - 大公司里怎样开发和部署前端代码？  
 > http://www.runoob.com/w3cnote/how-to-develop-and-deploy-front-end-code.html
 
+> http://stackoverflow.com/questions/16280341/hidden-field-in-rails-form  --hidden_field for form_for  
+> http://stackoverflow.com/questions/20891658/set-value-of-input-element-with-jquery  
+
+```
+Make sure that your code is running after the DOM is loaded.
+
+Also there is no need for jQuery in your example.
+
+You can just do:
+
+window.onload = function(){
+    document.getElementById("url").value = 'test';
+};
+Demo: http://jsfiddle.net/qwertynl/7uCfc/
+
+And if you want to do full on jQuery:
+
+$(function(){
+    $('#url').val('test');
+});
+Demo: http://jsfiddle.net/qwertynl/m5Ttn/
+```
   
 #CSS
 ```
