@@ -5,6 +5,7 @@
 
 > http://stackoverflow.com/questions/16280341/hidden-field-in-rails-form  --hidden_field for form_for  
 > http://stackoverflow.com/questions/20891658/set-value-of-input-element-with-jquery  
+> http://stackoverflow.com/questions/1225102/jquery-event-to-trigger-action-when-a-div-is-made-visible  
 
 ```
 Make sure that your code is running after the DOM is loaded.
