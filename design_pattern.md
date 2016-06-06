@@ -1,6 +1,8 @@
+> http://www.slideshare.net/anildigital/design-patterns-inruby  
+
 - Four points: 
 
-1. 从事物中分离出保持不变的东西。  
+1. 从事物(对象)中分离出保持不变的东西。  
 2. 编写接口， 而非实现。(抽象化事物)
 3. 使用组合，胜过继承。  
 4. 代理， 代理， 代理。  
