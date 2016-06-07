@@ -23,6 +23,7 @@
 #Ruby 语法   
 > http://www.runoob.com/ruby/ruby-hash.html   
 > http://guides.ruby-china.org/  --rails guides  
+> https://en.wikibooks.org/wiki/Category:Ruby_Programming   --
 
 #REST 
 REST，或者称为表征状态转移，它是一个分布式通信体系架构，正在迅速发展成云平台的一个通用概念。它非常简单，然而却足以表达大量的云资源和全部的配置、管理。在Ruby中从头开始学习如何实现和使用一个简单的REST代理。
