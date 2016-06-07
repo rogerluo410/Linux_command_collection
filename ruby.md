@@ -2724,6 +2724,22 @@ sha256.hexdigest
 2.1.4 :005 > decrypted_back = crypt.decrypt_and_verify(encrypted_data)
  => {:user_id=>1} 
  ```
- 
 
+# here document  
+For creating multiple-line strings, Ruby supports here documents (heredocs), a feature that originated in the Bourne shell and is also available in Perl and PHP.   
+> https://en.wikibooks.org/wiki/Ruby_Programming/Here_documents   
 
+```
+ import_model_desc = <<-DESC.gsub(/    /, '')
+      Import data from your model (pass name as CLASS environment variable).
+        $ rake environment elasticsearch:import:model CLASS='MyModel'
+      Force rebuilding the index (delete and create):
+        $ rake environment elasticsearch:import:model CLASS='Article' FORCE=y
+      Customize the batch size:
+        $ rake environment elasticsearch:import:model CLASS='Article' BATCH=100
+      Set target index name:
+        $ rake environment elasticsearch:import:model CLASS='Article' INDEX='articles-new'
+      Pass an ActiveRecord scope to limit the imported records:
+        $ rake environment elasticsearch:import:model CLASS='Article' SCOPE='published'
+    DESC
+```
