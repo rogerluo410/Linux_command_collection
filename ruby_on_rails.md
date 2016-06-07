@@ -1127,6 +1127,9 @@ LINE 1: ...y_groups".* FROM "product_property_groups" WHERE (product_pr...
    -- preload是2个sql 不能用关联表的字段做查询条件！  
 ```
 
+- ActiveModel::SecurePassword  
+
+
 
 ###recipes  
 
