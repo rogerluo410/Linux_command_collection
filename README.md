@@ -286,7 +286,9 @@ http抓包工具
 
 
 ＃Sublime Text  
-Sublime Text 怎样为不同的语言设置不同的缩进   
+> http://www.cnblogs.com/qiufuwu618/archive/2012/09/07/2675954.html  --Sublime Text 2 设置文件详解    
+
+Sublime Text 怎样为不同的语言设置不同的缩进     
 ```
 Preferences -> Settings - More -> Syntax Specific - User
 然后添加设置代码就可以了，文件保存在$Packages/User下
