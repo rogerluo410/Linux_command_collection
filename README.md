@@ -283,3 +283,15 @@ PS1 定义在/etc/bashrc 中，所以直接修改这个文件。
 
 #Charles
 http抓包工具   
+
+
+＃Sublime Text  
+Sublime Text 怎样为不同的语言设置不同的缩进   
+```
+Preferences -> Settings - More -> Syntax Specific - User
+然后添加设置代码就可以了，文件保存在$Packages/User下
+{
+    "tab_size": 2,
+    "translate_tabs_to_spaces": true 
+}
+```
