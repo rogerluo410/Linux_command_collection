@@ -285,7 +285,7 @@ PS1 定义在/etc/bashrc 中，所以直接修改这个文件。
 http抓包工具   
 
 
-＃Sublime Text  
+#Sublime Text  
 > http://www.cnblogs.com/qiufuwu618/archive/2012/09/07/2675954.html  --Sublime Text 2 设置文件详解    
 
 Sublime Text 怎样为不同的语言设置不同的缩进     
