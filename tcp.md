@@ -64,4 +64,111 @@ ARP:
 > http://www.retran.com/beej/index.html  
 
 
+**epoll**  
+> http://blog.csdn.net/xiajun07061225/article/details/9250579  --epoll详解  
+
+首先通过epoll_create(int maxfds)来创建一个epoll的句柄，其中maxfds为你epoll所支持的最大句柄数。这个函数会返回一个新的epoll句柄，之后的所有操作将通过这个句柄来进行操作。在用完之后，记得用close()来关闭这个创建出来的epoll句柄。  
+
+nfds=epoll_wait(kdpfd,events,maxevents,-1);     
+其中kdpfd为用epoll_create创建之后的句柄，events是一个epoll_event*的指针，当epoll_wait这个函数操作成功之后，epoll_events里面将储存所有的读写事件。maxevents是最大事件数量。最后一个timeout是epoll_wait的超时，为0的时候表示马上返回，为-1的时候表示一直等下去，直到有事件发生，为任意正整数的时候表示等这么长的时间，如果一直没有事件，则返回。一般如果网络主循环是单独的线程的话，可以用-1来等，这样可以保证一些效率，如果是和主逻辑在同一个线程的话，则可以用0来保证主循环的效率。   
+
+struct epoll_event结构如下: 
+```
+/保存触发事件的某个文件描述符相关的数据（与具体使用方式有关）  
+  
+typedef union epoll_data {  
+    void *ptr;  
+    int fd;  
+    __uint32_t u32;  
+    __uint64_t u64;  
+} epoll_data_t;  
+ //感兴趣的事件和被触发的事件  
+struct epoll_event {  
+    __uint32_t events; /* Epoll events */  
+    epoll_data_t data; /* User data variable */  
+};  
+```
+
+事件注册函数：  
+```
+ int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event);
+epoll的事件注册函数，它不同于select()是在监听事件时告诉内核要监听什么类型的事件，而是在这里先注册要监听的事件类型。
+第一个参数是epoll_create()的返回值。
+第二个参数表示动作，用三个宏来表示：
+EPOLL_CTL_ADD：注册新的fd到epfd中；
+EPOLL_CTL_MOD：修改已经注册的fd的监听事件；
+EPOLL_CTL_DEL：从epfd中删除一个fd；
+```
+
+事件类型： 
+```
+events可以是以下几个宏的集合：
+EPOLLIN ：表示对应的文件描述符可以读（包括对端SOCKET正常关闭）；
+EPOLLOUT：表示对应的文件描述符可以写；
+EPOLLPRI：表示对应的文件描述符有紧急的数据可读（这里应该表示有带外数据到来）；
+EPOLLERR：表示对应的文件描述符发生错误；
+EPOLLHUP：表示对应的文件描述符被挂断；
+EPOLLET： 将EPOLL设为边缘触发(Edge Triggered)模式，这是相对于水平触发(Level Triggered)来说的。
+EPOLLONESHOT：只监听一次事件，当监听完这次事件之后，如果还需要继续监听这个socket的话，需要再次把这个socket加入到EPOLL队列里
+```
+
+实例：  
+```CPP
+epoll_wait范围之后应该是一个循环，遍历所有的事件：  
+
+nfds = epoll_wait(epfd,events,20,500);  
+{
+  for(n=0;n<nfds;++n)
+  {
+    if(events[n].data.fd==listener)
+    {
+      //如果是主socket的事件的话，则表示
+      //有新连接进入了，进行新连接的处理。
+      client=accept(listener,(structsockaddr*)&local,&addrlen);
+      if(client<0)
+      {
+        perror("accept");
+        continue;
+      }
+      setnonblocking(client);//将新连接置于非阻塞模式
+      ev.events=EPOLLIN|EPOLLET;//并且将新连接也加入EPOLL的监听队列。
+      //注意，这里的参数EPOLLIN|EPOLLET并没有设置对写socket的监听，
+      //如果有写操作的话，这个时候epoll是不会返回事件的，如果要对写操作
+      //也监听的话，应该是EPOLLIN|EPOLLOUT|EPOLLET
+      ev.data.fd=client;
+      if(epoll_ctl(kdpfd,EPOLL_CTL_ADD,client,&ev)<0)
+      {
+        //设置好event之后，将这个新的event通过epoll_ctl加入到epoll的监听队列里面，
+        //这里用EPOLL_CTL_ADD来加一个新的epoll事件，通过EPOLL_CTL_DEL来减少一个
+        //epoll事件，通过EPOLL_CTL_MOD来改变一个事件的监听方式。
+        fprintf(stderr,"epollsetinsertionerror:fd=%d0,client);
+        return -1;
+      }
+    }
+    elseif(event[n].events&EPOLLIN)
+    {
+      //如果是已经连接的用户，并且收到数据，
+      //那么进行读入
+      intsockfd_r;
+      if((sockfd_r=event[n].data.fd)<0)continue;
+      read(sockfd_r,buffer,MAXSIZE);
+      //修改sockfd_r上要处理的事件为EPOLLOUT
+      ev.data.fd=sockfd_r;
+      ev.events=EPOLLOUT|EPOLLET;
+      epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd_r,&ev);
+    }
+    elseif(event[n].events&EPOLLOUT)
+    {
+      //如果有数据发送
+      intsockfd_w=events[n].data.fd;
+      write(sockfd_w,buffer,sizeof(buffer));
+      //修改sockfd_w上要处理的事件为EPOLLIN
+      ev.data.fd=sockfd_w;
+      ev.events=EPOLLIN|EPOLLET;
+      epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd_w,&ev);
+    }
+    do_use_fd(events[n].data.fd);
+  }
+}
+```
 
