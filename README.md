@@ -46,6 +46,11 @@ gc master
 git pull origin master   
 gc rogerluo410-dev  
 git merge master  -- 合并master到当前分支
+
+OR 
+
+git fetch origin staging
+git merge origin staging
 ```  
 
 **fork了开源项目后，如何持续跟进项目的开发:**     
