@@ -118,3 +118,27 @@ Dir.entries(source_path).each do |entry|
 end
 
 ```
+
+
+```
+File.open("./output.erb") do | f |
+
+   p f.read 
+   p f.tell # 文件游标位置
+   p f.pos  # 文件游标位置 为当前文件的末尾
+   #p f.rewind #文件游标归零
+   p f.seek(20) #文件游标偏移的位置 , 偏移成功返回0
+   p f.read  
+end
+
+
+IO.readlines 方法
+类 File 是类 IO 的一个子类。类 IO 也有一些用于操作文件的方法。
+IO.readlines 是 IO 类中的一个方法。该方法逐行返回文件的内容。下面的代码显示了方法 IO.readlines 的使用：
+
+#!/usr/bin/ruby
+arr = IO.readlines("input.txt")
+puts arr[0]
+puts arr[1]
+
+```
