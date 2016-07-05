@@ -1139,3 +1139,18 @@ LINE 1: ...y_groups".* FROM "product_property_groups" WHERE (product_pr...
 `load Rails.root + "db/seeds.rb" `  
 
 > http://stackoverflow.com/questions/8386604/auto-load-the-seed-data-from-db-seeds-rb-with-rake  
+
+- Redirect to previous page  
+
+> http://stackoverflow.com/questions/2139996/how-to-redirect-to-previous-page-in-ruby-on-rails  
+> http://stackoverflow.com/questions/771656/correctly-doing-redirect-to-back-in-ruby-on-rails-when-referrer-is-not-availabl  
+```
+def store_location
+  session[:return_to] = request.request_uri
+end
+
+def redirect_back_or_default(default)
+  redirect_to(session[:return_to] || default)
+  session[:return_to] = nil
+end
+```
