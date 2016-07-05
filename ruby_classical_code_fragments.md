@@ -47,7 +47,7 @@ Code :
 
 ```ruby  
 # release business js which is in the view file to individual file.
-
+# gsub 字符串替换。
 source_path = './app/views'
 
 dest_path = './app/assets/javascripts/controller'
