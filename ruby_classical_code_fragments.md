@@ -32,7 +32,7 @@ end
 ***(5)元编程***  
 
 
-＃ Directory and File  
+# Directory and File  
 
  Check type:  
 ```
