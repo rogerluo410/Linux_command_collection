@@ -3,6 +3,12 @@
 > http://www.cnblogs.com/Fooo/p/4281200.html  -- Rails 布局和视图渲染  
 
 
+# 前端资源： 
+编译前端资源，从 app/assets to public/assets
+RAILS_ENV=development bundle exec rake assets:precompile
+
+
+
 ##一、如何渲染 
 1、如有以下控制器 
 ```
