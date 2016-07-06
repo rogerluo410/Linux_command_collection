@@ -311,9 +311,9 @@ function search_input(selector){
 ```
 
 * 通过浏览器对象window (BOM)对象重定向url：  
-window.location.href = '/search?q=' + term;  
-window.history.back()  url后退
-window.history.forward() url前进
+window.location.href = '/search?q=' + term;    
+window.history.back();  //url后退   
+window.history.forward(); //url前进   
 
 ```
 window.addEventListener("resize", function(){
