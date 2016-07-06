@@ -141,7 +141,7 @@ nfds = epoll_wait(epfd,events,20,500);
         //设置好event之后，将这个新的event通过epoll_ctl加入到epoll的监听队列里面，
         //这里用EPOLL_CTL_ADD来加一个新的epoll事件，通过EPOLL_CTL_DEL来减少一个
         //epoll事件，通过EPOLL_CTL_MOD来改变一个事件的监听方式。
-        fprintf(stderr,"epollsetinsertionerror:fd=%d0,client);
+        fprintf(stderr,"epollsetinsertionerror:fd=%d",client);
         return -1;
       }
     }
