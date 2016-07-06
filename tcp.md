@@ -2,6 +2,7 @@
 
 **谈一谈网络编程学习经验**  
 > http://blog.csdn.net/solstice/article/details/6527585   
+> http://www.ideawu.net/blog/archives/880.html   -- 在Linux进行IO的正确姿势     
 
 **TCP的keep-alive选项** 
 > http://www.cnblogs.com/wainiwann/p/4024583.html   --tcp的keep-alive
