@@ -289,7 +289,7 @@ function myFunction() {
   }, false);
 ```  
 
-* 页面加载：  
+* 页面加载事件：  
 $(window).load();  所有的资源(DOM，CSS，JS，Images)被加载后，会触发这个事件。  
 
 $(document).ready();   在DOM被加载， 准备加载JS文件之前，会触发这个事件。
@@ -349,14 +349,14 @@ window.addEventListener("resize", function(){
 ```
 
 * 事件冒泡或事件捕获？
-事件传递有两种方式：冒泡与捕获。
-事件传递定义了元素事件触发的顺序。 如果你将 <p> 元素插入到 <div> 元素中，用户点击 <p> 元素, 哪个元素的 "click" 事件先被触发呢？
-在 冒泡 中，内部元素的事件会先被触发，然后再触发外部元素，即： <p> 元素的点击事件先触发，然后会触发 <div> 元素的点击事件。
-在 捕获 中，外部元素的事件会先被触发，然后才会触发内部元素的事件，即： <div> 元素的点击事件先触发 ，然后再触发 <p> 元素的点击事件。
-addEventListener() 方法可以指定 "useCapture" 参数来设置传递类型：
-addEventListener(event, function, useCapture);
-默认值为 false, 即冒泡传递，当值为 true 时, 事件使用捕获传递。
-实例: 
-```javascript  
+事件传递有两种方式：冒泡与捕获。  
+事件传递定义了元素事件触发的顺序。 如果你将 <p> 元素插入到 <div> 元素中，用户点击 <p> 元素, 哪个元素的 "click"   事件先被触发呢？    
+在 `冒泡` 中，内部元素的事件会先被触发，然后再触发外部元素，即： <p> 元素的点击事件先触发，然后会触发 <div> 元素的点击事件  
+在 `捕获` 中，外部元素的事件会先被触发，然后才会触发内部元素的事件，即： <div> 元素的点击事件先触发 ，然后再触发 <p>    元素的点击事件。    
+addEventListener() 方法可以指定 "useCapture" 参数来设置传递类型：   
+addEventListener(event, function, useCapture);   
+默认值为 false, 即冒泡传递，当值为 true 时, 事件使用捕获传递。    
+实例:   
+```javascript   
 document.getElementById("myDiv").addEventListener("click", myFunction, true);
 ```
