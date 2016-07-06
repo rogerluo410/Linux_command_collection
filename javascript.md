@@ -279,3 +279,63 @@ function myFunction() {
 
 
 # Jquery  
+
+> http://www.365mini.com/page/jquery-quickstart.htm  --Jquery 手册  
+
+捕获浏览器前进后退按钮的事件：   
+```
+  window.addEventListener('popstate', function(event) {
+    load_flag = 1;
+  }, false);
+```  
+
+页面加载：  
+$(window).load();  所有的资源(DOM，CSS，JS，Images)被加载后，会触发这个事件。  
+
+$(document).ready();   在DOM被加载， 准备加载JS文件之前，会触发这个事件。
+
+$(window).unload();  This event will be fired when you are navigating off the page. That could be Refresh/F5, pressing the previous page button, navigating to another website or closing the entire tab/window.  
+
+To sum up, ready() will be fired before load(), and unload() will be the last to be fired.  
+
+
+函数中获得 selector ：
+```
+selector = '.ui .selector'
+function search_input(selector){
+ var term =  $(selector).val();
+ if(term){
+   search(term);
+ }
+}
+```
+
+通过浏览器window对象重定向url：  
+window.location.href = '/search?q=' + term;  
+
+
+事件(点击事件等)被触发时， 在事件处理函数中， 可以使用一个event对象， 包含以下信息：  
+
+```
+  $(".search_key").click(function(event){
+    event.currentTarget  触发该事件的dom元素 
+    event.type  事件类型 click 等
+    event.timeStamp 事件触发时间戳
+    event.stopPropagation();  用于阻止当前事件在DOM树上冒泡
+根据DOM事件流机制，在元素上触发的大多数事件都会冒泡传递到该元素的所有祖辈元素上，如果这些祖辈元素上也绑定了相应的事件处理函数，就会触发执行这些函数。
+
+使用stopPropagation()函数可以阻止当前事件向祖辈元素的冒泡传递，也就是说该事件不会触发执行当前元素的任何祖辈元素的任何事件处理函数。
+
+该函数只阻止事件向祖辈元素的传播，不会阻止该元素自身绑定的其他事件处理函数的函数。event.stopImmediatePropagation()不仅会阻止事件向祖辈元素的传播，还会阻止该元素绑定的其他(尚未执行的)事件处理函数的执行。
+
+此外，由于live()函数并不是将事件处理函数直接绑定到自己身上，而是"委托"绑定到祖辈元素上，由祖辈元素来触发执行。live()函数会先一次性冒泡到文档的顶部，然后为符合条件的元素触发事件。因此，stopPropagation()函数无法阻止live事件的冒泡。
+
+同样地，delegate()函数也是"委托事件函数"，只有事件冒泡传递到"受委托"的祖辈元素才会被触发执行。因此，stopPropagation()函数无法阻止该元素到"受委托"的祖辈元素之间的事件冒泡。
+
+该函数属于jQuery的Event对象。
+  }
+  
+  $( document ).on( "mousemove", function( event ) {
+    $( "#log" ).text( "pageX: " + event.pageX + ", pageY: " + event.pageY );
+  });
+```
