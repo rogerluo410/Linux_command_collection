@@ -310,14 +310,22 @@ function search_input(selector){
 }
 ```
 
-* 通过浏览器window对象重定向url：  
+* 通过浏览器对象window (BOM)对象重定向url：  
 window.location.href = '/search?q=' + term;  
+window.history.back()  url后退
+window.history.forward() url前进
 
+```
+window.addEventListener("resize", function(){
+    document.getElementById("demo").innerHTML = sometext;
+});  //向浏览器对象window添加事件
+```
 
 * 事件(点击事件等)被触发时， 在事件处理函数中， 可以使用一个event对象， 包含以下信息：  
 
 ```
   $(".search_key").click(function(event){
+    event.preventDefault(); 阻止这个事件原本的动作。
     event.currentTarget  触发该事件的dom元素 
     event.type  事件类型 click 等
     event.timeStamp 事件触发时间戳
@@ -338,4 +346,17 @@ window.location.href = '/search?q=' + term;
   $( document ).on( "mousemove", function( event ) {
     $( "#log" ).text( "pageX: " + event.pageX + ", pageY: " + event.pageY );
   });
+```
+
+* 事件冒泡或事件捕获？
+事件传递有两种方式：冒泡与捕获。
+事件传递定义了元素事件触发的顺序。 如果你将 <p> 元素插入到 <div> 元素中，用户点击 <p> 元素, 哪个元素的 "click" 事件先被触发呢？
+在 冒泡 中，内部元素的事件会先被触发，然后再触发外部元素，即： <p> 元素的点击事件先触发，然后会触发 <div> 元素的点击事件。
+在 捕获 中，外部元素的事件会先被触发，然后才会触发内部元素的事件，即： <div> 元素的点击事件先触发 ，然后再触发 <p> 元素的点击事件。
+addEventListener() 方法可以指定 "useCapture" 参数来设置传递类型：
+addEventListener(event, function, useCapture);
+默认值为 false, 即冒泡传递，当值为 true 时, 事件使用捕获传递。
+实例: 
+```javascript  
+document.getElementById("myDiv").addEventListener("click", myFunction, true);
 ```
