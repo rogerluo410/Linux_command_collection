@@ -282,14 +282,14 @@ function myFunction() {
 
 > http://www.365mini.com/page/jquery-quickstart.htm  --Jquery 手册  
 
-捕获浏览器前进后退按钮的事件：   
+* 捕获浏览器前进后退按钮的事件：   
 ```
   window.addEventListener('popstate', function(event) {
     load_flag = 1;
   }, false);
 ```  
 
-页面加载：  
+* 页面加载：  
 $(window).load();  所有的资源(DOM，CSS，JS，Images)被加载后，会触发这个事件。  
 
 $(document).ready();   在DOM被加载， 准备加载JS文件之前，会触发这个事件。
@@ -299,7 +299,7 @@ $(window).unload();  This event will be fired when you are navigating off the pa
 To sum up, ready() will be fired before load(), and unload() will be the last to be fired.  
 
 
-函数中获得 selector ：
+* 函数中获得 selector ：
 ```
 selector = '.ui .selector'
 function search_input(selector){
@@ -310,11 +310,11 @@ function search_input(selector){
 }
 ```
 
-通过浏览器window对象重定向url：  
+* 通过浏览器window对象重定向url：  
 window.location.href = '/search?q=' + term;  
 
 
-事件(点击事件等)被触发时， 在事件处理函数中， 可以使用一个event对象， 包含以下信息：  
+* 事件(点击事件等)被触发时， 在事件处理函数中， 可以使用一个event对象， 包含以下信息：  
 
 ```
   $(".search_key").click(function(event){
