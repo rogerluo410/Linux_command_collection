@@ -113,7 +113,7 @@ EPOLLONESHOT：只监听一次事件，当监听完这次事件之后，如果�
 ```
 
 实例：  
-```CPP
+```C++  
 epoll_wait范围之后应该是一个循环，遍历所有的事件：  
 
 nfds = epoll_wait(epfd,events,20,500);  
@@ -171,4 +171,10 @@ nfds = epoll_wait(epfd,events,20,500);
   }
 }
 ```
+
+linux socket文件描述符与地址端口怎么关联的？  
+
+A: socket跟他绑定也是为了统一接口。所以网络相关的调用，如connect,bind等等，第一步基本上就是通过文件描述符找到对应的内核socket结构，然后在进行对应的操作。  
+
+
 
