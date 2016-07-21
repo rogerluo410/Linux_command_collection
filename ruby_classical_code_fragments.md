@@ -142,3 +142,45 @@ puts arr[0]
 puts arr[1]
 
 ```
+
+```
+def import_file_seeds(file)
+  if File.exist? file
+    puts "Existing file #{file}!"
+    seeds = CSV.parse(File.read(file))
+    seeds.each do | row |
+      yield(row) if block_given?
+    end
+  else
+    puts "Warning : Cann't find the file #{file}!"
+  end
+end
+
+
+namespace :import_data do
+  desc "Import pharmacy data into database."
+  task :pharmacy => :environment do 
+    import_file_seeds("./lib/tasks/pharmacies_australia.csv") { | row | 
+      Pharmacy.find_or_create_by!(
+        category: row[0], 
+        company_name: row[1], 
+        street: row[2], 
+        suburb: row[3], 
+        state: row[4], 
+        code: row[5].to_i,
+        country: row[6],
+        phone: row[7],
+        website: row[8],
+        mobile: row[9],
+        toll_free: row[10],
+        fax: row[11],
+        abn: row[12],
+        postal_address: row[13],
+        email: row[14],
+        latitude: row[15],
+        longitude: row[16]
+        )
+    }  
+  end  
+end
+```
