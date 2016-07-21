@@ -120,7 +120,7 @@ end
 ```
 
 
-```
+```ruby
 File.open("./output.erb") do | f |
 
    p f.read 
@@ -143,7 +143,7 @@ puts arr[1]
 
 ```
 
-```
+```ruby
 def import_file_seeds(file)
   if File.exist? file
     puts "Existing file #{file}!"
