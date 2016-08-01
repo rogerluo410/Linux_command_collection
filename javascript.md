@@ -360,3 +360,12 @@ addEventListener(event, function, useCapture);
 ```javascript   
 document.getElementById("myDiv").addEventListener("click", myFunction, true);
 ```
+
+
+＃ react.js  
+
+Install on Mac OS :  
+1. `brew intall npm`  
+2. 全局安装 `npm install bower -g`  
+3. `bower install react` --全局安装react   
+4. 实现在当前目录下安装react `npm install react`  
