@@ -365,7 +365,8 @@ document.getElementById("myDiv").addEventListener("click", myFunction, true);
 ＃ react.js  
 
 Install on Mac OS :  
-1. `brew intall npm`  
-2. 全局安装 `npm install bower -g`  
-3. `bower install react` --全局安装react   
-4. 实现在当前目录下安装react `npm install react`  
+1. `brew intall npm`   
+2. `npm install bower -g`  --全局安装bower(bower可以对第三方模块进行统一的版本管理或者迭代)   
+3. `bower install react` --全局安装react    
+4. `bower install --save react`  --实现在当前目录下安装react  
+5. `bower install babel`  --实现在当前目录下安装JSX解释器   
