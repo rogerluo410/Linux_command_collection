@@ -26,6 +26,16 @@
 * Show tables  :    
    `\d`   
 
+- 无法连接本地postgresql：  
+```
+2016-08-09 10:28:56 +0800: Rack app error: #<PG::ConnectionBad: could not connect to server: No such file or directory
+	Is the server running locally and accepting
+	connections on Unix domain socket "/tmp/.s.PGSQL.5432"?
+```	
+Solution: `rm /usr/local/var/postgres/postmaster.pid` 
+
+> http://stackoverflow.com/questions/13410686/postgres-could-not-connect-to-server/35805546#35805546   
+
 * 关于远程登录ubuntu下的postgresql服务的注意事项： 
 > http://www.postgresql.org/docs/current/static/auth-pg-hba-conf.html  
 > http://www.postgresql.org/docs/current/static/runtime-config-connection.html#GUC-LISTEN-ADDRESSES   
