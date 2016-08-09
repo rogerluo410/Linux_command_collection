@@ -291,14 +291,24 @@ http抓包工具
 
 
 #Sublime Text  
-> http://www.cnblogs.com/qiufuwu618/archive/2012/09/07/2675954.html  --Sublime Text 2 设置文件详解    
-
-Sublime Text 怎样为不同的语言设置不同的缩进     
+工具栏 Preferences – Settings-User 进入用户设置：  
 ```
-Preferences -> Settings - More -> Syntax Specific - User
-然后添加设置代码就可以了，文件保存在$Packages/User下
 {
-    "tab_size": 2,
-    "translate_tabs_to_spaces": true 
+ "trim_trailing_white_space_on_save": true,
+  "ensure_newline_at_eof_on_save": true,
+  "font_face": "Microsoft YaHei Mono",
+  "font_size": 16.0,
+  "disable_tab_abbreviations": true,
+  "tab_size": 2,
+  "draw_minimap_border": true,
+  "save_on_focus_lost": true,
+  "highlight_line": true,
+  "word_wrap": "true",
+  "fade_fold_buttons": false,
+  "bold_folder_labels": true,
+  "highlight_modified_tabs": true,
+  "default_line_ending": "unix",
+  "auto_find_in_selection": true
 }
-```
+```  
+> http://www.jianshu.com/p/b90fc7a0bd2d  
