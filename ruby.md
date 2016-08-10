@@ -2743,3 +2743,14 @@ For creating multiple-line strings, Ruby supports here documents (heredocs), a f
         $ rake environment elasticsearch:import:model CLASS='Article' SCOPE='published'
     DESC
 ```
+
+
+### 怎样才是 ruby 中捕获异常的正确姿势 
+> http://ju.outofmemory.cn/entry/241050  
+
+```
+最好的 rescue 姿势，捕获明确指定的异常，rescue OneError => e
+次好的 rescue 姿势，捕获 StandardError，通过 rescue 或 rescue => e
+千万千万不要 rescue Exception => e，除非真的知道自己在干嘛
+自己定义的异常应该继承自 StandardError ，而不是 Exception。
+```
