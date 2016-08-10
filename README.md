@@ -35,6 +35,7 @@ $ git config --global core.editor vim
 
 **git 分支合并与冲突**  
 * git branch branch_name           -- 创建分支  
+* git branch -a                    -- 查看所有本地 和 远程分支  
 * git checkout branch_name         -- 切换分支  
 * git push --set-upstream origin branch_name  --提交到远程本分支上（在远端服务器上创建该分支）   
 * git pull origin master:slave     -- 用远端origin主机的master分支更新本地slave分支  
@@ -51,7 +52,16 @@ git merge master  -- 合并master到当前分支
 OR 
 
 git fetch origin staging
-git merge origin staging
+git merge origin staging  
+
+OR  
+
+git fetch -p 
+git checkout staging
+git merge
+git checkout [branch_name]
+git rebase staging 
+git push -f origin [branch_name]  
 ```  
 
 **fork了开源项目后，如何持续跟进项目的开发:**     
