@@ -312,3 +312,13 @@ http抓包工具
 }
 ```  
 > http://www.jianshu.com/p/b90fc7a0bd2d  
+
+快捷键： 
+```
+On mac: 
+ (Shift) + Alt + command + 1(2,3,4) 分屏
+ command + N  新窗口  
+ command + w  关闭当前窗口  
+ command + shift + t  恢复关闭的窗口  
+ Shift + command + [  ( ] ) 切换文件
+```
