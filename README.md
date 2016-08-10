@@ -17,6 +17,7 @@ autoconf & automake :
 
 #Git
 > http://git-scm.com/book/zh/v2 --git 教程   
+> https://services.github.com/kit/downloads/cn/github-git-cheat-sheet.html  --git 常用命令  
  
 ```
 编辑用户名和邮箱, 编辑工具  
