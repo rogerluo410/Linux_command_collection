@@ -42,6 +42,33 @@ $ git config --global core.editor vim
 * git diff                         -- 如果有文件冲突,diff出冲突处，手动修改/删除`>>>>head  code  <<<<< `中的代码    
 * git commit -a -M "Update with master"  --本地slave分支提交到origin主机的slave分支即可    
 
+**git 命令自动补全脚本**  
+```
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+
+No need to worry about what directory you're in when you run this as your home directory(~) is used with the target.
+
+Then I added to my ~/.bash_profile file the following 'execute if it exists' code:
+
+(solution one)
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
+
+Update: I'm making these bits of code more concise to shrink down my .bashrc file, in this case I now use:
+
+(solution two)
+test -f ~/.git-completion.bash && . $_  
+
+Note: $_ means the last argument to the previous command. so . $_ means run it - "it" being .git-completion.bash in this case
+
+This still works on both Ubuntu and OSX and on machines without the script .git-completion.bash script.
+
+Now git Tab (actually it's git TabTab ) works like a charm!
+
+(PS: If this doesn't work off the bat, you may need to run chmod -X ~/.git-completion.bash to give the script permission to run.)
+```
+
 **git process on Working:**   
 ```
 gc master  
