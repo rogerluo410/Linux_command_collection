@@ -362,7 +362,7 @@ document.getElementById("myDiv").addEventListener("click", myFunction, true);
 ```
 
 
-＃ react.js  
+### react.js  
 
 Install on Mac OS :  
 1. `brew intall npm`   
@@ -370,3 +370,6 @@ Install on Mac OS :
 3. `bower install react` --全局安装react    
 4. `bower install --save react`  --实现在当前目录下安装react  
 5. `bower install babel`  --实现在当前目录下安装JSX解释器   
+
+Install Redux (Redux is a predictable state container for JavaScript apps.):  
+
