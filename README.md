@@ -359,4 +359,5 @@ On mac:
  command + w  关闭当前窗口  
  command + shift + t  恢复关闭的窗口  
  Shift + command + [  ( ] ) 切换文件
+ command + p 搜索文件
 ```
