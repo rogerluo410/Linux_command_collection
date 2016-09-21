@@ -36,6 +36,7 @@ Solution: `rm /usr/local/var/postgres/postmaster.pid`
 
 > http://stackoverflow.com/questions/13410686/postgres-could-not-connect-to-server/35805546#35805546   
 
+
 * 关于远程登录ubuntu下的postgresql服务的注意事项： 
 > http://www.postgresql.org/docs/current/static/auth-pg-hba-conf.html  
 > http://www.postgresql.org/docs/current/static/runtime-config-connection.html#GUC-LISTEN-ADDRESSES   
