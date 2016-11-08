@@ -970,6 +970,20 @@ end
 ```
 resources :photos, only: [:index, :show]  
 ```
+- 单条资源的路由: 
+```ruby
+Singular Resources: 
+
+resource :geocoder 
+
+HTTP Verb	Path	      Controller#Action	Used for
+GET	   /geocoder/new	geocoders#new	   return an HTML form for creating the geocoder
+POST	   /geocoder	   geocoders#create	create the new geocoder
+GET	   /geocoder	   geocoders#show	   display the one and only geocoder resource
+GET	   /geocoder/edit	geocoders#edit	   return an HTML form for editing the geocoder
+PATCH/PUT  /geocoder	   geocoders#update	update the one and only geocoder resource
+DELETE	  /geocoder	   geocoders#destroy	delete the geocoder resource
+```
 
 - CSRF 是什么, Rails 里针对它做了些什么?   
 所有使用表单帮助方法生成的表单，都有会添加这个令牌。如果想自己编写表单，或者基于其他原因添加令牌，可以使用
