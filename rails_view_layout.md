@@ -367,3 +367,12 @@ app/views/layouts/news.html.erb :
 That’s it. The News views will use the new layout, hiding the top menu and adding a new right menu inside the “content” div.   
 
 There are several ways of getting similar results with different sub-templating schemes using this technique. Note that there is no limit in nesting levels. One can use the ActionView::render method via render :file => 'layouts/news' to base a new layout on the News layout. If one is sure she will not subtemplate the News layout, she can ommit the yield(:news_content) or part.   
+
+# View 帮助方法  
+
+```
+<% 执行表达式(不需要返回值的那种 比如form) 对应haml的"-"(Running Ruby) 
+<%= 输出表达式的执行结果(<%=h user.name %>之类) 对应haml "="(Inserting Ruby) 
+```
+
+
