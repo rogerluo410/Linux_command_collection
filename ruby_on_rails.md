@@ -1171,3 +1171,21 @@ def redirect_back_or_default(default)
   session[:return_to] = nil
 end
 ```
+
+# controller concern  
+
+```ruby
+class AdminController < ApplicationController
+  before_filter :check_admin_user
+
+  private
+
+  def check_admin_user
+    unless current_user.admin
+      flash[:alert] = "You can't be here!"
+      redirect_to root_path
+    end
+  end
+end
+```
+
