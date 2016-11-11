@@ -184,3 +184,46 @@ namespace :import_data do
   end  
 end
 ```
+
+### Crawl down html page and its css file  
+
+```
+require 'open-uri'
+require 'nokogiri'
+require 'uri'
+require 'fileutils'
+
+p1 = URI.parse('drwrew')
+p p1
+
+open('luo.html', 'wb') do |file|
+  file << open('http://guides.rubyonrails.org/routing.html').read
+end
+
+  def parseHtml
+    uri = URI.parse("http://guides.rubyonrails.org/routing.html")
+    p uri.host
+    p 'error url' unless uri.kind_of?(URI::HTTP) or uri.kind_of?(URI::HTTPS)
+    doc = Nokogiri::HTML(open('http://guides.rubyonrails.org/routing.html') )
+
+    doc.css("head link").each do |tag|
+      link = tag["href"]
+      next unless link && link.end_with?("css")
+      p link  #=> 'stylesheet/name.css'
+      blink = File.basename(link) #=> 'name.css'
+      p blink
+      csslink_url = URI.join( "#{uri.scheme}://#{uri.host}", link)  #=> generate download url
+      p csslink_url
+      dirname = File.dirname(link) #fetch dir string
+      p dirname
+      FileUtils.mkdir_p(dirname) #create dir of css files
+      File.open("#{link}", "w") do |f|
+        content = open(csslink_url) { |g| g.read }  #write .css file with directory.
+        f.write(content)
+      end
+    end
+  end
+
+parseHtml
+
+```
