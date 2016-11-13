@@ -375,4 +375,30 @@ There are several ways of getting similar results with different sub-templating 
 <%= 输出表达式的执行结果(<%=h user.name %>之类) 对应haml "="(Inserting Ruby) 
 ```
 
+# form_for V.S form_tag  
 
+```ruby
+You would use form_for for a specific model,
+
+<% form_for @person do |f| %> # you can use f here
+
+    First name: <%= f.text_field :first_name %>
+    Last name : <%= f.text_field :last_name %>
+
+<% end %>
+Form_tag create basic form,
+
+<%= form_tag '/person' do -%>
+  <%= text_field_tag "person", "first_name" %>
+<% end -%>
+
+form_for is a bit easier to use for creating forms for a model object because it figures out what url to use and what http method to use depending on whether the object is a new record or a saved record.
+
+Instead form_tag only create a simply form html, for example, a search:
+
+ <%= form_tag("/search", :method => "get") do %>
+   <%= label_tag(:q, "Search for:") %>
+   <%= text_field_tag(:q) %>
+   <%= submit_tag("Search") %>
+<% end %>
+```
