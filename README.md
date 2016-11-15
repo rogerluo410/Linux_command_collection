@@ -361,3 +361,9 @@ On mac:
  Shift + command + [  ( ] ) 切换文件
  command + p 搜索文件
 ```
+
+# Atom plugins recommended.
+
+> http://blog.csdn.net/d780793370/article/details/52148297  
+> http://www.jianshu.com/p/dd97cbb3c22d  
+
