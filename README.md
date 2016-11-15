@@ -367,3 +367,21 @@ On mac:
 > http://blog.csdn.net/d780793370/article/details/52148297  
 > http://www.jianshu.com/p/dd97cbb3c22d  
 
+
+```
+relative-numbers
+ex-mode
+vim-mode
+
+advanced-open-file
+
+ruby-block
+
+docblockr 
+
+file-icons
+
+autocomplete-paths
+
+platformio-ide-terminal
+```
