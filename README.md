@@ -384,4 +384,6 @@ file-icons
 autocomplete-paths
 
 platformio-ide-terminal
+
+highlight-selected
 ```
