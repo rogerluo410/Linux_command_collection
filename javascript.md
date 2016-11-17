@@ -373,3 +373,11 @@ Install on Mac OS :
 
 Install Redux (Redux is a predictable state container for JavaScript apps.):  
 
+
+# Chrome extension  
+
+> http://lifehacker.com/5857721/how-to-build-a-chrome-extension  
+
+examples: 
+
+https://github.com/nihal111/IITB-login-extension-Chrome
