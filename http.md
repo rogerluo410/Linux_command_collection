@@ -79,3 +79,9 @@ I'd say go REST, using JSON for encoding; but if your requirements are really th
 508	:loop_detected   
 510	:not_extended   
 511	:network_authentication_required   
+
+
+# Crawling  
+
+> http://www.cnblogs.com/junrong624/p/5533655.html  
+
