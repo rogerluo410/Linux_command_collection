@@ -1,4 +1,4 @@
-#HTTP
+# HTTP
 
 
 # REST / JSON / XML-RPC / SOAP
@@ -11,7 +11,7 @@ I'd say go REST, using JSON for encoding; but if your requirements are really th
 > http://stackoverflow.com/questions/1371312/rest-json-xml-rpc-soap   
 
 
-###HTTP status  
+### HTTP status  
 * Informational	   
 100	:continue   
 101	:switching_protocols   
@@ -83,12 +83,15 @@ I'd say go REST, using JSON for encoding; but if your requirements are really th
 
 # Crawling  
 
-> http://www.cnblogs.com/junrong624/p/5533655.html  
+> http://www.cnblogs.com/junrong624/p/5533655.html  --抓包可能遇到的问题
 > https://my.oschina.net/leejun2005/blog/407043  --PhantomJS web抓包引擎
 > http://www.tuicool.com/articles/nieEVv  --PhantomJS使用说明
 
-# HTTP request header for form 
-`application/x-www-form-urlencoded`  and  `multipart/form-data`  
+# HTTP request header for form   
+
+ > http://www.cnblogs.com/yucongblog/p/5885802.html --HTTP消息中request和response的 header头部信息的讲解
+
+### `application/x-www-form-urlencoded`  and  `multipart/form-data`  
 
 - x-www-form-urlencoded
 
