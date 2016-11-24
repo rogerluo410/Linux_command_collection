@@ -98,9 +98,13 @@ I'd say go REST, using JSON for encoding; but if your requirements are really th
 当action为post时候，浏览器把form数据封装到http body中，然后发送到server。 
 
 
-- multipart/form-data  
-> http://blog.csdn.net/five3/article/details/7181521 
+- multipart/form-data 
 
-采用这种编码方式，浏览器可以很容易的使表单内的数据和文件一起传送。这种编码方式先定义好一个不可能在数据中出现的字符串作为分界符，然后用它将各个数据段分开，而对于每个数据段都对应着HTML页面表单中的一个Input区，包括一个content-disposition 属性，
-说明了这个数据段的一些信息，如果这个数据段的内容是一个文件，还会有Content-Type 属性，然后就是数据本身。
+ > http://blog.csdn.net/five3/article/details/7181521  --multipart/form-data 编码格式详解  
+
+采用这种编码方式，浏览器可以很容易的使表单内的数据和文件一起传送。
+
+这种编码方式先定义好一个不可能在数据中出现的字符串作为分界符，然后用它将各个数据段分开，
+而对于每个数据段都对应着HTML页面表单中的一个Input区，包括一个content-disposition 属性，
+说明了这个数据段的一些信息，如果这个数据段的内容是一个文件，还会有Content-Type属性，然后就是数据本身。
 
