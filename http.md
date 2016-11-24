@@ -1,7 +1,7 @@
 #HTTP
 
 
-###REST / JSON / XML-RPC / SOAP
+# REST / JSON / XML-RPC / SOAP
 REST mandates the general semantics and concepts. The transport and encodings are up to you. They were originally formulated on XML, but JSON is totally applicable.
 
 XML-RPC / SOAP are different mechanisms, but mostly the same ideas: how to map OO APIs on top of XML and HTTP. IMHO, they're disgusting from a design view. I was so relieved when found about REST. In your case, i'm sure that the lots of layers would mean a lot more CPU demand.
@@ -86,3 +86,21 @@ I'd say go REST, using JSON for encoding; but if your requirements are really th
 > http://www.cnblogs.com/junrong624/p/5533655.html  
 > https://my.oschina.net/leejun2005/blog/407043  --PhantomJS web抓包引擎
 > http://www.tuicool.com/articles/nieEVv  --PhantomJS使用说明
+
+# HTTP request header for form 
+`application/x-www-form-urlencoded`  and  `multipart/form-data`  
+
+- x-www-form-urlencoded
+
+当action为get时候，浏览器用x-www-form-urlencoded的编码方式把form数据转换成一个字串（name1=value1&name2=value2...），
+然后把这个字串append到url后面，用?分割，加载这个新的url。  
+
+当action为post时候，浏览器把form数据封装到http body中，然后发送到server。 
+
+
+- multipart/form-data  
+> http://blog.csdn.net/five3/article/details/7181521 
+
+采用这种编码方式，浏览器可以很容易的使表单内的数据和文件一起传送。这种编码方式先定义好一个不可能在数据中出现的字符串作为分界符，然后用它将各个数据段分开，而对于每个数据段都对应着HTML页面表单中的一个Input区，包括一个content-disposition 属性，
+说明了这个数据段的一些信息，如果这个数据段的内容是一个文件，还会有Content-Type 属性，然后就是数据本身。
+
