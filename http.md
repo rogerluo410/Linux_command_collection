@@ -120,3 +120,62 @@ I'd say go REST, using JSON for encoding; but if your requirements are really th
  4) 隧道
  5) Agent 代理
 ```
+
+ # HTTP报文格式  
+
+ - 请求报文  
+ ```
+ <method> <request-url> <http protocol version>
+ <headers>
+ 
+ <entity-body>
+ 
+ eg1: 
+ GET /test/hi-there.txt HTTP/1.1     --报文起始行  
+ 
+ Accept: text/*     --报文首部  
+ Host: www.xxx.com  
+ 
+ eg2: 
+ 
+ --请求头
+ Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+ Accept-Encoding:gzip, deflate, sdch
+ Accept-Language:en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4,zh-TW;q=0.2,ja;q=0.2
+ Cache-Control:max-age=0
+ Connection:keep-alive
+ Cookie:PHPSESSID=863619ebcfb4fc267ee3bb4d1426d617
+ Host:www.xingfushun.cn
+ Referer:https://www.baidu.com/link?url=6dzBGmzwkQfk5mRhKbOL_HuIpQvJK5HW5LOrhTOCc0RFsVScrY-wNQRGctY6h-htLt6XZMPyW38tAdPju8RpDa&wd=&eqid=e1212b3600012e74000000055847a57c
+ Upgrade-Insecure-Requests:1
+ User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36
+ ```
+ 
+ - 响应报文 
+ ```
+ <http protocol version> <status> <reason-phrase>
+ <headers>
+ 
+ <entity-body>
+ 
+ eg:
+ HTTP/1.1 200 OK   --报文起始行
+ --响应头
+ Cache-Control:no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+ Connection:Keep-Alive
+ Content-Encoding:gzip
+ Content-Length:2662
+ Content-Type:text/html; charset=utf-8
+ Date:Wed, 07 Dec 2016 06:11:33 GMT
+ Expires:Thu, 19 Nov 1981 08:52:00 GMT
+ Keep-Alive:timeout=1, max=100
+ Pragma:no-cache
+ Server:Apache/2
+ Vary:Accept-Encoding,User-Agent
+ X-Powered-By:PHP/5.2.17
+ ```
+ 
+ 
+ 
+ 
+ 
