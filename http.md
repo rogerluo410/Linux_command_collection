@@ -121,7 +121,7 @@ I'd say go REST, using JSON for encoding; but if your requirements are really th
  5) Agent 代理
 ```
 
- # HTTP报文格式  
+# HTTP报文格式     
 
  - 请求报文  
  ```
