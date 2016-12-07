@@ -175,7 +175,17 @@ I'd say go REST, using JSON for encoding; but if your requirements are really th
  X-Powered-By:PHP/5.2.17
  ```
  
+# 连接管理  
+
+- TCP的性能  
+
+- HTTP事物的时延 
  
+  通过DNS将URI中的主机名转换成IP地址需要花费一点时间。  
+  大多数HTTP客户端都有一个DNS缓存，用来保存近期所访问站点的IP地址。  
+  
+- HTTP连接处理与优化  
+
  
  
  
