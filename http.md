@@ -95,10 +95,9 @@ I'd say go REST, using JSON for encoding; but if your requirements are really th
 
 - x-www-form-urlencoded
 
-当action为get时候，浏览器用x-www-form-urlencoded的编码方式把form数据转换成一个字串（name1=value1&name2=value2...），
-然后把这个字串append到url后面，用?分割，加载这个新的url。  
+ * 当action为get时候，浏览器用x-www-form-urlencoded的编码方式把form数据转换成一个字串（name1=value1&name2=value2...），然后把这个字串append到url后面，用?分割，加载这个新的url。  
 
-当action为post时候，浏览器把form数据封装到http body中，然后发送到server。 
+ * 当action为post时候，浏览器把form数据封装到http body中，然后发送到server。 
 
 
 - multipart/form-data 
@@ -111,3 +110,13 @@ I'd say go REST, using JSON for encoding; but if your requirements are really th
 而对于每个数据段都对应着HTML页面表单中的一个Input区，包括一个content-disposition 属性，
 说明了这个数据段的一些信息，如果这个数据段的内容是一个文件，还会有Content-Type属性，然后就是数据本身。
 
+
+# Web 的结构组件  
+在Web浏览器 和 Web服务器之间，有很多中间组件， 分别是： 
+```
+ 1) 代理
+ 2) 缓存
+ 3) 网关
+ 4) 隧道
+ 5) Agent 代理
+```
