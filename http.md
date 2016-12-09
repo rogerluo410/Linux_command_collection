@@ -228,3 +228,10 @@ I'd say go REST, using JSON for encoding; but if your requirements are really th
 # SSL 隧道 
 
 > http://blog.csdn.net/clh604/article/details/22179907   -- https原理：证书传递、验证和数据加密、解密过程解析
+
+
+# 客户端识别和cookie机制  
+
+# 基本认证机制
+
+# 重定向和负载均衡
