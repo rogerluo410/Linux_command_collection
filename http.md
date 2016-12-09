@@ -217,10 +217,10 @@ I'd say go REST, using JSON for encoding; but if your requirements are really th
  * no-store 
  * no-cache
  * max-age
- * must-revalidate
- Cache-Control: no-store     --不存储， 直接删除
- Cache-Control: no-cache     --可以缓存在本地， 但必须与原始服务器验证成功后才可以使用
- Cache-Control: max-age=100  --客户端缓存的秒数  
+ * must-revalidate  
+ Cache-Control: no-store     --不存储， 直接删除   
+ Cache-Control: no-cache     --可以缓存在本地， 但必须与原始服务器验证成功后才可以使用    
+ Cache-Control: max-age=100  --客户端缓存的秒数      
  
  Expires 首部：
  Expires: 过期时间
