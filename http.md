@@ -204,6 +204,24 @@ I'd say go REST, using JSON for encoding; but if your requirements are really th
   Web Client --http-->  Web/Email网关 --POP--> Web Server  
   
   
-  
+# 缓存  
+- 缓存优点： 
+
+ * 减少冗余数据传输， 节省网络带宽
+ * 缓解网络瓶颈， 不需要更多的带宽就能更快的加载页面
+ * 降低对原始服务器的要求， 服务器可以更快响应， 避免过载的出现
+ * 降低距离时延， 因为从较远的地方加载页面会更快一些  
  
+- HTTP 关于缓存的首部  
+ Cache-Control 首部：
+ * no-store 
+ * no-cache
+ * max-age
+ * must-revalidate
+ Cache-Control: no-store     --不存储， 直接删除
+ Cache-Control: no-cache     --可以缓存在本地， 但必须与原始服务器验证成功后才可以使用
+ Cache-Control: max-age=100  --客户端缓存的秒数  
+ 
+ Expires 首部：
+ Expires: 过期时间
  
