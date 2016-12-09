@@ -192,6 +192,12 @@ I'd say go REST, using JSON for encoding; but if your requirements are really th
  * 持久连接  connection: KEEP-ALIVE， 减少打开连接的潜在数量；
  
  
- 
+# 代理  
+  * 公有代理和私有代理服务器  
+  ＊ 代理和网关的区别 
+  
+  代理： 
+             http 
+  Web Client ---->
  
  
