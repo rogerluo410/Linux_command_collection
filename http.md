@@ -196,8 +196,17 @@ I'd say go REST, using JSON for encoding; but if your requirements are really th
   * 公有代理和私有代理服务器  
   ＊ 代理和网关的区别 
   
-  代理： 
-             http 
-  Web Client ---->
+  代理: 
+             http            http
+  Web Client ---->  Web 代理 -----> Web Server  
+  
+  
+  网关:
+  
+             http                POP
+  Web Client ---->  Web/Email网关 -----> Web Server  
+  
+  
+  
  
  
