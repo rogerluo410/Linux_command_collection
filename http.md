@@ -194,7 +194,6 @@ I'd say go REST, using JSON for encoding; but if your requirements are really th
  
 # 代理 
 
-  * 公有代理和私有代理服务器  
   * 代理和网关的区别 
   
   代理: 
