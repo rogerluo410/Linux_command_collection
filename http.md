@@ -225,3 +225,6 @@ I'd say go REST, using JSON for encoding; but if your requirements are really th
  Expires 首部：
  Expires: 过期时间
  
+# SSL 隧道 
+
+> http://blog.csdn.net/clh604/article/details/22179907   -- https原理：证书传递、验证和数据加密、解密过程解析
