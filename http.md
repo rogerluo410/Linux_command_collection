@@ -186,10 +186,10 @@ I'd say go REST, using JSON for encoding; but if your requirements are really th
   
 - HTTP连接处理与优化  
 
- ＊ connection 首部
- ＊ 串行事物处理（串行连接）
- ＊ 并行连接  提高复合页面的传输速度
- ＊ 持久连接  connection: KEEP-ALIVE， 减少打开连接的潜在数量；
+ * connection 首部
+ * 串行事物处理（串行连接）
+ * 并行连接  提高复合页面的传输速度
+ * 持久连接  connection: KEEP-ALIVE， 减少打开连接的潜在数量；
  
  
  
