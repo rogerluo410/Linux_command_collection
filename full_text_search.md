@@ -10,8 +10,8 @@
   - Check running successfully   
   http://localhost:9200/ 
 
-  - Use plugin
+  - Use plugin    
   ln -s /usr/local/Cellar/elasticsearch/2.3.4/libexec/bin/plugin  esplugin
   
-  - Install Chinese Analysis plugin
-  esplugin install analysis-smartcn
+  - Install Chinese Analysis plugin    
+  esplugin install analysis-smartcn   (https://www.elastic.co/guide/en/elasticsearch/plugins/master/analysis-smartcn.html)
