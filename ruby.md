@@ -325,7 +325,7 @@ func h2 #=> successful!, 说明 **args 只接受key为symbol的hash结构
   p h[:conf]  #=> nil  :name and "name" are different keys.
 ```
 
-* Symbol Key to String key 
+* Symbol Key to String key    
 stringify_keys  
 deep_stringify_keys    
 
