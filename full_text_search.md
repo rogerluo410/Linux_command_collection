@@ -27,6 +27,16 @@ Elasticsearch不仅仅是Lucene和全文搜索，我们还能这样去描述它�
  
 # 集群和节点  
 
+* 集群中的一个节点会被选为 master 节点，它将负责管理集群范畴的变更，例如创建或删除索引，添加节点到集群或从集群删除节点。   
+
+* 查看集群是否健康：   
+
+`GET /_cluster/health`  
+
+* 主要分片(primary shard) 和 从分片(replica shard)   
+
+
+
 # 索引 ／ 文档 ／ 搜索 / 聚合 
 
 - 文档  
