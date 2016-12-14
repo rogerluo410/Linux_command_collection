@@ -165,6 +165,7 @@ hash = {:item1 => 1}
 another_hash = {:item2 => 2, :item3 => 3}
 hash.merge(another_hash) # {:item1=>1, :item2=>2, :item3=>3}
 ```
+
 * In your specific case it could be:
 ```
 hash = {:item1 => 1}
@@ -323,6 +324,17 @@ func h2 #=> successful!, 说明 **args 只接受key为symbol的hash结构
   p h["name"] #=> nil
   p h[:conf]  #=> nil  :name and "name" are different keys.
 ```
+
+* Symbol Key to String key 
+stringify_keys  
+deep_stringify_keys    
+
+```ruby
+definition = { a: "abc"}
+definition.to_hash.deep_stringify_keys  #=> { "a": "abc" }
+```
+
+> http://stackoverflow.com/questions/10549554/how-to-change-hash-keys-from-symbols-to-strings 
 
 
 
