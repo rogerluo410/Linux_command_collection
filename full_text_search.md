@@ -49,6 +49,30 @@ Elasticsearch不仅仅是Lucene和全文搜索，我们还能这样去描述它�
 
    Relational DB -> Databases -> Tables -> Rows -> Columns     
    Elasticsearch -> Indices   -> Types  -> Documents -> Fields    
+   
+   query in Client:   
+   ```http
+    GET  /ack_asset_pipeline_application_development_topic/_search 
+    {
+        "query": {
+          "match_all": {}
+       }
+    }
+
+    DELETE /ack_asset_pipeline_application_development_topic
+
+
+    GET  /ack_asset_pipeline_application_development_topic/_search 
+    {
+         "query": {
+          "multi_match": {
+             "query": "fds",
+             "operator": "or",
+             "fields": ["title","content"]
+          }
+       }
+    }
+   ```  
   
 - 聚合   
   Elasticsearch有一个功能叫做聚合(aggregations)，它允许你在数据上生成复杂的分析统计。它很像SQL中的GROUP BY但是功能更强大。   
