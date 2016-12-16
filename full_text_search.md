@@ -16,6 +16,7 @@
   - Install Chinese Analysis plugin    
   esplugin install analysis-smartcn   (https://www.elastic.co/guide/en/elasticsearch/plugins/master/analysis-smartcn.html)
 
+  － elasticsearch 权威指南  https://github.com/GavinFoo/elasticsearch-definitive-guide   
 
 # 关于 ElasticSearch 
 
