@@ -229,7 +229,10 @@ end
  5。 伪装HTTP请求  
 有时候你需要用到一些外部的服务。在你不能真的使用这些外部服务的时候你应该用类似 webmock 这样的工具来进行伪装。  
 
- 6。使用Fuubar   
+ 6。 Use rspec-mocks to stub smoke
+ > https://github.com/rspec/rspec-mocks  
+ 
+ 7。使用Fuubar   
 > https://github.com/thekompanee/fuubar  
 
 
@@ -1160,7 +1163,6 @@ LINE 1: ...y_groups".* FROM "product_property_groups" WHERE (product_pr...
 
 > http://stackoverflow.com/questions/2139996/how-to-redirect-to-previous-page-in-ruby-on-rails  
 > http://stackoverflow.com/questions/771656/correctly-doing-redirect-to-back-in-ruby-on-rails-when-referrer-is-not-availabl  
-
 ```
 def store_location
   session[:return_to] = request.request_uri
