@@ -380,12 +380,12 @@ Install Redux (Redux is a predictable state container for JavaScript apps.):
 - examples:    
 https://github.com/nihal111/IITB-login-extension-Chrome
 
-－ Firefox extension  VS  Chrome extension.
+- Firefox extension  VS  Chrome extension.     
 For Firefox the language is mostly JavaScript and XUL (XML UI Language). Although it is possible to use Python and XUL, or even have compiled code bound trough XPCOM/XPconnect. But that's definitely not for beginners.
 
 For Chrome the language is actually JavaScript, HTML and CSS. It's very similar to developing web application.
 
-See tutorials:
+See tutorials:   
 
-Firefox: https://developer.mozilla.org/en/building_an_extension
-Chrome: http://code.google.com/chrome/extensions/getstarted.html
+Firefox: https://developer.mozilla.org/en/building_an_extension   
+Chrome: http://code.google.com/chrome/extensions/getstarted.html   
