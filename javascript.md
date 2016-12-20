@@ -1,38 +1,16 @@
-**JS中获取HTML标签对象**  
-$("#id")是jquery写法，和GetElementById一样   
-* 在JS中使用 $('#images-mask')， 取得标签id    = images-mask 的对象  
-* 在JS中使用 $('.images-mask')， 取得标签class = images-mask 的对象  
+http://jsfiddle.net/                                      -- js test
 
-**在JS中动态添加标签**  
-```
-obj = '<div>...</div>'
-$(obj) 表示使用这个标签对象  
-var sData =  JSON.stringify(data);
-            var jData =  JSON.parse(sData);
-            //alert(jData["photos"])
-            var images = ""
-            for (var i in jData["photos"]) {
-                //alert (i)
-                 images += '<a href="#" class="preview"><img class="img" src="'+ jData["photos"][i]["photo_addr"] +'" alt="" /></a>';
+http://www.js-css.cn/a/jscode/album/                      --JQuery特效
 
-            }
-            $('#images-mask').html($(images));
-```
-
-
-http://jsfiddle.net/  -- js test
-
-http://www.js-css.cn/a/jscode/album/    --JQuery特效
-
-http://www.sencha.com/products/extjs/up-and-running  --Ext.js instruction  
+http://www.sencha.com/products/extjs/up-and-running       --Ext.js instruction  
 
 http://blog.csdn.net/qq838419230/article/details/8026390  --Javascript learning  
 
-http://www.ituring.com.cn/article/8108               --JavaScript宝座：七大框架论剑  
+http://www.ituring.com.cn/article/8108                    --JavaScript宝座：七大框架论剑  
 
-http://www.ituring.com.cn/article/38394              --JavaScript MVC框架PK：Angular、Backbone、CanJS与Ember  
+http://www.ituring.com.cn/article/38394                   --JavaScript MVC框架PK：Angular、Backbone、CanJS与Ember  
 
-http://www.cnblogs.com/jinguangguo/p/3534422.html    --侃侃前端MVC设计模式
+http://www.cnblogs.com/jinguangguo/p/3534422.html         --侃侃前端MVC设计模式
 
 对于比较流行的 Javascript MVC 框架应该如何选择？
 > http://www.zhihu.com/question/20381805
@@ -41,7 +19,7 @@ http://www.cnblogs.com/jinguangguo/p/3534422.html    --侃侃前端MVC设计模�
 不同项目应该有不同的最优选择（如果存在最优选择的话）。"
 
 
-###1.Asynchronous/Synchronous Javascript
+# Asynchronous/Synchronous Javascript   
 a.Unless, and this is the answer to your second question, you specify that the Ajax call should be synchronous, which is an option. Doing so will force the user to wait until the call completes before they can do anything, so that's usually not the best choice. Using a callback is usually the best approach.
 
 b.Additionally, if you want foo() to remain asynchronous but execute foobar() when it is complete, you could use foobar() as a callback. That way you can continue down your JS logic, but you can still make certain functions wait if they need to.
@@ -51,7 +29,7 @@ c.Gotcha, thanks! kingjiv said the exact phrase I was looking for - foobar will 
 > http://stackoverflow.com/questions/6748287/asynchronous-synchronous-javascript
 
 
-###2.Javascript by reference vs. by value
+# Javascript by reference vs. by value   
 My understanding is that this is actually very simple:
 
 - **.**Javascript is always pass by value, but when a variable refers to an object (including arrays), the "value" is a reference to the object.
@@ -94,7 +72,28 @@ console.log(b, c.foo); // "2" "bar"
 > http://stackoverflow.com/questions/6605640/javascript-by-reference-vs-by-value
 
 
-###Javascript
+# Javascript   
+**JS中获取HTML标签对象**  
+$("#id")是jquery写法，和GetElementById一样   
+* 在JS中使用 $('#images-mask')， 取得标签id    = images-mask 的对象  
+* 在JS中使用 $('.images-mask')， 取得标签class = images-mask 的对象  
+
+**在JS中动态添加标签**  
+```
+obj = '<div>...</div>'
+$(obj) 表示使用这个标签对象  
+var sData =  JSON.stringify(data);
+            var jData =  JSON.parse(sData);
+            //alert(jData["photos"])
+            var images = ""
+            for (var i in jData["photos"]) {
+                //alert (i)
+                 images += '<a href="#" class="preview"><img class="img" src="'+ jData["photos"][i]["photo_addr"] +'" alt="" /></a>';
+
+            }
+            $('#images-mask').html($(images));
+```
+
 * JavaScript中有两种主要对象：  
  a.Native:  
      JavaScript中内置的标准对象(Date, Array)；   
@@ -276,8 +275,6 @@ function myFunction() {
 
 ```
 
-
-
 # Jquery  
 
 > http://www.365mini.com/page/jquery-quickstart.htm  --Jquery 手册  
@@ -362,7 +359,7 @@ document.getElementById("myDiv").addEventListener("click", myFunction, true);
 ```
 
 
-### react.js  
+# react.js   
 
 Install on Mac OS :  
 1. `brew intall npm`   
@@ -390,3 +387,46 @@ See tutorials:
 
 Firefox: https://developer.mozilla.org/en/building_an_extension   
 Chrome: http://code.google.com/chrome/extensions/getstarted.html   
+
+# AngularJS，Ember.js，Backbone这类新框架与jQuery的重要区别在哪里？  
+
+```
+AngularJS，Ember.js，Backbone这类新框架与jQuery的区别如下：
+1、本质区别
+    AngularJS，Ember.js，Backbone这三者是框架，而jQuery是一个库；使用库是指，使用者的代码决定什么时候从库中调用一个特定的方法；使用框架则是，使用者实现了一些回调方法，到了特定的时候框架会去调用这些方法
+2、数据绑定的区别
+    在jQuery中，常常按照以下方式响应事件并修改视图：
+    $.ajax({
+	  url: '/myEndpoint.json',
+	  success: function ( data, status ) {
+	    $('ul#log').append('<li>Data Received!</li>');
+	  }
+	});
+	
+     相对于这样一个视图
+     <ul class="messages" id="log">
+     </ul>
+     
+     必须人工手动去引用并更新这个DOM节点，但是在AngularJS中，可以这样做
+     $http( '/myEndpoint.json' ).then( function ( response ) {
+	    $scope.log.push( { msg: 'Data Received!' } );
+	});
+     视图应该像下面这样
+     <ul class="messages">
+       <li ng-repeat="entry in log">{{ entry.msg }}</li>
+     </ul>
+     
+     不管是数据如何修改，视图层也会自动随之发生变化，非常简洁！
+     
+	3、区别model层
+	    在jQuery中，DOM类似于一种model，但是在AngularJS等框架中，拥有不同于jQuery中的model层以便可以以任何想要的方式去管理它，它是完全独立于视图之外的。这种方式是有助于进行数据绑定并且可以保持对分离的关注，而且可以具备更好的可测试性。
+	4、关注点分离
+	    AngularJS，Ember.js，Backbone这三个框架都是MVC框架，都是基于模型-视图-控制器的；关注分离，视图层显示记录，model层代表数据，你服务层用来执行这些可复用的任务。使用directive来执行dom操作并扩展视图，并将它和controller连接起来，这也就是其他方面提到的有关于增强可测试性的原因
+	    而jQuery却无法实现
+	5、依赖注入
+	    AngularJS，Ember.js，Backbone这三个框架分析代码，找到这些参数，然后将代码中所需要的服务推送给使用者。
+	    jQuery无法实现。
+
+	    jQuery主要是用来操作DOM的，如果单单说jQuery的话就是这样一个功能，它的插件也比较多，大家也都各自专注一个功能，可以说jQuery体系是跟着前端页面从静态到动态崛起的一个产物，他的作用就是消除各浏览器的差异，简化和丰富DOM的API，简单易用。
+	    而AngularJS、Ember.js、Backbone则是比较新的产物，他们的产生不是为了再页面上实现各种特效，而是为了构建更重量级的webapp，这种app通常只有一个页面，通常拥有丰富的数据和交互，业务逻辑耦合深，跟传统的web页面还是有比较大的差异的。他们通常把数据和逻辑还有展现之类的东西做了分离，可以更方便做出复杂的单页面应用。
+```
