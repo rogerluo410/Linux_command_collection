@@ -163,6 +163,29 @@ obj/
 问题：.gitignore只适用于尚未添加到git库的文件。如果已经添加了，则需用git rm移除后再重新commit。
 ```
 
+- Generally speaking, a commit has a type which must be one of the following:
+
+Commit starts with lowercase.
+
+* feat: A new feature
+* fix: A bug fix
+* docs: Documentation only changes
+* style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+* refactor: A code change that neither fixes a bug or adds a feature
+* perf: A code change that improves performance
+* test: Adding missing tests
+* chore: Changes to the build process or auxiliary tools and libraries such as documentation generation  
+
+A git commit example:
+
+```
+feat: auth with JWT
+
+- add gem JWT
+- add service LoginUser
+```
+
+
 #curl  
 `Get request with parameters IN URL:`  
 * curl http://localhost:3000/api/backend/taxonomies?params1=1&params2=2   
