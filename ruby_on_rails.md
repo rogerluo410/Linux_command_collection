@@ -1163,7 +1163,8 @@ LINE 1: ...y_groups".* FROM "product_property_groups" WHERE (product_pr...
 
 > http://stackoverflow.com/questions/2139996/how-to-redirect-to-previous-page-in-ruby-on-rails  
 > http://stackoverflow.com/questions/771656/correctly-doing-redirect-to-back-in-ruby-on-rails-when-referrer-is-not-availabl  
-```
+
+```ruby
 def store_location
   session[:return_to] = request.request_uri
 end
