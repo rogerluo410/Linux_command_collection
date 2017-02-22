@@ -1175,7 +1175,7 @@ def redirect_back_or_default(default)
 end
 ```
 
-# controller concern  
+###controller concern  
 
 ```ruby
 class AdminController < ApplicationController
@@ -1192,3 +1192,143 @@ class AdminController < ApplicationController
 end
 ```
 
+
+# Rails Best practices
+
+### In Model 
+
+1. Move code from Controller to Model  
+Action code 超过15行的请注意。
+
+2. Move Finder to named scope   
+
+3. Use Model Association  
+
+4. Use scope access 
+```ruby
+current_user.posts.find(1) #current_user的 posts找不到 id＝1 的自然抛出异常
+```
+
+5. Use Model callback  
+
+6. Replace complex Creation with Factory Method  
+```ruby
+ def self.new_by_user(params, user)
+```
+
+7. Move Model logic into the Model  
+
+8. Learn to use model.collection_model_ids to increase or descrease the collection
+```ruby
+@user.role_ids = params[:user][:role_ids]
+```
+
+9. Nested Model Forms 
+```ruby
+class Product
+ accepts_nested_attributes_for: details
+end
+```  
+then, we can use:
+```ruby
+ @product.update(details_attributes: [{id: 1, ...}, {id: 2, ...}, ...]) 
+ 
+ #one-to-one: 
+ @product.update(detail_attributes: {id: 1, ...}) 
+```
+
+10. Keep Finders on Their Own Model
+
+11. Love named_scope  
+
+12. Use delegate to associtations' methods, especially in Front-end
+```ruby
+class Invoice < ActiveRecord::Base
+  belongs_to :user
+  delegate :name, :address, :cellphone, to: :user, prefix: true
+end
+
+<%= @invoice.user_name %>
+<%= @invoice.user_address %>
+<%= @invoice.user_cellphone %> 
+
+# which are better than below: 
+<%= @invoice.user.name %>
+
+```
+
+13. DRY: Metaprogramming  
+```ruby
+class Post < ActiveRecord::Base
+  STATUSES = ['draft', 'published', 'spam']
+  validate_inclusion_of :status, :in => STATUSES
+  class << self
+    STATUSES.each do |status_name|
+      define_method "all_#{status}" do
+        find(:all, :conditions => { :status => status_name }
+      end 
+    end
+  end
+  STATUSES.each do |status_name|
+    define_method "#{status_name}?" do
+      self.status == status_name
+    end
+  end 
+end
+```
+
+14. Breaking up Model 帮Model减重  
+ 
+Extract into Module: '/lib/xxx.rb'
+
+15. Use Observer 
+```ruby
+class Project < ActiveRecord::Base
+  # nothing here
+end
+# app/observers/project_notification_observer.rb
+class ProjectNotificationObserver < ActiveRecord::Observer
+  observe Project
+  def after_create(project)
+    project.members.each do |member|
+      ProjectMailer.deliver_notice(project, member)
+    end 
+  end
+end
+```
+
+### In Migration  
+
+1. Isolating Seed Data  
+
+2. Always add DB index  
+
+### In Controller
+
+1. Use before_filter  
+```ruby
+ before_filter :find_post, only: [:show, :edit, :update, :destroy]
+```
+
+### In View  
+
+1. Never logic code in Views  
+ 
+Move code into controller / model / helper  
+
+2. Organize Helper files 
+
+3. Learn Rails Helpers
+
+ - Learn content_for and yield 
+ - Learn how to pass block parameter in helper
+ - Read Rails helpers source code 
+ /actionpack-x.y.z/action_view/helpers/*  
+
+ 
+### In routes, use Restful style / conventions
+
+1. Needless deep nesting  
+
+
+### Code refactor!  
