@@ -1197,33 +1197,33 @@ end
 
 ### In Model 
 
-1. Move code from Controller to Model  
+-1. Move code from Controller to Model  
 Action code 超过15行的请注意。
 
-2. Move Finder to named scope   
+-2. Move Finder to named scope   
 
-3. Use Model Association  
+-3. Use Model Association  
 
-4. Use scope access 
+-4. Use scope access 
 ```ruby
 current_user.posts.find(1) #current_user的 posts找不到 id＝1 的自然抛出异常
 ```
 
-5. Use Model callback  
+-5. Use Model callback  
 
-6. Replace complex Creation with Factory Method  
+-6. Replace complex Creation with Factory Method  
 ```ruby
  def self.new_by_user(params, user)
 ```
 
-7. Move Model logic into the Model  
+-7. Move Model logic into the Model  
 
-8. Learn to use model.collection_model_ids to increase or descrease the collection
+-8. Learn to use model.collection_model_ids to increase or descrease the collection
 ```ruby
 @user.role_ids = params[:user][:role_ids]
 ```
 
-9. Nested Model Forms 
+-9. Nested Model Forms 
 ```ruby
 class Product
  accepts_nested_attributes_for: details
@@ -1237,11 +1237,11 @@ then, we can use:
  @product.update(detail_attributes: {id: 1, ...}) 
 ```
 
-10. Keep Finders on Their Own Model
+-10. Keep Finders on Their Own Model
 
-11. Love named_scope  
+-11. Love named_scope  
 
-12. Use delegate to associtations' methods, especially in Front-end
+-12. Use delegate to associtations' methods, especially in Front-end
 ```ruby
 class Invoice < ActiveRecord::Base
   belongs_to :user
@@ -1257,7 +1257,7 @@ end
 
 ```
 
-13. DRY: Metaprogramming  
+-13. DRY: Metaprogramming  
 ```ruby
 class Post < ActiveRecord::Base
   STATUSES = ['draft', 'published', 'spam']
@@ -1277,11 +1277,11 @@ class Post < ActiveRecord::Base
 end
 ```
 
-14. Breaking up Model 帮Model减重  
+-14. Breaking up Model 帮Model减重  
  
 Extract into Module: '/lib/xxx.rb'
 
-15. Use Observer 
+-15. Use Observer 
 ```ruby
 class Project < ActiveRecord::Base
   # nothing here
@@ -1299,26 +1299,26 @@ end
 
 ### In Migration  
 
-1. Isolating Seed Data  
+-1. Isolating Seed Data  
 
-2. Always add DB index  
+-2. Always add DB index  
 
 ### In Controller
 
-1. Use before_filter  
+-1. Use before_filter  
 ```ruby
  before_filter :find_post, only: [:show, :edit, :update, :destroy]
 ```
 
 ### In View  
 
-1. Never logic code in Views  
+-1. Never logic code in Views  
  
 Move code into controller / model / helper  
 
-2. Organize Helper files 
+-2. Organize Helper files 
 
-3. Learn Rails Helpers
+-3. Learn Rails Helpers
 
  - Learn content_for and yield 
  - Learn how to pass block parameter in helper
@@ -1328,7 +1328,7 @@ Move code into controller / model / helper
  
 ### In routes, use Restful style / conventions
 
-1. Needless deep nesting  
+-1. Needless deep nesting  
 
 
 ### Code refactor!  
