@@ -72,13 +72,38 @@ RSpec is a great tool in the behavior-driven development (BDD) process of writin
 
 目的:  确保你升级各种第三方库或框架的时候，能有保障。    
 
+测试步骤：  
+```
+整合测试:  
+  Controller （不使用stub／mock， 直接使用model层的实体）
+  验收测试 （跨controllers测试， 模拟浏览器行为）
+  Request （目的是 full-stack测试， 可以stub）
+  Featrure
+
+单元测试: 是分层测试， 可使用 rspec-mock / factory-girl 去做隔离
+  Model
+  Controller (使用stub ／mock)
+  View
+  Helper
+  Routing
+  
+tips：
+  1. 有 time.now 时间依赖的， 用travel_to方法
+  2. database_cleaner 资料清洗， 支援不同DB
+  3. VCR，Http response重播， 配合 第三方服务
+  4. Simplecov 覆盖率
+```
+
 ```ruby    
 它在BDD流程的开发中被用来写高可读性的测试，引导并验证你开发的应用程序。
 #常用模式：  
-before(:all) { #全局变量赋值，只执行一遍，每个测试方法都可以用，变量最好设置为实例变量 @param  } 
-before(:each) { #全局变量赋值，每个测试方法运行前都会执行一遍，变量最好设置为实例变量 @param  } 
+before(:all) { #每段describe执行一次，变量设置为实例变量 @param  } 
+before(:each) { #每段it执行一次 } 
+after(:all)
+after(:each)
+
 describe '描述这个方法的测试目的' do
- let(:arg1) { #做测试使用变量的赋值 }
+ let(:arg1) { #做测试使用变量的赋值，lazy memoried, 相较于before(:each)增加执行速度，不需要用 instance variable into before }
  let(:arg2) { #做测试使用变量的赋值 }
  context '描述测试时的上下文环境，它能让测试更清晰，有条理' do
    it "描述测试的功能" do
@@ -189,7 +214,7 @@ end
 - 使用rspec的一些recipes:   
 
  1。善用 subject   
-如果你有好几个测试都是用了同一个 subject，使用 subject{} 来避免重复。  
+如果你有好几个测试都是用了同一个 subject，使用 subject{} 来避免重复, 可以省略receiver。  
 ```ruby
 describe CreditCard do
   subject do
@@ -879,16 +904,25 @@ collection.create!(attributes = {})
 
 **关联时出现重复记录的情况, 查询条件中有 IN谓词的要注意!**   
 ```ruby
+解决方法：
 jobseekers.joins(:zones).where("jobseeker_zones.zone_id in (?)", params[:zone_ids] ).distinct
 
+错误实例：
 Jobseeker.joins(:zones).where("jobseeker_zones.zone_id in (?)", [1,2] )
-  Jobseeker Load (4.2ms)  SELECT "jobseekers".* FROM "jobseekers" INNER JOIN "jobseeker_zones" ON "jobseeker_zones"."jobseeker_id" = "jobseekers"."id" WHERE (jobseeker_zones.zone_id in (1,2))
+  Jobseeker Load (4.2ms)  
+  SELECT "jobseekers".* FROM "jobseekers" 
+  INNER JOIN "jobseeker_zones" ON "jobseeker_zones"."jobseeker_id" = "jobseekers"."id" 
+  WHERE (jobseeker_zones.zone_id in (1,2))
+  
  => #<ActiveRecord::Relation [
  #<Jobseeker id: 1, rate: 10, state: "published", role_id: 26, vocation_id: 1, user_id: 4, created_at: nil, updated_at: nil>, 
  #<Jobseeker id: 1, rate: 10, state: "published", role_id: 26, vocation_id: 1, user_id: 4, created_at: nil, updated_at: nil>]>   #两条一样的记录
 
 2.1.4 :056 >   Jobseeker.joins(:zones).where("jobseeker_zones.zone_id in (?)", [1,2] ).distinct
-  Jobseeker Load (5.9ms)  SELECT DISTINCT "jobseekers".* FROM "jobseekers" INNER JOIN "jobseeker_zones" ON "jobseeker_zones"."jobseeker_id" = "jobseekers"."id" WHERE (jobseeker_zones.zone_id in (1,2))
+  Jobseeker Load (5.9ms)  
+  SELECT DISTINCT "jobseekers".* FROM "jobseekers" 
+  INNER JOIN "jobseeker_zones" ON "jobseeker_zones"."jobseeker_id" = "jobseekers"."id" 
+  WHERE (jobseeker_zones.zone_id in (1,2))
  => #<ActiveRecord::Relation [#<Jobseeker id: 1, rate: 10, state: "published", role_id: 26, vocation_id: 1, user_id: 4, created_at: nil, updated_at: nil>]> 
  
  
@@ -909,7 +943,7 @@ SELECT count(DISTINCT clients.id) AS count_all FROM clients
 > http://guides.ruby-china.org/active_record_basics.html  
 
 - create   返回对象 或 nil  
-- create   返回对象 或 抛出异常  
+- create!   返回对象 或 抛出异常  
 - save     返回 true 或 false    
 - save!    返回 true 或 抛出异常    
 - update   返回true 或 false    
@@ -923,10 +957,10 @@ SELECT count(DISTINCT clients.id) AS count_all FROM clients
 resources :posts do
   member do
     get 'comments'
-  end
-  collection do
+  end               #成员路由 posts/:id/comments
+  collection do
     post 'bulk_upload'
-  end
+  end               ＃集合路由 posts/bulk_upload
 end
 ```  
 有几个路由地址：9条  
@@ -993,9 +1027,12 @@ DELETE	  /geocoder	   geocoders#destroy	delete the geocoder resource
 form_authenticity_token 方法。
 
 ```
-跨站请求伪造（CSRF）是一种攻击方式，A 网站的用户伪装成 B 网站的用户发送请求，在 B 站中添加、修改或删除数据，而 B 站的用户绝然不知。
+跨站请求伪造（CSRF）是一种攻击方式，A网站的用户伪装成B网站的用户发送请求，
+在B站中添加、修改或删除数据，而B站的用户绝然不知。
 
-防止这种攻击的第一步是，确保所有析构动作（create，update 和 destroy）只能通过 GET 之外的请求方法访问。如果遵从 REST 架构，已经完成了这一步。不过，恶意网站还是可以很轻易地发起非 GET 请求，这时就要用到其他防止跨站攻击的方法了。
+防止这种攻击的第一步是，确保所有析构动作(create，update 和 destroy)只能通过GET之外的请求方法访问。
+如果遵从REST架构，已经完成了这一步。不过，恶意网站还是可以很轻易地发起非GET请求，
+这时就要用到其他防止跨站攻击的方法了。
 
 我们添加一个只有自己的服务器才知道的难以猜测的令牌。如果请求中没有该令牌，就会禁止访问。
 ```
