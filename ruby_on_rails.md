@@ -1369,3 +1369,25 @@ Move code into controller / model / helper
 
 
 ### Code refactor!  
+
+
+# Rails Security Best Practices  
+
+### Defense in Depth  
+ - Network: firewalls, IDS  
+ - Operating system
+ - Web server
+ - Web application
+ - Database
+ 
+1) session
+
+2) SQL injection
+
+3) XSS
+
+4) CSRF
+
+5) File uploads / download
+
+6) Dos
