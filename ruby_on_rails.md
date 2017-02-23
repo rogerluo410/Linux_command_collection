@@ -1381,13 +1381,54 @@ Move code into controller / model / helper
  - Database
  
 1) session
+  - cookie.signed
+  ```
+  cookie会随着浏览器每次发起的请求（request）传给服务器进行读取，而服务器则会在应答（response）中携带cookie写在本机上。因此，cookie是存储在本地的。而且由于cookie的这种性质，cookie必须在赋值后的下一次请求中才能“生效”（不过，貌似立即生效也没啥作用……）。
+  rails中的cookie使用起来相当简单，只需要按照所需使用cookies这个hash就可以了。例如：
+   # Sets a simple session cookie.
+   # This cookie will be deleted when the user's browser is closed.
+    cookies[:user_name] = "david"
+   # Assign an array of values to a cookie.
+   cookies[:lat_lon] = [47.68, -122.37]
+
+    读取时也同样调用cookies相应的键值对即可。默认的，cookie将在30min后过期（或者随着关闭浏览器而过期）。
+    当然也可以自行设定其过期日期（expires）
+    cookies[:login] = { :value => "XJ-122", :expires => 1.hour.from_now }
+    其实cookies设定时出了:value :expires之外，还有一些其他参数：
+      :path 设定cookie有效的路径。没有验证过怎么使用，但是应该是指cookie在哪一层目录下有效吧，这样可以防止不同的controller之间的同名cookie。
+      :domain 设定cookie在哪些域名下有效。
+      :secure true/false，标识是否传递给https server。
+      :httponly 顾名思义吧
+
+    另外，还可以设定一些特殊的cookie:
+      cookies.signed[:user_id] = current_user.id
+      signed cookie，防止用户篡改其值（没试过，不知道理解的对不对）
+      cookies.permanent[:login] = "XJ-122"
+      permanent cookie，有效期20年的cookie
+    以上两种cookie还可以串联起来使用，构成signed permanent cookie
+==============================================================
+    codereview的时候，在ruby中用cookie被xinan说了，主要是由于cookie会随请求传送给服务器，占用带宽。目前一个折中的方案是：尽量用较少的bit代表较多的信息。例如表示若干个filter的状态，可以用若干位的0-1字符串来表示。
+  ```
 
 2) SQL injection
+  - don't use hard code in SQL
 
-3) XSS
+3) XSS: Cross site scripting
 
 4) CSRF
 
-5) File uploads / download
-
-6) Dos
+5) File uploads / download  
+  - Make sure file uploads don't overwrite important files .eg "../../../etc/passwd"
+  - Never to allow users to upload any extension associated with executable content on your site, using whitelist for extensions. 
+  - When user download, set the appropriate Content-Type Http header, eliminate the potential for XSS attacks.
+  - Make user users can't download arbitrary files 
+    
+    ```ruby
+     send_file('/var/www/uploads/' + params[:filename])
+    ```
+  
+6) Dos:  Denial-of-service attacks
+ - Avoid long-running action, use background-processing.
+ - Don't bother your application server
+   1) Use Web server provide static files
+   2) Use Http reverse proxy if need
