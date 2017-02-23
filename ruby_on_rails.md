@@ -32,7 +32,11 @@ REST是一种web基础通信架构风格，它允许客户端通过一个唯一�
 
 #API Description Generator  
 > http://apidocjs.com   
-> https://github.com/apidoc/apidoc   
+> https://github.com/apidoc/apidoc  
+
+# redis-store 
+Namespaced Rack::Session, Rack::Cache, I18n and cache Redis stores for Ruby web frameworks   
+> https://github.com/redis-store/redis-store  
 
 #rack-attack  
 Rack::Attack is a rack middleware to protect your web app from bad clients.  防止恶意访问。  
