@@ -1412,6 +1412,13 @@ Move code into controller / model / helper
     以上两种cookie还可以串联起来使用，构成signed permanent cookie
 ==============================================================
     codereview的时候，在ruby中用cookie被xinan说了，主要是由于cookie会随请求传送给服务器，占用带宽。目前一个折中的方案是：尽量用较少的bit代表较多的信息。例如表示若干个filter的状态，可以用若干位的0-1字符串来表示。
+    
+    
+    在浏览器端， session又叫会话，能够持久的叫cookie，可以认为没有设置时间的cookie都叫session(这种cookie仅仅维持一个会话时间)。
+    如果浏览器关闭 这个session也就不在了。
+    在服务器端， 还有可以自己重写SessionStateStoreProvider， 以前为了分布式， 有人把SessionState放在sqlserver数据库里面
+    现在由于nosql的出现 直接都是放在redis 、 memcache里面。
+    重写的话SessionStateStoreProvider里面session过期事件一般不好写，session过期后重新生成一个sessionid。
   ```
 
 2) SQL injection
