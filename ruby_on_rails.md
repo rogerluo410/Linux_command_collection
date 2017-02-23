@@ -1418,7 +1418,8 @@ Move code into controller / model / helper
 4) CSRF
 
 5) File uploads / download  
-  - Make sure file uploads don't overwrite important files .eg "../../../etc/passwd"
+
+  - Make sure file uploads don't overwrite important files .eg "../../../etc/passwd"   
   - Never to allow users to upload any extension associated with executable content on your site, using whitelist for extensions. 
   - When user download, set the appropriate Content-Type Http header, eliminate the potential for XSS attacks.
   - Make user users can't download arbitrary files 
@@ -1429,6 +1430,6 @@ Move code into controller / model / helper
   
 6) Dos:  Denial-of-service attacks
  - Avoid long-running action, use background-processing.
- - Don't bother your application server
+ - Don't bother your application server   
    1) Use Web server provide static files
-   2) Use Http reverse proxy if need
+   2) Use Http reverse proxy if need   
