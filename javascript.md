@@ -430,3 +430,30 @@ AngularJS，Ember.js，Backbone这类新框架与jQuery的区别如下：
 	    jQuery主要是用来操作DOM的，如果单单说jQuery的话就是这样一个功能，它的插件也比较多，大家也都各自专注一个功能，可以说jQuery体系是跟着前端页面从静态到动态崛起的一个产物，他的作用就是消除各浏览器的差异，简化和丰富DOM的API，简单易用。
 	    而AngularJS、Ember.js、Backbone则是比较新的产物，他们的产生不是为了再页面上实现各种特效，而是为了构建更重量级的webapp，这种app通常只有一个页面，通常拥有丰富的数据和交互，业务逻辑耦合深，跟传统的web页面还是有比较大的差异的。他们通常把数据和逻辑还有展现之类的东西做了分离，可以更方便做出复杂的单页面应用。
 ```
+
+
+# Gulp 和 browserify / webpack  
+Gulp应该和Grunt比较，他们的区别我就不说了，说说用处吧。Gulp / Grunt 是一种工具，能够优化前端工作流程。比如自动刷新页面、combo、压缩css、js、编译less等等。简单来说，就是使用Gulp/Grunt，然后配置你需要的插件，就可以把以前需要手工做的事情让它帮你做了。
+
+说到 browserify / webpack ，那还要说到 seajs / requirejs 。这四个都是JS模块化的方案。其中seajs / require 是一种类型，browserify / webpack 是另一种类型。
+
+
+seajs / require : 是一种在线"编译" 模块的方案，相当于在页面上加载一个 CMD/AMD 解释器。这样浏览器就认识了 define、exports、module 这些东西。也就实现了模块化。
+
+browserify / webpack : 是一个预编译模块的方案，相比于上面 ，这个方案更加智能。没用过browserify，这里以webpack为例。首先，它是预编译的，不需要在浏览器中加载解释器。另外，你在本地直接写JS，不管是 AMD / CMD / ES6 风格的模块化，它都能认识，并且编译成浏览器认识的JS。这样就知道，Gulp是一个工具，而webpack等等是模块化方案。Gulp也可以配置seajs、requirejs甚至webpack的插件。
+
+
+### Webpack 
+http://webpackdoc.com/  
+
+1. Installing
+
+2. Loader 
+
+3. webpack.config.js  
+
+4. Plugins  
+
+5. 开发环境  
+
+6. 故障处理
