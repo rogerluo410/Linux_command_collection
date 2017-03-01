@@ -126,12 +126,12 @@ _, b := 31, 32  //特殊变量名 _  , 任何赋给它的值都被丢弃
      
      ```
      
-     * map 
-     键值对 ／ hash ／ 字典  
+     * map   
+     键值对 ／ hash ／ 字典     
      
-     定义： 
-     map[key-type]value-type:  
-     m := map[string]int {   // { 左花扩号 必须在同一行
-       "Jan": 31, "Feb": 28，  //结尾的逗号是必须的
-     }
+     定义：    
+     map[key-type]value-type:     
+     m := map[string]int {   // { 左花扩号 必须在同一行    
+       "Jan": 31, "Feb": 28，  //结尾的逗号是必须的    
+     }    
 
