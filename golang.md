@@ -3,6 +3,11 @@
 Purpose:   
 学习函数式编程     
 
+> https://blog.golang.org/   --blog   
+> https://golang.org/doc/effective_go.html  --effective go   
+> https://golang.org/pkg/  -- go packages  
+> https://github.com/golang/go/wiki/  --go wiki  
+> http://awesome-go.com/  --go module     
 
 1) 变量， 类型 和 保留字 
 ```go
@@ -144,13 +149,13 @@ _, b := 31, 32  //特殊变量名 _  , 任何赋给它的值都被丢弃
      }
      
      增加元素：   
-     m["March"] = 31     
+      m["March"] = 31     
      
-     检查元素是否存在：  
-     v, ok := m["March"]    
+     检查元素是否存在：   
+      v, ok := m["March"]    
      
      删除元素：  
-     delete(m, "March")   
+      delete(m, "March")   
      
      
      
