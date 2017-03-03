@@ -40,10 +40,10 @@ a, b := 20, 16  //平行赋值
 _, b := 31, 32  //特殊变量名 _  , 任何赋给它的值都被丢弃  
 
 
-## 内建类型    
-  ## bool   true / false     
+2) 内建类型    
+  - bool   true / false     
  
-  ## 数字类型： 
+  - 数字类型： 
     int （32位系统是  32位字长， 64位系统是 64位字长， 硬件决定长度）， 
     还可以显示指定类型长度： int32/uint32, byte/int8/int16/int64, byte是 uint8 的别名。 
 
@@ -52,7 +52,7 @@ _, b := 31, 32  //特殊变量名 _  , 任何赋给它的值都被丢弃
 
     注意： 混用这些类型向变量赋值，会引起编译器错误。  
  
-  ## 常量： 
+  - 常量： 
   常量在编译时被创建， 只能是数字，字符串， bool。 
   可以使用 itoa 生成枚举值。 
 
@@ -71,7 +71,7 @@ _, b := 31, 32  //特殊变量名 _  , 任何赋给它的值都被丢弃
     )
   ```
 
-  ### 字符串   
+  - 字符串   
   var s string = "hello"
   
   与 C 语言一样， "" 表示字符串， '' 表示字符。 
@@ -91,7 +91,7 @@ _, b := 31, 32  //特殊变量名 _  , 任何赋给它的值都被丢弃
     s := \`xxxx   
           yyyy\`    //使用反引号， 但是包含换行符， 原始字符串在反引号内是不转义的    
 
-  ## 集合结构 
+  - 集合结构 
   array, slice (切片)， map    
   
    * 数组定义： 
@@ -161,16 +161,16 @@ _, b := 31, 32  //特殊变量名 _  , 任何赋给它的值都被丢弃
      
 # 函数       
 
-## 内建函数   
+- 内建函数   
 close  delete  len  cap  new  make  copy  append  panic  recover  print  println  complex  real  imag   
 
 
-## 自定义函数  
+- 自定义函数  
  
- ## 作用域  
+ - 作用域  
  函数内的局部变量将覆盖全局同名变量  
  
- ## 多值返回  
+ - 多值返回  
  go 函数和方法可以返回多值  
  
  ```go
@@ -181,7 +181,7 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
   }
  ```  
  
- ## 延迟代码  
+ - 延迟代码  
  defer 关键字， 相当于c++中的析构函数   
  defer 后指定的函数，会在函数退出前调用  
  例如，文件打开，结束操作后，需要关闭，可以使用defer  
@@ -217,7 +217,7 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
  }
  ```
  
-## 变参  
+  - 变参  
   接受变参的函数有不定数量的参数:   
   ```go
    func myfunc(arg ...int)
