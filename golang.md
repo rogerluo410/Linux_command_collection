@@ -250,8 +250,8 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
       }
     ```   
     
-  -  函数也是值  
-  函数也是值， 可以赋值给变量  
+  - 函数也是值  
+    函数也是值， 可以赋值给变量  
   
   ```go
     func main() {
@@ -272,7 +272,7 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
     }
   ```   
   
-  回调函数例子：  
+回调函数例子：  
   ```go
     package main
 
