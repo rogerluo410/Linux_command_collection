@@ -94,7 +94,7 @@ _, b := 31, 32  //特殊变量名 _  , 任何赋给它的值都被丢弃
   - 集合结构 
   array, slice (切片)， map    
   
-   * 数组定义： 
+   - 数组定义： 
 
          array ：  ［n]type,     
          a := [3]int{1,2,3}   //{1,2,3} 为赋的初值     
@@ -105,7 +105,7 @@ _, b := 31, 32  //特殊变量名 _  , 任何赋给它的值都被丢弃
          a := [][2]int { {1,2}, {3,4} }    
    
    
-   * 切片定义：      
+    - 切片定义：      
        slice 与 array 类似， 但是在新的元素加入的时候可以增加长度。 slice 总是指向底层的一个array， slice是一个指向array的指针， 参考STL中的vector。     
 
        slice是引用类型，这意味着当赋值某个slice到另外一个变量，两个引用会指向同一个array。   
@@ -133,7 +133,7 @@ _, b := 31, 32  //特殊变量名 _  , 任何赋给它的值都被丢弃
              n2 := copy(s, s[2:])   <- n2 = 4, s == []int{2,3,4,5,4,5}  
              ```    
      
-   * map:     
+   - map:     
      键值对 ／ hash ／ 字典      
      
      定义：    
@@ -149,13 +149,13 @@ _, b := 31, 32  //特殊变量名 _  , 任何赋给它的值都被丢弃
      }
      
      增加元素：   
-      m["March"] = 31     
+       m["March"] = 31     
      
      检查元素是否存在：   
-      v, ok := m["March"]    
+       v, ok := m["March"]     
      
      删除元素：  
-      delete(m, "March")   
+       delete(m, "March")   
      
      
      
@@ -182,51 +182,51 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
  ```  
  
  - 延迟代码  
- defer 关键字， 相当于c++中的析构函数   
- defer 后指定的函数，会在函数退出前调用  
- 例如，文件打开，结束操作后，需要关闭，可以使用defer  
+   defer 关键字， 相当于c++中的析构函数   
+   defer 后指定的函数，会在函数退出前调用  
+   例如，文件打开，结束操作后，需要关闭，可以使用defer  
+
+   ```go
+   func ReadWrite() bool {
+     file.Open("file")
+     defer file.Close()  //file.Close() 被添加到defer列表中   
+   }
+   ```   
+
+   defer 列表是栈的结构， 后进先出：    
+   ```go
+   func Myfunc() {
+     defer func(){
+       fmt.Println("1")
+     }()
+
+     defer func(){
+       fmt.Println("2")
+     }()
+                       //打印顺序： 2 1
+   }
+   ```   
+
+   defer 可以访问命名返回参数：  
+   ```go
+   func f() (ret int) {
+     defer func() {
+       ret++   //初始化为零值  
+     }()
+     return   //返回 1， 而不是0
+   }
+   ```
  
- ```go
- func ReadWrite() bool {
-   file.Open("file")
-   defer file.Close()  //file.Close() 被添加到defer列表中   
- }
- ```   
- 
- defer 列表是栈的结构， 后进先出：    
- ```go
- func Myfunc() {
-   defer func(){
-     fmt.Println("1")
-   }()
-   
-   defer func(){
-     fmt.Println("2")
-   }()
-                     //打印顺序： 2 1
- }
- ```   
- 
- defer 可以访问命名返回参数：  
- ```go
- func f() (ret int) {
-   defer func() {
-     ret++   //初始化为零值  
-   }()
-   return   //返回 1， 而不是0
- }
- ```
- 
-  - 变参  
-  接受变参的函数有不定数量的参数:   
-  ```go
-   func myfunc(arg ...int)
-  ```  
-  所有参数都为整型， 在函数体内， arg是一个slice。  
-  
-  如果不想指定类型，则可以一个万能类型 interface{} :      
-  ```go
-   func myfunc(arg ...interface{})
-  ```   
+  - 变参        
+    接受变参的函数有不定数量的参数:   
+    ```go
+     func myfunc(arg ...int)
+    ```  
+    所有参数都为整型， 在函数体内， arg是一个slice。  
+
+    如果不想指定类型，则可以一个万能类型 interface{} :      
+    ```go
+     func myfunc(arg ...interface{})
+    ```   
   
  
