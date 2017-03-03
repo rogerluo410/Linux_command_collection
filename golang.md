@@ -144,7 +144,7 @@ _, b := 31, 32  //特殊变量名 _  , 任何赋给它的值都被丢弃
        }    
 
      遍历：     
-     for k, v := range m {
+     for k, v := range m {    //range 迭代器遍历集合， ｛｝中的为闭包   
        fmt.Println(k,v)
      }
      
@@ -228,5 +228,112 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
     ```go
      func myfunc(arg ...interface{})
     ```   
+    
+    ```go
+      package main
+
+      import (
+        "fmt"
+      )
+
+
+      func Get(arg ...int) {
+        fmt.Println(arg)
+        arg[0] = 9
+        fmt.Println(arg)
+      }
+
+      func main() {
+       //a := [...]int {1,2,3,4,5}
+       //Get(a)   //可变参数为都是整型的参数，只是在函数体内是一个slice
+       Get(1,2,3,4,5)
+      }
+    ```   
+    
+  -  函数也是值  
+  函数也是值， 可以赋值给变量  
+  
+  ```go
+    func main() {
+      a := func() {
+        ...
+      }
+      a()   //函数调用
+    }  
+    
+    var xs = map[int]func() int {
+      1: func() int { return 30 }，
+      2: func() int { return 20 },  
+    } 
+    
+    函数作为函数入参：  
+    func myfunc(y int, f func(int) bool) {
+      f(1)  //调用回调函数  
+    }
+  ```   
+  
+  回调函数例子：  
+  ```go
+    package main
+
+    import (
+      "fmt"
+    )
+
+
+    func callback(i int, f func(int) bool) {
+       b := f(i)
+       fmt.Println(b)
+    }
+
+
+    func main() {
+      a := func(i int) bool {
+        fmt.Println(i)
+        return true
+      }
+      callback(10, a)
+    }
+
+  ```   
+  
+
+ - 函数的恐慌 和 恢复  
+   Go 没有像Java那样的异常机制， 不能抛出一个异常。  
+   一定要记得，这应当作为最后手段被使用， 代码中应该没有或很少恐慌的东西。   
+   
+   panic / recover  
+   panic 可以直接由panic函数产生， 也可以由运行时错误产生， 如： 访问越界的数组。   
+   panic的函数，如果不recover会终止运行， 有recover函数的会执行recover函数体内的代码。  
+   
+   ```go
+     func Join(i []interface{}) string {
+        // t := reflect.TypeOf(i)
+        // v := reflect.ValueOf(i)
+        //
+        defer func() {
+          if x := recover(); x != nil {  //短表达式， 整个成为一个完整的表达式并返回值。  
+             fmt.Println("recovered!")
+          }
+        }()
+        cnt := len(i)
+        sl := make([]uint8, cnt)
+        for k,v := range i {
+          // fmt.Println(v)
+          switch v.(type) {
+          case byte:
+            sl[k] = v.(byte)
+          default:
+            panic("error type")
+          }
+          // sl[k] = v.(int)  //赋值必须要 type assertion
+        }
+          //[]int to string
+        return string(sl)
+      }
+   ```
+   
+  
+  
   
  
