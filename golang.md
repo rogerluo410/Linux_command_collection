@@ -397,24 +397,24 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
   
  1)  new 和 make  
    new:   
-   分配初值为零值， 返回指针。 主要是结构类型的分配   
+     分配初值为零值， 返回指针。 主要是结构类型的分配   
    
-    ```go   
-      type SyncedBuffer struct { 
-        lock sync.Mutex 
-        buffer bytes.Buffer
-      }
+         ```go      
+           type SyncedBuffer struct { 
+             lock sync.Mutex 
+             buffer bytes.Buffer
+           }
 
-      p := new(SyncedBuffer)  //p是一个指针  
-    ```
+           p := new(SyncedBuffer)  //p是一个指针  
+         ```     
 
    make: 
-   分配初值为非零值， 返回类型的引用， 而不是指针。 仅用于 slice， map， channel的初始化。   
+     分配初值为非零值， 返回类型的引用， 而不是指针。 仅用于 slice， map， channel的初始化。   
    
-    ```go   
-      var p *[]int = new([]int)
-      *p = make([]int, 100, 100)
-    ```
+        ```go   
+          var p *[]int = new([]int)
+          *p = make([]int, 100, 100)
+        ```    
   
  2) 复合声明  
   
