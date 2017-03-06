@@ -390,3 +390,62 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
      )
     ```
  
+# 内存分配 与 自定义类型  
+ 
+  ** Go只有指针， 没有指针运算， 不能用指针遍历字符串中的各个字符。     
+  ** Go也有GC功能， 无须担心内存分配和回收。  
+  
+  1)  new 和 make  
+   new:   
+   分配初值为零值， 返回指针。 主要是结构类型的分配   
+   
+   ```go
+     type SyncedBuffer struct { 
+       lock sync.Mutex 
+       buffer bytes.Buffer
+     }
+     
+     p := new(SyncedBuffer)  //p是一个指针  
+   ```
+
+   make: 
+   分配初值为非零值， 返回类型的引用， 而不是指针。 仅用于 slice， map， channel的初始化。   
+   
+   ```go
+     var p *[]int = new([]int)
+     *p = make([]int, 100, 100)
+   ```
+  
+  2) 复合声明  
+    ** 有时候， 零值不能满足需求， 必须有一个用于初始化的构造函数。        
+    ** &File{fd, name, nil, 0} 从复合声明中获取地址，意味着告诉编译器在堆中分配空间，而不是栈中。   
+    ** 在特定的情况下,如果复合声明不包含任何字段,它创建特定类型的零值。表达 式new(File) 和&File{} 是等价的。     
+    ** 复合声明同样可以用于创建array,slice 和map。  
+    
+    ```go
+      orig:  
+      
+      f :=new(File)
+      f.fd = fd
+      f.name = name 
+      f.nepipe = 0
+      
+      updated: 
+      
+      func Newfile(fd int, name string) *File {
+         ...
+         if fd < 0 {
+           return nil
+         }
+         
+         f := File(fd, name, 0)
+         return &f    //返回本地变量的地址没有问题， 在函数返回后，相关的存储区域仍然存在。  
+      }
+    ```  
+    
+  3) 自定义类型   
+  
+    
+    
+  
+  
