@@ -417,6 +417,7 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
    ```
   
   2) 复合声明  
+  
     ** 有时候， 零值不能满足需求， 必须有一个用于初始化的构造函数。        
     ** &File{fd, name, nil, 0} 从复合声明中获取地址，意味着告诉编译器在堆中分配空间，而不是栈中。   
     ** 在特定的情况下,如果复合声明不包含任何字段,它创建特定类型的零值。表达 式new(File) 和&File{} 是等价的。     
