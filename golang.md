@@ -333,7 +333,56 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
       }
    ```
    
-  
+# 包     
+包是函数和数据的集合。   
+
+> http://www.cnblogs.com/sevenyuan/p/4548748.html   --理解Golang包导入   
+
+1. 创建包  
+```go
+  package pkg_name   //包名小写   
   
-  
+  func Func1() {     //首字母大写为导出函数，小写为私有函数；这个规则同样适用于定义在包中的其他名字(新类型，全局变量)
+    ...  
+  }
+```  
+
+2. 创建目录， 将包代码文件存入该目录下    
+ -src
+   -pkg_name    //目录名一般与包名相同     
+     -文件名1
+     -文件名2    //多个文件中都可以处于pkg_name这个namespace下     
+     
+ ```go
+   src 
+     github.com
+       pkg_name    //目录名
+         file1.go  //文件名
+         file2.go
+           .
+           .
+           .
+ ```
+
+ 3. 使用该package  
+ 
+ - 先要编译安装： 
+ go install "github.com/pkgname"    //记住，指定的是目录名，而不是包名，包名本质上是代码层面的概念。  
+ go get url  //取github上的包   
+ 
+ - 在其他的包 或 main 中引入该包：    
+ ```go
+  import (
+    "github.com/mylib"    //仅引入目录相对路径, 加载GOPATH/src/github.com/mylib 模块
+  )
+ ```
+ 
+ - 其他引入包的方式      
+ ```go
+  import( 
+   . “fmt”    //点操作，省略前缀的包名，适用于方法名唯一，不会与其它包中方法名冲突的系统内建包。 
+   f "fmt"    //别名操作， f为fmt这个包 在该文件中的别名    
+   “database/sql” _ “github.com/ziutek/mymysql/godrv”   //_操作, 只是引用该包，所以无法通过包名来调用包中的其他函数。  
+  )
+ ```
  
