@@ -348,12 +348,14 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
  ```  
 
 2) 创建目录, 将包代码文件存入该目录下    
-  -src     
-    -pkg_name    //目录名一般与包名相同         
-      -文件名1        
-      -文件名2    //多个文件中都可以处于pkg_name这个namespace下         
 
   ```go
+    -src   //$GOPATH/src    
+     -pkg_name    //目录名一般与包名相同         
+      -文件名1        
+      -文件名2    //多个文件中都可以处于pkg_name这个namespace下         
+    -pkg   //$GOPATH/pkg, 存放包编译后的 .a 文件； golang是一个动态语言，实际链接的还是源码； 静态编译，动态运行。  
+    
     src 
       github.com
         pkg_name    //目录名
@@ -366,9 +368,9 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
 
  3) 使用该package  
  
-  - 先要编译安装： 
-   go install "github.com/pkgname"    //记住，指定的是目录名，而不是包名，包名本质上是代码层面的概念。  
-   go get url  //取github上的包   
+  - 先要编译安装：         
+   go install "github.com/pkgname"    //记住，指定的是目录名，而不是包名，包名本质上是代码层面的概念。      
+   go get url  //取github上的包       
 
   - 在其他的包 或 main 中引入该包：   
 
