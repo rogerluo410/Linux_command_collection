@@ -447,8 +447,16 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
       ```  
     
  3) 自定义类型   
-  
-    
-    
+   Go 允许自定义新的类型， 通过保留字type实现。  
+   
+   ```go
+     type NameAge struct {
+       name string     //不导出
+       age int         //不导出
+     }
+   ```
+   
+   
+    
   
   
