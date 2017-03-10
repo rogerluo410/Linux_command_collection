@@ -462,26 +462,24 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
  但是PrintableMutex 已经从Mutex 继承了方法集合。   
  *PrintableMutex 的方法集合包含了Lock 和Unlock 方法,被绑定到其匿名字段Mutex。   
    
-   ```go  
-   
-     type Mutex struct {}
+  ```go     
+    type Mutex struct {}
 
-     func (m *Mutex) Lock() { fmt.Println("in lock") }
-     func (m *Mutex) Unlock() { fmt.Println("in unlock") }
+    func (m *Mutex) Lock() { fmt.Println("in lock") }
+    func (m *Mutex) Unlock() { fmt.Println("in unlock") }
 
-     type NewMutex Mutex
-     type PrintableMutex struct {
-        Mutex   //这种写法会创建匿名Mutex类型成员变量，也可以看成PrintableMutex继承了Mutex
-     }
+    type NewMutex Mutex
+    type PrintableMutex struct {
+       Mutex   //这种写法会创建匿名Mutex类型成员变量，也可以看成PrintableMutex继承了Mutex
+    }
 
-     func main() {
-       var nm NewMutex
-       (&nm).Lock()  //(&nm).Lock undefined (type *NewMutex has no field or method Lock)
+    func main() {
+      var nm NewMutex
+      (&nm).Lock()  //(&nm).Lock undefined (type *NewMutex has no field or method Lock)
 
-       pm := new(PrintableMutex)
-       pm.Lock()   // => in lock
-     }
-     
-   ```
+      pm := new(PrintableMutex)
+      pm.Lock()   // => in lock
+    }
+  ```
   
   
