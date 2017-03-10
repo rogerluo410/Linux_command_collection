@@ -424,44 +424,46 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
   4 复合声明同样可以用于创建array,slice 和map。    
   
     
-      ```go   
-      
-        orig:  
+    ```go   
 
-        f :=new(File)
-        f.fd = fd
-        f.name = name 
-        f.nepipe = 0
+      orig:  
 
-        updated: 
+      f :=new(File)
+      f.fd = fd
+      f.name = name 
+      f.nepipe = 0
 
-        func Newfile(fd int, name string) *File {
-           ...
-           if fd < 0 {
-             return nil
-           }
+      updated: 
 
-           f := File(fd, name, 0)
-           return &f    //返回本地变量的地址没有问题， 在函数返回后，相关的存储区域仍然存在。  
-        }
-      ```  
+      func Newfile(fd int, name string) *File {
+         ...
+         if fd < 0 {
+           return nil
+         }
+
+         f := File(fd, name, 0)
+         return &f    //返回本地变量的地址没有问题， 在函数返回后，相关的存储区域仍然存在。  
+      }
+    ```  
     
  3) 自定义类型   
    Go 允许自定义新的类型， 通过保留字type实现。  
    
-   ```go
+   ```go    
+   
      type NameAge struct {     //首字母大写  
        name string     //不导出
        age int         //不导出
      }
    ```
    
-   现在NewMutux 等同于Mutex,但是它没有任何Mutex 的方法。      
-   换句话说,它的方法是空的。    
-   但是PrintableMutex 已经从Mutex 继承了方法集合。   
-   *PrintableMutex 的方法集合包含了Lock 和Unlock 方法,被绑定到其匿名字段Mutex。   
+ 现在NewMutux 等同于Mutex,但是它没有任何Mutex 的方法。      
+ 换句话说,它的方法是空的。    
+ 但是PrintableMutex 已经从Mutex 继承了方法集合。   
+ *PrintableMutex 的方法集合包含了Lock 和Unlock 方法,被绑定到其匿名字段Mutex。   
    
-   ```go
+   ```go  
+   
      type Mutex struct {}
 
      func (m *Mutex) Lock() { fmt.Println("in lock") }
@@ -479,6 +481,7 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
        pm := new(PrintableMutex)
        pm.Lock()   // => in lock
      }
+     
    ```
   
   
