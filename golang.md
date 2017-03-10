@@ -450,13 +450,35 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
    Go 允许自定义新的类型， 通过保留字type实现。  
    
    ```go
-     type NameAge struct {
+     type NameAge struct {     //首字母大写  
        name string     //不导出
        age int         //不导出
      }
    ```
    
+   现在NewMutux 等同于Mutex,但是它没有任何Mutex 的方法。      
+   换句话说,它的方法是空的。    
+   但是PrintableMutex 已经从Mutex 继承了方法集合。   
+   *PrintableMutex 的方法集合包含了Lock 和Unlock 方法,被绑定到其匿名字段Mutex。   
    
-    
+   ```go
+     type Mutex struct {}
+
+     func (m *Mutex) Lock() { fmt.Println("in lock") }
+     func (m *Mutex) Unlock() { fmt.Println("in unlock") }
+
+     type NewMutex Mutex
+     type PrintableMutex struct {
+        Mutex   //这种写法会创建匿名Mutex类型成员变量，也可以看成PrintableMutex继承了Mutex
+     }
+
+     func main() {
+       var nm NewMutex
+       (&nm).Lock()  //(&nm).Lock undefined (type *NewMutex has no field or method Lock)
+
+       pm := new(PrintableMutex)
+       pm.Lock()   // => in lock
+     }
+   ```
   
   
