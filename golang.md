@@ -457,7 +457,7 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
      }
    ```
    
- 现在NewMutux 等同于Mutex,但是它没有任何Mutex 的方法。      
+ 现在NewMutux 等同于Mutex,但是它没有任何Mutex的方法。      
  换句话说,它的方法是空的。    
  但是PrintableMutex 已经从Mutex 继承了方法集合。   
  *PrintableMutex 的方法集合包含了Lock 和Unlock 方法,被绑定到其匿名字段Mutex。   
@@ -482,4 +482,36 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
     }
   ```
   
-  
+  假如某自定义类型2个匿名成员有同名的方法， 则该类型变量在调用同名方法时， 会出现编译错误 ambiguous selector pm.Lock  
+    
+    ```go  
+      type Mutex struct {}
+      func (m *Mutex) Lock() { fmt.Println("lock in Mutex") }
+      func (m *Mutex) Unlock() { fmt.Println("unlock in Mutex") }
+
+      type Mutex1 struct {}
+      func (m *Mutex1) Lock() { fmt.Println("lock in Mutex1 ") }
+      func (m *Mutex1) Unlock() { fmt.Println("unlock in Mutex1") }
+
+      type NewMutex Mutex
+      type PrintableMutex struct {
+         Mutex   //这种写法会创建匿名Mutex类型成员变量，也可以看成PrintableMutex继承了Mutex
+         Mutex1  
+      }
+
+      func main() {
+        // var nm NewMutex
+        // (&nm).Lock()  //(&nm).Lock undefined (type *NewMutex has no field or method Lock)
+        defer func() {
+          if x := recover(); x != nil {
+            fmt.Println("recovered!")
+          }
+        }()  //匿名函数
+
+        pm := new(PrintableMutex)
+        pm.Lock()   // => 编译错误：  ambiguous selector pm.Lock
+      } 
+    ```     
+    
+
+  
