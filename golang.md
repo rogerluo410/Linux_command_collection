@@ -7,7 +7,11 @@ Purpose:
 > https://golang.org/doc/effective_go.html  --effective go   
 > https://golang.org/pkg/  -- go packages  
 > https://github.com/golang/go/wiki/  --go wiki  
-> http://awesome-go.com/  --go module     
+> http://awesome-go.com/  --go module  
+
+`go env`  命令查看go环境  
+`go run xx.go`  运行  go代码   
+`go build xx.go` 编译 go代码  
 
 1) 变量， 类型 和 保留字 
 ```go
