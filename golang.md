@@ -534,11 +534,11 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
      fmt.Println(d[2]) // => 3
    ```  
 
-   如何在自定义类型之间进行转换?这里创建了两个类型Foo 和Bar,而Bar 是Foo 的一个 别名:   
-   type foo struct { int } ← 匿名字段
-   type bar foo 
+   如何在自定义类型之间进行转换?这里创建了两个类型Foo 和Bar,而Bar 是Foo 的一个 别名:     
+   type foo struct { int } ← 匿名字段   
+   type bar foo    
    
-   然后:
+   然后:   
    
    var b bar = bar{1}  
    var f foo = b   
@@ -548,6 +548,7 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
    
    这可以通过转换来修复:  
    var f foo = foo(b)  
+   
    注意转换那些字段不一致的结构是相当困难的。同时注意,转换b到int 同样会出错;  
    整数与有整数字段的结构并不一样。    
   
