@@ -551,4 +551,39 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
    
    注意转换那些字段不一致的结构是相当困难的。同时注意,转换b到int 同样会出错;  
    整数与有整数字段的结构并不一样。    
+   
+   
+# 接口   
+
+接口是Go 中的核心概念。   `*S` 在Go中表示， S类型的指针。  
+
+定义结构 和 结构的方法：     
+
+  ```go
+    type Sa struct { i int }
+    
+    func (p *Sa) Get() int { return p.i }
+    func (p *Sa) Put(v int) { p.i = v } 
+  ```
+  
+也可以定义接口类型， 仅仅是方法的集合。 定义结构 I : 
+
+  ```go
+   type I interface {
+    Get() int
+    Put(int)
+   } 
+  ```  
   
+对于接口I， Sa是合法的实现， 因为它定义了I所需要的两个方法， 注意， 及时没有明确定义Sa实现了I， 这也是正确的。  
+
+Go可以利用这一特点来实现接口的另一含义， 就是接口类型做入参。   
+  ```go
+    func f(p I) {
+      fmt.Println(p.Get())
+      p.Put(1)
+    }
+  ```
+  
+
+  
