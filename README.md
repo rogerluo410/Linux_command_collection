@@ -41,7 +41,19 @@ $ git config --global core.editor vim
 * git pull origin master:slave     -- 用远端origin主机的master分支更新本地slave分支  
 * git diff                         -- 如果有文件冲突,diff出冲突处，手动修改/删除`>>>>head  code  <<<<< `中的代码    
 * git commit -a -M "Update with master"  --本地slave分支提交到origin主机的slave分支即可    
+* delete a branch both locally and remotely  
+  ``` 
+    Executive Summary
 
+    $ git push origin --delete <branch_name>
+    $ git branch -D <branch_name>
+    Delete Local Branch
+
+    To delete the local branch use:
+
+    $ git branch -D branch_name
+  ```  
+  
 **git 命令自动补全脚本**  
 ```
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
