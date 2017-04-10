@@ -575,7 +575,7 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
    } 
   ```  
   
-对于接口I， Sa是合法的实现， 因为它定义了I所需要的两个方法， 注意， 及时没有明确定义Sa实现了I， 这也是正确的。  
+对于接口I， Sa是合法的实现， 因为它定义了I所需要的两个方法， 注意， 即使没有明确定义Sa实现了I， 这也是正确的。  
 
 Go可以利用这一特点来实现接口的另一含义， 就是接口类型做入参。   
   ```go
