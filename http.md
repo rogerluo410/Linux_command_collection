@@ -1,5 +1,8 @@
 # HTTP
 
+ post 传输的数据被截断： http://stackoverflow.com/questions/16934226/jquery-post-request-interrupted-only-half-of-post-parameters-arrive    
+ “post 理论上讲是没有大小限制的，HTTP协议规范也没有进行大小限制，但实际上post所能传递的数据量大小取决于服务器的设置和内存大小”    
+
 
 # REST / JSON / XML-RPC / SOAP
 REST mandates the general semantics and concepts. The transport and encodings are up to you. They were originally formulated on XML, but JSON is totally applicable.
