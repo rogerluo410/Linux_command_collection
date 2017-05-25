@@ -2,7 +2,7 @@
 # Typescript
   wiki: https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Basic%20Types.md   
   
-  ** Basic Types   
+ ** Basic Types   
   1. boolean 
    let isDone: boolean = false;
   
@@ -39,6 +39,7 @@
     let someValue: any = "assss";    
     let strLength: number = (someValue as string).length;       
     
+
 ** Interface   
   
   如果对象中的某属性，某interface也有， 则该对象可以转换成该接口。   
@@ -84,8 +85,11 @@
     let p1: Point = { x: 10, y: 20 };
     p1.x = 5; // error! 赋了初值就不能再赋值了   
     
-    接口中有函数原型声明：   
-    
+  ```   
+  
+   接口中有函数原型声明：   
+   
+   ```
      interface SearchFunc {
         (source: string, subString: string): boolean;
       }
@@ -96,26 +100,26 @@
           let result = src.search(sub);
           return result > -1;
       }
-  ``` 
+    ```
   
-** Class Types implementing an interface   
+ ** Class Types implementing an interface   
  
- ```
-   interface ClockInterface {
-        currentTime: Date;
-        setTime(d: Date);
-    }
+   ```
+     interface ClockInterface {
+          currentTime: Date;
+          setTime(d: Date);
+      }
 
-    class Clock implements ClockInterface {
-        currentTime: Date;
-        setTime(d: Date) {
-            this.currentTime = d;
-        }
-        constructor(h: number, m: number) { }
-    }  
-    
-    Interfaces describe the public side of the class, rather than both the public and private side.   
- ```
+      class Clock implements ClockInterface {
+          currentTime: Date;
+          setTime(d: Date) {
+              this.currentTime = d;
+          }
+          constructor(h: number, m: number) { }
+      }  
+
+      Interfaces describe the public side of the class, rather than both the public and private side.   
+   ```
 
 ** 类的继承  
  
