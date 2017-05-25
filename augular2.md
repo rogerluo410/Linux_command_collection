@@ -98,8 +98,7 @@
       }
   ``` 
   
-
- Class Types implementing an interface   
+** Class Types implementing an interface   
  
  ```
    interface ClockInterface {
@@ -118,7 +117,7 @@
     Interfaces describe the public side of the class, rather than both the public and private side.   
  ```
 
- ** 类的继承  
+** 类的继承  
  
    ```
      class Person {
@@ -145,7 +144,7 @@
    ```
 
 
-  ** Namespace and Module  
+** Namespace and Module  
   
   ```
     shapes.ts: 
