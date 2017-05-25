@@ -2,6 +2,7 @@
 # Typescript
   wiki: https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Basic%20Types.md   
   
+  ** Basic Types   
   1. boolean 
    let isDone: boolean = false;
   
@@ -38,4 +39,123 @@
     let someValue: any = "assss";    
     let strLength: number = (someValue as string).length;       
     
+** Interface   
   
+  如果对象中的某属性，某interface也有， 则该对象可以转换成该接口。   
+  
+  ```javascript
+    function printLabel(labelledObj: { label: string }) {
+    console.log(labelledObj.label);
+    }
+
+    let myObj = {size: 10, label: "Size 10 Object"};
+    printLabel(myObj);  
+    
+    //or  
+    interface LabelledValue {
+    label: string;
+    }
+
+    function printLabel(labelledObj: LabelledValue) {
+        console.log(labelledObj.label);
+    }
+
+    let myObj = {size: 10, label: "Size 10 Object"};
+    printLabel(myObj);  
+    
+    //or 
+    
+    interface SquareConfig {
+      color?: string;   //Optional Properties  
+      width?: number;
+    }
+  ```
+  
+  
+  readonly vs const :   
+  Variables use const whereas properties use readonly.    
+
+  ```
+    interface Point {
+      readonly x: number;
+      readonly y: number;
+    }
+    
+    let p1: Point = { x: 10, y: 20 };
+    p1.x = 5; // error! 赋了初值就不能再赋值了   
+  ``` 
+  
+  接口中有函数声明：  
+  ```
+    interface SearchFunc {
+      (source: string, subString: string): boolean;
+    }
+    
+    //usage:  
+    let mySearch: SearchFunc;
+    mySearch = function(src: string, sub: string): boolean {
+        let result = src.search(sub);
+        return result > -1;
+    }
+  ```
+
+ Class Types implementing an interface   
+ 
+ ```
+   interface ClockInterface {
+        currentTime: Date;
+        setTime(d: Date);
+    }
+
+    class Clock implements ClockInterface {
+        currentTime: Date;
+        setTime(d: Date) {
+            this.currentTime = d;
+        }
+        constructor(h: number, m: number) { }
+    }  
+    
+    Interfaces describe the public side of the class, rather than both the public and private side.   
+ ```
+
+ ** 类的继承  
+ 
+   ```
+     class Person {
+          protected name: string;
+          protected constructor(theName: string) { this.name = theName; }
+      }
+
+      // Employee can extend Person
+      class Employee extends Person {
+          private department: string;
+
+          constructor(name: string, department: string) {
+              super(name);
+              this.department = department;
+          }
+
+          public getElevatorPitch() {
+              return `Hello, my name is ${this.name} and I work in ${this.department}.`;
+          }
+      }
+
+      let howard = new Employee("Howard", "Sales");
+      let john = new Person("John"); // Error: The 'Person' constructor is protected
+   ```
+
+
+  ** Namespace and Module  
+  
+  ```
+    shapes.ts: 
+    
+    export namespace Shapes {
+        export class Triangle { /* ... */ }
+        export class Square { /* ... */ }
+    } 
+    
+    shapeConsumer.ts:  
+    import * as shapes from "./shapes";
+    let t = new shapes.Shapes.Triangle(); // shapes.Shapes?
+  ```
