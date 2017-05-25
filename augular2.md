@@ -85,19 +85,20 @@
     p1.x = 5; // error! 赋了初值就不能再赋值了   
   ``` 
   
-  接口中有函数声明：  
-  ```
-    interface SearchFunc {
-      (source: string, subString: string): boolean;
-    }
-    
-    //usage:  
-    let mySearch: SearchFunc;
-    mySearch = function(src: string, sub: string): boolean {
-        let result = src.search(sub);
-        return result > -1;
-    }
-  ```
+  接口中有函数原型声明：     
+  
+    ```
+      interface SearchFunc {
+        (source: string, subString: string): boolean;
+      }
+
+      //usage:  
+      let mySearch: SearchFunc;
+      mySearch = function(src: string, sub: string): boolean {
+          let result = src.search(sub);
+          return result > -1;
+      }
+    ```
 
  Class Types implementing an interface   
  
