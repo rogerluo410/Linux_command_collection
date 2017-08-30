@@ -128,5 +128,8 @@ l 数据的存储方式，例如有1000万个数据文件，可以在一个节�
 > http://blog.csdn.net/xymyeah/article/details/8559136   --网站性能优化:base64:URL传输图片文件
 > http://www.cnblogs.com/it-cen/p/4624939.html   -- 减少HTTP请求之将图片转成二进制并生成Base64编码
 
+ 前端开发中，使用base64图片的弊端是什么？
+ > https://www.zhihu.com/question/31155574?sort=created
+
 # Website 
 > http://tech.meituan.com/   --美团技术
