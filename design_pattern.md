@@ -3,19 +3,16 @@
 - Four points: 
 
 1. 从事物(对象)中分离出保持不变的东西。  
+   Separate out the things that change from those that stay the same.    
+   
 2. 编写接口， 而非实现。(抽象化事物)
+   Program to an interface, not an implementation.    
+   
 3. 使用组合，胜过继承。  
+   Prefer composition over inheritance.    
+   
 4. 代理， 代理， 代理。  
-
-.English {    
-  Separate out the things that change from those that stay the same.    
-  
-  Program to an interface, not an implementation.    
-  
-  Prefer composition over inheritance.    
-  
-  Delegate, delegate, delegate.
-}   
+   Delegate, delegate, delegate.
 
 
 - principles: 
