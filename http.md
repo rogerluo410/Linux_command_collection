@@ -220,16 +220,22 @@ I'd say go REST, using JSON for encoding; but if your requirements are really th
  
 - HTTP 关于缓存的首部  
  Cache-Control 首部：
- * no-store 
- * no-cache
- * max-age
- * must-revalidate  
+    * no-store 
+    * no-cache
+    * max-age   
+    * must-revalidate    
+ 
  Cache-Control: no-store     --不存储， 直接删除   
  Cache-Control: no-cache     --可以缓存在本地， 但必须与原始服务器验证成功后才可以使用    
  Cache-Control: max-age=100  --客户端缓存的秒数      
+     
+ Expires: 服务器响应头告诉浏览器改资源的过期时间。 是http1.0的规范
  
- Expires 首部：
- Expires: 过期时间
+ Etag:  服务器返回的校验串， 决定返回200或304    
+ 
+- 浏览器行为还和用户行为有关   
+   Ctrl + F5 刷新页面时， cache-control / Etag 都会无效， 重新从服务器拿资源，返回200.   
+ 
  
 # SSL 隧道 
 
