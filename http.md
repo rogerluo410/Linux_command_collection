@@ -1,5 +1,13 @@
+
 # HTTP
 
+ 基于 session 和基于 token 的用户认证方式到底该如何选择？  https://www.v2ex.com/t/276207  
+ 
+ jwt 确实是基于 token 认证的一种比较好的实现方法，而且是行业标准 rfc7519 ，可以通过解码确认用户身份，这个我之前不知道，学习了。 
+我看到的 token 实现方式有多种，主要参考了这个： http://security.stackexchange.com/questions/81756/session-authentication-vs-token-authentication
+ 
+ 
+  -----------------------------------------
  post 传输的数据被截断： http://stackoverflow.com/questions/16934226/jquery-post-request-interrupted-only-half-of-post-parameters-arrive    
  “post 理论上讲是没有大小限制的，HTTP协议规范也没有进行大小限制，但实际上post所能传递的数据量大小取决于服务器的设置和内存大小”    
  
