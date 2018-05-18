@@ -260,6 +260,8 @@ Archie McNichol:(206) 548-1348:250:100:175
 
 
 #Normal USE  
+telnet xxx.com 587  用telnet 查看某服务器端口是否启动服务
+
 **1.basename  从路徑中分离出文件名 常用在shell中**         
 basename  路径-->basename /home/eclipse/script       
 
