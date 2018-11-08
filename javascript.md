@@ -358,6 +358,39 @@ addEventListener(event, function, useCapture);
 document.getElementById("myDiv").addEventListener("click", myFunction, true);
 ```
 
+* dom / window 加载完回调  
+```
+  $( document ).ready(function() {
+      console.log( "ready!" );
+   });
+   
+   use the shorthand $() for $( document ).ready(): 
+   
+   // Shorthand for $( document ).ready()
+   $(function() {
+      console.log( "ready!" );
+    });
+```
+
+`$(document).ready()` :     
+The document ready event fired when the HTML document is loaded and the DOM is ready, even if all the graphics haven’t loaded yet. If you want to hook up your events for certain elements before the window loads, then $(document).ready is the right place.       
+
+`$(window).load()`  :      
+The window load event fired a bit later, when the complete page is fully loaded, including all frames, objects and images. Therefore functions which concern images or other page contents should be placed in the load event for the window or the content tag itself.   
+
+* 自调函数(function(){})()  
+a）$实参:$是jQuery的简写，很多方法和类库也使用$,这里$接受jQuery对象，也是为了避免$变量冲突，保证插件可以正常运行。   
+   
+   ```  
+    (function (window, document, undefined) {
+	  // 
+    })(window, document);
+   ```
+   "它们是直接调用的函数表达式。
+
+这意味着它们在运行时被立即调用，
+
+我们也不能再调用它们了，它们只运行一"     
 
 # react.js   
 
