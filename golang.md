@@ -3,6 +3,7 @@
 Purpose:   
 学习函数式编程     
 
+> https://github.com/golang/go/tree/master/src  -- go 源码
 > https://blog.golang.org/   --blog   
 > https://golang.org/doc/effective_go.html  --effective go   
 > https://golang.org/pkg/  -- go packages  
@@ -554,6 +555,18 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
    
    
 # 接口   
+
+Go 语言不是一种 “传统” 的面向对象编程语言：它里面没有类和继承的概念。  
+
+ - 通过接口可以实现很多面向对象的特性。接口提供了一种方式来 说明 对象的行为：如果谁能搞定这件事，它就可以用在这儿。  
+
+ - 接口定义了一组方法（方法集），但是这些方法不包含（实现）代码：它们没有被实现（它们是抽象的）。接口里也不能包含变量。 
+ 
+ - 一般用 结构体 实现接口方法集中的方法，每一个方法的实现说明了此方法是如何作用于该类型的：即实现接口
+ 
+ - 实现某个接口的 结构体（除了实现接口方法外）还可以有其他的方法。
+ 
+ - 即使接口在类型之后才定义，二者处于不同的包中，被单独编译：只要类型实现了接口中的方法，它就实现了此接口
 
 接口是Go 中的核心概念。   `*S` 在Go中表示， S类型的指针。  
 
