@@ -567,6 +567,21 @@ Go 语言不是一种 “传统” 的面向对象编程语言：它里面没有
  - 实现某个接口的 结构体（除了实现接口方法外）还可以有其他的方法。
  
  - 即使接口在类型之后才定义，二者处于不同的包中，被单独编译：只要类型实现了接口中的方法，它就实现了此接口
+ 
+ - 类型（struct）赋值给 接口， 接口才能做类型断言， 查看该接口指向哪一个类型。  
+   ```golang
+     var areaIntf IShaper
+     sq1 := new(Square)
+	    sq1.side = 5
+	    areaIntf = sq1
+     
+     // Is Square the type of areaIntf?
+     if t, ok := areaIntf.(*Square); ok {
+      fmt.Printf("The type of areaIntf is: %T\n", t)
+     }
+     
+     如果忽略 areaIntf.(*Square) 中的 * 号，会导致编译错误：impossible type assertion: Square does not implement Shaper (Area method has pointer receiver)。
+   ```
 
 接口是Go 中的核心概念。   `*S` 在Go中表示， S类型的指针。  
 
