@@ -3,7 +3,7 @@
 Purpose:   
 学习函数式编程     
 
-> https://github.com/golang/go/tree/master/src  -- go 源码
+> https://github.com/golang/go/tree/master/src  -- go 源码  
 > https://blog.golang.org/   --blog   
 > https://golang.org/doc/effective_go.html  --effective go   
 > https://golang.org/pkg/  -- go packages  
@@ -166,9 +166,9 @@ _, b := 31, 32  //特殊变量名 _  , 任何赋给它的值都被丢弃
      
 # 函数       
 
-type mytype int ← 新的类型
-func (p mytype) funcname(q int) (r,s int) { return 0,0 } 
- 0       1         2       3        4           5
+type mytype int ← 新的类型   
+func (p mytype) funcname(q int) (r,s int) { return 0,0 }       
+ 0       1         2       3        4           5      
 
 0. 保留字 func 用于定义一个函数;  
 1. 函数可以定义用于特定的类型，这类函数更加通俗的称呼是 method。这部分称 作 receiver 而它是可选的。  
