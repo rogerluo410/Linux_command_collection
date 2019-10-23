@@ -559,6 +559,8 @@ close  delete  len  cap  new  make  copy  append  panic  recover  print  println
 Go 语言不是一种 “传统” 的面向对象编程语言：它里面没有类和继承的概念。  
 
  - 通过接口可以实现很多面向对象的特性。接口提供了一种方式来 说明 对象的行为：如果谁能搞定这件事，它就可以用在这儿。  
+ 
+ - Go 中的接口跟 Java/C# 类似：都是必须提供一个指定方法集的实现。但是更加灵活通用：任何提供了接口方法实现代码的类型都隐式地实现了该接口，而不用显式地声明。  
 
  - 接口定义了一组方法（方法集），但是这些方法不包含（实现）代码：它们没有被实现（它们是抽象的）。接口里也不能包含变量。 
  
@@ -566,7 +568,46 @@ Go 语言不是一种 “传统” 的面向对象编程语言：它里面没有
  
  - 实现某个接口的 结构体（除了实现接口方法外）还可以有其他的方法。
  
- - 即使接口在类型之后才定义，二者处于不同的包中，被单独编译：只要类型实现了接口中的方法，它就实现了此接口
+ - 即使接口在类型之后才定义，二者处于不同的包中，被单独编译：只要类型实现了接口中的方法，它就实现了此接口  
+ 
+ - go 会做 静态类型检查（是否该类型实现了某个接口）， 如果该类型没有实现某个接口，则会报 “impossible type assertion”   
+ 
+ - 鸭子编程， 实现运行时的动态转行  
+ 
+   ```golang
+        package main
+
+	import "fmt"
+
+	type IDuck interface {  
+		Quack()
+		Walk()
+	}
+
+	func DuckDance(duck IDuck) {  // 先使用接口， 后创建bird
+		for i := 1; i <= 3; i++ {
+			duck.Quack()
+			duck.Walk()
+		}
+	}
+
+	type Bird struct {
+		// ...
+	}
+
+	func (b *Bird) Quack() {   // bird 实现 duck接口
+		fmt.Println("I am quacking!")
+	}
+
+	func (b *Bird) Walk()  {
+		fmt.Println("I am walking!")
+	}
+
+	func main() {
+		b := new(Bird)
+		DuckDance(b)
+	}
+   ```   
  
  - 类型（struct）赋值给 接口， 接口才能做类型断言， 查看该接口指向哪一个类型。  
    ```golang
@@ -583,9 +624,9 @@ Go 语言不是一种 “传统” 的面向对象编程语言：它里面没有
      如果忽略 areaIntf.(*Square) 中的 * 号，会导致编译错误：impossible type assertion: Square does not implement Shaper (Area method has pointer receiver)。
    ```
 
-接口是Go 中的核心概念。   `*S` 在Go中表示， S类型的指针。  
+  接口是Go 中的核心概念。 `*S` 在Go中表示， S类型的指针。  
 
-定义结构 和 结构的方法：     
+  定义结构 和 结构的方法：     
 
   ```go
     type Sa struct { i int }
@@ -594,7 +635,7 @@ Go 语言不是一种 “传统” 的面向对象编程语言：它里面没有
     func (p *Sa) Put(v int) { p.i = v } 
   ```
   
-也可以定义接口类型， 仅仅是方法的集合。 定义结构 I : 
+  也可以定义接口类型， 仅仅是方法的集合。 定义结构 I : 
 
   ```go
    type I interface {
@@ -603,9 +644,9 @@ Go 语言不是一种 “传统” 的面向对象编程语言：它里面没有
    } 
   ```  
   
-对于接口I， Sa是合法的实现， 因为它定义了I所需要的两个方法， 注意， 即使没有明确定义Sa实现了I， 这也是正确的。  
+  对于接口I， Sa是合法的实现， 因为它定义了I所需要的两个方法， 注意， 即使没有明确定义Sa实现了I， 这也是正确的。  
 
-Go可以利用这一特点来实现接口的另一含义， 就是接口类型做入参。   
+  Go可以利用这一特点来实现接口的另一含义， 就是接口类型做入参。   
   ```go
     func f(p I) {
       fmt.Println(p.Get())
@@ -613,10 +654,129 @@ Go可以利用这一特点来实现接口的另一含义， 就是接口类型�
     }
   ```
   
+  * 类型判断：type-switch  
+   接口变量的类型也可以使用一种特殊形式的 switch 来检测：type-switch  
+
+	```golang
+	  switch areaIntf.(type) {
+		case *Square:
+			// TODO
+		case *Circle:
+			// TODO
+		...
+		default:
+			// TODO
+		}
+
+	  func classifier(items ...interface{}) {  //可变参数
+		for i, x := range items {
+			switch x.(type) {
+			case bool:
+				fmt.Printf("Param #%d is a bool\n", i)
+			case float64:
+				fmt.Printf("Param #%d is a float64\n", i)
+			case int, int64:
+				fmt.Printf("Param #%d is a int\n", i)
+			case nil:
+				fmt.Printf("Param #%d is a nil\n", i)
+			case string:
+				fmt.Printf("Param #%d is a string\n", i)
+			default:
+				fmt.Printf("Param #%d is unknown\n", i)
+			}
+		}
+	  }
+	```
+
+	* 接口嵌套接口  
+	比如接口 File 包含了 ReadWrite 和 Lock 的所有方法，它还额外有一个 Close() 方法  
+	```golang
+		type ReadWrite interface {
+		    Read(b Buffer) bool
+		    Write(b Buffer) bool
+		}
+
+		type Lock interface {
+		    Lock()
+		    Unlock()
+		}
+
+		type File interface {
+		    ReadWrite
+		    Lock
+		    Close()
+		}
+	```
+  
   
 
 - 自省和反射  
   
-   了解一个对象中的标签， 需要用reflect包（在Go中没有其它方法）。  
+   了解一个对象中的标签， 需要用reflect包（在Go中没有其它方法）。 
+   
+   - 可以通过反射来分析一个结构体  
+   
+   - 反射是用程序检查其所拥有的结构，尤其是类型的一种能力；这是元编程的一种形式  
+   
+   - 反射可以在运行时检查类型和变量，例如它的大小、方法和 动态 的调用这些方法。这对于没有源代码的包尤其有用。这是一个强大的工具，除非真得有必要，否则应当避免使用或小心使用。  
+   
+   - 两个简单的函数，reflect.TypeOf 和 reflect.ValueOf，返回被检查对象的类型和值。例如，x 被定义为：var x float64 = 3.4，那么 reflect.TypeOf(x) 返回 float64，reflect.ValueOf(x) 返回 <float64 Value>  
 
+   - 实际上，反射是通过检查一个接口的值，变量首先被转换成空接口。这从下面两个函数签名能够很明显的看出来：  
+    ```golang
+      func TypeOf(i interface{}) Type
+      func ValueOf(i interface{}) Value
+    ```
+   
+```golang
+        package main
+
+	import (
+		"fmt"
+		"reflect"
+	)
+
+	func main() {
+		var x float64 = 3.4
+		fmt.Println("type:", reflect.TypeOf(x))
+		v := reflect.ValueOf(x)
+		fmt.Println("value:", v)
+		fmt.Println("type:", v.Type())
+		fmt.Println("kind:", v.Kind())
+		fmt.Println("value:", v.Float())
+		fmt.Println(v.Interface())
+		fmt.Printf("value is %5.2e\n", v.Interface())
+		y := v.Interface().(float64)
+		fmt.Println(y)
+	}
+```  
+
+
+# 使用工厂方法创建结构体实例
+
+Go 语言不支持面向对象编程语言中那样的构造子方法，但是可以很容易的在 Go 中实现 “构造子工厂”方法。为了方便通常会为类型定义一个工厂，按惯例，工厂的名字以 new 或 New 开头。  
+
+我们可以说是工厂实例化了类型的一个对象，就像在基于类的OO语言中那样。  
+
+如果想知道结构体类型T的一个实例占用了多少内存，可以使用：size := unsafe.Sizeof(T{})  
+
+	```golang
+	  type matrix struct {    // 不曝光 matrix 结构体， 只能在本文件中使用matrix结构体
+            ...
+	  }
+
+	  func NewMatrix(params) *matrix {
+	     m := new(matrix) // 初始化 m
+             return m
+	  }
+	```
+	
+在其他包里使用工厂方法：  
+        ```golang
+	  package main
+	  import "matrix"
+	  ...
+	  wrong := new(matrix.matrix)     // 编译失败（matrix 是私有的）
+	  right := matrix.NewMatrix(...)  // 实例化 matrix 的唯一方式
+	```
   
