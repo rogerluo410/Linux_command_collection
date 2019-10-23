@@ -652,6 +652,31 @@ Go 语言不是一种 “传统” 的面向对象编程语言：它里面没有
      }
      
      如果忽略 areaIntf.(*Square) 中的 * 号，会导致编译错误：impossible type assertion: Square does not implement Shaper (Area method has pointer receiver)。
+     
+     //动态方法调用  
+     type xmlWriter interface {
+	WriteXML(w io.Writer) error
+     }
+     
+     // Exported XML streaming function.
+	func StreamXML(v interface{}, w io.Writer) error {
+		if xw, ok := v.(xmlWriter); ok {
+			// It’s an  xmlWriter, use method of asserted type.
+			return xw.WriteXML(w)
+		}
+		// No implementation, so we have to use our own function (with perhaps reflection):
+		return encodeToXML(v, w)
+	}
+
+	// Internal XML encoding function.
+	func encodeToXML(v interface{}, w io.Writer) error {
+		// ...
+	}
+	
+	现在我们可以实现适用于该流类型的任何变量的 StreamXML 函数，并用类型断言检查传入的变量是否实现了该接口；如果没有，我们就调用内建的 encodeToXML 来完成相应工作  
+	
+	因此 Go 提供了动态语言的优点，却没有其他动态语言在运行时可能发生错误的缺点。  
+	
    ```
   
   * 类型判断：type-switch  
@@ -707,8 +732,41 @@ Go 语言不是一种 “传统” 的面向对象编程语言：它里面没有
 	    Close()
 	}
 ```
-  
-  
+
+# go 多态特性  
+
+当一个类型包含（内嵌）另一个类型（实现了一个或多个接口）的指针时，这个类型就可以使用（另一个类型）所有的接口方法。  
+
+```golang
+type Task struct {
+	Command string
+	*log.Logger
+}
+```
+
+这个类型的工厂方法像这样：  
+```golang
+func NewTask(command string, logger *log.Logger) *Task {
+	return &Task{command, logger}
+}
+```
+
+当 log.Logger 实现了 Log() 方法后，Task 的实例 task 就可以调用该方法：  
+```golang
+  task.Log()  
+```
+
+类型可以通过继承多个接口来提供像 多重继承 一样的特性：  
+```golang
+type ReaderWriter struct {
+	*io.Reader
+	*io.Writer
+}
+```
+
+上面概述的原理被应用于整个 Go 包，多态用得越多，代码就相对越少。这被认为是 Go 编程中的重要的最佳实践。   
+
+
 
 # 自省和反射  
   
@@ -751,6 +809,7 @@ Go 语言不是一种 “传统” 的面向对象编程语言：它里面没有
 		fmt.Println(y)
 	}
 ```  
+
 
 
 # 使用工厂方法创建结构体实例
