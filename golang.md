@@ -166,6 +166,17 @@ _, b := 31, 32  //特殊变量名 _  , 任何赋给它的值都被丢弃
      
 # 函数       
 
+type mytype int ← 新的类型
+func (p mytype) funcname(q int) (r,s int) { return 0,0 } 
+ 0       1         2       3        4           5
+
+0. 保留字 func 用于定义一个函数;  
+1. 函数可以定义用于特定的类型，这类函数更加通俗的称呼是 method。这部分称 作 receiver 而它是可选的。  
+2. funcname 是你函数的名字;   
+3. int类型的变量q作为输入参数。参数用pass-by-value方式传递，意味着它们会被复制;  
+4. 变量 r 和 s 是这个函数的 命名返回值。在 Go 的函数中可以返回多个值。如果不想对返回的参数命名，只需要提供类型:(int, int)。如果只有一个返回值，可以省略圆括号。如果函数是一个子过程，并且 没有任何返回值，也可以省略这些内容;    
+5. 这是函数体，注意 return 是一个语句，所以包裹参数的括号是可选的。    
+
 - 内建函数   
 close  delete  len  cap  new  make  copy  append  panic  recover  print  println  complex  real  imag   
 
