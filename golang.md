@@ -608,23 +608,8 @@ Go 语言不是一种 “传统” 的面向对象编程语言：它里面没有
 		DuckDance(b)
 	}
    ```   
- 
- - 类型（struct）赋值给 接口， 接口才能做类型断言， 查看该接口指向哪一个类型。  
-   ```golang
-     var areaIntf IShaper
-     sq1 := new(Square)
-	    sq1.side = 5
-	    areaIntf = sq1
-     
-     // Is Square the type of areaIntf?
-     if t, ok := areaIntf.(*Square); ok {
-      fmt.Printf("The type of areaIntf is: %T\n", t)
-     }
-     
-     如果忽略 areaIntf.(*Square) 中的 * 号，会导致编译错误：impossible type assertion: Square does not implement Shaper (Area method has pointer receiver)。
-   ```
 
-  接口是Go 中的核心概念。 `*S` 在Go中表示， S类型的指针。  
+  * 接口是Go 中的核心概念。 `*S` 在Go中表示， S类型的指针。  
 
   定义结构 和 结构的方法：     
 
@@ -653,6 +638,21 @@ Go 语言不是一种 “传统” 的面向对象编程语言：它里面没有
       p.Put(1)
     }
   ```
+ 
+ * 类型（struct）赋值给 接口， 接口才能做类型断言， 查看该接口指向哪一个类型。  
+   ```golang
+     var areaIntf IShaper
+     sq1 := new(Square)
+	    sq1.side = 5
+	    areaIntf = sq1
+     
+     // Is Square the type of areaIntf?
+     if t, ok := areaIntf.(*Square); ok {
+      fmt.Printf("The type of areaIntf is: %T\n", t)
+     }
+     
+     如果忽略 areaIntf.(*Square) 中的 * 号，会导致编译错误：impossible type assertion: Square does not implement Shaper (Area method has pointer receiver)。
+   ```
   
   * 类型判断：type-switch  
    接口变量的类型也可以使用一种特殊形式的 switch 来检测：type-switch  
@@ -688,29 +688,29 @@ Go 语言不是一种 “传统” 的面向对象编程语言：它里面没有
 	  }
 	```
 
-	* 接口嵌套接口  
-	比如接口 File 包含了 ReadWrite 和 Lock 的所有方法，它还额外有一个 Close() 方法  
-	```golang
-		type ReadWrite interface {
-		    Read(b Buffer) bool
-		    Write(b Buffer) bool
-		}
+  * 接口嵌套接口  
+  比如接口 File 包含了 ReadWrite 和 Lock 的所有方法，它还额外有一个 Close() 方法  
+```golang
+	type ReadWrite interface {
+	    Read(b Buffer) bool
+	    Write(b Buffer) bool
+	}
 
-		type Lock interface {
-		    Lock()
-		    Unlock()
-		}
+	type Lock interface {
+	    Lock()
+	    Unlock()
+	}
 
-		type File interface {
-		    ReadWrite
-		    Lock
-		    Close()
-		}
-	```
+	type File interface {
+	    ReadWrite
+	    Lock
+	    Close()
+	}
+```
   
   
 
-- 自省和反射  
+# 自省和反射  
   
    了解一个对象中的标签， 需要用reflect包（在Go中没有其它方法）。 
    
@@ -722,11 +722,12 @@ Go 语言不是一种 “传统” 的面向对象编程语言：它里面没有
    
    - 两个简单的函数，reflect.TypeOf 和 reflect.ValueOf，返回被检查对象的类型和值。例如，x 被定义为：var x float64 = 3.4，那么 reflect.TypeOf(x) 返回 float64，reflect.ValueOf(x) 返回 <float64 Value>  
 
-   - 实际上，反射是通过检查一个接口的值，变量首先被转换成空接口。这从下面两个函数签名能够很明显的看出来：  
-    ```golang
-      func TypeOf(i interface{}) Type
-      func ValueOf(i interface{}) Value
-    ```
+   - 实际上，反射是通过检查一个接口的值，变量首先被转换成空接口。这从下面两个函数签名能够很明显的看出来： 
+   
+```golang
+  func TypeOf(i interface{}) Type
+  func ValueOf(i interface{}) Value
+```
    
 ```golang
         package main
@@ -754,29 +755,29 @@ Go 语言不是一种 “传统” 的面向对象编程语言：它里面没有
 
 # 使用工厂方法创建结构体实例
 
-Go 语言不支持面向对象编程语言中那样的构造子方法，但是可以很容易的在 Go 中实现 “构造子工厂”方法。为了方便通常会为类型定义一个工厂，按惯例，工厂的名字以 new 或 New 开头。  
+- Go 语言不支持面向对象编程语言中那样的构造子方法，但是可以很容易的在 Go 中实现 “构造子工厂”方法。为了方便通常会为类型定义一个工厂，按惯例，工厂的名字以 new 或 New 开头。  
 
-我们可以说是工厂实例化了类型的一个对象，就像在基于类的OO语言中那样。  
+- 我们可以说是工厂实例化了类型的一个对象，就像在基于类的OO语言中那样。  
 
-如果想知道结构体类型T的一个实例占用了多少内存，可以使用：size := unsafe.Sizeof(T{})  
+- 如果想知道结构体类型T的一个实例占用了多少内存，可以使用：size := unsafe.Sizeof(T{})  
 
-	```golang
-	  type matrix struct {    // 不曝光 matrix 结构体， 只能在本文件中使用matrix结构体
-            ...
-	  }
+```golang
+  type matrix struct {    // 不曝光 matrix 结构体， 只能在本文件中使用matrix结构体
+    ...
+  }
 
-	  func NewMatrix(params) *matrix {
-	     m := new(matrix) // 初始化 m
-             return m
-	  }
-	```
+  func NewMatrix(params) *matrix {
+     m := new(matrix) // 初始化 m
+     return m
+  }
+```
 	
 在其他包里使用工厂方法：  
-        ```golang
-	  package main
-	  import "matrix"
-	  ...
-	  wrong := new(matrix.matrix)     // 编译失败（matrix 是私有的）
-	  right := matrix.NewMatrix(...)  // 实例化 matrix 的唯一方式
-	```
+```golang
+  package main
+  import "matrix"
+  ...
+  wrong := new(matrix.matrix)     // 编译失败（matrix 是私有的）
+  right := matrix.NewMatrix(...)  // 实例化 matrix 的唯一方式
+```
   
