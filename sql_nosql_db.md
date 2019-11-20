@@ -15,6 +15,10 @@
    `pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start`    
 * Close        :    
    `pg_ctl -D /usr/local/var/postgres stop -s -m fast`   
+* Create user  :  
+   `createuser --pwprompt postgres`  -- ithout a password just take the --pwprompt off the command.  
+* ALTER ROLE   :
+   `psql postgres`  && `ALTER ROLE postgres CREATEDB;`   
 * Create db    :   
    `createdb dbname -O username -E UTF8 -e`  
 * Access to    :   
