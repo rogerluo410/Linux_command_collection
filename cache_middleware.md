@@ -12,7 +12,7 @@
 缓存雪崩是指在我们设置缓存时采用了相同的过期时间，导致缓存在某一时刻同时失效，请求全部转发到DB，DB瞬时压力过重雪崩。
 
 
-#Redis    
+# Redis    
 Desc:  Redis 是一款依据BSD开源协议发行的高性能Key-Value存储系统（cache and store）。它通常被称为数据结构服务器，因为值（value）可以是 字符串(String), 哈希(hashes), 列表(list), 集合(sets) 和 有序集合(sorted sets)等类型。  
 
 Learning Redis:  
