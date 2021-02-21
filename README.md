@@ -2,20 +2,20 @@
 Note all commands in Linux and Mac.  
 > http://www.duyan.com.cn/edu-85.html  
 
-#URL  
+# URL  
 GDB document : http://www.sourceware.org/gdb/current/onlinedocs/gdb.html   
 autoconf & automake :   
 > http://www.cnblogs.com/itech/archive/2010/11/28/1890220.html    
   http://www.laruence.com/2009/11/18/1154.html --for GNU    
-
-#GNU nano 
+ 
+# GNU nano 
 **^G表示Ctrl+G，就是按住Ctrl键不放然后按G**  
 
-#VIM  
+# VIM  
 光标到行首： shift+^    
 光标到行未： shift+$   or  shift+a（edit mode）    
 
-#Git
+# Git
 > http://git-scm.com/book/zh/v2 --git 教程   
 > https://services.github.com/kit/downloads/cn/github-git-cheat-sheet.html  --git 常用命令  
  
@@ -198,7 +198,7 @@ feat: auth with JWT
 ```
 
 
-#curl  
+# curl  
 `Get request with parameters IN URL:`  
 * curl http://localhost:3000/api/backend/taxonomies?params1=1&params2=2   
 
@@ -209,7 +209,7 @@ feat: auth with JWT
 * curl -X PUT localhost:3000/api/v1/team/63/products/111 -d 'token=123' -d 'file_ids[]=8' -d 'file_ids[]=6' -d 'taxonomy_id=15' -d 'surface_id=7' -d 'archive_ids[]=12' -d 'prices[0][price_id]=230' -d 'prices[0][money]=1255.55' -d 'prices[0][amount]=100' -d 'prices[0][length]=101' -d 'prices[0][type]=2' -d 'prices[0][height]=134' -d 'prices[1][height]=50' -d 'prices[1][money]=500' -d 'prices[1][amount]=200'    
 
 
-#scp  
+# scp  
 一.作用： 
 远程拷贝文件/目录 SCP 
 
@@ -237,8 +237,8 @@ scp -r UserName1@RemoteIP1:RemoteFolder1 UserName2@RemoteIP2:RemoteFolder2
 
 注：执行以上命令后，系统会提示输入UserName的密码。     
 
-#Tips for configure Linux   
-###Creating a user and adding it to the sudoers list    
+# Tips for configure Linux   
+### Creating a user and adding it to the sudoers list    
    Creating               : http://www.cyberciti.biz/faq/howto-add-new-linux-user-account/   
    Adding in sudoers list : http://www.pendrivelinux.com/how-to-add-a-user-to-the-sudoers-list/    
    
@@ -251,7 +251,7 @@ scp -r UserName1@RemoteIP1:RemoteFolder1 UserName2@RemoteIP2:RemoteFolder2
      and then edit with `"devops:x:1001:1001::/home/devops:/bin/bash" `  
      
      
-###.bashrc and .profile 
+### .bashrc and .profile 
 * 要搞清bashrc与profile的区别，首先要弄明白什么是交互式shell和非交互式shell，什么是login shell 和non-login shell。   
 
 * 交互式模式就是shell等待你的输入，并且执行你提交的命令。这种模式被称作交互式是因为shell与用户进行交互。这种模式也是大多数用户非常熟悉的：登录、执行一些命令、签退。当你签退后，shell也终止了。     shell也可以运行在另外一种模式：非交互式模式。在这种模式下，shell不与你进行交互，而是读取存放在文件中的命令,并且执行它们。当它读到文件的结尾，shell也就终止了。   
@@ -311,7 +311,7 @@ Unbutu默认没有此文件，可新建。
 ```
 
    
-###set colorful prompt   
+### set colorful prompt   
 `export PS1='\[\e[1;32m\][\u@\h \W]\$\[\e[0m\] '    `  
 
 * shell提示符显示git当前分支  
@@ -354,16 +354,16 @@ PS1="$white[$magenta\u$white@$green\h$white:$cyan\w$yellow\$git_branch$white]\$ 
 PS1 定义在/etc/bashrc 中，所以直接修改这个文件。
 ```
 
-#Mac  
+# Mac  
 * 8个不可不知的Mac OS X专用命令行工具:  mdfind ...   
 > http://segmentfault.com/a/1190000000509514   
 
 
-#Charles
+# Charles
 http抓包工具   
 
 
-#Sublime Text  
+# Sublime Text  
 工具栏 Preferences – Settings-User 进入用户设置：  
 ```
 {
