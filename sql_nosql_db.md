@@ -1,4 +1,4 @@
-#Postgresql  
+# Postgresql  
 
 > http://www.postgres.cn/docs/9.3/index.html  --中文文档  
 
@@ -83,7 +83,8 @@ sudo service postgresql restart
 sudo /etc/init.d/postgresql restart   
 ```
 
-###使用手册  
+### 使用手册
+
 **LIMIT 和 OFFSET**  
 ```sql
  在使用LIMIT 和 OFFSET时，结果集必须有主键 或 排序，并且排序需要强排序（唯一性字段上有排序）以便返回一个可预料的顺序，否则返回结果得不到预期值。
@@ -207,7 +208,7 @@ strangers.where("not exists (select 'X' from (select * from clients cs, stranger
 
 ```  
 
-#MongoDB   
+# MongoDB   
 Description:  MongoDB是一个面向文档的数据库，采用乐观并发控制(乐观锁)    
 文件存储格式为BSON（一种JSON的扩展）  
   > docs  :  https://docs.mongodb.org    
@@ -232,7 +233,7 @@ mongoDB 不支持事务的答疑
    `mongo`    
 `MongoDb的可视化管理工具:  Robomongo   `  
 
-###Mongo command:   
+### Mongo command:   
 * `db.help()`          :  Show help for database methods  
 * `show dbs`           :  Show disk usage  
 * `show users`         :  Print a list of users for current database  
@@ -240,7 +241,7 @@ mongoDB 不支持事务的答疑
 * `show collections`   :  Print a list of all collections for current database     
 * `show databases`     :  Print a list of all available databases      
 
-###Create users  
+### Create users  
 ```
   db.createUser(
    {
@@ -411,7 +412,7 @@ ObjectId 使用12 字节的存储空间，每个字节两位十六进制数字�
 ```
 
 
-#Mysql   
+# Mysql   
 * Install on OSX    
 `brew install mysql`     
 `unset TMPDIR` to avoid `ERROR 2002 (HY000): Can not connect to local MySQL server through socket '/tmp/mysql.sock' (2)`  
@@ -455,7 +456,7 @@ create table students
 	);
 ```
 
-*Mysql 与postgresql比较  
+* Mysql 与postgresql比较  
 ```
 著作权归作者所有。
 商业转载请联系作者获得授权，非商业转载请注明出处。
@@ -487,7 +488,7 @@ MySQL 处理树状回复的设计会很复杂, 而且需要写很多代码, 而 
 心动不如行动Converting MySQL to PostgreSQL
 ```
 
-#Oracle   
+# Oracle   
 * sql语句优化和索引的使用  
 ```
 1.最常见的索引扫描类型为 唯一扫描 和 范围扫描。主键索引或 定义了unique的列的索引会定义为唯一索引。一般的索引则会定义为范围性索引。
