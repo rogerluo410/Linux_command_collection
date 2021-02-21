@@ -1,4 +1,4 @@
-#Shell中引用的一些解释   
+# Shell中引用的解释   
 * 引用的使用   
   1.`` 反引号，系统命令输出到变量     
 ```
@@ -24,7 +24,7 @@
 
 
 
-#正则表达式   
+# 正则表达式   
 
 正则需要用//包围起来     
 
@@ -75,8 +75,8 @@ UERNAME:
 USERPASSWD:    
 
 
-#grep的使用  
-###grep & egrep
+# grep的使用  
+### grep & egrep
 * 缺省情况下， grep是大小写敏感的，如要查询大小写不敏感字符串，必须使用-i开关.    
 
 * 在grep命令中输入字符串参数时，最好将其用双引号括起来。例如：“my string”。这样做
@@ -129,7 +129,7 @@ USERPASSWD:
       `grep -v "SQL>" `    
 
 
-#find 与 xargs
+# find 与 xargs
 * 命令&&命令  命令联合使用   
   命令||命令   
   (命令;命令)的使用   
@@ -158,7 +158,7 @@ find / -type f -print
 find命令把匹配到的文件传递给xargs命令，而xargs命令每次只获取一部分文件而不是全部，不像-exec选项那样。      
  
 
-#AWK
+# AWK
 ```
 Mike Harrington:(510) 548-1278:250:100:175   
 Christian Dobbins:(408) 538-2358:155:90:201   
@@ -259,7 +259,7 @@ Archie McNichol:(206) 548-1348:250:100:175
   `awk -F[:]  '$1~/\<Nancy McNeil/{$1="Louise McInnes";print $0}' lab4.data  --字符串赋值`   
 
 
-#Normal USE  
+# Normal USE  
 telnet xxx.com 587  用telnet 查看某服务器端口是否启动服务
 
 **1.basename  从路徑中分离出文件名 常用在shell中**         
@@ -450,12 +450,20 @@ FTPIT
 * command <&- 关闭标准输入    
 * 2>&1,  1文件描述符本身就代表标准输出     
 
-**27.写shell脚本的一些知识点和心得**       
+**27.写shell脚本的知识点和心得**       
 * 命令的返回状态     
 命令成功返回0 ，失败返回1.   
 所以在自定义函数时，也应该成功返回0,失败返回1。     
 
 * 文件置换符 *     
 在shell中使用文件置换符，例如file="ydds_*.txt"     
- ydds_*.txt: 文件置换为第一个匹配的字符串 ydds_201107.txt则file取引用($file)为ydds_201107.txt.       
+ ydds_*.txt: 文件置换为第一个匹配的字符串 ydds_201107.txt则file取引用($file)为ydds_201107.txt.
+ 
+ * 查找文件 *
+ `find / -type f -name pg_hba.conf 2> /dev/null`
+ 
+ * 系统disk usage *
+ `du -d 1 -h`
+ `du -sh *`
+ `df -h`
 
