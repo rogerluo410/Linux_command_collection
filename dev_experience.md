@@ -5,7 +5,8 @@ http://linux.cn/article-2722-1.html  -- 加盐密码哈希：如何正确使用
 比如用于实现哈希表这之类数据结构的哈希函数，它们的目标是快速查找，而不是高安全性。   
 只有加密哈希函数才能用于保护密码，例如SHA256，SHA512，RipeMD和WHIRLPOOL。**   
 
-###1.序列化
+## 1.序列
+
 **序列化**就是一种用来处理对象流的机制，所谓对象流也就是将对象的内容进行流化。可以对流化后的对象进行读写操作，也可将流化后的对象传输 于网络之间。序列化是为了解决在对对象流进行读写操作时所引发的问题。 
    序列化的实现：将需要被序列化的类实现Serializable接口，该接口没有需要实现的方法，implements Serializable只是为了标注该对象是可被序列化的，然后使用一个输出流(如：FileOutputStream)来构造一个ObjectOutputStream(对象流)对象，接着，使用ObjectOutputStream对象的writeObject(Object obj)方法就可以将参数为obj的对象写出(即保存其状态)，要恢复的话则用输入流.
 
@@ -16,7 +17,8 @@ http://linux.cn/article-2722-1.html  -- 加盐密码哈希：如何正确使用
 
 **Base64** 也是一种序列化的算法。
 
-###2. MD5
+## 2. MD5
+
 - MD5即Message-Digest Algorithm 5（信息-摘要算法 5），用于确保信息传输完整一致。是计算机广泛使用的散列算法之一（又译摘要算法、哈希算法），主流编程语言普遍已有MD5实现。 将数据（如汉字）运算为另一固定长度值，是散列算法的基础原理，MD5的前身有MD2、MD3和MD4。
 - MD5一度被广泛应用于安全领域。但是由于MD5的弱点被不断发现以及计算机能力不断的提升，现在已经可以构造两个具有相同MD5的信息[2]，使本  算法不再适合当前的安全环境。目前，MD5计算广泛应用于错误检查。例如在一些BitTorrent下载中，软件通过计算MD5和检验下载到的碎片的完整性。
 - MD5是输入不定长度信息，输出固定长度128-bits的算法。经过程序流程，生成四个32位数据，最后联合起来成为一个128-bits散列。基本方式为，求余、取余、调整长度、与链接变量进行循环运算。得出结果。
@@ -54,7 +56,8 @@ http://linux.cn/article-2722-1.html  -- 加盐密码哈希：如何正确使用
          
 > http://www.zhihu.com/question/22311285
 
-###3.哈希加密算法
+## 3.哈希加密算法
+
 **MD5,SHA-1,SHA-2,SHA-256,SHA-512,SHA-3,RIPEMD-160**
 
 > http://www.atool.org/hash.php
@@ -84,7 +87,8 @@ It's included in the "crypt" function since PHP 5.3. If you have an earlier vers
 
 > http://stackoverflow.com/questions/2235158/sha1-vs-md5-vs-sha256-which-to-use-for-a-php-login
 
-#字符编码：ASCII，Unicode和UTF-8  
+# 字符编码：ASCII，Unicode和UTF-8 
+
 * ASCII码  一个字符占一个字节
 因此八个二进制位就可以组合出256种状态，这被称为一个字节（byte）。也就是说，一个字节一共可以用来表示256种不同的状态，每一个状态对应一个符号，就是256个符号，从0000000到11111111。  
 
@@ -99,7 +103,7 @@ UTF-8最大的一个特点，就是它是一种变长的编码方式。它可以
 
 > http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html   
 
-#分布式文件系统  
+# 分布式文件系统  
 分布式文件系统（Distributed File System）是指文件系统管理的物理存储资源不一定直接连接在本地节点上，而是通过计算机网络与节点相连。  
 
 特点：  
