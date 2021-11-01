@@ -186,3 +186,15 @@ http
 }
 
 ```
+
+### 反向代理header的设置
+
+HTTP Origin header (https://example.com) didn't match request.base_url (http://example.com) on rails:  
+
+```
+  proxy_set_header  Host $host;
+  proxy_set_header  X-Forwarded-Port $server_port;
+  proxy_set_header  X-Forwarded-Host $host;
+  proxy_set_header  X-Forwarded-Proto $scheme;
+  proxy_set_header  X-Forwarded-Ssl on;
+```
