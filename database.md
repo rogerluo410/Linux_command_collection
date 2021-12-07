@@ -30,6 +30,13 @@
    `\c dbname`   
 * Show tables  :    
    `\d`   
+* 导入/导出:  
+  `
+    pg_dump mydb > db.sql   # mydb数据库导出SQL-script file  
+    psql -d newdb -f db.sql  # SQL-script file 导入到数据库 newdb  
+    
+    https://www.postgresql.org/docs/9.1/app-pgdump.html
+  `
 
 - 无法连接本地postgresql：  
 ```
