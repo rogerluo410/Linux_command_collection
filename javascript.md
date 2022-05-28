@@ -18,6 +18,10 @@ http://www.cnblogs.com/jinguangguo/p/3534422.html         --侃侃前端MVC设�
 "我觉得这个讨论还需要设定一个前提——项目类型是什么，是互联网应用还是企业（Web）应用？互联网应用也要分电子商务、社交网络、门户网站，
 不同项目应该有不同的最优选择（如果存在最优选择的话）。"
 
+# 函数防抖与节流  
+
+  - 防抖, 单位时间内执行一次调用， 如 search, 值在变化    
+  - 节流, 单位时间内执行一次调用， 如鼠标单击, 值不变化   
 
 # Asynchronous/Synchronous Javascript   
 a.Unless, and this is the answer to your second question, you specify that the Ajax call should be synchronous, which is an option. Doing so will force the user to wait until the call completes before they can do anything, so that's usually not the best choice. Using a callback is usually the best approach.
