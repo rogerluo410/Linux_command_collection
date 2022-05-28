@@ -1,4 +1,3 @@
-http://jsfiddle.net/                                      -- js test
 
 http://www.js-css.cn/a/jscode/album/                      --JQuery特效
 
@@ -126,7 +125,7 @@ HTML，css，dom，xml，xmlHttpRequest，javascript
 通过HTTP Request， 一个web页面可以发送一个请求到web服务器并
 且接受web服务器返回的信息(不用重新加载页面)，展示给用户的还是通一个页面，用户感觉页面刷新，也看不到到Javascript后台进行的发送请求和接受响应。   
 
-###Javascript语法   
+### Javascript语法   
 
 > http://www.runoob.com/js/js-tutorial.html    --js教程  
 
@@ -456,12 +455,12 @@ AngularJS，Ember.js，Backbone这类新框架与jQuery的区别如下：
      不管是数据如何修改，视图层也会自动随之发生变化，非常简洁！
      
 	3、区别model层
-	    在jQuery中，DOM类似于一种model，但是在AngularJS等框架中，拥有不同于jQuery中的model层以便可以以任何想要的方式去管理它，它是完全独立于视图之外的。这种方式是有助于进行数据绑定并且可以保持对分离的关注，而且可以具备更好的可测试性。
+	   在jQuery中，DOM类似于一种model，但是在AngularJS等框架中，拥有不同于jQuery中的model层以便可以以任何想要的方式去管理它，它是完全独立于视图之外的。这种方式是有助于进行数据绑定并且可以保持对分离的关注，而且可以具备更好的可测试性。
 	4、关注点分离
-	    AngularJS，Ember.js，Backbone这三个框架都是MVC框架，都是基于模型-视图-控制器的；关注分离，视图层显示记录，model层代表数据，你服务层用来执行这些可复用的任务。使用directive来执行dom操作并扩展视图，并将它和controller连接起来，这也就是其他方面提到的有关于增强可测试性的原因
+	   AngularJS，Ember.js，Backbone这三个框架都是MVC框架，都是基于模型-视图-控制器的；关注分离，视图层显示记录，model层代表数据，你服务层用来执行这些可复用的任务。使用directive来执行dom操作并扩展视图，并将它和controller连接起来，这也就是其他方面提到的有关于增强可测试性的原因
 	    而jQuery却无法实现
 	5、依赖注入
-	    AngularJS，Ember.js，Backbone这三个框架分析代码，找到这些参数，然后将代码中所需要的服务推送给使用者。
+	   AngularJS，Ember.js，Backbone这三个框架分析代码，找到这些参数，然后将代码中所需要的服务推送给使用者。
 	    jQuery无法实现。
 
 	    jQuery主要是用来操作DOM的，如果单单说jQuery的话就是这样一个功能，它的插件也比较多，大家也都各自专注一个功能，可以说jQuery体系是跟着前端页面从静态到动态崛起的一个产物，他的作用就是消除各浏览器的差异，简化和丰富DOM的API，简单易用。
